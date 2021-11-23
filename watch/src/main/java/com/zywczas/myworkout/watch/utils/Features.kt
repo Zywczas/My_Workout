@@ -9,6 +9,15 @@ SwipeDismissFrameLayout. A layout that enables a user to dismiss any view by swi
 WearableRecyclerView. A view that provides a curved layout, such as the layout used for the main Wear OS application launcher.
 AmbientModeSupport. A class used with the AmbientModeSupport.AmbientCallbackProvider interface to provide support for ambient mode.
 
+SYNCHRONIZACJA:
+kazdy element bedzie mial swoj timestamp ktory bedzie uaktualniany przy kazdej zmianie elementu
+bede porownywac nazwe elementow i timestamp, z elementow o tej samej nazwie bedzie brany ten nowszy i zastapi wszystko w srodku
+dwa rozne tygodnie nie moga miec tej samej nazwy
+dwa rozne dni nie moga miec tej samej nazwy w jednym tygodniu
+dwa rozne cwiczenia nie moga miec tej samej nazwy w jednym dniu
+dwa rozne kardio nie moga miec tej samej nazwy w jednym dniu
+w bibliotece kardio nie moze byc dwoch roznych o tych samych nazwach
+
 EKRANY:
 ...
 pokazywanie jak dlugo faza ekscentryczna i koncentryczna (2s)
