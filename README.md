@@ -1,3 +1,3 @@
-# My_Workout
+# My Workout
 
 ### Train hard, win easily.
