@@ -1,0 +1,15 @@
+apply from: "${rootProject.projectDir}/config/detekt/detekt.gradle"
+apply from: "${rootProject.projectDir}/config/gradle/libs.gradle"
+apply from: "${rootProject.projectDir}/config/gradle/versions-android-sdk.gradle"
+
+//dependencies {
+//	implementation "androidx.core:core-ktx:$ktx_version"
+//	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+	// Dagger
+//	kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+//	api "com.google.dagger:hilt-android:$hiltVersion"
+//	kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
+//	api "androidx.hilt:hilt-work:$androidXHilt"
+//	kapt "androidx.hilt:hilt-compiler:$androidXHilt"
+//}

@@ -1,0 +1,8 @@
+ext {
+
+    minSdkVersionWatch = 30
+    minSdkVersionApp = 24
+    targetSdkVersion = 31
+    compileSdkVersion = 31
+
+}

@@ -36,6 +36,9 @@ ustawianie kolejnosci tygodni treningowych
 ustawianie kolejnosci cwiczen
 
 LOGIKA:
+chyba bede potrzebowac dwie bazy danych, jedna to exercise templates a druga to planned exercises
+dac zmienna finished i chyba trzeba bedzie kopiowac do bazy kilka tygodni i dni itd. -
+ktore bedzie kopiowane jak zacznie sie nowy tydzien i zapisywane osobno do bazy
 Jesli ktos ma 3 rozne tygodnie to pokazuje 3 wstecz i 3 do przodu, jesli ktos ma 1 tylko to pokazuje 1 wstecz i 1 aktualny(jezeli jest skonczony to zaczyna nowy)
 Jesli rozne tygodnie to lista tygodni na init, a jesli taki sam to od razu
 zaznaczanie zrobionego tygodnia - jezeli wszystkie dni sa zrobione

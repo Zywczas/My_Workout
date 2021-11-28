@@ -1,15 +1,20 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
+apply from: "${rootProject.projectDir}/config/detekt/detekt.gradle"
+apply from: "${rootProject.projectDir}/config/gradle/libs.gradle"
+apply from: "${rootProject.projectDir}/config/gradle/versions-android-sdk.gradle"
+
 android {
-    compileSdk 31
+    compileSdk compileSdkVersion
 
     defaultConfig {
         applicationId "com.zywczas.myworkout.watch"
-        minSdk 30
-        targetSdk 31
+        minSdk minSdkVersionWatch
+        targetSdk targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -23,15 +28,39 @@ android {
     }
     buildFeatures {
         viewBinding true
+        dataBinding true
     }
 }
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'com.google.android.gms:play-services-wearable:17.1.0'
-    implementation 'androidx.percentlayout:percentlayout:1.0.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation 'androidx.wear:wear:1.2.0'
+    implementation project(path: ':common')
+    implementation project(path: ':databasestore')
+
+    implementation wearDependencies.wear
+    implementation wearDependencies.playServicesWarable
+
+    implementation appDependencies.corektx
+    implementation appDependencies.kotlin
+
+    implementation viewDependencies.appCompat
+    implementation viewDependencies.material
+//    implementation viewDependencies.composeMaterial
+//    implementation viewDependencies.composeUIToolingPreview
+//    implementation viewDependencies.composeActivity
+    implementation viewDependencies.navigationFragment
+    implementation viewDependencies.navigationUi
+    implementation viewDependencies.recyclerview
+    implementation viewDependencies.percentlayout
+
+    implementation kotlinCoroutines
+
+    implementation diDependencies.dagger
+    implementation diDependencies.daggerAndroid
+    kapt diDependencies.daggerCompiler
+    kapt diDependencies.daggerCompilerAndroid
+
+    implementation lifeCycleDependencies.liveData
+
+//    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version" todo
 }

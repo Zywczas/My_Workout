@@ -1,0 +1,17 @@
+apply plugin: 'io.gitlab.arturbosch.detekt'
+
+detekt {
+    allRules = false
+    description = "Custom DETEKT build for all modules"
+    parallel = true
+    ignoreFailures = false
+    autoCorrect = false
+    buildUponDefaultConfig = true
+    config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
+    reports {
+        html.enabled = true
+        xml.enabled = false
+        txt.enabled = false
+        sarif.enabled = false
+    }
+}

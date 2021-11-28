@@ -1,0 +1,87 @@
+ext {
+
+    compose_version = '1.0.5'
+    kotlin_version = "1.6.0"
+
+    appDependencies = [
+//            compose                         : "androidx.compose.ui:ui:$compose_version",
+            kotlin                          : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
+            corektx                         : "androidx.core:core-ktx:1.7.0",
+            jodatime                        : "joda-time:joda-time:2.10.13"
+    ]
+
+    wearDependencies = [
+            playServicesWarable             : 'com.google.android.gms:play-services-wearable:17.1.0',
+            wear                            : 'androidx.wear:wear:1.2.0'
+
+    ]
+
+    androidx_navigation_version = '2.3.5'
+    fast_adapter_version = '5.6.0'
+
+    viewDependencies = [
+            appCompat                       : "androidx.appcompat:appcompat:1.3.1",
+            composeActivity                 : 'androidx.activity:activity-compose:1.4.0',
+//            constraintLayout                : "androidx.constraintlayout:constraintlayout:2.0.4",
+            material                        : "com.google.android.material:material:1.4.0",
+//            composeMaterial                 : "androidx.compose.material:material:$compose_version",
+//            composeUIToolingPreview         : "androidx.compose.ui:ui-tooling-preview:$compose_version",
+            navigationFragment              : "androidx.navigation:navigation-fragment-ktx:$androidx_navigation_version",
+            navigationUi                    : "androidx.navigation:navigation-ui-ktx:$androidx_navigation_version",
+            fastAdapter                     : "com.mikepenz:fastadapter:$fast_adapter_version",
+            fastAdapterBinding              : "com.mikepenz:fastadapter-extensions-binding:$fast_adapter_version",
+            fastAdapterDiffUtil             : "com.mikepenz:fastadapter-extensions-diff:$fast_adapter_version",
+            recyclerview                    : 'androidx.recyclerview:recyclerview:1.2.1',
+            percentlayout                   : 'androidx.percentlayout:percentlayout:1.0.0'
+    ]
+
+    kotlinCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2"
+
+    testDependencies = [
+//            junit                           : "junit:junit:4.13.2",
+//            espresso                        : 'androidx.test.espresso:espresso-core:3.3.0',
+//            composeUITest                   : "androidx.compose.ui:ui-test-junit4:$compose_version"
+    ]
+
+    dagger_version = '2.40.1'
+
+    diDependencies = [
+            dagger                          : "com.google.dagger:dagger:$dagger_version",
+            daggerCompiler                  : "com.google.dagger:dagger-compiler:$dagger_version",
+            daggerAndroid                   : "com.google.dagger:dagger-android:$dagger_version",
+            daggerCompilerAndroid           : "com.google.dagger:dagger-android-processor:$dagger_version"
+    ]
+
+    room_version = '2.3.0'
+
+    dbDependencies = [
+            room                            : "androidx.room:room-runtime:$room_version",
+            roomktx                         : "androidx.room:room-ktx:$room_version",
+            roomCompiler                    : "androidx.room:room-compiler:$room_version"
+    ]
+
+//    retrofit_version = '2.9.0'
+//    ok_http_version = '4.9.1'
+
+    networkDependencies = [
+//            retrofit                            : "com.squareup.retrofit2:retrofit:$retrofit_version",
+//            gsonConverter                       : "com.squareup.retrofit2:converter-gson:$retrofit_version",
+//            okHttpInterceptor            : "com.squareup.okhttp3:logging-interceptor:$ok_http_version",
+//            okHttp                              : "com.squareup.okhttp3:okhttp:$ok_http_version"
+    ]
+
+    lifeCycleDependencies = [
+            liveData                        : "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0"
+    ]
+
+    firebaseDependencies = [
+//            firebaseBom                     : "com.google.firebase:firebase-bom:28.4.0",
+//            analytics                       : "com.google.firebase:firebase-analytics-ktx",
+//            crashlytics                     : "com.google.firebase:firebase-crashlytics-ktx"
+    ]
+
+    reportingDependencies = [
+//            sentry                          : "io.sentry:sentry-android:5.1.1"
+    ]
+
+}
