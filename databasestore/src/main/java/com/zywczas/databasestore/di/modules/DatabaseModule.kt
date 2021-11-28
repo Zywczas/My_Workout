@@ -2,28 +2,26 @@ package com.zywczas.databasestore.di.modules
 
 import android.content.Context
 import androidx.room.Room
-import com.zywczas.databasestore.db.AppDatabase
-import com.zywczas.databasestore.db.ExercisesTemplatesDatabase
-import com.zywczas.databasestore.db.PlannedExercisesDatabase
+import com.zywczas.databasestore.db.TrainingsTemplatesDatabase
+import com.zywczas.databasestore.db.PlannedTrainingsDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
-import kotlin.reflect.KParameter
 
 @Module
 class DatabaseModule {
 
     @Provides
     @Singleton
-    internal fun provideExercisesTemplatesDatabase(context: Context): ExercisesTemplatesDatabase =
-            Room.databaseBuilder(context, ExercisesTemplatesDatabase::class.java, "ExercisesTemplatesDatabase").build()
+    internal fun provideTrainingsTemplatesDatabase(context: Context): TrainingsTemplatesDatabase =
+            Room.databaseBuilder(context, TrainingsTemplatesDatabase::class.java, "TrainingsTemplatesDatabase").build()
 
     @Provides
     @Singleton
-    internal fun providePlannedExercisesDatabase(context: Context): PlannedExercisesDatabase =
-        Room.databaseBuilder(context, PlannedExercisesDatabase::class.java, "PlannedExercisesDatabase").build()
+    internal fun providePlannedTrainingsDatabase(context: Context): PlannedTrainingsDatabase =
+        Room.databaseBuilder(context, PlannedTrainingsDatabase::class.java, "PlannedTrainingsDatabase").build()
 //
 //    @Provides
-//    internal fun provideLeaveRequestDao(db: AppDatabase): LeaveRequestDao = db.leaveRequestDao()
+//    internal fun provideLeaveRequestDao(db: TrainingsDatabase): LeaveRequestDao = db.leaveRequestDao()
 
 }

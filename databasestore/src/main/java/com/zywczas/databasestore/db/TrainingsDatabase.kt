@@ -13,7 +13,7 @@ import com.zywczas.databasestore.utils.Converters
         version = 1
 )
 @TypeConverters(Converters::class)
-internal abstract class AppDatabase : RoomDatabase() {
+internal abstract class TrainingsDatabase : RoomDatabase() {
 
 //    abstract fun leaveRequestDao(): LeaveRequestDao
 
