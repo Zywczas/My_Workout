@@ -9,12 +9,12 @@ apply from: "${rootProject.projectDir}/config/gradle/libs.gradle"
 apply from: "${rootProject.projectDir}/config/gradle/versions-android-sdk.gradle"
 
 android {
-    compileSdk compileSdkVersion
+    compileSdk project.compileSdkVersion
 
     defaultConfig {
         applicationId "com.zywczas.myworkout.watch"
-        minSdk minSdkVersionWatch
-        targetSdk targetSdkVersion
+        minSdk project.minSdkVersionWatch
+        targetSdk project.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
