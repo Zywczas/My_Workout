@@ -1,4 +1,4 @@
-package com.zywczas.databasestore.trainingplan.entities
+package com.zywczas.databasestore.trainings.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

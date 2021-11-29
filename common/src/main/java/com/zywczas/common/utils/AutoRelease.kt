@@ -1,9 +1,9 @@
 package com.zywczas.common.utils
 
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.OnLifecycleEvent
+import android.content.Context
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.*
+import kotlinx.coroutines.launch
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -25,6 +25,18 @@ class AutoReleasedProperty<T : Any>(lifecycleOwner: LifecycleOwner) :
             }
         })
     }
+
+    //todo moze tak to zrobic:
+//    fun collect(lifecycleOwner: LifecycleOwner, fragmentManager: FragmentManager, context: Context) {
+//        lifecycleOwner.lifecycleScope.launch {
+//            lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                attachmentsManager.attachmentsViewModel.cachedAttachments.collect {
+//                    dismissProgress(fragmentManager)
+//                    onCacheComplete(context, it)
+//                }
+//            }
+//        }
+//    }
 
     override fun getValue(thisRef: Any, property: KProperty<*>): T =
         internalValue ?: run {
