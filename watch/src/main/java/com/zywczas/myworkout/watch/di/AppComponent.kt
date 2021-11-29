@@ -6,7 +6,11 @@ import com.zywczas.common.di.modules.CommonProviderModule
 import com.zywczas.common.di.modules.DispatchersModule
 import com.zywczas.databasestore.di.modules.DatabaseModule
 import com.zywczas.myworkout.watch.BaseApp
-import com.zywczas.myworkout.watch.di.modules.*
+import com.zywczas.myworkout.watch.di.modules.ActivityBuilderModule
+import com.zywczas.myworkout.watch.di.modules.AppModule
+import com.zywczas.myworkout.watch.di.modules.DomainModule
+import com.zywczas.myworkout.watch.di.modules.FragmentFactoryModule
+import com.zywczas.myworkout.watch.di.modules.ViewModelFactoryModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule

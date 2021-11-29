@@ -1,7 +1,7 @@
 package com.zywczas.myworkout.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.zywczas.myworkout.R
 
 class MainActivity : AppCompatActivity() {

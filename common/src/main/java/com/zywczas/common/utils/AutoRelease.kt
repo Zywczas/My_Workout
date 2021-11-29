@@ -1,9 +1,9 @@
 package com.zywczas.common.utils
 
-import android.content.Context
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.*
-import kotlinx.coroutines.launch
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.OnLifecycleEvent
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
