@@ -6,7 +6,7 @@ import com.zywczas.databasestore.trainings.entities.CardioEntity
 import com.zywczas.databasestore.trainings.entities.DayEntity
 import com.zywczas.databasestore.trainings.entities.ExerciseEntity
 
-data class DayRelations(@Embedded val day: DayEntity,
+data class DayRelations(@Embedded val day: DayEntity = DayEntity(),
 
                         @Relation(parentColumn = "id",
                                   entityColumn = "foreignDayId")
@@ -14,4 +14,4 @@ data class DayRelations(@Embedded val day: DayEntity,
 
                         @Relation(parentColumn = "id",
                                   entityColumn = "foreignDayId")
-                        val cardios: List<CardioEntity> = emptyList())
+                        val cardios: CardioEntity? = null)
