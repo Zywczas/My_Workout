@@ -3,7 +3,6 @@ package com.zywczas.databasestore.di.modules
 import android.content.Context
 import androidx.room.Room
 import com.zywczas.databasestore.db.PlannedTrainingsDatabase
-import com.zywczas.databasestore.db.TrainingsDatabase
 import com.zywczas.databasestore.db.TrainingsTemplatesDatabase
 import com.zywczas.databasestore.trainings.dao.CardioDao
 import com.zywczas.databasestore.trainings.dao.DayDao

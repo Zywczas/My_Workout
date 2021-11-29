@@ -1,6 +1,5 @@
 package com.zywczas.databasestore.trainings
 
-import com.zywczas.databasestore.di.modules.DatabaseModule
 import com.zywczas.databasestore.di.modules.DatabaseModule.PlannedTrainings
 import com.zywczas.databasestore.trainings.dao.CardioDao
 import com.zywczas.databasestore.trainings.dao.DayDao
@@ -12,10 +11,10 @@ import javax.inject.Inject
 
 internal class PlannedTrainingsBusinessCaseImpl
 @Inject constructor(@PlannedTrainings private val weekDao: WeekDao,
-                    @PlannedTrainings private val dayDao: DayDao,
-                    @PlannedTrainings private val cardioDao: CardioDao,
-                    @PlannedTrainings private val exerciseDao: ExerciseDao,
-                    @PlannedTrainings private val timerDao: TimerDao) : PlannedTrainingsBusinessCase {
+    @PlannedTrainings private val dayDao: DayDao,
+    @PlannedTrainings private val cardioDao: CardioDao,
+    @PlannedTrainings private val exerciseDao: ExerciseDao,
+    @PlannedTrainings private val timerDao: TimerDao) : PlannedTrainingsBusinessCase {
 
     override suspend fun getWeekRelationsList(): List<WeekRelations> = weekDao.getWeekRelationsList()
 
