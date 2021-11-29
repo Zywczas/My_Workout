@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import com.zywczas.databasestore.trainings.entities.WeekEntity
+import com.zywczas.databasestore.trainings.relations.WeekRelations
 
 @Dao
 internal interface WeekDao {
@@ -15,7 +16,7 @@ internal interface WeekDao {
 
     @Transaction
     @Query("SELECT * FROM Week")
-    suspend fun getWeekRelationsList(): List<WeekEntity>
+    suspend fun getWeekRelationsList(): List<WeekRelations>
 
 //    @Transaction
 //    @Query("SELECT * FROM Week WHERE id = :id")
