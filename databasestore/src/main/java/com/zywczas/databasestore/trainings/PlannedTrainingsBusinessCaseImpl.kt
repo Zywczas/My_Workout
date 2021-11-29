@@ -11,10 +11,10 @@ import javax.inject.Inject
 
 internal class PlannedTrainingsBusinessCaseImpl
 @Inject constructor(@PlannedTrainings private val weekDao: WeekDao,
-    @PlannedTrainings private val dayDao: DayDao,
-    @PlannedTrainings private val cardioDao: CardioDao,
-    @PlannedTrainings private val exerciseDao: ExerciseDao,
-    @PlannedTrainings private val timerDao: TimerDao) : PlannedTrainingsBusinessCase {
+                    @PlannedTrainings private val dayDao: DayDao,
+                    @PlannedTrainings private val cardioDao: CardioDao,
+                    @PlannedTrainings private val exerciseDao: ExerciseDao,
+                    @PlannedTrainings private val timerDao: TimerDao) : PlannedTrainingsBusinessCase {
 
     override suspend fun getWeekRelationsList(): List<WeekRelations> = weekDao.getWeekRelationsList()
 
