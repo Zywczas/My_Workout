@@ -1,13 +1,19 @@
 package com.zywczas.myworkout.watch
 
 
-import com.zywczas.myworkout.watch.di.DaggerWatchComponent
+import android.app.Application
+import com.zywczas.myworkout.watch.di.AppInjector
 import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
+import dagger.android.HasAndroidInjector
 
-class BaseWatch : DaggerApplication() {
+class BaseWatch : Application() {
 
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
-        DaggerWatchComponent.factory().create(this)
+//    override fun applicationInjector(): AndroidInjector<out DaggerApplication> = //todo usunac
+//        DaggerWatchComponent.factory().create(this)
+
+    override fun onCreate() {
+        super.onCreate()
+        AppInjector.init(this)
+    }
 
 }

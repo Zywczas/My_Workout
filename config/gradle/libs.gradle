@@ -26,8 +26,8 @@ ext {
             material                        : "com.google.android.material:material:1.4.0",
 //            composeMaterial                 : "androidx.compose.material:material:$compose_version",
 //            composeUIToolingPreview         : "androidx.compose.ui:ui-tooling-preview:$compose_version",
-            navigationFragment              : "androidx.navigation:navigation-fragment-ktx:$androidx_navigation_version",
-            navigationUi                    : "androidx.navigation:navigation-ui-ktx:$androidx_navigation_version",
+            navigationFragment              : "androidx.navigation:navigation-fragment-ktx:$androidx_navigation_version", //todo usunac
+            navigationUi                    : "androidx.navigation:navigation-ui-ktx:$androidx_navigation_version", //todo usunac
             fastAdapter                     : "com.mikepenz:fastadapter:$fast_adapter_version",
             fastAdapterBinding              : "com.mikepenz:fastadapter-extensions-binding:$fast_adapter_version",
             fastAdapterDiffUtil             : "com.mikepenz:fastadapter-extensions-diff:$fast_adapter_version",
@@ -43,7 +43,8 @@ ext {
 //            composeUITest                   : "androidx.compose.ui:ui-test-junit4:$compose_version"
     ]
 
-    dagger_version = '2.40.1'
+    dagger_version = '2.36'
+//    dagger_version = '2.40.1'
 
     diDependencies = [
             dagger                          : "com.google.dagger:dagger:$dagger_version",

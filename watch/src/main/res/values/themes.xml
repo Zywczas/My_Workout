@@ -1,10 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MyWatch" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.MyWatch" parent="@android:style/Theme.DeviceDefault">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/black</item>
-        <item name="colorPrimaryVariant">@color/black</item>
-        <item name="colorOnPrimary">@color/white</item>
+<!--        todo-->
+<!--        <item name="colorPrimary">@color/black</item>-->
+<!--        <item name="colorPrimaryVariant">@color/black</item>-->
+<!--        <item name="colorOnPrimary">@color/white</item>-->
 <!--        &lt;!&ndash; Secondary brand color. &ndash;&gt;-->
 <!--        <item name="colorSecondary">@color/teal_200</item>-->
 <!--        <item name="colorSecondaryVariant">@color/teal_200</item>-->

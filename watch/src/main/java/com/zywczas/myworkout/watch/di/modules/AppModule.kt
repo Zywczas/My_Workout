@@ -1,14 +1,13 @@
 package com.zywczas.myworkout.watch.di.modules
 
-import android.app.Application
 import android.content.Context
 import dagger.Module
 import dagger.Provides
 
 @Module
-class AppModule {
+class AppModule(private val context: Context) {
 
     @Provides
-    fun provideAppContext(app: Application) : Context = app.applicationContext
+    fun provideAppContext() : Context = context
 
 }
