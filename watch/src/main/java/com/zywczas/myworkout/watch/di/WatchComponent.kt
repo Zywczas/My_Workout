@@ -5,7 +5,7 @@ import com.zywczas.common.di.modules.CommonBinderModule
 import com.zywczas.common.di.modules.CommonProviderModule
 import com.zywczas.common.di.modules.DispatchersModule
 import com.zywczas.databasestore.di.modules.DatabaseModule
-import com.zywczas.myworkout.watch.BaseApp
+import com.zywczas.myworkout.watch.BaseWatch
 import com.zywczas.myworkout.watch.di.modules.ActivityBuilderModule
 import com.zywczas.myworkout.watch.di.modules.AppModule
 import com.zywczas.myworkout.watch.di.modules.DomainModule
@@ -30,11 +30,11 @@ import javax.inject.Singleton
     CommonBinderModule::class,
     CommonProviderModule::class
 ])
-interface AppComponent : AndroidInjector<BaseApp> {
+interface WatchComponent : AndroidInjector<BaseWatch> {
 
     @Component.Factory
     interface Factory {
-        fun create(@BindsInstance app: Application): AppComponent
+        fun create(@BindsInstance app: Application): WatchComponent
     }
 
 }

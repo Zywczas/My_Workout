@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-parcelize'
 }
 
 apply from: "${rootProject.projectDir}/config/detekt/detekt.gradle"
@@ -45,9 +47,31 @@ dependencies {
     implementation project(path: ':common')
     implementation project(path: ':databasestore')
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation appDependencies.corektx
+    implementation appDependencies.kotlin
+
+    implementation viewDependencies.appCompat
+    implementation viewDependencies.material
+//    implementation viewDependencies.composeMaterial
+//    implementation viewDependencies.composeUIToolingPreview
+//    implementation viewDependencies.composeActivity
+    implementation viewDependencies.navigationFragment
+    implementation viewDependencies.navigationUi
+    implementation viewDependencies.recyclerview
+    implementation viewDependencies.percentlayout
+
+    implementation 'androidx.fragment:fragment-ktx:1.4.0'
+
+    implementation kotlinCoroutines
+
+    implementation diDependencies.dagger
+    implementation diDependencies.daggerAndroid
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0' //todo
+    kapt diDependencies.daggerCompiler
+    kapt diDependencies.daggerCompilerAndroid
+
+    implementation lifeCycleDependencies.liveData
+
+//    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version" todo
 
 }

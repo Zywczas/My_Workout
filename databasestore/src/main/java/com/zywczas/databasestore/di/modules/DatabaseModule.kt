@@ -29,43 +29,43 @@ class DatabaseModule {
 
     @Provides
     @TrainingTemplates
-    internal fun provideCardioDao(db: TrainingsTemplatesDatabase): CardioDao = db.cardioDao()
+    internal fun provideTemplatesCardioDao(db: TrainingsTemplatesDatabase): CardioDao = db.cardioDao()
 
     @Provides
     @PlannedTrainings
-    internal fun provideCardioDao(db: PlannedTrainingsDatabase): CardioDao = db.cardioDao()
+    internal fun providePlannedCardioDao(db: PlannedTrainingsDatabase): CardioDao = db.cardioDao()
 
     @Provides
     @TrainingTemplates
-    internal fun provideDayDao(db: TrainingsTemplatesDatabase): DayDao = db.dayDao()
+    internal fun provideTemplatesDayDao(db: TrainingsTemplatesDatabase): DayDao = db.dayDao()
 
     @Provides
     @PlannedTrainings
-    internal fun provideDayDao(db: PlannedTrainingsDatabase): DayDao = db.dayDao()
+    internal fun providePlannedDayDao(db: PlannedTrainingsDatabase): DayDao = db.dayDao()
 
     @Provides
     @TrainingTemplates
-    internal fun provideExerciseDao(db: TrainingsTemplatesDatabase): ExerciseDao = db.exerciseDao()
+    internal fun provideTemplatesExerciseDao(db: TrainingsTemplatesDatabase): ExerciseDao = db.exerciseDao()
 
     @Provides
     @PlannedTrainings
-    internal fun provideExerciseDao(db: PlannedTrainingsDatabase): ExerciseDao = db.exerciseDao()
+    internal fun providePlannedExerciseDao(db: PlannedTrainingsDatabase): ExerciseDao = db.exerciseDao()
 
     @Provides
     @TrainingTemplates
-    internal fun provideTimerDao(db: TrainingsTemplatesDatabase): TimerDao = db.timerDao()
+    internal fun provideTemplatesTimerDao(db: TrainingsTemplatesDatabase): TimerDao = db.timerDao()
 
     @Provides
     @PlannedTrainings
-    internal fun provideTimerDao(db: PlannedTrainingsDatabase): TimerDao = db.timerDao()
+    internal fun providePlannedTimerDao(db: PlannedTrainingsDatabase): TimerDao = db.timerDao()
 
     @Provides
     @TrainingTemplates
-    internal fun provideWeekDao(db: TrainingsTemplatesDatabase): WeekDao = db.weekDao()
+    internal fun provideTemplatesWeekDao(db: TrainingsTemplatesDatabase): WeekDao = db.weekDao()
 
     @Provides
     @PlannedTrainings
-    internal fun provideWeekDao(db: PlannedTrainingsDatabase): WeekDao = db.weekDao()
+    internal fun providePlannedWeekDao(db: PlannedTrainingsDatabase): WeekDao = db.weekDao()
 
     @Qualifier
     annotation class PlannedTrainings

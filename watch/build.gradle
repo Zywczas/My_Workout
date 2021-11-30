@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-parcelize'
 }
 
 apply from: "${rootProject.projectDir}/config/detekt/detekt.gradle"
@@ -48,6 +50,7 @@ dependencies {
 //    implementation viewDependencies.composeMaterial
 //    implementation viewDependencies.composeUIToolingPreview
 //    implementation viewDependencies.composeActivity
+    implementation 'androidx.fragment:fragment-ktx:1.4.0'
     implementation viewDependencies.navigationFragment
     implementation viewDependencies.navigationUi
     implementation viewDependencies.recyclerview
@@ -57,6 +60,7 @@ dependencies {
 
     implementation diDependencies.dagger
     implementation diDependencies.daggerAndroid
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0' //todo
     kapt diDependencies.daggerCompiler
     kapt diDependencies.daggerCompilerAndroid
 
