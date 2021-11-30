@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.presentation.WeeksListActivity
 import com.zywczas.myworkout.watch.databinding.ActivityMainBinding
-import dagger.android.AndroidInjection
 
 class MainActivity : ComponentActivity() {
 

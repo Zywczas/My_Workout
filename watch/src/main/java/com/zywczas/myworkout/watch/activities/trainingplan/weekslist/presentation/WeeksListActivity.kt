@@ -2,10 +2,7 @@ package com.zywczas.myworkout.watch.activities.trainingplan.weekslist.presentati
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import com.zywczas.myworkout.watch.R
-import com.zywczas.myworkout.watch.databinding.ActivityMainBinding
 import com.zywczas.myworkout.watch.databinding.ActivityWeeksListBinding
-import dagger.android.AndroidInjection
 
 class WeeksListActivity : ComponentActivity() {
 

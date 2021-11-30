@@ -43,27 +43,26 @@ dependencies {
 
     implementation appDependencies.corektx
     implementation appDependencies.kotlin
+    implementation appDependencies.legacySupport
 
 //    implementation viewDependencies.appCompat
     implementation viewDependencies.material
 //    implementation viewDependencies.composeMaterial
 //    implementation viewDependencies.composeUIToolingPreview
 //    implementation viewDependencies.composeActivity
-    implementation viewDependencies.navigationFragment
-    implementation viewDependencies.navigationUi
     implementation viewDependencies.recyclerview
     implementation viewDependencies.percentlayout
+    implementation viewDependencies.constraintlayout
+
+    //    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
 
     implementation kotlinCoroutines
 
     implementation diDependencies.dagger
     implementation diDependencies.daggerAndroid
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'//todo
     kapt diDependencies.daggerCompiler
     kapt diDependencies.daggerCompilerAndroid
 
     implementation lifeCycleDependencies.liveData
 
-//    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version" todo
 }

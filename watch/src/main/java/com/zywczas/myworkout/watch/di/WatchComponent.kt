@@ -9,29 +9,7 @@ import com.zywczas.myworkout.watch.di.modules.AppModule
 import com.zywczas.myworkout.watch.di.modules.DomainModule
 import com.zywczas.myworkout.watch.di.modules.ViewModelFactoryModule
 import dagger.Component
-import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
-
-//@Singleton todo usunac
-//@Component(modules = [
-//    AndroidInjectionModule::class,
-//    AppModule::class,
-//    DispatchersModule::class,
-//    DomainModule::class,
-//    ActivityBuilderModule::class,
-//    ViewModelFactoryModule::class,
-//    DatabaseModule::class,
-//    CommonBinderModule::class,
-//    CommonProviderModule::class
-//])
-//interface WatchComponent : AndroidInjector<BaseWatch> {
-//
-//    @Component.Factory
-//    interface Factory {
-//        fun create(@BindsInstance app: Application): WatchComponent
-//    }
-//
-//}
 
 @Singleton
 @Component(modules = [
