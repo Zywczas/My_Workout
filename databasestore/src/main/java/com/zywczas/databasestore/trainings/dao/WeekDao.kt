@@ -13,10 +13,14 @@ internal interface WeekDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(model: WeekEntity): Long
-
+//todo moze nie potrzebna
     @Transaction
     @Query("SELECT * FROM Week")
     suspend fun getWeekRelationsList(): List<WeekRelations>
+
+    @Transaction
+    @Query("SELECT * FROM Week")
+    suspend fun getWeeks(): List<WeekEntity>
 
 //    @Transaction
 //    @Query("SELECT * FROM Week WHERE id = :id")

@@ -6,6 +6,7 @@ import com.zywczas.databasestore.trainings.dao.DayDao
 import com.zywczas.databasestore.trainings.dao.ExerciseDao
 import com.zywczas.databasestore.trainings.dao.TimerDao
 import com.zywczas.databasestore.trainings.dao.WeekDao
+import com.zywczas.databasestore.trainings.entities.WeekEntity
 import com.zywczas.databasestore.trainings.relations.WeekRelations
 import javax.inject.Inject
 
@@ -15,7 +16,9 @@ internal class PlannedTrainingsBusinessCaseImpl
                     @PlannedTrainings private val cardioDao: CardioDao,
                     @PlannedTrainings private val exerciseDao: ExerciseDao,
                     @PlannedTrainings private val timerDao: TimerDao) : PlannedTrainingsBusinessCase {
-
+//todo ta funkcja moze wogole nie potrzebnna
     override suspend fun getWeekRelationsList(): List<WeekRelations> = weekDao.getWeekRelationsList()
+
+    override suspend fun getWeeks(): List<WeekEntity> = weekDao.getWeeks()
 
 }
