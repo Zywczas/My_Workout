@@ -12,6 +12,7 @@ import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.Week
 import com.zywczas.myworkout.watch.adapters.DiffUtilCallback
 import com.zywczas.myworkout.watch.adapters.WeekItem
 import com.zywczas.myworkout.watch.databinding.ActivityWeeksListBinding
+import com.zywczas.myworkout.watch.utils.CustomScrollingLayoutCallback
 
 class WeeksListActivity : ComponentActivity() {
 
@@ -30,7 +31,7 @@ class WeeksListActivity : ComponentActivity() {
     private fun WearableRecyclerView.setup(){
         //todo sprobowac powrzucac do layoutu
         isEdgeItemsCenteringEnabled = true
-        layoutManager = WearableLinearLayoutManager(this@WeeksListActivity)
+        layoutManager = WearableLinearLayoutManager(this@WeeksListActivity, CustomScrollingLayoutCallback())
         adapter = recyclerAdapter
     }
 

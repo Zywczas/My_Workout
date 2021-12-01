@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.trainingplan.weekslist.presentation.WeeksListActivity" >
-
+<!--todo poprawic dimensy-->
     <androidx.wear.widget.WearableRecyclerView
         android:id="@+id/weeksList"
         android:layout_width="match_parent"
