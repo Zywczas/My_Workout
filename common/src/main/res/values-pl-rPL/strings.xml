@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Moj plan</string>
+    <string name="train_hard_win_easily">Trenuj ciezko\nWygrywaj latwo</string>
+    <string name="empty_training_plan">Brak treningow.\nKliknij aby dodac.</string>
+</resources>
+<!--todo poprawic na poprawny polski-->
