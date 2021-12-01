@@ -49,6 +49,7 @@ dependencies {
 
     implementation appDependencies.corektx
     implementation appDependencies.kotlin
+    implementation appDependencies.legacySupport
 
     implementation viewDependencies.appCompat
     implementation viewDependencies.material
@@ -60,18 +61,16 @@ dependencies {
     implementation viewDependencies.recyclerview
     implementation viewDependencies.percentlayout
 
-    implementation 'androidx.fragment:fragment-ktx:1.4.0'
+    //    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
 
     implementation kotlinCoroutines
 
     implementation diDependencies.dagger
     implementation diDependencies.daggerAndroid
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0' //todo
     kapt diDependencies.daggerCompiler
     kapt diDependencies.daggerCompilerAndroid
 
     implementation lifeCycleDependencies.liveData
 
-//    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version" todo
 
 }

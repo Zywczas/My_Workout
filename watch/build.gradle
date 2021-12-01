@@ -53,6 +53,9 @@ dependencies {
     implementation viewDependencies.recyclerview
     implementation viewDependencies.percentlayout
     implementation viewDependencies.constraintlayout
+    implementation viewDependencies.fastAdapter
+    implementation viewDependencies.fastAdapterBinding
+    implementation viewDependencies.fastAdapterDiffUtil
 
     //    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
 

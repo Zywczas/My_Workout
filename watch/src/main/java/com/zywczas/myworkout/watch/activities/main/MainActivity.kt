@@ -1,4 +1,4 @@
-package com.zywczas.myworkout.watch.activities
+package com.zywczas.myworkout.watch.activities.main
 
 import android.content.Intent
 import android.os.Bundle
