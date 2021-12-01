@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.wear.widget.WearableRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/weeksList"
-    android:scrollbars="vertical"
-    tools:context=".activities.trainingplan.weekslist.presentation.WeeksListActivity">
-</androidx.wear.widget.WearableRecyclerView>
+    tools:context=".activities.trainingplan.weekslist.presentation.WeeksListActivity" >
+
+    <androidx.wear.widget.WearableRecyclerView
+        android:id="@+id/weeksList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:scrollbars="vertical"
+        tools:ignore="SpeakableTextPresentCheck" />
+</androidx.constraintlayout.widget.ConstraintLayout>
