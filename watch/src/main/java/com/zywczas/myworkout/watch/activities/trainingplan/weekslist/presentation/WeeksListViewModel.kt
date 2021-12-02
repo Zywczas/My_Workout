@@ -38,7 +38,6 @@ class WeeksListViewModel
                             else -> ""
                         }
             }
-
             _weeks.postValue(weeks)
         }
     }
