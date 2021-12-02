@@ -14,7 +14,7 @@ internal class TrainingTemplatesBusinessCaseImpl
                     @TrainingTemplates private val dayDao: DayDao,
                     @TrainingTemplates private val cardioDao: CardioDao,
                     @TrainingTemplates private val exerciseDao: ExerciseDao,
-                    @TrainingTemplates private val timerDao: TimerDao) : PlannedTrainingsBusinessCase {
+                    @TrainingTemplates private val timerDao: TimerDao) : TrainingTemplatesBusinessCase {
 
     override suspend fun getWeekRelationsList(): List<WeekRelations> = weekDao.getWeekRelationsList()
 

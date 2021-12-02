@@ -2,6 +2,7 @@ package com.zywczas.myworkout.watch.activities.trainingplan.weekslist.presentati
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.view.isGone
 import androidx.wear.widget.WearableLinearLayoutManager
 import androidx.wear.widget.WearableRecyclerView
 import com.mikepenz.fastadapter.FastAdapter
@@ -29,6 +30,7 @@ class WeeksListActivity : BaseActivity() {
         setContentView(binding.root)
         binding.weeksList.setup()
         viewModel.getPlannedWeeks()
+        setupLiveDataObservers()
     }
 
     private fun WearableRecyclerView.setup(){
@@ -37,6 +39,13 @@ class WeeksListActivity : BaseActivity() {
         layoutManager = WearableLinearLayoutManager(this@WeeksListActivity, CustomScrollingLayoutCallback())
         adapter = recyclerAdapter
     }
+
+    private fun setupLiveDataObservers(){
+        viewModel.weeks.observe(this){ weeks -> FastAdapterDiffUtil.set(itemAdapter, weeks.toWeekItems(), DiffUtilCallback()) }
+        viewModel.isEmptyPlanMessageGone.observe(this){ binding.emptyPlanMessage.isGone = it }
+    }
+
+    private fun List<Week>.toWeekItems(): List<WeekItem> = map { WeekItem(it) }
 
 //    private fun addSomeItems(){
 //        val items = listOf<GenericItem>(

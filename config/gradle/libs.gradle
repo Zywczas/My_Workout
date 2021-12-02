@@ -1,7 +1,7 @@
 ext {
 
     compose_version = '1.0.5'
-    kotlin_version = "1.6.0"
+    kotlin_version = "1.5.32"
 
     appDependencies = [
 //            compose                         : "androidx.compose.ui:ui:$compose_version",
@@ -14,10 +14,9 @@ ext {
     wearDependencies = [
             playServicesWarable             : 'com.google.android.gms:play-services-wearable:17.1.0',
             wear                            : 'androidx.wear:wear:1.2.0'
-
     ]
 
-    androidx_navigation_version = '2.3.5'
+    androidx_navigation_version = '2.4.0-alpha02'
     fast_adapter_version = '5.6.0'
 
     viewDependencies = [

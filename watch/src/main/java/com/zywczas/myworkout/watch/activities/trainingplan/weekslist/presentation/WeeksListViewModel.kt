@@ -2,7 +2,9 @@ package com.zywczas.myworkout.watch.activities.trainingplan.weekslist.presentati
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.Week
@@ -17,6 +19,12 @@ class WeeksListViewModel
 
     private val _weeks = MutableLiveData<List<Week>>()
     val weeks: LiveData<List<Week>> = _weeks
+
+    val isEmptyPlanMessageGone: LiveData<Boolean> = Transformations.switchMap(weeks) { weeks ->
+        liveData(dispatcherIO){
+            emit(weeks.isNotEmpty())
+        }
+    }
 
     fun getPlannedWeeks(){
         viewModelScope.launch(dispatcherIO){

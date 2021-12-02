@@ -3,6 +3,7 @@ package com.zywczas.myworkout.watch.di
 import com.zywczas.common.di.modules.CommonBinderModule
 import com.zywczas.common.di.modules.CommonProviderModule
 import com.zywczas.common.di.modules.DispatchersModule
+import com.zywczas.databasestore.di.modules.BusinessCaseModule
 import com.zywczas.databasestore.di.modules.DatabaseModule
 import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.di.modules.AppModule
@@ -18,6 +19,7 @@ import javax.inject.Singleton
     DomainModule::class,
     ViewModelFactoryModule::class,
     DatabaseModule::class,
+    BusinessCaseModule::class,
     CommonBinderModule::class,
     CommonProviderModule::class
 ])

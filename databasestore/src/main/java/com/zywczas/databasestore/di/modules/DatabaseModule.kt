@@ -20,12 +20,12 @@ class DatabaseModule {
     @Provides
     @Singleton
     internal fun provideTrainingsTemplatesDatabase(context: Context): TrainingsTemplatesDatabase =
-            Room.databaseBuilder(context, TrainingsTemplatesDatabase::class.java, "TrainingsTemplates").build()
+            Room.databaseBuilder(context, TrainingsTemplatesDatabase::class.java, "TrainingsTemplatesDatabase").build()
 
     @Provides
     @Singleton
     internal fun providePlannedTrainingsDatabase(context: Context): PlannedTrainingsDatabase =
-        Room.databaseBuilder(context, PlannedTrainingsDatabase::class.java, "PlannedTrainings").build()
+        Room.databaseBuilder(context, PlannedTrainingsDatabase::class.java, "PlannedTrainingsDatabase").build()
 
     @Provides
     @TrainingTemplates

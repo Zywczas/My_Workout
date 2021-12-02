@@ -70,4 +70,6 @@ dependencies {
 
     implementation lifeCycleDependencies.liveData
 
+    implementation dbDependencies.room
+
 }
