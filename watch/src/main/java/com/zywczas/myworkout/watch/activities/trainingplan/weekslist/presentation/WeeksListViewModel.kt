@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
+import com.zywczas.common.extetions.dayFormat
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.Week
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksListRepository
 import kotlinx.coroutines.CoroutineDispatcher
@@ -21,14 +22,24 @@ class WeeksListViewModel
     val weeks: LiveData<List<Week>> = _weeks
 
     val isEmptyPlanMessageGone: LiveData<Boolean> = Transformations.switchMap(weeks) { weeks ->
-        liveData(dispatcherIO){
+        liveData(dispatcherIO) {
             emit(weeks.isNotEmpty())
         }
     }
 
-    fun getPlannedWeeks(){
-        viewModelScope.launch(dispatcherIO){
-            _weeks.postValue(repo.getWeeks())
+    fun getPlannedWeeks() {
+        viewModelScope.launch(dispatcherIO) {
+            val weeks = repo.getWeeks()
+            weeks.forEach {
+                it.displayedDates =
+                        when {
+                            it.dateStarted != null && it.dateFinished != null -> "${it.dateStarted.dayFormat()}-${it.dateFinished.dayFormat()}"
+                            it.dateStarted != null -> it.dateStarted.dayFormat()
+                            else -> ""
+                        }
+            }
+
+            _weeks.postValue(weeks)
         }
     }
 

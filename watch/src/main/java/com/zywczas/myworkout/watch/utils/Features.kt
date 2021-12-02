@@ -24,9 +24,10 @@ pokazywanie jak dlugo faza ekscentryczna i koncentryczna (2s)
 pokazywanie aktualnej godziny podczas cwiczenia i minutnika
 
 USUWANIE:
-usuwanie tygodni na dlugi klik albo swipe to dismiss
-usuwanie dni na dlugi klik albo swipe to dismiss
-usuwanie cwiczen na dlugi klik albo swipe to dismiss
+nie moze byc swipe to dismiss bo ekrany sa tak zamykane i bedzie sie klocic ze soba
+usuwanie tygodni na dlugi klik
+usuwanie dni na dlugi klik
+usuwanie cwiczen na dlugi klik
 usuwanie w ustawieniach jest na stale
 
 KOLEJNOSC:
@@ -36,17 +37,12 @@ ustawianie kolejnosci tygodni treningowych
 ustawianie kolejnosci cwiczen
 
 LOGIKA:
-chyba bede potrzebowac dwie bazy danych, jedna to exercise templates a druga to planned exercises
-dac zmienna finished i chyba trzeba bedzie kopiowac do bazy kilka tygodni i dni itd. -
-ktore bedzie kopiowane jak zacznie sie nowy tydzien i zapisywane osobno do bazy
 Jesli ktos ma 3 rozne tygodnie to pokazuje 3 wstecz i 3 do przodu, jesli ktos ma 1 tylko to pokazuje 1 wstecz i 1 aktualny(jezeli jest skonczony to zaczyna nowy)
-Jesli rozne tygodnie to lista tygodni na init, a jesli taki sam to od razu
 zaznaczanie zrobionego tygodnia - jezeli wszystkie dni sa zrobione
 zaznaczanie zrobionego dnia - jezeli wszystkie cwiczenia sa zrobione, pokazywanie daty "zrobione" jak sie wszystkie cwiczenia zrobi, a jak nie to bedzie
 zaznaczanie zrobionego cwiczenia - jak sie przechodzi do kolejnego cwiczenia, a przy ostatnim cwiczeniu przy ostatniej serii guzik "Zakoncz cwiczenie"
 wystwielac elementy w kolejnosci z gory na dol
 stoper - wibracje po czasie i zapalanie ekranu
-Wracanie do poprzedniego ekranu na Swipe z lewej do prawej SwipeDismissFrameLayout
 klikniecie nowy tydzien/dzien/cwiczenie przenosi do wpisywania tekstu a potem do szczegolow danego elementu
 jak dodaje na koniec dnia jakies kardio to wczytac to co zapisane i pozwolic na zmiane przed zakonczeniem dodawania
 

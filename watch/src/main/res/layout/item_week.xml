@@ -8,16 +8,37 @@
     android:padding="10dp">
 <!--    todo zamiast paddingu to dac poprawny line separator-->
 <!--todo dimensy-->
+    <ImageView
+        android:id="@+id/backgroundLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/dates"
+        app:layout_constraintEnd_toEndOf="@+id/weekName"
+        app:layout_constraintStart_toStartOf="@+id/weekName"
+        app:layout_constraintTop_toTopOf="@+id/weekName"
+        app:srcCompat="@drawable/item_background"
+        tools:ignore="ContentDescription" />
+
     <TextView
         android:id="@+id/weekName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:background="@drawable/item_background"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/dates"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Tydzien 1\n21.07-26.07" />
-<!--    todo poprawic tlo na okragle-->
+        tools:text="Tydzien 1" />
+
+    <TextView
+        android:id="@+id/dates"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/weekName"
+        app:layout_constraintStart_toStartOf="@+id/weekName"
+        app:layout_constraintTop_toBottomOf="@+id/weekName"
+        tools:text="21.07" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
