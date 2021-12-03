@@ -10,10 +10,8 @@ import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.common.extetions.dayFormat
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.Week
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksListRepository
-import com.zywczas.myworkout.watch.adapters.WeekItem
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
-import org.joda.time.DateTime
 import javax.inject.Inject
 
 class WeeksListViewModel
@@ -31,8 +29,7 @@ class WeeksListViewModel
 
     fun getPlannedWeeks() {
         viewModelScope.launch(dispatcherIO) {
-            val weeks = items.sortedBy { it.sequence }
-//            val weeks = repo.getWeeks().sortedBy { it.sequence }
+            val weeks = repo.getWeeks().sortedBy { it.sequence }
             weeks.forEach {
                 it.displayedDates =
                         when {
@@ -44,32 +41,5 @@ class WeeksListViewModel
             _weeks.postValue(weeks)
         }
     }
-
-        val items = listOf(
-                Week(id = 222,
-                     name = "tydzien 2",
-                     sequence = 2,
-                     dateStarted = DateTime(),
-                     dateFinished = null,
-                     isFinished = false),
-                Week(id = 44,
-                     name = "tydzien 4",
-                     sequence = 4,
-                     dateStarted = DateTime(),
-                     dateFinished = DateTime(),
-                     isFinished = false),
-                Week(id = 2442,
-                     name = "tydzien 1",
-                     sequence = 1,
-                     dateStarted = DateTime(),
-                     dateFinished = DateTime(),
-                     isFinished = true),
-                Week(id = 3342,
-                     name = "tydzien 3",
-                     sequence = 3,
-                     dateStarted = null,
-                     dateFinished = DateTime(),
-                     isFinished = true),
-        )
 
 }
