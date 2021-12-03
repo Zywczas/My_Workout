@@ -1,10 +1,10 @@
 package com.zywczas.myworkout.watch.adapters
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
-import com.zywczas.common.extetions.setColorOfText
 import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.Week
 import com.zywczas.myworkout.watch.databinding.ItemWeekBinding
@@ -25,8 +25,9 @@ class WeekItem(val week: Week) : AbstractBindingItem<ItemWeekBinding>() {
             binding.dates.isVisible = false
         }
         if (week.isFinished) {
-            binding.weekName.setColorOfText(R.color.doneText) //todo sprawdzic czy to dobrze dziala
-            binding.backgroundLayout.setBackgroundResource(R.color.doneBackground) //todo sprawdzic czy to dobrze dziala
+            binding.weekName.setTextColor(binding.root.context.getColor(R.color.doneText))
+            binding.dates.setTextColor(binding.root.context.getColor(R.color.doneText))
+            binding.backgroundLayout.backgroundTintList = ColorStateList.valueOf(binding.root.context.getColor(R.color.doneBackground))
         }
     }
 

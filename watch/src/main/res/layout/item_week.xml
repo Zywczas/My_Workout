@@ -8,15 +8,15 @@
     android:padding="10dp">
 <!--    todo zamiast paddingu to dac poprawny line separator-->
 <!--todo dimensy-->
-    <ImageView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/backgroundLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/item_background"
         app:layout_constraintBottom_toBottomOf="@+id/dates"
         app:layout_constraintEnd_toEndOf="@+id/weekName"
         app:layout_constraintStart_toStartOf="@+id/weekName"
         app:layout_constraintTop_toTopOf="@+id/weekName"
-        app:srcCompat="@drawable/item_background"
         tools:ignore="ContentDescription" />
 
     <TextView

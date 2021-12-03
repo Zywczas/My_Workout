@@ -7,5 +7,5 @@ data class Week(val id: Long,
                 val sequence: Int,
                 val dateStarted: DateTime?,
                 val dateFinished: DateTime?,
-                val isFinished: Boolean,
+                val isFinished: Boolean, //todo to jest troche bez sensu, powiela sie z finished date
                 var displayedDates: String = "")

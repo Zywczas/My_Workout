@@ -3,6 +3,7 @@ package com.zywczas.myworkout.watch.activities.trainingplan.weekslist.presentati
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isGone
+import androidx.lifecycle.lifecycleScope
 import androidx.wear.widget.WearableLinearLayoutManager
 import androidx.wear.widget.WearableRecyclerView
 import com.mikepenz.fastadapter.FastAdapter
@@ -46,18 +47,5 @@ class WeeksListActivity : BaseActivity() {
     }
 
     private fun List<Week>.toWeekItems(): List<WeekItem> = map { WeekItem(it) }
-
-//    private fun addSomeItems(){
-//        val items = listOf<GenericItem>(
-//            WeekItem(Week("tydzien 1")),
-//            WeekItem(Week("tydzien 2")),
-//            WeekItem(Week("tydzien 3")),
-//            WeekItem(Week("baaaaaaaaaardzo dluuuuuugi tyyyyyydzien sas sda sadasd das sd dasd sd ")),
-//            WeekItem(Week(" dsa ad asd sdsds ds ds g 5gffdsf sdf gfg dsfgsada  dao afjdspij fpdjfpsj  ")),
-//            WeekItem(Week("tydzien 6")),
-//            WeekItem(Week("tydzien 7")),
-//        )
-//        FastAdapterDiffUtil.set(itemAdapter, items, DiffUtilCallback())
-//    }
 
 }
