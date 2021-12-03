@@ -9,7 +9,7 @@ import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.Week
 import com.zywczas.myworkout.watch.databinding.ItemWeekBinding
 
-class WeekItem(val week: Week) : AbstractBindingItem<ItemWeekBinding>() {
+class WeekItem(val week: Week, private val onClickAction:(Long)->Unit) : AbstractBindingItem<ItemWeekBinding>() {
 
     override val type: Int = R.id.weekItem
 
@@ -29,6 +29,7 @@ class WeekItem(val week: Week) : AbstractBindingItem<ItemWeekBinding>() {
             binding.dates.setTextColor(binding.root.context.getColor(R.color.exerciseDoneText))
             binding.backgroundLayout.backgroundTintList = ColorStateList.valueOf(binding.root.context.getColor(R.color.exerciseDoneBackground))
         }
+        binding.root.setOnClickListener { onClickAction(week.id) }
     }
 
 }

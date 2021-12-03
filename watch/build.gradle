@@ -65,6 +65,7 @@ dependencies {
 
     implementation diDependencies.dagger
     implementation diDependencies.daggerAndroid
+    implementation 'androidx.appcompat:appcompat:1.4.0'
     kapt diDependencies.daggerCompiler
     kapt diDependencies.daggerCompilerAndroid
 

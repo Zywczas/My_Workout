@@ -13,4 +13,5 @@
     -->
     <dimen name="inner_frame_layout_padding">5dp</dimen>
     <dimen name="largeTextSize">24sp</dimen>
+    <dimen name="iconSize">30dp</dimen>
 </resources>

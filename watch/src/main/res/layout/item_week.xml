@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/weekItem"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="60dp"
     android:padding="10dp">
-<!--    todo zamiast paddingu to dac poprawny line separator-->
-<!--todo dimensy-->
+    <!--    todo zamiast paddingu to dac poprawny line separator-->
+    <!--todo dimensy-->
+    <!--    todo dac tak ze jak nie ma drugiej linijki to i tak zachowuje grubosc dwoch linijek-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/backgroundLayout"
         android:layout_width="0dp"
