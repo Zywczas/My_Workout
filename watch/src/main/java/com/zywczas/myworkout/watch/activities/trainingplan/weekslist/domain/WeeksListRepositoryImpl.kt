@@ -4,17 +4,19 @@ import com.zywczas.databasestore.trainings.PlannedTrainingsBusinessCase
 import com.zywczas.databasestore.trainings.entities.WeekEntity
 import javax.inject.Inject
 
-class WeeksListRepositoryImpl
-@Inject constructor(private val plannedTrainings: PlannedTrainingsBusinessCase) :
-    WeeksListRepository {
+class WeeksListRepositoryImpl @Inject constructor(
+    private val plannedTrainings: PlannedTrainingsBusinessCase
+) : WeeksListRepository {
 
-    override suspend fun getWeeks(): List<Week> = plannedTrainings.getWeeks().map { it.toDomain() }
+    override suspend fun getWeeks(): List<WeeksList.Week> = plannedTrainings.getWeeks().map { it.toDomain() }
 
-    private fun WeekEntity.toDomain() = Week(id = id,
-                                             name = name,
-                                             sequence = sequence,
-                                             dateStarted = dateStarted,
-                                             dateFinished = dateFinished,
-                                             isFinished = isFinished)
+    private fun WeekEntity.toDomain() = WeeksList.Week(
+        id = id,
+        name = name,
+        sequence = sequence,
+        dateStarted = dateStarted,
+        dateFinished = dateFinished,
+        isFinished = isFinished
+    )
 
 }

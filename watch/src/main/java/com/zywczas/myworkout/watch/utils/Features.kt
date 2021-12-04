@@ -68,4 +68,7 @@ Sworzyc apke na komorke z wykorzystaniem patentow z OpsenioHRM i jetpack compose
 Dac zapis do Firebase.
 Dodac kwestie bezpieczenstwa - zapisywanie na komorce, shared prefs, blokady zgrywania ekranu.
 
+ todo ustawic detekt tak zeby rowniez przy commitach skanowal kod
+todo dac scrollowanie do pierwszego elementu ktory teraz trzeba wykonac, np. do kolejnego tygodnia, dnia lub treningu (przy otwieraniu aktywnosci)
+
  */

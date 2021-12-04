@@ -7,11 +7,17 @@
     tools:context=".activities.settings.main.presentation.SettingsMainActivity">
 
     <androidx.wear.widget.WearableRecyclerView
-        android:id="@+id/weeksList"
+        android:id="@+id/settingsList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
+        android:paddingStart="@dimen/recyclerViewPaddingOnSides"
+        android:paddingEnd="@dimen/recyclerViewPaddingOnSides"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck"
         android:scrollbars="vertical" />
+<!--    todo sprawdzic co to jest to SpeakableTextPresentCheck bo daje ignore we wszystkich -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

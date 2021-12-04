@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 import com.zywczas.myworkout.watch.R
-import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.Week
 import com.zywczas.myworkout.watch.databinding.ItemWeekBinding
 
 class WeekItem(val week: Week, private val onClickAction:(Long)->Unit) : AbstractBindingItem<ItemWeekBinding>() {

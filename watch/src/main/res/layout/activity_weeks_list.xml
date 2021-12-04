@@ -10,9 +10,14 @@
         android:id="@+id/weeksList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:scrollbars="vertical" />
+        android:paddingStart="@dimen/recyclerViewPaddingOnSides"
+        android:paddingEnd="@dimen/recyclerViewPaddingOnSides"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/emptyPlanMessage"
@@ -30,5 +35,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck"
         tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

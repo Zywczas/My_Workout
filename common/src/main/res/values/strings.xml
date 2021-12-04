@@ -2,4 +2,5 @@
     <string name="app_name">My Workout</string>
     <string name="train_hard_win_easily">Train hard\nWin easily</string>
     <string name="empty_training_plan">No trainings planned.\nClick here to add new.</string>
+    <string name="planned_trainings">Planned trainings</string>
 </resources>

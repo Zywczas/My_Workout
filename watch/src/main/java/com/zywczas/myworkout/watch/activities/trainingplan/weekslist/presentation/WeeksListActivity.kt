@@ -1,5 +1,6 @@
 package com.zywczas.myworkout.watch.activities.trainingplan.weekslist.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isGone
@@ -10,9 +11,11 @@ import com.mikepenz.fastadapter.GenericItem
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import com.zywczas.myworkout.watch.activities.BaseActivity
-import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.Week
+import com.zywczas.myworkout.watch.activities.settings.main.presentation.SettingsMainActivity
+import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksList
 import com.zywczas.myworkout.watch.adapters.DiffUtilCallback
 import com.zywczas.myworkout.watch.adapters.SettingsItem
+import com.zywczas.myworkout.watch.adapters.TitleItem
 import com.zywczas.myworkout.watch.adapters.WeekItem
 import com.zywczas.myworkout.watch.databinding.ActivityWeeksListBinding
 import com.zywczas.myworkout.watch.utils.CustomScrollingLayoutCallback
@@ -42,15 +45,16 @@ class WeeksListActivity : BaseActivity() {
     }
 
     private fun setupLiveDataObservers(){
-        viewModel.weeks.observe(this){ weeks -> FastAdapterDiffUtil.set(itemAdapter, weeks.toGenericItems(), DiffUtilCallback()) }
+        viewModel.weeksList.observe(this){ weeks -> FastAdapterDiffUtil.set(itemAdapter, weeks.toAdapterItems(), DiffUtilCallback()) }
         viewModel.isEmptyPlanMessageGone.observe(this){ binding.emptyPlanMessage.isGone = it }
     }
 
-    private fun List<Week>.toGenericItems(): List<GenericItem> {
-        val genericItems = mutableListOf<GenericItem>()
-        forEach { genericItems.add(WeekItem(it){ id -> goToWeekActivity(id) }) }
-        genericItems.add(SettingsItem{ goToSettingsActivity() })
-        return genericItems
+    private fun List<WeeksList>.toAdapterItems(): List<GenericItem> = map {
+        when(it){
+            is WeeksList.Title -> TitleItem(getString(it.title))
+            is WeeksList.Week -> WeekItem(it){ id -> goToWeekActivity(id) }
+            is WeeksList.Settings -> SettingsItem{ goToSettingsActivity() }
+        }
     }
 
     private fun goToWeekActivity(weekId: Long){
@@ -58,7 +62,8 @@ class WeeksListActivity : BaseActivity() {
     }
 
     private fun goToSettingsActivity(){
-        //todo przejscie
+        val intent = Intent(this, SettingsMainActivity::class.java)
+        startActivity(intent)
     }
 
     private fun setupOnClickListeners(){
