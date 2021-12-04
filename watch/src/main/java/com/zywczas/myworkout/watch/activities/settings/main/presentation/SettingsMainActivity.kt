@@ -59,6 +59,4 @@ class SettingsMainActivity : BaseActivity() {
         //todo
     }
 
-    //todo dac empty space item i zobaczyc jak to bedzie wygladac
-
 }

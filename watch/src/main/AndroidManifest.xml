@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyWatch">
         <activity
+            android:name=".activities.settings.timer.presentation.SettingsTimerActivity"
+            android:exported="true" />
+        <activity
             android:name=".activities.settings.main.presentation.SettingsMainActivity"
             android:exported="true" />
         <activity
@@ -23,7 +26,7 @@
         <uses-library
             android:name="com.google.android.wearable"
             android:required="true" />
-        <!--
+        <!-- todo sprawdzic
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.
         -->

@@ -45,6 +45,7 @@ wystwielac elementy w kolejnosci z gory na dol
 stoper - wibracje po czasie i zapalanie ekranu
 klikniecie nowy tydzien/dzien/cwiczenie przenosi do wpisywania tekstu a potem do szczegolow danego elementu
 jak dodaje na koniec dnia jakies kardio to wczytac to co zapisane i pozwolic na zmiane przed zakonczeniem dodawania
+jezeli ktos nie ustawil timera to brac domyslny z czasem 1 min
 
 3 SCENARIUSZE:
 Nowy uzytkownik ktory wszystko od nowa ustawia
