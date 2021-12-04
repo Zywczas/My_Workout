@@ -3,9 +3,10 @@ package com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain
 import androidx.annotation.StringRes
 import org.joda.time.DateTime
 
-sealed class WeeksList {
+@Suppress("CanSealedSubClassBeObject")
+sealed class WeeksElements {
 
-    data class Title(@StringRes val title: Int) : WeeksList()
+    data class Title(@StringRes val title: Int) : WeeksElements()
 
     data class Week(val id: Long,
                     val name: String,
@@ -13,8 +14,8 @@ sealed class WeeksList {
                     val dateStarted: DateTime?,
                     val dateFinished: DateTime?,
                     val isFinished: Boolean,
-                    var displayedDates: String = "") : WeeksList()
+                    var displayedDates: String = "") : WeeksElements()
 
-    object Settings : WeeksList()
+    class Settings : WeeksElements()
 
 }

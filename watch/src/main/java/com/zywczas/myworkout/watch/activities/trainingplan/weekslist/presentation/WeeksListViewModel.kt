@@ -9,7 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.common.extetions.dayFormat
 import com.zywczas.myworkout.watch.R
-import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksList
+import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksElements
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksListRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -20,32 +20,41 @@ class WeeksListViewModel @Inject constructor(
     @DispatcherIO private val dispatcherIO: CoroutineDispatcher
 ) : ViewModel() {
 
-    private val _weeksList = MutableLiveData<List<WeeksList>>()
-    val weeksList: LiveData<List<WeeksList>> = _weeksList
+    private val _weeksElements = MutableLiveData<List<WeeksElements>>()
+    val weeksElements: LiveData<List<WeeksElements>> = _weeksElements
 
-    val isEmptyPlanMessageGone: LiveData<Boolean> = Transformations.switchMap(weeksList) { weeks ->
+    val isEmptyPlanMessageGone: LiveData<Boolean> = Transformations.switchMap(weeksElements) { weeksElements ->
         liveData(dispatcherIO) {
-            emit(weeks.isNotEmpty())
+            emit(weeksElements.firstOrNull { it is WeeksElements.Week }?.let { true } ?: false )
         }
     }
 
-    fun getPlannedWeeks() {
+    fun getWeeksList() {
         viewModelScope.launch(dispatcherIO) {
-            val weeksList = mutableListOf<WeeksList>()
-            weeksList.add(WeeksList.Title(R.string.planned_trainings))
-            val weeks = repo.getWeeks().sortedBy { it.sequence }
-            weeks.forEach {
-                it.displayedDates =
-                    when {
-                        it.dateStarted != null && it.dateFinished != null -> "${it.dateStarted.dayFormat()}-${it.dateFinished.dayFormat()}"
-                        it.dateStarted != null -> it.dateStarted.dayFormat()
-                        else -> ""
-                    }
+            val weeks = repo.getWeeks().sortedBy { it.sequence }.withSetDisplayedDates()
+            if (weeks.isNotEmpty()){
+                val weeksElements = mutableListOf<WeeksElements>().apply {
+                    add(WeeksElements.Title(R.string.planned_trainings))
+                    addAll(weeks)
+                    add(WeeksElements.Settings())
+                }
+                _weeksElements.postValue(weeksElements)
+            } else {
+                _weeksElements.postValue(emptyList())
             }
-            weeksList.addAll(weeks)
-            weeksList.add(WeeksList.Settings)
-            _weeksList.postValue(weeksList)
         }
+    }
+
+    private fun List<WeeksElements.Week>.withSetDisplayedDates(): List<WeeksElements.Week> {
+        forEach {
+            it.displayedDates =
+                when {
+                    it.dateStarted != null && it.dateFinished != null -> "${it.dateStarted.dayFormat()}-${it.dateFinished.dayFormat()}"
+                    it.dateStarted != null -> it.dateStarted.dayFormat()
+                    else -> ""
+                }
+        }
+        return this
     }
 
 }

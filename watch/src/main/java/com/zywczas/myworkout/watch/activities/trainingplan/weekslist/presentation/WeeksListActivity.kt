@@ -12,9 +12,9 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.settings.main.presentation.SettingsMainActivity
-import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksList
+import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksElements
 import com.zywczas.myworkout.watch.adapters.DiffUtilCallback
-import com.zywczas.myworkout.watch.adapters.SettingsItem
+import com.zywczas.myworkout.watch.adapters.SettingsFooterItem
 import com.zywczas.myworkout.watch.adapters.TitleItem
 import com.zywczas.myworkout.watch.adapters.WeekItem
 import com.zywczas.myworkout.watch.databinding.ActivityWeeksListBinding
@@ -32,28 +32,27 @@ class WeeksListActivity : BaseActivity() {
         binding = ActivityWeeksListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.weeksList.setup()
-        viewModel.getPlannedWeeks()
+        viewModel.getWeeksList()
         setupLiveDataObservers()
         setupOnClickListeners()
     }
 
     private fun WearableRecyclerView.setup(){
-        //todo sprobowac powrzucac do layoutu
         isEdgeItemsCenteringEnabled = true
         layoutManager = WearableLinearLayoutManager(this@WeeksListActivity, CustomScrollingLayoutCallback())
         adapter = FastAdapter.with(itemAdapter)
     }
 
     private fun setupLiveDataObservers(){
-        viewModel.weeksList.observe(this){ weeks -> FastAdapterDiffUtil.set(itemAdapter, weeks.toAdapterItems(), DiffUtilCallback()) }
+        viewModel.weeksElements.observe(this){ weeks -> FastAdapterDiffUtil.set(itemAdapter, weeks.toAdapterItems(), DiffUtilCallback()) }
         viewModel.isEmptyPlanMessageGone.observe(this){ binding.emptyPlanMessage.isGone = it }
     }
 
-    private fun List<WeeksList>.toAdapterItems(): List<GenericItem> = map {
+    private fun List<WeeksElements>.toAdapterItems(): List<GenericItem> = map {
         when(it){
-            is WeeksList.Title -> TitleItem(getString(it.title))
-            is WeeksList.Week -> WeekItem(it){ id -> goToWeekActivity(id) }
-            is WeeksList.Settings -> SettingsItem{ goToSettingsActivity() }
+            is WeeksElements.Title -> TitleItem(getString(it.title))
+            is WeeksElements.Week -> WeekItem(it){ id -> goToWeekActivity(id) }
+            is WeeksElements.Settings -> SettingsFooterItem{ goToSettingsActivity() }
         }
     }
 

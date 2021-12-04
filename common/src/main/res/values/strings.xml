@@ -3,4 +3,7 @@
     <string name="train_hard_win_easily">Train hard\nWin easily</string>
     <string name="empty_training_plan">No trainings planned.\nClick here to add new.</string>
     <string name="planned_trainings">Planned trainings</string>
+    <string name="settings">Settings</string>
+    <string name="trainings">Trainings</string>
+    <string name="break_interval">Break interval</string>
 </resources>

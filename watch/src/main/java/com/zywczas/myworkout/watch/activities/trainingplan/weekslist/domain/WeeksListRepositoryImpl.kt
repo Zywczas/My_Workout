@@ -8,9 +8,9 @@ class WeeksListRepositoryImpl @Inject constructor(
     private val plannedTrainings: PlannedTrainingsBusinessCase
 ) : WeeksListRepository {
 
-    override suspend fun getWeeks(): List<WeeksList.Week> = plannedTrainings.getWeeks().map { it.toDomain() }
+    override suspend fun getWeeks(): List<WeeksElements.Week> = plannedTrainings.getWeeks().map { it.toDomain() }
 
-    private fun WeekEntity.toDomain() = WeeksList.Week(
+    private fun WeekEntity.toDomain() = WeeksElements.Week(
         id = id,
         name = name,
         sequence = sequence,
