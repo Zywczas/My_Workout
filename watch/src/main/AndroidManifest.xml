@@ -13,6 +13,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyWatch">
+        <service
+            android:name=".services.timer.TimerService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <activity
+            android:name=".activities.trainingplan.timer.presentation.TimerActivity"
+            android:exported="true" />
         <activity
             android:name=".activities.settings.timer.presentation.SettingsTimerActivity"
             android:exported="true" />
@@ -26,7 +34,8 @@
         <uses-library
             android:name="com.google.android.wearable"
             android:required="true" />
-        <!-- todo sprawdzic
+        <!--
+ todo sprawdzic
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.
         -->
@@ -40,6 +49,7 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

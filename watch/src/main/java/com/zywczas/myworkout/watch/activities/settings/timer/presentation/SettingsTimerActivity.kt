@@ -2,16 +2,11 @@ package com.zywczas.myworkout.watch.activities.settings.timer.presentation
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.AlarmClock
-import android.speech.RecognizerIntent
-import android.util.Log
-import android.view.LayoutInflater
 import androidx.activity.viewModels
 import com.zywczas.common.utils.autoRelease
-import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseActivity
+import com.zywczas.myworkout.watch.activities.trainingplan.timer.presentation.TimerActivity
 import com.zywczas.myworkout.watch.databinding.ActivitySettingsTimerBinding
-import java.util.zip.Inflater
 
 class SettingsTimerActivity : BaseActivity() {
 
@@ -26,7 +21,14 @@ class SettingsTimerActivity : BaseActivity() {
     }
 
     private fun setupOnClickListeners(){
-        binding.time.setOnClickListener {  }
+        binding.time.setOnClickListener {
+            goToTimerActivity() //todo to pozniej poprawic
+        }
+    }
+
+    private fun goToTimerActivity(){
+        val intent = Intent(this, TimerActivity::class.java)
+        startActivity(intent)
     }
 
 }
