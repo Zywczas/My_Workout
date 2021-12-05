@@ -1,7 +1,7 @@
 package com.zywczas.myworkout.watch.activities.settings.main.presentation
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.wear.widget.WearableLinearLayoutManager
 import androidx.wear.widget.WearableRecyclerView
@@ -11,7 +11,7 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.settings.main.domain.SettingsMainElements
-import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksElements
+import com.zywczas.myworkout.watch.activities.settings.timer.presentation.SettingsTimerActivity
 import com.zywczas.myworkout.watch.adapters.DiffUtilCallback
 import com.zywczas.myworkout.watch.adapters.SettingsItem
 import com.zywczas.myworkout.watch.adapters.TitleItem
@@ -56,7 +56,8 @@ class SettingsMainActivity : BaseActivity() {
     }
 
     private fun goToSettingsTimerActivity(){
-        //todo
+        val intent = Intent(this, SettingsTimerActivity::class.java)
+        startActivity(intent)
     }
 
 }

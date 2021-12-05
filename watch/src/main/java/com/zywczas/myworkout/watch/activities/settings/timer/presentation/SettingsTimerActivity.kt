@@ -1,6 +1,10 @@
 package com.zywczas.myworkout.watch.activities.settings.timer.presentation
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.AlarmClock
+import android.speech.RecognizerIntent
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.activity.viewModels
 import com.zywczas.common.utils.autoRelease
@@ -18,7 +22,11 @@ class SettingsTimerActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsTimerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupOnClickListeners()
+    }
 
+    private fun setupOnClickListeners(){
+        binding.time.setOnClickListener {  }
     }
 
 }

@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/train_hard_win_easily"
+        android:textAlignment="center"
         android:textColor="@color/accent"
         android:textSize="@dimen/largeTextSize"
         app:layout_constraintBottom_toBottomOf="parent"
