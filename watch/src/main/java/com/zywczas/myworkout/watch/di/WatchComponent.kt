@@ -9,6 +9,7 @@ import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.di.modules.AppModule
 import com.zywczas.myworkout.watch.di.modules.DomainModule
 import com.zywczas.myworkout.watch.di.modules.ViewModelFactoryModule
+import com.zywczas.myworkout.watch.services.timer.TimerService
 import dagger.Component
 import javax.inject.Singleton
 
@@ -26,5 +27,6 @@ import javax.inject.Singleton
 interface WatchComponent {
 
     fun inject(activity: BaseActivity)
+    fun inject(service: TimerService)
 
 }

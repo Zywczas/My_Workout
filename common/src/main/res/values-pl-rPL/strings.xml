@@ -9,5 +9,8 @@
     <string name="break_interval">Dlugosc przerwy</string>
     <string name="time_between_series">Czas pomiedzy seriami</string>
     <string name="save">Zapisz</string>
+    <string name="counting_to">Odliczanie do:</string>
+    <string name="skip">Pomin</string>
+    <string name="back">Wroc</string>
 </resources>
 <!--todo poprawic na poprawny polski-->

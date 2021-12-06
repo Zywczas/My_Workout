@@ -13,7 +13,8 @@ ext {
 
     wearDependencies = [
             playServicesWarable             : 'com.google.android.gms:play-services-wearable:17.1.0',
-            wear                            : 'androidx.wear:wear:1.2.0'
+            wear                            : 'androidx.wear:wear:1.2.0',
+            ongoingActivity                 : "androidx.wear:wear-ongoing:1.0.0"
     ]
 
     androidx_navigation_version = '2.4.0-alpha02'
