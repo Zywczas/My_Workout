@@ -10,6 +10,7 @@ import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericItem
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
+import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.settings.main.presentation.SettingsMainActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksElements
@@ -24,7 +25,7 @@ class WeeksListActivity : BaseActivity() {
 
     private val viewModel: WeeksListViewModel by viewModels { viewModelFactory }
 
-    private lateinit var binding: ActivityWeeksListBinding
+    private var binding: ActivityWeeksListBinding by autoRelease()
     private val itemAdapter by lazy { ItemAdapter<GenericItem>() }
 
     override fun onCreate(savedInstanceState: Bundle?) {

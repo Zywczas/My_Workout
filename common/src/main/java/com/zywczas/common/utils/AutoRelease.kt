@@ -1,12 +1,7 @@
 package com.zywczas.common.utils
 
-import android.content.Context
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.OnLifecycleEvent
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.launch
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -20,26 +15,14 @@ class AutoReleasedProperty<T : Any>(lifecycleOwner: LifecycleOwner) :
     private var ownerDestroyed = false
 
     init {
-        lifecycleOwner.lifecycle.addObserver(object : LifecycleObserver {
-            @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY) //todo deprecated
-            fun onDestroy() {
+        lifecycleOwner.lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onDestroy(owner: LifecycleOwner) {
                 ownerDestroyed = true
                 internalValue = null
+                super.onDestroy(owner)
             }
         })
     }
-
-    //todo moze tak to zrobic:
-//    fun collect(lifecycleOwner: LifecycleOwner, fragmentManager: FragmentManager, context: Context) {
-//        lifecycleOwner.lifecycleScope.launch {
-//            lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-//                attachmentsManager.attachmentsViewModel.cachedAttachments.collect {
-//                    dismissProgress(fragmentManager)
-//                    onCacheComplete(context, it)
-//                }
-//            }
-//        }
-//    }
 
     override fun getValue(thisRef: Any, property: KProperty<*>): T =
         internalValue ?: run {

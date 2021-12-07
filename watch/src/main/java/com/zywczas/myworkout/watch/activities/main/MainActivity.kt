@@ -3,12 +3,13 @@ package com.zywczas.myworkout.watch.activities.main
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.presentation.WeeksListActivity
 import com.zywczas.myworkout.watch.databinding.ActivityMainBinding
 
 class MainActivity : ComponentActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private var binding: ActivityMainBinding by autoRelease()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

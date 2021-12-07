@@ -9,6 +9,7 @@ import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericItem
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
+import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.settings.main.domain.SettingsMainElements
 import com.zywczas.myworkout.watch.activities.settings.timer.presentation.SettingsTimerActivity
@@ -20,7 +21,7 @@ import com.zywczas.myworkout.watch.utils.CustomScrollingLayoutCallback
 
 class SettingsMainActivity : BaseActivity() {
 
-    private lateinit var binding: ActivitySettingsMainBinding
+    private var binding: ActivitySettingsMainBinding by autoRelease()
     private val viewModel: SettingsMainViewModel by viewModels{ viewModelFactory }
     private val itemAdapter by lazy { ItemAdapter<GenericItem>() }
 
