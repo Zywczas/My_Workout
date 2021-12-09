@@ -2,6 +2,6 @@ package com.zywczas.myworkout.watch.services.timer
 
 interface TimerServiceRepository {
 
-    fun getBreakPeriodInSeconds(): Int
+    suspend fun getBreakPeriodInSeconds(): Int
 
 }

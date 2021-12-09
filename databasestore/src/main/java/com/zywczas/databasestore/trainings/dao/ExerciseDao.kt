@@ -12,7 +12,7 @@ internal interface ExerciseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(model: ExerciseEntity): Long
 
-    @Query("DELETE FROM Exercise WHERE id = :id")
+    @Query("DELETE FROM Exercise WHERE id = :id")//todo sprawdzic czy tu nie powinno byc samo @Delete
     suspend fun deleteExercise(id: Long)
 
     @Query("DELETE FROM Exercise WHERE foreignDayId = :dayId")

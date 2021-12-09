@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "890bc33f8c1290d3292f26bc214bbcd9",
+    "identityHash": "39cc2197cbcb7c6282ede52aea01c223",
     "entities": [
       {
         "tableName": "Week",
@@ -242,7 +242,7 @@
       },
       {
         "tableName": "Timer",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `seconds` INTEGER NOT NULL, `timeStamp` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `seconds` INTEGER NOT NULL, `timeStamp` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -267,7 +267,7 @@
           "columnNames": [
             "id"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
@@ -276,7 +276,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '890bc33f8c1290d3292f26bc214bbcd9')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '39cc2197cbcb7c6282ede52aea01c223')"
     ]
   }
 }

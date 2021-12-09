@@ -66,8 +66,9 @@ class TimerService : LifecycleService() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
         logD("onStartCommand")
-        val breakPeriod = repo.getBreakPeriodInSeconds()
-        startCountingTime(breakPeriod)
+        lifecycleScope.launch(dispatcherIO){
+            startCountingTime(repo.getBreakPeriodInSeconds())
+        }
         val cancelWorkoutFromNotification = intent?.getBooleanExtra(EXTRA_CANCEL_WORKOUT_FROM_NOTIFICATION, false) ?: false //todo sprawdzic jak to dziala i pewnie usunac
         if (cancelWorkoutFromNotification) {
             stopCountingTimeWithServiceShutdownOption(stopService = true)
@@ -78,7 +79,7 @@ class TimerService : LifecycleService() {
 
     private fun startCountingTime(seconds: Int) {
         countTimeJob = lifecycleScope.launch(dispatcherIO) {
-            for (i: Int in 1..seconds) { //todo dac tutaj czas
+            for (i: Int in 1..seconds) {
                 logD("i = $i")
                 delay(1000L) //todo zamienic na poprawny miernik czasu
             }

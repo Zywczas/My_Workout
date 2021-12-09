@@ -2,11 +2,12 @@ package com.zywczas.databasestore.di.modules
 
 import android.content.Context
 import androidx.room.Room
+import com.zywczas.databasestore.db.GeneralDatabase
 import com.zywczas.databasestore.db.TrainingsDatabase
+import com.zywczas.databasestore.timer.dao.TimerDao
 import com.zywczas.databasestore.trainings.dao.CardioDao
 import com.zywczas.databasestore.trainings.dao.DayDao
 import com.zywczas.databasestore.trainings.dao.ExerciseDao
-import com.zywczas.databasestore.trainings.dao.TimerDao
 import com.zywczas.databasestore.trainings.dao.WeekDao
 import dagger.Module
 import dagger.Provides
@@ -15,6 +16,11 @@ import javax.inject.Singleton
 
 @Module
 class DatabaseModule {
+
+    @Provides
+    @Singleton
+    internal fun provideGeneralDatabase(context: Context): GeneralDatabase =
+        Room.databaseBuilder(context, GeneralDatabase::class.java, "GeneralDatabase").build()
 
     @Provides
     @Singleton
@@ -27,6 +33,9 @@ class DatabaseModule {
     @PlannedTrainings
     internal fun providePlannedTrainingsDatabase(context: Context): TrainingsDatabase =
         Room.databaseBuilder(context, TrainingsDatabase::class.java, "PlannedTrainingsDatabase").build()
+
+    @Provides
+    internal fun provideTimerDao(db: GeneralDatabase): TimerDao = db.timerDao()
 
     @Provides
     @TrainingTemplates
@@ -51,14 +60,6 @@ class DatabaseModule {
     @Provides
     @PlannedTrainings
     internal fun providePlannedExerciseDao(@PlannedTrainings db: TrainingsDatabase): ExerciseDao = db.exerciseDao()
-
-    @Provides
-    @TrainingTemplates
-    internal fun provideTemplatesTimerDao(@TrainingTemplates db: TrainingsDatabase): TimerDao = db.timerDao()
-
-    @Provides
-    @PlannedTrainings
-    internal fun providePlannedTimerDao(@PlannedTrainings db: TrainingsDatabase): TimerDao = db.timerDao()
 
     @Provides
     @TrainingTemplates

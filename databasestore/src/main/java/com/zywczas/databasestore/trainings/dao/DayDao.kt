@@ -12,7 +12,7 @@ internal interface DayDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(model: DayEntity): Long
 
-    @Query("DELETE FROM Day WHERE id = :id")
+    @Query("DELETE FROM Day WHERE id = :id")//todo sprawdzic czy tu nie powinno byc samo @Delete
     suspend fun deleteDay(id: Long)
 
     @Query("DELETE FROM Day WHERE foreignWeekId = :weekId")
