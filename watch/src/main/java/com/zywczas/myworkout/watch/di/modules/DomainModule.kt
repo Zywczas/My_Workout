@@ -6,6 +6,8 @@ import com.zywczas.myworkout.watch.activities.trainingplan.timer.domain.TimerRep
 import com.zywczas.myworkout.watch.activities.trainingplan.timer.domain.TimerRepositoryImpl
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksListRepository
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksListRepositoryImpl
+import com.zywczas.myworkout.watch.services.timer.TimerServiceRepository
+import com.zywczas.myworkout.watch.services.timer.TimerServiceRepositoryImpl
 import dagger.Binds
 import dagger.Module
 
@@ -20,5 +22,8 @@ abstract class DomainModule {
 
     @Binds
     abstract fun bindTimerRepository(repo: TimerRepositoryImpl): TimerRepository
+
+    @Binds
+    abstract fun bindTimerServiceRepository(repo: TimerServiceRepositoryImpl): TimerServiceRepository
 
 }

@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.IBinder
 import android.os.PersistableBundle
 import androidx.activity.viewModels
+import com.zywczas.common.extetions.logD
 import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.settings.timer.presentation.SettingsTimerActivity
@@ -15,6 +16,10 @@ import com.zywczas.myworkout.watch.databinding.ActivityTimerBinding
 import com.zywczas.myworkout.watch.services.timer.TimerService
 
 class TimerActivity : BaseActivity() {
+
+    init {
+        logD("init aktywnosci") //todo uruchamia sie kilka razy bo serwis tworzy nowe przy kliknieciu w ikonke, do poprawy, moze da sie jakos z back stacku otwierac ta sama
+    }
 
     private var binding: ActivityTimerBinding by autoRelease()
     private val viewModel: TimerViewModel by viewModels { viewModelFactory }
@@ -46,7 +51,7 @@ class TimerActivity : BaseActivity() {
         setupOnClickListeners()
     }
 
-    private fun bindTimerService(){
+    private fun bindTimerService(){ //todo dac jakies sprawdzenie gdzies czy ustawiony czas to nie jest zero albo 1, jezeli bedzie to jakos przeskakiwac timer service, moze dac sprawdzenie we wczesniejszej aktywnosci
         val serviceIntent = Intent(this, TimerService::class.java)
         bindService(serviceIntent, timerServiceConnection, Context.BIND_AUTO_CREATE)
     }
@@ -87,7 +92,7 @@ class TimerActivity : BaseActivity() {
         val intent = Intent(this, SettingsTimerActivity::class.java)
         startActivity(intent)
     }
-
+//todo
     //3. jak serwis skonczy odliczanie to wlaczyc wibracje i obudzic aktywnosc timer, a po wejsciu w aktywnosc wylaczyc serwis
 
     override fun onStop() {

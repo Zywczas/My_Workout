@@ -22,6 +22,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 class TimerService : LifecycleService() {
@@ -39,6 +40,9 @@ class TimerService : LifecycleService() {
     @SuppressLint("FieldSiteTargetOnQualifierAnnotation")
     @field:[Inject DispatcherIO]
     lateinit var dispatcherIO: CoroutineDispatcher
+
+    @Inject
+    lateinit var repo: TimerServiceRepository
 
     private val localBinder = LocalBinder()
     private val notificationManager by lazy { getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager }
@@ -62,7 +66,8 @@ class TimerService : LifecycleService() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
         logD("onStartCommand")
-        startCountingTime()
+        val breakPeriod = repo.getBreakPeriodInSeconds()
+        startCountingTime(breakPeriod)
         val cancelWorkoutFromNotification = intent?.getBooleanExtra(EXTRA_CANCEL_WORKOUT_FROM_NOTIFICATION, false) ?: false //todo sprawdzic jak to dziala i pewnie usunac
         if (cancelWorkoutFromNotification) {
             stopCountingTimeWithServiceShutdownOption(stopService = true)
@@ -71,9 +76,9 @@ class TimerService : LifecycleService() {
         return Service.START_NOT_STICKY
     }
 
-    private fun startCountingTime() {
+    private fun startCountingTime(seconds: Int) {
         countTimeJob = lifecycleScope.launch(dispatcherIO) {
-            for (i: Int in 1..100) { //todo dac tutaj czas
+            for (i: Int in 1..seconds) { //todo dac tutaj czas
                 logD("i = $i")
                 delay(1000L) //todo zamienic na poprawny miernik czasu
             }
