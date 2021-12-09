@@ -22,7 +22,7 @@ class TimerActivity : BaseActivity() {
     }
 
     private var binding: ActivityTimerBinding by autoRelease()
-    private val viewModel: TimerViewModel by viewModels { viewModelFactory }
+    private val viewModel: TimerViewModel by viewModels { viewModelFactory } //todo chyba do wylotu
     private var timerService: TimerService? = null
     private var isTimerServiceBound = false
     private var isConfigurationChange = false
@@ -33,11 +33,19 @@ class TimerActivity : BaseActivity() {
             val binder = service as? TimerService.LocalBinder
             timerService = binder?.timerService
             isTimerServiceBound = true
+            setupLiveDataObservers() //todo zmienic nazwe jesli uzyje live daty z view modelu
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {
             timerService = null
             isTimerServiceBound = false
+        }
+    }
+
+    private fun setupLiveDataObservers(){
+        timerService?.timeLeft?.observe(this){
+            logD("pobiera live date: $it")
+            binding.timeLeft.text = it
         }
     }
 
@@ -47,17 +55,12 @@ class TimerActivity : BaseActivity() {
         setContentView(binding.root)
         isConfigurationChange = false
         bindTimerService()
-        setupLiveDataObservers()
         setupOnClickListeners()
     }
 
     private fun bindTimerService(){ //todo dac jakies sprawdzenie gdzies czy ustawiony czas to nie jest zero albo 1, jezeli bedzie to jakos przeskakiwac timer service, moze dac sprawdzenie we wczesniejszej aktywnosci
         val serviceIntent = Intent(this, TimerService::class.java)
         bindService(serviceIntent, timerServiceConnection, Context.BIND_AUTO_CREATE)
-    }
-
-    private fun setupLiveDataObservers(){
-
     }
 
     private fun setupOnClickListeners(){
@@ -75,6 +78,7 @@ class TimerActivity : BaseActivity() {
 
     private fun unBindAndCloseTimerService(){
         if (isTimerServiceBound){
+            timerService?.timeLeft?.removeObservers(this)
             unbindService(timerServiceConnection)
             isTimerServiceBound = false
         }

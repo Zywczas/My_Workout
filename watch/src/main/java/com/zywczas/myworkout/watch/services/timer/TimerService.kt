@@ -10,11 +10,14 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.wear.ongoing.OngoingActivity
 import androidx.wear.ongoing.Status
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.common.extetions.logD
+import com.zywczas.common.utils.DateTimeProvider
 import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.trainingplan.timer.presentation.TimerActivity
 import com.zywczas.myworkout.watch.di.AppInjector
@@ -22,6 +25,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.joda.time.DateTime
 import java.util.*
 import javax.inject.Inject
 
@@ -43,12 +47,17 @@ class TimerService : LifecycleService() {
 
     @Inject
     lateinit var repo: TimerServiceRepository
+    @Inject
+    lateinit var dateTime: DateTimeProvider
 
     private val localBinder = LocalBinder()
     private val notificationManager by lazy { getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager }
     private var isServiceRunningInForeground = false
     private var isServiceRunning = false
     private var countTimeJob: Job? = null
+
+    private val _timeLeft = MutableLiveData<String>()
+    val timeLeft: LiveData<String> = _timeLeft
 
     //todo poustawiac funkcje po kolei
     override fun onCreate() {
@@ -79,9 +88,13 @@ class TimerService : LifecycleService() {
 
     private fun startCountingTime(seconds: Int) {
         countTimeJob = lifecycleScope.launch(dispatcherIO) {
-            for (i: Int in 1..seconds) {
+            _timeLeft.postValue(dateTime.getTimerRepresentationOf(seconds))
+            val oneSecond = 1000L
+            delay(oneSecond)
+            for (i: Int in seconds-1 downTo 0) { //todo odwrocic zeby licznika spadal a nie rosl
                 logD("i = $i")
-                delay(1000L) //todo zamienic na poprawny miernik czasu
+                _timeLeft.postValue(dateTime.getTimerRepresentationOf(i))
+                delay(oneSecond) //todo zamienic na poprawny miernik czasu
             }
         }
     }
