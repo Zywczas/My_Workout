@@ -8,8 +8,10 @@ import android.os.Bundle
 import android.os.IBinder
 import android.os.PersistableBundle
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import com.zywczas.common.extetions.logD
 import com.zywczas.common.utils.autoRelease
+import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.settings.timer.presentation.SettingsTimerActivity
 import com.zywczas.myworkout.watch.databinding.ActivityTimerBinding
@@ -27,13 +29,13 @@ class TimerActivity : BaseActivity() {
     private var isTimerServiceBound = false
     private var isConfigurationChange = false
 
-    private val timerServiceConnection = object : ServiceConnection {
+    private val timerServiceConnection = object : ServiceConnection { //todo dac to nizej, tam gdzie uzywane i poustawiac wszystkie funkcje
 
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             val binder = service as? TimerService.LocalBinder
             timerService = binder?.timerService
             isTimerServiceBound = true
-            setupLiveDataObservers() //todo zmienic nazwe jesli uzyje live daty z view modelu
+            setupServiceLiveDataObservers()
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {
@@ -42,11 +44,29 @@ class TimerActivity : BaseActivity() {
         }
     }
 
-    private fun setupLiveDataObservers(){
+    private fun setupServiceLiveDataObservers(){
         timerService?.timeLeft?.observe(this){
             logD("pobiera live date: $it")
             binding.timeLeft.text = it
         }
+        timerService?.isAlarmOff?.observe(this) {
+            if (it) {
+                turnAlarmOn()
+                showFinishedCounter()
+            }
+        }
+    }
+
+    private fun turnAlarmOn(){
+        //todo wlaczanie wibracji
+    }
+
+    private fun showFinishedCounter(){
+        binding.counterHeader.isVisible = false
+        binding.nextExercise.isVisible = false
+        binding.goBack.isVisible = false
+        binding.settings.isVisible = false
+        binding.skipTimer.setText(R.string.nextExercise)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,20 +85,26 @@ class TimerActivity : BaseActivity() {
 
     private fun setupOnClickListeners(){
         binding.skipTimer.setOnClickListener {
+            turnAlarmOff()
             unBindAndCloseTimerService()
             goToNextExercise()
             finish()
         }
-        binding.goBack.setOnClickListener { onBackPressed() } //todo nie jestem pewien czy to jest ok
+        binding.goBack.setOnClickListener { onBackPressed() }
         binding.settings.setOnClickListener {
             unBindAndCloseTimerService()
             goToTimerSettingsActivity()
         }
     }
 
+    private fun turnAlarmOff(){
+        //todo wylaczyc wibracje jesli sa wlaczone
+    }
+
     private fun unBindAndCloseTimerService(){
         if (isTimerServiceBound){
             timerService?.timeLeft?.removeObservers(this)
+            timerService?.isAlarmOff?.removeObservers(this)
             unbindService(timerServiceConnection)
             isTimerServiceBound = false
         }

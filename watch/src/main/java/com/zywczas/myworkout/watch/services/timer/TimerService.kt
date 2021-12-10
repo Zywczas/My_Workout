@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.*
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Binder
 import android.os.IBinder
 import android.util.Log
@@ -25,7 +24,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.joda.time.DateTime
 import java.util.*
 import javax.inject.Inject
 
@@ -55,9 +53,13 @@ class TimerService : LifecycleService() {
     private var isServiceRunningInForeground = false
     private var isServiceRunning = false
     private var countTimeJob: Job? = null
+    private val launchActivityIntent = Intent(this, TimerActivity::class.java) //todo dac to tak zeby bralo ze stacka a nie tworzylo nowe
 
     private val _timeLeft = MutableLiveData<String>()
     val timeLeft: LiveData<String> = _timeLeft
+
+    private val _isAlarmOff = MutableLiveData<Boolean>()
+    val isAlarmOff: LiveData<Boolean> = _isAlarmOff
 
     //todo poustawiac funkcje po kolei
     override fun onCreate() {
@@ -91,19 +93,36 @@ class TimerService : LifecycleService() {
             _timeLeft.postValue(dateTime.getTimerRepresentationOf(seconds))
             val oneSecond = 1000L
             delay(oneSecond)
-            for (i: Int in seconds-1 downTo 0) { //todo odwrocic zeby licznika spadal a nie rosl
+            for (i: Int in seconds-1 downTo 0) {
                 logD("i = $i")
                 _timeLeft.postValue(dateTime.getTimerRepresentationOf(i))
+                if(i == 0){
+                    finishCounting()
+                }
                 delay(oneSecond) //todo zamienic na poprawny miernik czasu
             }
         }
+    }
+
+    private fun finishCounting(){
+        notForegroundService()
+        bringActivityToFront()
+        setAlarmOff()
+    }
+
+    private fun bringActivityToFront(){
+        startActivity(launchActivityIntent)
+    }
+
+    private fun setAlarmOff(){
+        _isAlarmOff.postValue(true)
     }
 
     private fun stopCountingTimeWithServiceShutdownOption(stopService: Boolean) {
         logD("stopCountingTimeWithServiceShutdownOption()")
         countTimeJob?.cancel()
 
-        lifecycleScope.launch {
+        lifecycleScope.launch { //todo do wylotu
 //            val job: Job = setActiveWalkingWorkout(false)
             if (stopService) {
                 // Waits until DataStore data is saved before shutting down service. //todo wyczyscic
@@ -175,9 +194,6 @@ class TimerService : LifecycleService() {
         val bigTextStyle = NotificationCompat.BigTextStyle()
             .bigText(mainText)
             .setBigContentTitle(titleText)
-
-        // 3. Set up main Intent/Pending Intents for notification.
-        val launchActivityIntent = Intent(this, TimerActivity::class.java)
 
         val cancelIntent = Intent(this, TimerService::class.java).apply {
             putExtra(EXTRA_CANCEL_WORKOUT_FROM_NOTIFICATION, true)

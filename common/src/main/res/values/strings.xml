@@ -11,4 +11,5 @@
     <string name="counting_to">Counting to:</string>
     <string name="skip">Skip</string>
     <string name="back">Back</string>
+    <string name="nextExercise">Next</string>
 </resources>
