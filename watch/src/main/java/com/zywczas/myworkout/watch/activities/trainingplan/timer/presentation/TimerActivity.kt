@@ -28,13 +28,7 @@ class TimerActivity : BaseActivity() {
     private var timerService: TimerService? = null
     private var isTimerServiceBound = false
     private var isConfigurationChange = false
-    private val vibrator: Vibrator by lazy { //todo
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as Vibrator
-        } else {
-            getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        }
-    }
+    private val vibrator by lazy { getSystemService(Vibrator::class.java) }
 
     private val timerServiceConnection = object : ServiceConnection { //todo dac to nizej, tam gdzie uzywane i poustawiac wszystkie funkcje
 
@@ -66,10 +60,10 @@ class TimerActivity : BaseActivity() {
 
     private fun turnAlarmOn(){
         logD("wlaczam wibracje")
-        if (vibrator.hasVibrator()) { //todo usunac
+        if (vibrator.hasVibrator()) {
             logD("ma wibrator")
 //        vibrator.vibrate(3000L)//todo deprecated
-            vibrator.vibrate(VibrationEffect.createOneShot(3000L, VibrationEffect.DEFAULT_AMPLITUDE))
+            vibrator.vibrate(VibrationEffect.createOneShot(3000L, VibrationEffect.DEFAULT_AMPLITUDE)) //todo jest jeszcze sposob by
 //        binding.root.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS) //todo inny sposob na wibracje, i niby nie trzeba permission
         }
     }
