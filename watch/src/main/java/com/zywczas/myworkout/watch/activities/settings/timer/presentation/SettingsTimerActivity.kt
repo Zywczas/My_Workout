@@ -5,9 +5,16 @@ import androidx.activity.viewModels
 import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseActivity
+import com.zywczas.myworkout.watch.activityresultcontracts.registerVoiceRecognition
 import com.zywczas.myworkout.watch.databinding.ActivitySettingsTimerBinding
 
 class SettingsTimerActivity : BaseActivity() {
+
+    private val voiceRecognitionLauncher = registerVoiceRecognition { text -> //todo zamienic pozniej na przesuwanie cyfr jak kolowrotkiem
+        text?.let {
+            viewModel.saveBreakPeriod(text.toInt())
+        }
+    }
 
     private var binding: ActivitySettingsTimerBinding by autoRelease()
     private val viewModel: SettingsTimerViewModel by viewModels { viewModelFactory }
@@ -26,10 +33,8 @@ class SettingsTimerActivity : BaseActivity() {
 
     private fun setupOnClickListeners(){
         binding.change.setOnClickListener {
-
+            voiceRecognitionLauncher.launch()
         }
     }
-
-
 
 }
