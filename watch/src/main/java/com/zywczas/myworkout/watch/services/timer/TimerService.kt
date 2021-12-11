@@ -47,13 +47,13 @@ class TimerService : LifecycleService() {
     lateinit var repo: TimerServiceRepository
     @Inject
     lateinit var dateTime: DateTimeProvider
+    var timerActivity: TimerActivity? = null
 
     private val localBinder = LocalBinder()
     private val notificationManager by lazy { getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager }
     private var isServiceRunningInForeground = false
     private var isServiceRunning = false
     private var countTimeJob: Job? = null
-    private val launchActivityIntent = Intent(this, TimerActivity::class.java) //todo dac to tak zeby bralo ze stacka a nie tworzylo nowe
 
     private val _timeLeft = MutableLiveData<String>()
     val timeLeft: LiveData<String> = _timeLeft
@@ -111,9 +111,11 @@ class TimerService : LifecycleService() {
     }
 
     private fun bringActivityToFront(){
-        startActivity(launchActivityIntent)
+        val intent = Intent(this, TimerActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+        startActivity(intent)
     }
-
     private fun setAlarmOff(){
         _isAlarmOff.postValue(true)
     }
@@ -163,7 +165,7 @@ class TimerService : LifecycleService() {
     }
 
     fun goToForegroundService() {
-        logD("onUnbindService")
+        logD("goToForegroundService")
         val notification = generateNotification("jakis tekst main") //todo poprawic
         startForeground(NOTIFICATION_ID, notification)
         isServiceRunningInForeground = true
@@ -194,6 +196,8 @@ class TimerService : LifecycleService() {
         val bigTextStyle = NotificationCompat.BigTextStyle()
             .bigText(mainText)
             .setBigContentTitle(titleText)
+
+        val launchActivityIntent = Intent(this, TimerActivity::class.java)
 
         val cancelIntent = Intent(this, TimerService::class.java).apply {
             putExtra(EXTRA_CANCEL_WORKOUT_FROM_NOTIFICATION, true)

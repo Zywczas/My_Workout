@@ -19,6 +19,7 @@
 
         <activity
             android:name=".activities.trainingplan.timer.presentation.TimerActivity"
+            android:launchMode="singleTask"
             android:exported="true" />
         <activity
             android:name=".activities.settings.timer.presentation.SettingsTimerActivity"

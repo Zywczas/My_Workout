@@ -8,6 +8,6 @@ class TimerServiceRepositoryImpl @Inject constructor(
 ) : TimerServiceRepository {
 
 //    override suspend fun getBreakPeriodInSeconds(): Int = timerBusinessCase.getTimer().seconds //todo tak ma byc ale na razie dla testow dam tak:
-    override suspend fun getBreakPeriodInSeconds(): Int = 10
+    override suspend fun getBreakPeriodInSeconds(): Int = 3
 
 }

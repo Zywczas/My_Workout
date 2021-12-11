@@ -4,10 +4,10 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
-import android.os.Bundle
-import android.os.IBinder
-import android.os.PersistableBundle
+import android.os.*
+import android.view.HapticFeedbackConstants
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import com.zywczas.common.extetions.logD
 import com.zywczas.common.utils.autoRelease
@@ -28,6 +28,13 @@ class TimerActivity : BaseActivity() {
     private var timerService: TimerService? = null
     private var isTimerServiceBound = false
     private var isConfigurationChange = false
+    private val vibrator: Vibrator by lazy { //todo
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as Vibrator
+        } else {
+            getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        }
+    }
 
     private val timerServiceConnection = object : ServiceConnection { //todo dac to nizej, tam gdzie uzywane i poustawiac wszystkie funkcje
 
@@ -58,7 +65,13 @@ class TimerActivity : BaseActivity() {
     }
 
     private fun turnAlarmOn(){
-        //todo wlaczanie wibracji
+        logD("wlaczam wibracje")
+        if (vibrator.hasVibrator()) { //todo usunac
+            logD("ma wibrator")
+//        vibrator.vibrate(3000L)//todo deprecated
+            vibrator.vibrate(VibrationEffect.createOneShot(3000L, VibrationEffect.DEFAULT_AMPLITUDE))
+//        binding.root.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS) //todo inny sposob na wibracje, i niby nie trzeba permission
+        }
     }
 
     private fun showFinishedCounter(){
@@ -115,8 +128,6 @@ class TimerActivity : BaseActivity() {
     private fun goToNextExercise(){
         //przejscie do Exercise Activity i wczytanie odpowiedniego cwiczenia i serii todo
     }
-
-
 
     private fun goToTimerSettingsActivity(){
         val intent = Intent(this, SettingsTimerActivity::class.java)
