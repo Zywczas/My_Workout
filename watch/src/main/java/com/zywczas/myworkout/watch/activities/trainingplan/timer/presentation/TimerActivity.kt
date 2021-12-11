@@ -53,9 +53,9 @@ class TimerActivity : BaseActivity() {
 
     private fun turnAlarmOn(){
         if (vibrator.hasVibrator()) {
-//        vibrator.vibrate(3000L)//todo deprecated
-            vibrator.vibrate(VibrationEffect.createOneShot(3000L, VibrationEffect.DEFAULT_AMPLITUDE)) //todo jest jeszcze sposob by
-//        binding.root.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS) //todo inny sposob na wibracje, i niby nie trzeba permission
+            val breakBetweenVibrations = 1000L
+            val vibrationLength = 1000L
+            vibrator.vibrate(VibrationEffect.createWaveform(longArrayOf(breakBetweenVibrations, vibrationLength), 0))
         }
     }
 
@@ -86,20 +86,22 @@ class TimerActivity : BaseActivity() {
             turnAlarmOff()
             unBindAndCloseTimerService()
             goToNextExercise()
-            isGoingToNextExercise = true
             finish()
         }
-        binding.goBack.setOnClickListener { onBackPressed() }
+        binding.goBack.setOnClickListener {
+            turnAlarmOff()
+            onBackPressed()
+        }
         binding.settings.setOnClickListener {
+            turnAlarmOff()
             unBindAndCloseTimerService()
             goToTimerSettingsActivity()
         }
     }
 
     private fun turnAlarmOff(){
-        //todo wylaczyc wibracje jesli sa wlaczone, sprawdzic czy to ma sens
         if (vibrator.hasVibrator()) {
-            vibrator.vibrate(VibrationEffect.createOneShot(100L, VibrationEffect.DEFAULT_AMPLITUDE)) //todo sprawdzic czy ma to sens
+            vibrator.cancel()
         }
     }
 
@@ -115,6 +117,7 @@ class TimerActivity : BaseActivity() {
     }
 
     private fun goToNextExercise(){
+        isGoingToNextExercise = true
         //todo zapisanie jakie jest kolejne cwiczenie jesli jeszcze nie zapisalem
         //przejscie do Exercise Activity i wczytanie odpowiedniego cwiczenia i serii todo
     }
