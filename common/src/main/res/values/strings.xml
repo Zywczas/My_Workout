@@ -8,10 +8,11 @@
     <string name="break_interval">Break interval</string>
     <string name="time_between_series">Time between series</string>
     <string name="save">Save</string>
+    <string name="saved">Saved</string>
     <string name="change">Change</string>
     <string name="counting_to">Counting to:</string>
     <string name="skip">Skip</string>
     <string name="back">Back</string>
     <string name="nextExercise">Next</string>
-    <string name="number_of_seconds">%1$d seconds</string>
+    <string name="in_seconds">in seconds</string>
 </resources>

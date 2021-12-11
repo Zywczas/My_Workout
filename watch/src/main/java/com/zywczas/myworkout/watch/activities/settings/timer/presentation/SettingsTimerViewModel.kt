@@ -31,7 +31,6 @@ class SettingsTimerViewModel @Inject constructor(
     fun saveBreakPeriod(seconds: Int){
         viewModelScope.launch(dispatcherIO){
             repo.saveBreakPeriod(seconds)
-            _breakPeriodInSeconds.postValue(seconds)
         }
     }
 
