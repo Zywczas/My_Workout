@@ -1,5 +1,6 @@
 package com.zywczas.myworkout.watch.activities.settings.weeks.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.wear.widget.WearableLinearLayoutManager
@@ -7,12 +8,11 @@ import androidx.wear.widget.WearableRecyclerView
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericItem
 import com.mikepenz.fastadapter.adapters.ItemAdapter
-import com.mikepenz.fastadapter.diff.DiffCallback
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import com.zywczas.common.extetions.showToast
 import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.activities.BaseActivity
-import com.zywczas.myworkout.watch.activities.settings.main.domain.SettingsMainElements
+import com.zywczas.myworkout.watch.activities.settings.days.presentation.SettingsDaysActivity
 import com.zywczas.myworkout.watch.activities.settings.weeks.domain.SettingsWeeksElements
 import com.zywczas.myworkout.watch.activityresultcontracts.registerVoiceRecognition
 import com.zywczas.myworkout.watch.adapters.DiffUtilCallback
@@ -23,6 +23,10 @@ import com.zywczas.myworkout.watch.databinding.ActivitySettingsWeeksBinding
 import com.zywczas.myworkout.watch.utils.CustomScrollingLayoutCallback
 
 class SettingsWeeksActivity : BaseActivity() {
+
+    companion object {
+        const val KEY_WEEK_ID = "KEY_WEEK_ID"
+    }
 
     private var binding: ActivitySettingsWeeksBinding by autoRelease()
     private val viewModel: SettingsWeeksViewModel by viewModels{ viewModelFactory }
@@ -58,7 +62,10 @@ class SettingsWeeksActivity : BaseActivity() {
     }
 
     private fun goToSettingsDaysActivity(weekId: Long){
-        //todo
+        val intent = Intent(this, SettingsDaysActivity::class.java).apply {
+            putExtra(KEY_WEEK_ID, weekId)
+        }
+        startActivity(intent)
     }
 
     private fun addNewWeek(){

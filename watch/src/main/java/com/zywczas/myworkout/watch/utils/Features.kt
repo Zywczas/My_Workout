@@ -31,7 +31,7 @@ ustawianie kolejnosci tygodni treningowych
 ustawianie kolejnosci cwiczen
 
 LOGIKA:
--Jesli ktos ma 3 rozne tygodnie to pokazuje 3 wstecz i 3 do przodu, jesli ktos ma 1 tylko to pokazuje 1 wstecz i 1 aktualny(jezeli jest skonczony to zaczyna nowy)
+- jak mam jakikolwiek tydzien w templates to z widoku szczegolow (SettingsDaysActivity) moge go dodac do planu treningowego, i wyswietlam 4 ostatnie tygodnie, reszte usuwam
 -zaznaczanie zrobionego tygodnia - jezeli wszystkie dni sa zrobione
 -zaznaczanie zrobionego dnia - jezeli wszystkie cwiczenia sa zrobione, pokazywanie daty "zrobione" jak sie wszystkie cwiczenia zrobi, a jak nie to bedzie
 -zaznaczanie zrobionego cwiczenia - jak sie przechodzi do kolejnego cwiczenia, a przy ostatnim cwiczeniu przy ostatniej serii guzik "Zakoncz cwiczenie"

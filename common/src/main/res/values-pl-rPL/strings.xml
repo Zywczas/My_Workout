@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Moj plan</string>
     <string name="train_hard_win_easily">Trenuj ciezko\nWygrywaj latwo</string>
-    <string name="empty_training_plan">Brak treningow.\nKliknij aby dodac.</string>
+    <string name="empty_training_plan">Brak zaplanowanych treningow.\nKliknij aby dodac.</string>
     <string name="planned_trainings">Zaplanowane treningi</string>
     <string name="settings">Ustawienia</string>
     <string name="trainings">Treningi</string>
