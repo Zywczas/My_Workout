@@ -3,12 +3,6 @@ package com.zywczas.myworkout.watch.utils
 /**
 todo
 
-popatrzec co one daja:
-BoxInsetLayout. A layout that applies insets for round screens, so that developers can use the same layout and data for different Wear OS screen shapes.
-SwipeDismissFrameLayout. A layout that enables a user to dismiss any view by swiping on the screen from left to right. Wear OS users expect left to right swiping for the back action.
-WearableRecyclerView. A view that provides a curved layout, such as the layout used for the main Wear OS application launcher.
-AmbientModeSupport. A class used with the AmbientModeSupport.AmbientCallbackProvider interface to provide support for ambient mode.
-
 SYNCHRONIZACJA:
 kazdy element bedzie mial swoj timestamp ktory bedzie uaktualniany przy kazdej zmianie elementu
 bede porownywac nazwe elementow i timestamp, z elementow o tej samej nazwie bedzie brany ten nowszy i zastapi wszystko w srodku
@@ -41,11 +35,8 @@ LOGIKA:
 -zaznaczanie zrobionego tygodnia - jezeli wszystkie dni sa zrobione
 -zaznaczanie zrobionego dnia - jezeli wszystkie cwiczenia sa zrobione, pokazywanie daty "zrobione" jak sie wszystkie cwiczenia zrobi, a jak nie to bedzie
 -zaznaczanie zrobionego cwiczenia - jak sie przechodzi do kolejnego cwiczenia, a przy ostatnim cwiczeniu przy ostatniej serii guzik "Zakoncz cwiczenie"
--wystwielac elementy w kolejnosci z gory na dol
--stoper - wibracje po czasie i zapalanie ekranu
 -klikniecie nowy tydzien/dzien/cwiczenie przenosi do wpisywania tekstu a potem do szczegolow danego elementu
 -jak dodaje na koniec dnia jakies kardio to wczytac to co zapisane i pozwolic na zmiane przed zakonczeniem dodawania
--jezeli ktos nie ustawil timera to brac domyslny z czasem 1 min
 
 3 SCENARIUSZE:
 Nowy uzytkownik ktory wszystko od nowa ustawia

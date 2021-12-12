@@ -3,12 +3,16 @@ package com.zywczas.myworkout.watch.activities.settings.weeks.domain
 import androidx.annotation.StringRes
 import com.zywczas.myworkout.watch.R
 
-sealed class SettingsWeeksElements(@StringRes val resTitle: Int? = null, val stringTitle: String? = null) {
+sealed class SettingsWeeksElements {
 
-    class Title : SettingsWeeksElements(resTitle = R.string.training_weeks)
+    data class Title(@StringRes val title: Int = R.string.training_weeks) : SettingsWeeksElements()
 
-    data class Week(private val title: String) : SettingsWeeksElements(stringTitle = title)
+    data class Week(
+        val id: Long = 0,
+        val name: String,
+        val sequence: Int
+    ) : SettingsWeeksElements()
 
-    class AddNewWeek : SettingsWeeksElements(resTitle = R.string.add_new_week)
+    data class AddNewWeek(@StringRes val title: Int = R.string.add_new_week) : SettingsWeeksElements()
 
 }

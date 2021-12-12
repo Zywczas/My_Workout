@@ -1,14 +1,8 @@
 package com.zywczas.myworkout.watch.activities.trainingplan.weekslist.presentation
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.common.extetions.dayFormat
-import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksElements
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksListRepository
 import kotlinx.coroutines.CoroutineDispatcher
@@ -38,7 +32,7 @@ class WeeksListViewModel @Inject constructor(
             val weeks = repo.getWeeks().sortedBy { it.sequence }.withSetDisplayedDates()
             if (weeks.isNotEmpty()){
                 val weeksElements = mutableListOf<WeeksElements>().apply {
-                    add(WeeksElements.Title(R.string.planned_trainings))
+                    add(WeeksElements.Title())
                     addAll(weeks)
                     add(WeeksElements.Settings())
                 }

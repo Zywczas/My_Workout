@@ -13,6 +13,7 @@ class DiffUtilCallback : DiffCallback<GenericItem> {
             oldItem is SettingsFooterItem && newItem is SettingsFooterItem -> true
             oldItem is TitleItem && newItem is TitleItem -> true
             oldItem is SettingsItem && newItem is SettingsItem -> oldItem.title == newItem.title
+            oldItem is SettingsWeekItem && newItem is SettingsWeekItem -> oldItem.week.id == newItem.week.id
             else -> false
         }
 
@@ -22,6 +23,7 @@ class DiffUtilCallback : DiffCallback<GenericItem> {
             is SettingsFooterItem -> true
             is TitleItem -> oldItem.title == (newItem as TitleItem).title
             is SettingsItem -> oldItem.title == (newItem as SettingsItem).title
+            is SettingsWeekItem -> oldItem.week == (newItem as SettingsWeekItem).week
             else -> false
         }
 
