@@ -13,6 +13,7 @@ import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.settings.main.domain.SettingsMainElements
 import com.zywczas.myworkout.watch.activities.settings.timer.presentation.SettingsTimerActivity
+import com.zywczas.myworkout.watch.activities.settings.weeks.presentation.SettingsWeeksActivity
 import com.zywczas.myworkout.watch.adapters.DiffUtilCallback
 import com.zywczas.myworkout.watch.adapters.SettingsItem
 import com.zywczas.myworkout.watch.adapters.TitleItem
@@ -30,7 +31,6 @@ class SettingsMainActivity : BaseActivity() {
         binding = ActivitySettingsMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.settingsList.setup()
-        viewModel.getSettingsList()
         setupObservers()
     }
 
@@ -53,7 +53,8 @@ class SettingsMainActivity : BaseActivity() {
     }
 
     private fun goToSettingsWeeksActivity(){
-        //todo
+        val intent = Intent(this, SettingsWeeksActivity::class.java)
+        startActivity(intent)
     }
 
     private fun goToSettingsTimerActivity(){

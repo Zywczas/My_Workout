@@ -23,13 +23,17 @@ class WeeksListViewModel @Inject constructor(
     private val _weeksElements = MutableLiveData<List<WeeksElements>>()
     val weeksElements: LiveData<List<WeeksElements>> = _weeksElements
 
+    init {
+        getWeeksList()
+    }
+
     val isEmptyPlanMessageGone: LiveData<Boolean> = Transformations.switchMap(weeksElements) { weeksElements ->
         liveData(dispatcherIO) {
             emit(weeksElements.firstOrNull { it is WeeksElements.Week }?.let { true } ?: false )
         }
     }
 
-    fun getWeeksList() {
+    private fun getWeeksList() {
         viewModelScope.launch(dispatcherIO) {
             val weeks = repo.getWeeks().sortedBy { it.sequence }.withSetDisplayedDates()
             if (weeks.isNotEmpty()){

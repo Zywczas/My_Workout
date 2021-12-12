@@ -16,5 +16,7 @@
     <string name="back">Wroc</string>
     <string name="nextExercise">Nastepne</string>
     <string name="in_seconds">w sekundach</string>
+    <string name="training_weeks">Tygodnie treningowe</string>
+    <string name="add_new_week">Dodaj nowy tydzien</string>
 </resources>
 <!--todo poprawic na poprawny polski-->

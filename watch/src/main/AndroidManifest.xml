@@ -3,6 +3,7 @@
     package="com.zywczas.myworkout.watch">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <uses-feature android:name="android.hardware.type.watch" />
 
     <application
@@ -12,6 +13,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyWatch">
+        <activity
+            android:name=".activities.settings.weeks.presentation.SettingsWeeksActivity"
+            android:exported="false" />
+
         <service
             android:name=".services.timer.TimerService"
             android:enabled="true"
@@ -19,8 +24,8 @@
 
         <activity
             android:name=".activities.trainingplan.timer.presentation.TimerActivity"
-            android:launchMode="singleTask"
-            android:exported="true" />
+            android:exported="true"
+            android:launchMode="singleTask" />
         <activity
             android:name=".activities.settings.timer.presentation.SettingsTimerActivity"
             android:exported="true" />

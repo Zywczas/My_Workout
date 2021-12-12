@@ -33,7 +33,6 @@ class WeeksListActivity : BaseActivity() {
         binding = ActivityWeeksListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.weeksList.setup()
-        viewModel.getWeeksList()
         setupLiveDataObservers()
         setupOnClickListeners()
     }

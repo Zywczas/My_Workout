@@ -18,7 +18,7 @@ class SettingsTimerViewModel @Inject constructor(
     private val _breakPeriodInSeconds = MutableLiveData<Int>()
     val breakPeriodInSeconds: LiveData<Int> = _breakPeriodInSeconds
 
-    init { //todo dac init tez w innych view modelach
+    init {
         getBreakPeriod()
     }
 
