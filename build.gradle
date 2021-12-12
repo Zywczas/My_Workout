@@ -6,8 +6,8 @@ buildscript {
     }
     apply from: "${rootProject.projectDir}/config/gradle/libs.gradle"
     dependencies {
-        classpath "com.android.tools.build:gradle:7.0.3"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31" //todo juz mozna dac plugin 1.6 ale potrzeba javy 11
+        classpath "com.android.tools.build:gradle:$build_gradle_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.18.1"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$androidx_navigation_version"
     }
