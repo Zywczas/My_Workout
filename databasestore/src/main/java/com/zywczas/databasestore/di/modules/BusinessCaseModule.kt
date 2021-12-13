@@ -11,10 +11,7 @@ import dagger.Module
 abstract class BusinessCaseModule {
 
     @Binds
-    internal abstract fun bindPlannedTrainingsBusinessCase(case: PlannedTrainingsBusinessCaseImpl) : PlannedTrainingsBusinessCase
-
-    @Binds
-    internal abstract fun bindTrainingTemplatesBusinessCase(case: TrainingsBusinessCaseImpl) : TrainingsBusinessCase
+    internal abstract fun bindTrainingsBusinessCase(case: TrainingsBusinessCaseImpl) : TrainingsBusinessCase
 
     @Binds
     internal abstract fun bindTimerBusinessCase(case: TimerBusinessCaseImpl) : TimerBusinessCase

@@ -3,7 +3,6 @@ package com.zywczas.myworkout.watch.activities.trainingplan.weekslist.presentati
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.wear.widget.WearableLinearLayoutManager
 import androidx.wear.widget.WearableRecyclerView
@@ -14,7 +13,7 @@ import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import com.zywczas.common.extetions.showToast
 import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.activities.BaseActivity
-import com.zywczas.myworkout.watch.activities.settings.days.presentation.SettingsDaysActivity
+import com.zywczas.myworkout.watch.activities.trainingplan.week.presentation.WeekActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksElements
 import com.zywczas.myworkout.watch.activityresultcontracts.registerVoiceRecognition
 import com.zywczas.myworkout.watch.adapters.*
@@ -64,7 +63,7 @@ class WeeksListActivity : BaseActivity() {
     }
 
     private fun goToWeekActivity(weekId: Long){
-        val intent = Intent(this, SettingsDaysActivity::class.java).apply { //todo zmienic nazwe actywnosci
+        val intent = Intent(this, WeekActivity::class.java).apply {
             putExtra(KEY_WEEK_ID, weekId)
         }
         startActivity(intent)

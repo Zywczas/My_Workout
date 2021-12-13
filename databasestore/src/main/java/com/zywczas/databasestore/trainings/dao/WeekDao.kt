@@ -1,12 +1,7 @@
 package com.zywczas.databasestore.trainings.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
 import com.zywczas.databasestore.trainings.entities.WeekEntity
-import com.zywczas.databasestore.trainings.relations.WeekRelations
 
 @Dao
 internal interface WeekDao {

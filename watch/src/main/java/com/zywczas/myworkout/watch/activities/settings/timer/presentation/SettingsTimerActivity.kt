@@ -2,13 +2,10 @@ package com.zywczas.myworkout.watch.activities.settings.timer.presentation
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.core.view.isVisible
-import androidx.core.widget.doOnTextChanged
 import com.zywczas.common.extetions.showToast
 import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseActivity
-import com.zywczas.myworkout.watch.activityresultcontracts.registerVoiceRecognition
 import com.zywczas.myworkout.watch.databinding.ActivitySettingsTimerBinding
 
 class SettingsTimerActivity : BaseActivity() {

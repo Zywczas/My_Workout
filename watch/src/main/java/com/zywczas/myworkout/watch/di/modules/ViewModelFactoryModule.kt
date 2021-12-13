@@ -32,7 +32,7 @@ abstract class ViewModelFactoryModule {
     @Binds
     @IntoMap
     @ViewModelKey(WeekViewModel::class)
-    abstract fun bindTimerViewModel(vm: WeekViewModel) : ViewModel
+    abstract fun bindWeekViewModel(vm: WeekViewModel) : ViewModel
 
     @Binds
     @IntoMap

@@ -4,6 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.zywczas.databasestore.timer.dao.TimerDao
+import com.zywczas.databasestore.timer.entities.TimerEntity
 import com.zywczas.databasestore.trainings.dao.CardioDao
 import com.zywczas.databasestore.trainings.dao.DayDao
 import com.zywczas.databasestore.trainings.dao.ExerciseDao
@@ -11,7 +12,6 @@ import com.zywczas.databasestore.trainings.dao.WeekDao
 import com.zywczas.databasestore.trainings.entities.CardioEntity
 import com.zywczas.databasestore.trainings.entities.DayEntity
 import com.zywczas.databasestore.trainings.entities.ExerciseEntity
-import com.zywczas.databasestore.timer.entities.TimerEntity
 import com.zywczas.databasestore.trainings.entities.WeekEntity
 import com.zywczas.databasestore.utils.Converters
 
