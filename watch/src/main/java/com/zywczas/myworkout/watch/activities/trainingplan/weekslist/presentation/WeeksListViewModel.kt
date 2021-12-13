@@ -28,10 +28,10 @@ class WeeksListViewModel @Inject constructor(
             emit(weeksElements.isEmpty())
         }
     }
-
+//todo dodac usuwanie jesli wiecej niz 5
     private fun getWeeksList() {
         viewModelScope.launch(dispatcherIO) {
-            val weeks = repo.getWeeks().sortedBy { it.sequence }.withDisplayedDates()
+            val weeks = repo.getWeeks().sortedByDescending { it.sequence }.withDisplayedDates()
             if (weeks.isNotEmpty()){
                 val weeksElements = mutableListOf<WeeksElements>().apply {
                     add(WeeksElements.Title())
@@ -71,7 +71,7 @@ class WeeksListViewModel @Inject constructor(
 
     private fun findNextWeekPosition(): Int =
         weeksElements.value?.let { weeks ->
-            weeks.findLast { it is WeeksElements.Week }?.let { (it as WeeksElements.Week).sequence + 1 }
+            weeks.find { it is WeeksElements.Week }?.let { (it as WeeksElements.Week).sequence + 1 }
         } ?: 1
 
 }

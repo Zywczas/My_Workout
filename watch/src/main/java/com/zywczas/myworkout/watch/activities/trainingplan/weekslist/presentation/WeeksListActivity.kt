@@ -58,7 +58,6 @@ class WeeksListActivity : BaseActivity() {
             is WeeksElements.Title -> TitleItem(getString(it.title))
             is WeeksElements.Week -> WeekItem(it){ id -> goToWeekActivity(id) }
             is WeeksElements.AddNewWeek -> SettingsItem(getString(it.title)){ addNewWeek() }
-//            is WeeksElements.Settings -> SettingsFooterItem{ goToSettingsActivity() } //todo na razie chyba nie potrzebne
         }
     }
 
@@ -72,11 +71,6 @@ class WeeksListActivity : BaseActivity() {
     private fun addNewWeek(){
         voiceRecognitionLauncher.launch()
     }
-
-//    private fun goToSettingsActivity(){//todo na razie chyba nie potrzebne
-//        val intent = Intent(this, SettingsMainActivity::class.java)
-//        startActivity(intent)
-//    }
 
     private fun setupOnClickListeners(){
         binding.emptyPlanMessage.setOnClickListener { voiceRecognitionLauncher.launch() } //todo zmienic napis na dodaj pierwszy tydzien treningowy i przejsc do nazwy tygodnia

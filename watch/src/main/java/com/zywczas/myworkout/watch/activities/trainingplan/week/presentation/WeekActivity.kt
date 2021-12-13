@@ -25,7 +25,6 @@ class WeekActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityWeekBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setContentView(R.layout.activity_week)
         binding.daysList.setup()
         viewModel.getDaysList(weekId)
         setupLiveDataObservers()

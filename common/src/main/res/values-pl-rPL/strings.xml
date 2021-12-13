@@ -18,6 +18,7 @@
     <string name="in_seconds">w sekundach</string>
     <string name="training_weeks">Tygodnie treningowe</string>
     <string name="add_new_week">Dodaj nowy tydzien</string>
+    <string name="add_new_day">Dodaj nowy dzien</string>
     <string name="copy_week">Skopiuj ten tydzien</string>
     <string name="week_name_not_provided">Nie podano nazwy tyogodnia</string>
 </resources>

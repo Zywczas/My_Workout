@@ -4,6 +4,7 @@ import com.zywczas.databasestore.trainings.dao.CardioDao
 import com.zywczas.databasestore.trainings.dao.DayDao
 import com.zywczas.databasestore.trainings.dao.ExerciseDao
 import com.zywczas.databasestore.trainings.dao.WeekDao
+import com.zywczas.databasestore.trainings.entities.DayEntity
 import com.zywczas.databasestore.trainings.entities.WeekEntity
 import javax.inject.Inject
 
@@ -19,5 +20,7 @@ internal class TrainingsBusinessCaseImpl
     override suspend fun saveNewWeek(week: WeekEntity) {
         weekDao.insert(week)
     }
+
+    override suspend fun getDays(weekId: Long): List<DayEntity> = dayDao.getDays(weekId)
 
 }

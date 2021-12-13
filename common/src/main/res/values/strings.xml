@@ -17,6 +17,7 @@
     <string name="in_seconds">in seconds</string>
     <string name="training_weeks">Training weeks</string>
     <string name="add_new_week">Add new week</string>
+    <string name="add_new_day">Add new day</string>
     <string name="copy_week">Copy the week</string>
     <string name="week_name_not_provided">No week name provided</string>
 </resources>
