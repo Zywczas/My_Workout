@@ -31,7 +31,13 @@ ustawianie kolejnosci tygodni treningowych
 ustawianie kolejnosci cwiczen
 
 LOGIKA:
-- jak mam jakikolwiek tydzien w templates to z widoku szczegolow (SettingsDaysActivity) moge go dodac do planu treningowego, i wyswietlam 4 ostatnie tygodnie, reszte usuwam
+- mam tylko jedna baze danych - wszystko tworze juz w widoku treningow
+- mozna dodac dowolna ilosc dni treningowych do jednego tygodnia
+- jak stworze tydzien i mam w nim jakies dni to juz moge trenowac
+- w kazdym momencie moge dodac kolejny dzien
+- dodatkowy guzik kopiuj tydzien lub kopiuj dzien
+- cardio - jak dodaje cardio to otwieram okno CardioList i moge dodac nowe cardio i dowolne zmienic i wybieram z listy
+- wyswietlam 4 ostatnie tygodnie, reszte usuwam
 -zaznaczanie zrobionego tygodnia - jezeli wszystkie dni sa zrobione
 -zaznaczanie zrobionego dnia - jezeli wszystkie cwiczenia sa zrobione, pokazywanie daty "zrobione" jak sie wszystkie cwiczenia zrobi, a jak nie to bedzie
 -zaznaczanie zrobionego cwiczenia - jak sie przechodzi do kolejnego cwiczenia, a przy ostatnim cwiczeniu przy ostatniej serii guzik "Zakoncz cwiczenie"
