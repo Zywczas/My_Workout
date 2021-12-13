@@ -1,6 +1,5 @@
 package com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain
 
-import com.zywczas.databasestore.trainings.PlannedTrainingsBusinessCase
 import com.zywczas.databasestore.trainings.entities.WeekEntity
 import javax.inject.Inject
 

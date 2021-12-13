@@ -3,6 +3,7 @@ package com.zywczas.databasestore.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.zywczas.databasestore.timer.dao.TimerDao
 import com.zywczas.databasestore.trainings.dao.CardioDao
 import com.zywczas.databasestore.trainings.dao.DayDao
 import com.zywczas.databasestore.trainings.dao.ExerciseDao
@@ -30,5 +31,6 @@ internal abstract class TrainingsDatabase : RoomDatabase() {
     abstract fun dayDao(): DayDao
     abstract fun exerciseDao(): ExerciseDao
     abstract fun weekDao(): WeekDao
+    abstract fun timerDao(): TimerDao
 
 }

@@ -4,7 +4,7 @@ import androidx.room.Embedded
 import androidx.room.Relation
 import com.zywczas.databasestore.trainings.entities.DayEntity
 import com.zywczas.databasestore.trainings.entities.WeekEntity
-
+//todo nie wiem czy potrzebne
 data class WeekRelations(@Embedded val week: WeekEntity = WeekEntity(),
 
                          @Relation(parentColumn = "id",
