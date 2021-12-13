@@ -3,6 +3,8 @@ package com.zywczas.myworkout.watch.activities.trainingplan.weekslist.presentati
 import androidx.lifecycle.*
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.common.extetions.dayFormat
+import com.zywczas.myworkout.watch.R
+import com.zywczas.myworkout.watch.activities.BaseViewModel
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksElements
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksListRepository
 import kotlinx.coroutines.CoroutineDispatcher
@@ -12,7 +14,7 @@ import javax.inject.Inject
 class WeeksListViewModel @Inject constructor(
     private val repo: WeeksListRepository,
     @DispatcherIO private val dispatcherIO: CoroutineDispatcher
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _weeksElements = MutableLiveData<List<WeeksElements>>()
     val weeksElements: LiveData<List<WeeksElements>> = _weeksElements
@@ -21,20 +23,20 @@ class WeeksListViewModel @Inject constructor(
         getWeeksList()
     }
 
-    val isEmptyPlanMessageGone: LiveData<Boolean> = Transformations.switchMap(weeksElements) { weeksElements ->
+    val isEmptyPlanMessageVisible: LiveData<Boolean> = Transformations.switchMap(weeksElements) { weeksElements ->
         liveData(dispatcherIO) {
-            emit(weeksElements.firstOrNull { it is WeeksElements.Week }?.let { true } ?: false )
+            emit(weeksElements.isEmpty())
         }
     }
 
     private fun getWeeksList() {
         viewModelScope.launch(dispatcherIO) {
-            val weeks = repo.getWeeks().sortedBy { it.sequence }.withSetDisplayedDates()
+            val weeks = repo.getWeeks().sortedBy { it.sequence }.withDisplayedDates()
             if (weeks.isNotEmpty()){
                 val weeksElements = mutableListOf<WeeksElements>().apply {
                     add(WeeksElements.Title())
                     addAll(weeks)
-                    add(WeeksElements.Settings())
+                    add(WeeksElements.AddNewWeek())
                 }
                 _weeksElements.postValue(weeksElements)
             } else {
@@ -43,7 +45,7 @@ class WeeksListViewModel @Inject constructor(
         }
     }
 
-    private fun List<WeeksElements.Week>.withSetDisplayedDates(): List<WeeksElements.Week> {
+    private fun List<WeeksElements.Week>.withDisplayedDates(): List<WeeksElements.Week> {
         forEach {
             it.displayedDates =
                 when {
@@ -54,5 +56,22 @@ class WeeksListViewModel @Inject constructor(
         }
         return this
     }
+
+    fun addNewWeek(name: String?){
+        viewModelScope.launch(dispatcherIO){
+            name?.let {
+                repo.saveNewWeek(WeeksElements.Week(
+                    name = it,
+                    sequence = findNextWeekPosition()
+                ))
+                getWeeksList()
+            } ?: postMessage(R.string.week_name_not_provided)
+        }
+    }
+
+    private fun findNextWeekPosition(): Int =
+        weeksElements.value?.let { weeks ->
+            weeks.findLast { it is WeeksElements.Week }?.let { (it as WeeksElements.Week).sequence + 1 }
+        } ?: 1
 
 }

@@ -8,6 +8,7 @@
     android:padding="10dp">
     <!--    todo zamiast paddingu to dac poprawny line separator-->
     <!--todo dimensy-->
+<!--    todo poptrzec ktore layouty nie sa uzywane -->
     <ImageView
         android:id="@+id/settings"
         android:layout_width="@dimen/iconSize"

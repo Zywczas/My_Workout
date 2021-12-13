@@ -2,11 +2,10 @@ package com.zywczas.myworkout.watch.di.modules
 
 import androidx.lifecycle.ViewModel
 import com.zywczas.common.di.qualifiers.ViewModelKey
-import com.zywczas.myworkout.watch.activities.settings.days.presentation.SettingsDaysViewModel
 import com.zywczas.myworkout.watch.activities.settings.main.presentation.SettingsMainViewModel
 import com.zywczas.myworkout.watch.activities.settings.timer.presentation.SettingsTimerViewModel
-import com.zywczas.myworkout.watch.activities.settings.weeks.presentation.SettingsWeeksViewModel
 import com.zywczas.myworkout.watch.activities.trainingplan.timer.presentation.TimerViewModel
+import com.zywczas.myworkout.watch.activities.trainingplan.week.presentation.WeekViewModel
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.presentation.WeeksListViewModel
 import dagger.Binds
 import dagger.Module
@@ -32,17 +31,12 @@ abstract class ViewModelFactoryModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(WeekViewModel::class)
+    abstract fun bindTimerViewModel(vm: WeekViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(SettingsTimerViewModel::class)
     abstract fun bindSettingsTimerViewModel(vm: SettingsTimerViewModel) : ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(SettingsWeeksViewModel::class)
-    abstract fun bindSettingsWeeksViewModel(vm: SettingsWeeksViewModel) : ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(SettingsDaysViewModel::class)
-    abstract fun bindSettingsDaysViewModel(vm: SettingsDaysViewModel) : ViewModel
 
 }

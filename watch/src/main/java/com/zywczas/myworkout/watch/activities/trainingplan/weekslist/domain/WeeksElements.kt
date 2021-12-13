@@ -10,15 +10,17 @@ sealed class WeeksElements {
     data class Title(@StringRes val title: Int = R.string.planned_trainings) : WeeksElements()
 
     data class Week(
-        val id: Long,
-        val name: String,
-        val sequence: Int,
-        val dateStarted: DateTime?,
-        val dateFinished: DateTime?,
-        val isFinished: Boolean,
+        val id: Long = 0L,
+        val name: String = "",
+        val sequence: Int = 0,
+        val dateStarted: DateTime? = null,
+        val dateFinished: DateTime? = null,
+        val isFinished: Boolean = false,
         var displayedDates: String = ""
     ) : WeeksElements()
 
-    class Settings : WeeksElements()
+    data class AddNewWeek(@StringRes val title: Int = R.string.add_new_week) : WeeksElements()
+
+//    class Settings : WeeksElements() //todo chyba nie potrzebne
 
 }

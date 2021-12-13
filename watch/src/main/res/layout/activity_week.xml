@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.settings.days.presentation.SettingsDaysActivity">
+    tools:context=".activities.trainingplan.week.presentation.WeekActivity">
 
     <androidx.wear.widget.WearableRecyclerView
-        android:id="@+id/settingsList"
+        android:id="@+id/daysList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingStart="@dimen/recyclerViewPaddingOnSides"

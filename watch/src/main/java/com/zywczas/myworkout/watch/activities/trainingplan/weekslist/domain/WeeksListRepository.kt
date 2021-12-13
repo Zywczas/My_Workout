@@ -4,4 +4,6 @@ interface WeeksListRepository {
 
     suspend fun getWeeks(): List<WeeksElements.Week>
 
+    suspend fun saveNewWeek(week: WeeksElements.Week)
+
 }
