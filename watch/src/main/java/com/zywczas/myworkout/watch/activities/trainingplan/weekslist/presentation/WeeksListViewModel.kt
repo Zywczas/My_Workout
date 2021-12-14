@@ -47,12 +47,11 @@ class WeeksListViewModel @Inject constructor(
 
     private fun List<WeeksElements.Week>.withDisplayedDates(): List<WeeksElements.Week> {
         forEach {
-            it.displayedDates =
-                when {
-                    it.dateStarted != null && it.dateFinished != null -> "${it.dateStarted.dayFormat()}-${it.dateFinished.dayFormat()}"
-                    it.dateStarted != null -> it.dateStarted.dayFormat()
-                    else -> ""
-                }
+            if (it.dateStarted != null && it.dateFinished != null) {
+                it.displayedDates = "${it.dateStarted.dayFormat()}-${it.dateFinished.dayFormat()}"
+            } else if (it.dateStarted != null) {
+                it.displayedDates = it.dateStarted.dayFormat()
+            }
         }
         return this
     }

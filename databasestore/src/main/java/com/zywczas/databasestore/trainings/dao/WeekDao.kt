@@ -18,6 +18,9 @@ internal interface WeekDao {
     @Query("SELECT * FROM Week")
     suspend fun getWeeks(): List<WeekEntity>
 
+    @Query("SELECT * FROM Week WHERE id = :id")
+    suspend fun getWeek(id: Long): WeekEntity
+
 //    @Transaction
 //    @Query("SELECT * FROM Week WHERE id = :id")
 //    suspend fun getWeekRelations(id: Long): WeekEntity

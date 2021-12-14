@@ -21,5 +21,7 @@
     <string name="add_new_day">Dodaj nowy dzien</string>
     <string name="copy_week">Skopiuj ten tydzien</string>
     <string name="week_name_not_provided">Nie podano nazwy tyogodnia</string>
+    <string name="started">Zaczety: </string>
+    <string name="done">Skonczony: </string>
 </resources>
 <!--todo poprawic na poprawny polski-->

@@ -39,5 +39,7 @@ class WeekActivity : BaseActivity() {
     private fun setupLiveDataObservers(){
 
     }
+    //todo dac info jak pusta lista
+    //todo w pierwszym ekranie poprawic pierwsza informacje, dac info ze max 5 tygodnie moga byc
 
 }

@@ -21,6 +21,8 @@ internal class TrainingsBusinessCaseImpl
         weekDao.insert(week)
     }
 
+    override suspend fun getWeek(id: Long): WeekEntity = weekDao.getWeek(id)
+
     override suspend fun getDays(weekId: Long): List<DayEntity> = dayDao.getDays(weekId)
 
 }

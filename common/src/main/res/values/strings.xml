@@ -20,4 +20,6 @@
     <string name="add_new_day">Add new day</string>
     <string name="copy_week">Copy the week</string>
     <string name="week_name_not_provided">No week name provided</string>
+    <string name="started">Started: </string>
+    <string name="done">Done: </string>
 </resources>
