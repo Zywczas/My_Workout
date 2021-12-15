@@ -9,10 +9,12 @@ import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericItem
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
+import com.zywczas.common.extetions.showToast
 import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.week.domain.DaysElements
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.presentation.WeeksListActivity
+import com.zywczas.myworkout.watch.activityresultcontracts.registerVoiceRecognition
 import com.zywczas.myworkout.watch.adapters.*
 import com.zywczas.myworkout.watch.databinding.ActivityWeekBinding
 import com.zywczas.myworkout.watch.utils.CustomScrollingLayoutCallback
@@ -23,6 +25,7 @@ class WeekActivity : BaseActivity() {
     private val viewModel: WeekViewModel by viewModels{ viewModelFactory }
     private val itemAdapter by lazy { ItemAdapter<GenericItem>() }
     private val weekId by lazy { intent?.getLongExtra(WeeksListActivity.KEY_WEEK_ID, 0) ?: 0L }
+    private val voiceRecognitionLauncher = registerVoiceRecognition { dayName -> viewModel.addNewDay(dayName, weekId) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +44,7 @@ class WeekActivity : BaseActivity() {
     }
 
     private fun setupLiveDataObservers(){
+        viewModel.message.observe(this){ showToast(it) }
         viewModel.isEmptyPlanMessageGone.observe(this){ binding.emptyPlanMessage.isGone = it }
         viewModel.daysElements.observe(this){ days -> FastAdapterDiffUtil.set(itemAdapter, days.toAdapterItems(), DiffUtilCallback()) }
     }
@@ -60,19 +64,19 @@ class WeekActivity : BaseActivity() {
     }
 
     private fun goToDayActivity(dayId: Long){
-
+        //todo
     }
 
     private fun addNewDay(){
-
+        voiceRecognitionLauncher.launch()
     }
 
     private fun copyWeek(){
-
+        //todo
     }
 
     private fun setupOnClickListeners(){
-
+        binding.emptyPlanMessage.setOnClickListener { voiceRecognitionLauncher.launch() }
     }
 
 }

@@ -13,4 +13,6 @@ interface TrainingsBusinessCase {
 
     suspend fun getDays(weekId: Long): List<DayEntity>
 
+    suspend fun saveNewDay(day: DayEntity)
+
 }

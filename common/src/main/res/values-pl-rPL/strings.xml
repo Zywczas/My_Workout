@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Moj plan</string>
-    <string name="train_hard_win_easily">Trenuj ciezko\nWygrywaj latwo</string>
-    <string name="empty_training_plan_weeks">Brak zaplanowanych treningow.\nMozesz miec max 5 tygodni treningowych w jednym czasie. Kliknij aby dodac.</string>
-    <string name="empty_training_plan_days">Brak zaplanowanych treningow.\nKliknin aby dodac nowy dzien treningowy.</string>
+    <string name="app_name">Mój plan</string>
+    <string name="train_hard_win_easily">Trenuj ciężko\nWygrywaj łatwo</string>
+    <string name="empty_training_plan_weeks">Brak zaplanowanych treningów.\nMożesz mieć max 5 tygodni treningowych w jednym czasie. Kliknij aby dodać.</string>
+    <string name="empty_training_plan_days">Brak zaplanowanych treningów.\nKliknij aby dodać nowy dzień treningowy.</string>
     <string name="planned_trainings">Zaplanowane treningi</string>
     <string name="settings">Ustawienia</string>
     <string name="trainings">Treningi</string>
-    <string name="break_interval">Dlugosc przerwy</string>
-    <string name="time_between_series">Czas pomiedzy seriami</string>
+    <string name="break_interval">Długość przerwy</string>
+    <string name="time_between_series">Czas pomiędzy seriami</string>
     <string name="save">Zapisz</string>
     <string name="saved">Zapisano</string>
-    <string name="change">Zmien</string>
+    <string name="change">Zmień</string>
     <string name="counting_to">Odliczanie do:</string>
-    <string name="skip">Pomin</string>
-    <string name="back">Wroc</string>
-    <string name="nextExercise">Nastepne</string>
+    <string name="skip">Pomiń</string>
+    <string name="back">Wróc</string>
+    <string name="nextExercise">Następne</string>
     <string name="in_seconds">w sekundach</string>
     <string name="training_weeks">Tygodnie treningowe</string>
-    <string name="add_new_week">Dodaj nowy tydzien</string>
-    <string name="add_new_day">Dodaj nowy dzien</string>
-    <string name="copy_week">Skopiuj ten tydzien</string>
-    <string name="week_name_not_provided">Nie podano nazwy tyogodnia</string>
-    <string name="started">Zaczety: </string>
-    <string name="done">Skonczony: </string>
+    <string name="add_new_week">Dodaj nowy tydzień</string>
+    <string name="add_new_day">Dodaj nowy dzień</string>
+    <string name="copy_week">Skopiuj ten tydzień</string>
+    <string name="week_name_not_provided">Nie podano nazwy tygodnia</string>
+    <string name="day_name_not_provided">Nie podano nazwy dnia</string>
+    <string name="started">Zaczęty: </string>
+    <string name="done">Skończony: </string>
 </resources>
-<!--todo poprawic na poprawny polski-->
+<!--todo poprawic spacje na znak ascii albo cos-->

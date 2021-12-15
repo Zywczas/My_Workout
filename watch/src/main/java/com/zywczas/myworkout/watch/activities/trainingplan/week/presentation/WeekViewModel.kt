@@ -5,6 +5,7 @@ import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.common.extetions.dayFormat
 import com.zywczas.common.utils.StringProvider
 import com.zywczas.myworkout.watch.R
+import com.zywczas.myworkout.watch.activities.BaseViewModel
 import com.zywczas.myworkout.watch.activities.trainingplan.week.domain.DaysElements
 import com.zywczas.myworkout.watch.activities.trainingplan.week.domain.WeekRepository
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksElements
@@ -16,7 +17,7 @@ class WeekViewModel @Inject constructor(
     @DispatcherIO private val dispatcherIO: CoroutineDispatcher,
     private val repo: WeekRepository,
     private val stringProvider: StringProvider
-) : ViewModel(){
+) : BaseViewModel(){
 
     private val _daysElements = MutableLiveData<List<DaysElements>>()
     val daysElements: LiveData<List<DaysElements>> = _daysElements
@@ -60,5 +61,19 @@ class WeekViewModel @Inject constructor(
         }
         return this
     }
+
+    fun addNewDay(name: String?, weekId: Long){
+        viewModelScope.launch(dispatcherIO){
+            name?.let {
+                repo.saveNewDay(name = it, weekId = weekId, sequence = findNextDayPosition())
+                getDaysList(weekId)
+            } ?: postMessage(R.string.day_name_not_provided)
+        }
+    }
+
+    private fun findNextDayPosition(): Int =
+        daysElements.value?.let { days ->
+            days.find { it is DaysElements.Day }?.let { (it as DaysElements.Day).sequence + 1 }
+        } ?: 1
 
 }

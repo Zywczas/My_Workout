@@ -78,7 +78,7 @@ class WeeksListActivity : BaseActivity() {
     }
 
     private fun setupOnClickListeners(){
-        binding.emptyPlanMessage.setOnClickListener { voiceRecognitionLauncher.launch() } //todo zmienic napis na dodaj pierwszy tydzien treningowy i przejsc do nazwy tygodnia
+        binding.emptyPlanMessage.setOnClickListener { voiceRecognitionLauncher.launch() }
     }
 
 }

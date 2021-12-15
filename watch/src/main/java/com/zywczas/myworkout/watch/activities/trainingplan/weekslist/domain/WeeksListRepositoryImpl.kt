@@ -20,7 +20,7 @@ class WeeksListRepositoryImpl @Inject constructor(
         dateFinished = dateFinished,
         isFinished = isFinished
     )
-
+//todo poprawic i wyrzicuc ten caly element a podawac funkcji tylko nazwe i sequence
     override suspend fun saveNewWeek(week: WeeksElements.Week) = trainings.saveNewWeek(
         WeekEntity(
             name = week.name,

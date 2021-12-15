@@ -6,4 +6,6 @@ interface WeekRepository {
 
     suspend fun getDays(weekId: Long): List<DaysElements.Day>
 
+    suspend fun saveNewDay(name: String, weekId: Long, sequence: Int)
+
 }
