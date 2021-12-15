@@ -3,6 +3,7 @@ package com.zywczas.myworkout.watch.activities.trainingplan.weekslist.presentati
 import androidx.lifecycle.*
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.common.extetions.dayFormat
+import com.zywczas.common.utils.StringProvider
 import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseViewModel
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksElements
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 class WeeksListViewModel @Inject constructor(
     private val repo: WeeksListRepository,
-    @DispatcherIO private val dispatcherIO: CoroutineDispatcher
+    @DispatcherIO private val dispatcherIO: CoroutineDispatcher,
+    private val stringProvider: StringProvider
 ) : BaseViewModel() {
 
     private val _weeksElements = MutableLiveData<List<WeeksElements>>()
@@ -45,12 +47,12 @@ class WeeksListViewModel @Inject constructor(
         }
     }
 
-    private fun List<WeeksElements.Week>.withDisplayedDates(): List<WeeksElements.Week> {
+    private suspend fun List<WeeksElements.Week>.withDisplayedDates(): List<WeeksElements.Week> {
         forEach {
             if (it.dateStarted != null && it.dateFinished != null) {
                 it.displayedDates = "${it.dateStarted.dayFormat()}-${it.dateFinished.dayFormat()}"
             } else if (it.dateStarted != null) {
-                it.displayedDates = it.dateStarted.dayFormat()
+                it.displayedDates = stringProvider.getString(R.string.started, it.dateStarted.dayFormat())
             }
         }
         return this

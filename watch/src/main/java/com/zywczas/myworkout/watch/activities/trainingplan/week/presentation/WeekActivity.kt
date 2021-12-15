@@ -13,9 +13,7 @@ import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.week.domain.DaysElements
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.presentation.WeeksListActivity
-import com.zywczas.myworkout.watch.adapters.DiffUtilCallback
-import com.zywczas.myworkout.watch.adapters.SettingsItem
-import com.zywczas.myworkout.watch.adapters.TitleItem
+import com.zywczas.myworkout.watch.adapters.*
 import com.zywczas.myworkout.watch.databinding.ActivityWeekBinding
 import com.zywczas.myworkout.watch.utils.CustomScrollingLayoutCallback
 
@@ -49,8 +47,13 @@ class WeekActivity : BaseActivity() {
 
     private fun List<DaysElements>.toAdapterItems(): List<GenericItem> = map {
         when(it){
-            is DaysElements.WeekHeader -> TitleItem(getString(it.title))
-            is DaysElements.Day -> DaI(it){ id -> goToDayActivity(id) }
+            is DaysElements.WeekHeader -> WeekHeaderItem(it)
+            is DaysElements.Day -> WeekOrDayItem(
+                weekOrDayId = it.id,
+                title = it.name,
+                dates = it.displayedDate,
+                isFinished = it.isFinished
+            ){ id -> goToDayActivity(id) }
             is DaysElements.AddNewDay -> SettingsItem(getString(it.title)){ addNewDay() }
             is DaysElements.CopyWeek -> SettingsItem(getString(it.title)){ copyWeek() }
         }

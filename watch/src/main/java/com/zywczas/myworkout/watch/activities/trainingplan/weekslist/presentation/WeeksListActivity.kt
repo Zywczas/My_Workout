@@ -56,7 +56,12 @@ class WeeksListActivity : BaseActivity() {
     private fun List<WeeksElements>.toAdapterItems(): List<GenericItem> = map {
         when(it){
             is WeeksElements.Title -> TitleItem(getString(it.title))
-            is WeeksElements.Week -> WeekOrDayItem(it){ id -> goToWeekActivity(id) }
+            is WeeksElements.Week -> WeekOrDayItem(
+                weekOrDayId = it.id,
+                title = it.name,
+                dates = it.displayedDates,
+                isFinished = it.isFinished
+            ){ id -> goToWeekActivity(id) }
             is WeeksElements.AddNewWeek -> SettingsItem(getString(it.title)){ addNewWeek() }
         }
     }
