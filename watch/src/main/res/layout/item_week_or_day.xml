@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/weekItem"
+    android:id="@+id/weekOrDayItem"
     android:layout_width="match_parent"
     android:layout_height="60dp"
     android:padding="10dp">
@@ -15,13 +15,13 @@
         android:layout_height="0dp"
         android:background="@drawable/item_background"
         app:layout_constraintBottom_toBottomOf="@+id/dates"
-        app:layout_constraintEnd_toEndOf="@+id/weekName"
-        app:layout_constraintStart_toStartOf="@+id/weekName"
-        app:layout_constraintTop_toTopOf="@+id/weekName"
+        app:layout_constraintEnd_toEndOf="@+id/title"
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintTop_toTopOf="@+id/title"
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/weekName"
+        android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textAlignment="center"
@@ -37,9 +37,9 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/weekName"
-        app:layout_constraintStart_toStartOf="@+id/weekName"
-        app:layout_constraintTop_toBottomOf="@+id/weekName"
+        app:layout_constraintEnd_toEndOf="@+id/title"
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/title"
         tools:text="21.07" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

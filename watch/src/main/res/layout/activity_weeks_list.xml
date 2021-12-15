@@ -28,13 +28,11 @@
         android:background="@drawable/item_background"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:text="@string/empty_training_plan"
+        android:text="@string/empty_training_plan_weeks"
         android:textAlignment="center"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TextContrastCheck"
-        tools:visibility="visible" />
+        tools:ignore="TextContrastCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

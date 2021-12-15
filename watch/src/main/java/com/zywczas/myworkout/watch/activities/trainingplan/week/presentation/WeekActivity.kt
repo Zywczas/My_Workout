@@ -2,15 +2,20 @@ package com.zywczas.myworkout.watch.activities.trainingplan.week.presentation
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.view.isGone
 import androidx.wear.widget.WearableLinearLayoutManager
 import androidx.wear.widget.WearableRecyclerView
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericItem
 import com.mikepenz.fastadapter.adapters.ItemAdapter
+import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import com.zywczas.common.utils.autoRelease
-import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseActivity
+import com.zywczas.myworkout.watch.activities.trainingplan.week.domain.DaysElements
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.presentation.WeeksListActivity
+import com.zywczas.myworkout.watch.adapters.DiffUtilCallback
+import com.zywczas.myworkout.watch.adapters.SettingsItem
+import com.zywczas.myworkout.watch.adapters.TitleItem
 import com.zywczas.myworkout.watch.databinding.ActivityWeekBinding
 import com.zywczas.myworkout.watch.utils.CustomScrollingLayoutCallback
 
@@ -28,6 +33,7 @@ class WeekActivity : BaseActivity() {
         binding.daysList.setup()
         viewModel.getDaysList(weekId)
         setupLiveDataObservers()
+        setupOnClickListeners()
     }
 
     private fun WearableRecyclerView.setup(){
@@ -37,9 +43,33 @@ class WeekActivity : BaseActivity() {
     }
 
     private fun setupLiveDataObservers(){
+        viewModel.isEmptyPlanMessageGone.observe(this){ binding.emptyPlanMessage.isGone = it }
+        viewModel.daysElements.observe(this){ days -> FastAdapterDiffUtil.set(itemAdapter, days.toAdapterItems(), DiffUtilCallback()) }
+    }
+
+    private fun List<DaysElements>.toAdapterItems(): List<GenericItem> = map {
+        when(it){
+            is DaysElements.WeekHeader -> TitleItem(getString(it.title))
+            is DaysElements.Day -> DaI(it){ id -> goToDayActivity(id) }
+            is DaysElements.AddNewDay -> SettingsItem(getString(it.title)){ addNewDay() }
+            is DaysElements.CopyWeek -> SettingsItem(getString(it.title)){ copyWeek() }
+        }
+    }
+
+    private fun goToDayActivity(dayId: Long){
 
     }
-    //todo dac info jak pusta lista
-    //todo w pierwszym ekranie poprawic pierwsza informacje, dac info ze max 5 tygodnie moga byc
+
+    private fun addNewDay(){
+
+    }
+
+    private fun copyWeek(){
+
+    }
+
+    private fun setupOnClickListeners(){
+
+    }
 
 }

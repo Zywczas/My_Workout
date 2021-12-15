@@ -3,7 +3,7 @@ package com.zywczas.myworkout.watch.activities.trainingplan.weekslist.presentati
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.core.view.isVisible
+import androidx.core.view.isGone
 import androidx.wear.widget.WearableLinearLayoutManager
 import androidx.wear.widget.WearableRecyclerView
 import com.mikepenz.fastadapter.FastAdapter
@@ -50,13 +50,13 @@ class WeeksListActivity : BaseActivity() {
     private fun setupLiveDataObservers(){
         viewModel.message.observe(this){ showToast(it) }
         viewModel.weeksElements.observe(this){ weeks -> FastAdapterDiffUtil.set(itemAdapter, weeks.toAdapterItems(), DiffUtilCallback()) }
-        viewModel.isEmptyPlanMessageVisible.observe(this){ binding.emptyPlanMessage.isVisible = it }
+        viewModel.isEmptyPlanMessageGone.observe(this){ binding.emptyPlanMessage.isGone = it }
     }
 
     private fun List<WeeksElements>.toAdapterItems(): List<GenericItem> = map {
         when(it){
             is WeeksElements.Title -> TitleItem(getString(it.title))
-            is WeeksElements.Week -> WeekItem(it){ id -> goToWeekActivity(id) }
+            is WeeksElements.Week -> WeekOrDayItem(it){ id -> goToWeekActivity(id) }
             is WeeksElements.AddNewWeek -> SettingsItem(getString(it.title)){ addNewWeek() }
         }
     }

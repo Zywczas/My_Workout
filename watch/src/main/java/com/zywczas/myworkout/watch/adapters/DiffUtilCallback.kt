@@ -9,7 +9,7 @@ class DiffUtilCallback : DiffCallback<GenericItem> {
 
     override fun areItemsTheSame(oldItem: GenericItem, newItem: GenericItem): Boolean =
         when {
-            oldItem is WeekItem && newItem is WeekItem -> oldItem.week.id == newItem.week.id
+            oldItem is WeekOrDayItem && newItem is WeekOrDayItem -> oldItem.week.id == newItem.week.id
             oldItem is SettingsFooterItem && newItem is SettingsFooterItem -> true
             oldItem is TitleItem && newItem is TitleItem -> true
             oldItem is SettingsItem && newItem is SettingsItem -> oldItem.title == newItem.title
@@ -18,7 +18,7 @@ class DiffUtilCallback : DiffCallback<GenericItem> {
 
     override fun areContentsTheSame(oldItem: GenericItem, newItem: GenericItem): Boolean =
         when (oldItem) {
-            is WeekItem -> oldItem.week == (newItem as WeekItem).week
+            is WeekOrDayItem -> oldItem.week == (newItem as WeekOrDayItem).week
             is SettingsFooterItem -> true
             is TitleItem -> oldItem.title == (newItem as TitleItem).title
             is SettingsItem -> oldItem.title == (newItem as SettingsItem).title

@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Moj plan</string>
     <string name="train_hard_win_easily">Trenuj ciezko\nWygrywaj latwo</string>
-    <string name="empty_training_plan">Brak zaplanowanych treningow.\nKliknij aby dodac.</string>
+    <string name="empty_training_plan_weeks">Brak zaplanowanych treningow.\nMozesz miec max 5 tygodni treningowych w jednym czasie. Kliknij aby dodac.</string>
+    <string name="empty_training_plan_days">Brak zaplanowanych treningow.\nKliknin aby dodac nowy dzien treningowy.</string>
     <string name="planned_trainings">Zaplanowane treningi</string>
     <string name="settings">Ustawienia</string>
     <string name="trainings">Treningi</string>
