@@ -41,6 +41,7 @@ internal class TrainingsBusinessCaseImpl
     override suspend fun copyWeekAndTrainings(weekId: Long) {
         val weekRelationsToCopy = weekDao.getWeekRelations(weekId)
         val newWeekRelations = copyWeekRelations(weekRelationsToCopy)
+        save(newWeekRelations)
     }
 
     private suspend fun copyWeekRelations(oldWeekRelations: WeekRelations): WeekRelations {
@@ -65,21 +66,31 @@ internal class TrainingsBusinessCaseImpl
             )
             val newDayRelation = DayRelations(
                 day = newDay,
-                exercises = copyExercices(it.exercises),
-                cardio = copyCardio(it.cardio)
+                exercises = copyExercises(it.exercises)
             )
             copiedDaysRelations.add(newDayRelation)
         }
         return copiedDaysRelations
     }
 
-    private suspend fun copyExercices(oldExercises: List<ExerciseEntity>): List<ExerciseEntity> {
-
+    private suspend fun copyExercises(oldExercises: List<ExerciseEntity>): List<ExerciseEntity> {
+        val copiedExercises = mutableListOf<ExerciseEntity>()
+        oldExercises.forEach {
+            val newExercise = ExerciseEntity(
+                name = it.name,
+                sequence = it.sequence,
+                setsQuantity = it.setsQuantity,
+                repsQuantity = it.repsQuantity,
+                weightInKg = it.weightInKg,
+                timeStamp = dateTime.now()
+            )
+            copiedExercises.add(newExercise)
+        }
+        return copiedExercises
     }
 
-
-    private suspend fun copyCardio(oldCardio: CardioEntity?): CardioEntity? {
-
+    private suspend fun save(weekRelations: WeekRelations){
+        //todo
     }
 
 }

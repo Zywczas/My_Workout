@@ -24,4 +24,5 @@
     <string name="day_name_not_provided">No day name provided</string>
     <string name="started">Started: </string>
     <string name="done">Done: </string>
+    <string name="week_copied">Week copied.</string>
 </resources>

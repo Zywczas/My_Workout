@@ -2,7 +2,6 @@ package com.zywczas.databasestore.trainings
 
 import com.zywczas.databasestore.trainings.entities.DayEntity
 import com.zywczas.databasestore.trainings.entities.WeekEntity
-import com.zywczas.databasestore.trainings.relations.WeekRelations
 
 interface TrainingsBusinessCase {
 

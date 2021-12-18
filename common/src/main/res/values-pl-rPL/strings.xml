@@ -25,5 +25,6 @@
     <string name="day_name_not_provided">Nie podano nazwy dnia</string>
     <string name="started">Zaczęty: </string>
     <string name="done">Skończony: </string>
+    <string name="week_copied">Skopiowano tydzień.</string>
 </resources>
 <!--todo poprawic spacje na znak ascii albo cos-->

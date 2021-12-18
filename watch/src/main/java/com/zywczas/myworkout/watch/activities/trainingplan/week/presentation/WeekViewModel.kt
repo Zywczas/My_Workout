@@ -5,10 +5,6 @@ import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.common.extetions.dayFormat
 import com.zywczas.common.utils.DateTimeProvider
 import com.zywczas.common.utils.StringProvider
-import com.zywczas.databasestore.trainings.entities.DayEntity
-import com.zywczas.databasestore.trainings.entities.WeekEntity
-import com.zywczas.databasestore.trainings.relations.DayRelations
-import com.zywczas.databasestore.trainings.relations.WeekRelations
 import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseViewModel
 import com.zywczas.myworkout.watch.activities.trainingplan.week.domain.DaysElements
@@ -85,7 +81,7 @@ class WeekViewModel @Inject constructor(
         viewModelScope.launch(dispatcherIO){
             showProgressBar(true)
             repo.copyWeekAndTrainings(id)
-            postMessage(...)
+            postMessage(R.string.week_copied)
             showProgressBar(false)
         }
     }
