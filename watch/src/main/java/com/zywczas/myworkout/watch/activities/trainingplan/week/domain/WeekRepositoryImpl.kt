@@ -35,4 +35,6 @@ class WeekRepositoryImpl @Inject constructor(
         timeStamp = dateTime.now()
     ))
 
+    override suspend fun copyWeekAndTrainings(weekId: Long) = trainings.copyWeekAndTrainings(weekId)
+
 }

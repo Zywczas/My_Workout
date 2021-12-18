@@ -1,5 +1,6 @@
 package com.zywczas.myworkout.watch.activities.trainingplan.week.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isGone
@@ -12,6 +13,7 @@ import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import com.zywczas.common.extetions.showToast
 import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.activities.BaseActivity
+import com.zywczas.myworkout.watch.activities.trainingplan.day.presentation.DayActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.week.domain.DaysElements
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.presentation.WeeksListActivity
 import com.zywczas.myworkout.watch.activityresultcontracts.registerVoiceRecognition
@@ -20,6 +22,10 @@ import com.zywczas.myworkout.watch.databinding.ActivityWeekBinding
 import com.zywczas.myworkout.watch.utils.CustomScrollingLayoutCallback
 
 class WeekActivity : BaseActivity() {
+
+    companion object {
+        const val KEY_DAY_ID = "KEY_DAY_ID"
+    }
 
     private var binding: ActivityWeekBinding by autoRelease()
     private val viewModel: WeekViewModel by viewModels{ viewModelFactory }
@@ -64,7 +70,10 @@ class WeekActivity : BaseActivity() {
     }
 
     private fun goToDayActivity(dayId: Long){
-        //todo
+        val intent = Intent(this, DayActivity::class.java).apply {
+            putExtra(KEY_DAY_ID, dayId)
+        }
+        startActivity(intent)
     }
 
     private fun addNewDay(){
@@ -72,7 +81,7 @@ class WeekActivity : BaseActivity() {
     }
 
     private fun copyWeek(){
-        //todo
+        viewModel.copyWeek(weekId)
     }
 
     private fun setupOnClickListeners(){

@@ -26,7 +26,6 @@ class AutoReleasedProperty<T : Any>(lifecycleOwner: LifecycleOwner) :
 
     override fun getValue(thisRef: Any, property: KProperty<*>): T =
         internalValue ?: run {
-            @Suppress("ReplaceGuardClauseWithFunctionCall")
             if (ownerDestroyed){
                 throw IllegalStateException(
                     "Property '$property.name' is unavailable because its owning '${thisRef.javaClass.name} has been destroyed."

@@ -69,7 +69,7 @@ class WeeksListViewModel @Inject constructor(
             } ?: postMessage(R.string.week_name_not_provided)
         }
     }
-
+//todo wziac funkcje z repo
     private fun findNextWeekPosition(): Int =
         weeksElements.value?.let { weeks ->
             weeks.find { it is WeeksElements.Week }?.let { (it as WeeksElements.Week).sequence + 1 }

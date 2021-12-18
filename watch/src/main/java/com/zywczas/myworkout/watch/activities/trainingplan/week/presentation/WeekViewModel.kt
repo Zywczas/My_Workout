@@ -3,12 +3,16 @@ package com.zywczas.myworkout.watch.activities.trainingplan.week.presentation
 import androidx.lifecycle.*
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.common.extetions.dayFormat
+import com.zywczas.common.utils.DateTimeProvider
 import com.zywczas.common.utils.StringProvider
+import com.zywczas.databasestore.trainings.entities.DayEntity
+import com.zywczas.databasestore.trainings.entities.WeekEntity
+import com.zywczas.databasestore.trainings.relations.DayRelations
+import com.zywczas.databasestore.trainings.relations.WeekRelations
 import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseViewModel
 import com.zywczas.myworkout.watch.activities.trainingplan.week.domain.DaysElements
 import com.zywczas.myworkout.watch.activities.trainingplan.week.domain.WeekRepository
-import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksElements
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,7 +20,8 @@ import javax.inject.Inject
 class WeekViewModel @Inject constructor(
     @DispatcherIO private val dispatcherIO: CoroutineDispatcher,
     private val repo: WeekRepository,
-    private val stringProvider: StringProvider
+    private val stringProvider: StringProvider,
+    private val dateTime: DateTimeProvider
 ) : BaseViewModel(){
 
     private val _daysElements = MutableLiveData<List<DaysElements>>()
@@ -75,5 +80,14 @@ class WeekViewModel @Inject constructor(
         daysElements.value?.let { days ->
             days.find { it is DaysElements.Day }?.let { (it as DaysElements.Day).sequence + 1 }
         } ?: 1
+
+    fun copyWeek(id: Long){
+        viewModelScope.launch(dispatcherIO){
+            showProgressBar(true)
+            repo.copyWeekAndTrainings(id)
+            postMessage(...)
+            showProgressBar(false)
+        }
+    }
 
 }
