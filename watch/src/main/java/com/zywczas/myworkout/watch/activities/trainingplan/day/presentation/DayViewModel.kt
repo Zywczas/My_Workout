@@ -7,7 +7,7 @@ import androidx.lifecycle.liveData
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.myworkout.watch.activities.BaseViewModel
 import com.zywczas.myworkout.watch.activities.trainingplan.day.domain.DayRepository
-import com.zywczas.myworkout.watch.activities.trainingplan.week.domain.DaysElements
+import com.zywczas.myworkout.watch.activities.trainingplan.week.domain.WeekElements
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 

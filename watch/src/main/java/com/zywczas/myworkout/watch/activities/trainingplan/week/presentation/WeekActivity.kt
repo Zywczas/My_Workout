@@ -14,7 +14,7 @@ import com.zywczas.common.extetions.showToast
 import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.day.presentation.DayActivity
-import com.zywczas.myworkout.watch.activities.trainingplan.week.domain.DaysElements
+import com.zywczas.myworkout.watch.activities.trainingplan.week.domain.WeekElements
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.presentation.WeeksListActivity
 import com.zywczas.myworkout.watch.activityresultcontracts.registerVoiceRecognition
 import com.zywczas.myworkout.watch.adapters.*
@@ -52,20 +52,20 @@ class WeekActivity : BaseActivity() {
     private fun setupLiveDataObservers(){
         viewModel.message.observe(this){ showToast(it) }
         viewModel.isEmptyPlanMessageGone.observe(this){ binding.emptyPlanMessage.isGone = it }
-        viewModel.daysElements.observe(this){ days -> FastAdapterDiffUtil.set(itemAdapter, days.toAdapterItems(), DiffUtilCallback()) }
+        viewModel.weekElements.observe(this){ days -> FastAdapterDiffUtil.set(itemAdapter, days.toAdapterItems(), DiffUtilCallback()) }
     }
 
-    private fun List<DaysElements>.toAdapterItems(): List<GenericItem> = map {
+    private fun List<WeekElements>.toAdapterItems(): List<GenericItem> = map {
         when(it){
-            is DaysElements.WeekHeader -> WeekHeaderItem(it)
-            is DaysElements.Day -> WeekOrDayItem(
+            is WeekElements.WeekHeader -> WeekHeaderItem(it)
+            is WeekElements.Day -> WeekOrDayItem(
                 weekOrDayId = it.id,
                 title = it.name,
                 dates = it.displayedDate,
                 isFinished = it.isFinished
             ){ id -> goToDayActivity(id) }
-            is DaysElements.AddNewDay -> SettingsItem(getString(it.title)){ addNewDay() }
-            is DaysElements.CopyWeek -> SettingsItem(getString(it.title)){ copyWeek() }
+            is WeekElements.AddNewDay -> SettingsItem(getString(it.title)){ addNewDay() }
+            is WeekElements.CopyWeek -> SettingsItem(getString(it.title)){ copyWeek() }
         }
     }
 

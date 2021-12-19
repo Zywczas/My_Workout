@@ -11,17 +11,17 @@ class WeekRepositoryImpl @Inject constructor(
     private val dateTime: DateTimeProvider
 ) : WeekRepository {
 
-    override suspend fun getWeek(id: Long): DaysElements.WeekHeader = trainings.getWeek(id).toDomain()
+    override suspend fun getWeek(id: Long): WeekElements.WeekHeader = trainings.getWeek(id).toDomain()
 
-    private fun WeekEntity.toDomain() = DaysElements.WeekHeader(
+    private fun WeekEntity.toDomain() = WeekElements.WeekHeader(
         weekName = name,
         dateStarted = dateStarted,
         dateFinished = dateFinished
     )
 
-    override suspend fun getDays(weekId: Long): List<DaysElements.Day> = trainings.getDays(weekId).map { it.toDomain() }
+    override suspend fun getDays(weekId: Long): List<WeekElements.Day> = trainings.getDays(weekId).map { it.toDomain() }
 
-    private fun DayEntity.toDomain() = DaysElements.Day(
+    private fun DayEntity.toDomain() = WeekElements.Day(
         id = id,
         name = name,
         isFinished = isFinished
