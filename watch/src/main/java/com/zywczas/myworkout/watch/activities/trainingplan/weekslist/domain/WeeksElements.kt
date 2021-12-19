@@ -21,6 +21,4 @@ sealed class WeeksElements {
 
     data class AddNewWeek(@StringRes val title: Int = R.string.add_new_week) : WeeksElements()
 
-//    class Settings : WeeksElements() //todo chyba nie potrzebne
-
 }

@@ -3,7 +3,6 @@ package com.zywczas.myworkout.watch.activities.trainingplan.week.presentation
 import androidx.lifecycle.*
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.common.extetions.dayFormat
-import com.zywczas.common.utils.DateTimeProvider
 import com.zywczas.common.utils.StringProvider
 import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseViewModel
@@ -16,8 +15,7 @@ import javax.inject.Inject
 class WeekViewModel @Inject constructor(
     @DispatcherIO private val dispatcherIO: CoroutineDispatcher,
     private val repo: WeekRepository,
-    private val stringProvider: StringProvider,
-    private val dateTime: DateTimeProvider
+    private val stringProvider: StringProvider
 ) : BaseViewModel(){
 
     private val _daysElements = MutableLiveData<List<DaysElements>>()
@@ -63,7 +61,7 @@ class WeekViewModel @Inject constructor(
         return this
     }
 
-    fun addNewDay(name: String?, weekId: Long){
+    fun addNewDay(name: String?, weekId: Long) {
         viewModelScope.launch(dispatcherIO){
             name?.let {
                 repo.saveNewDay(name = it, weekId = weekId, sequence = findNextDayPosition())

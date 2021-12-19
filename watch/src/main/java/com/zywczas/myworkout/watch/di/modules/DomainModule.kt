@@ -2,6 +2,8 @@ package com.zywczas.myworkout.watch.di.modules
 
 import com.zywczas.myworkout.watch.activities.settings.timer.domain.SettingsTimerRepository
 import com.zywczas.myworkout.watch.activities.settings.timer.domain.SettingsTimerRepositoryImpl
+import com.zywczas.myworkout.watch.activities.trainingplan.day.domain.DayRepository
+import com.zywczas.myworkout.watch.activities.trainingplan.day.domain.DayRepositoryImpl
 import com.zywczas.myworkout.watch.activities.trainingplan.timer.domain.TimerRepository
 import com.zywczas.myworkout.watch.activities.trainingplan.timer.domain.TimerRepositoryImpl
 import com.zywczas.myworkout.watch.activities.trainingplan.week.domain.WeekRepository
@@ -30,5 +32,8 @@ abstract class DomainModule {
 
     @Binds
     abstract fun bindWeekRepository(repo: WeekRepositoryImpl): WeekRepository
+
+    @Binds
+    abstract fun bindDayRepository(repo: DayRepositoryImpl): DayRepository
 
 }

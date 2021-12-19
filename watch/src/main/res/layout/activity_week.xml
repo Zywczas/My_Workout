@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
-
+<!--todo dimensy-->
     <TextView
         android:id="@+id/emptyPlanMessage"
         android:layout_width="wrap_content"
