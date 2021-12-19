@@ -81,4 +81,9 @@ class WeeksListActivity : BaseActivity() {
         binding.emptyPlanMessage.setOnClickListener { voiceRecognitionLauncher.launch() }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getWeeksList()
+    }
+
 }

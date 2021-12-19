@@ -40,7 +40,6 @@ class DayActivity : BaseActivity() {
         setContentView(binding.root)
         binding.exerciseList.setup()
         setupLiveDataObservers()
-        viewModel.getExerciseList(dayId)
         setupOnClickListeners()
     }
 
@@ -85,6 +84,11 @@ class DayActivity : BaseActivity() {
 
     private fun setupOnClickListeners() {
         binding.emptyPlanMessage.setOnClickListener { voiceRecognitionLauncher.launch() }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getExerciseList(dayId)
     }
 
 }

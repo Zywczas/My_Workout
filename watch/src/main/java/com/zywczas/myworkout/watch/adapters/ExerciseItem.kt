@@ -9,7 +9,7 @@ import com.zywczas.myworkout.watch.databinding.ItemExerciseBinding
 
 class ExerciseItem(val exercise: DayElements.Exercise) : AbstractBindingItem<ItemExerciseBinding>() {
 
-    override val type: Int = R.id.settingsItem
+    override val type: Int = R.id.exerciseItem
 
     override fun createBinding(inflater: LayoutInflater, parent: ViewGroup?): ItemExerciseBinding =
         ItemExerciseBinding.inflate(inflater, parent, false)

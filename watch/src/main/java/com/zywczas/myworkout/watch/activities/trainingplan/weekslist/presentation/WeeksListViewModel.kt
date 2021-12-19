@@ -21,17 +21,13 @@ class WeeksListViewModel @Inject constructor(
     private val _weeksListElements = MutableLiveData<List<WeeksListElements>>()
     val weeksListElements: LiveData<List<WeeksListElements>> = _weeksListElements
 
-    init {
-        getWeeksList()
-    }
-
     val isEmptyPlanMessageGone: LiveData<Boolean> = Transformations.switchMap(weeksListElements) { weeksListElements ->
         liveData(dispatcherIO) {
             emit(weeksListElements.isNotEmpty())
         }
     }
 //todo dodac usuwanie jesli wiecej niz 5
-    private fun getWeeksList() {
+    fun getWeeksList() {
         viewModelScope.launch(dispatcherIO) {
             val weeks = repo.getWeeks().sortedByDescending { it.sequence }.withDisplayedDates()
             if (weeks.isNotEmpty()){
@@ -61,18 +57,10 @@ class WeeksListViewModel @Inject constructor(
     fun addNewWeek(name: String?){
         viewModelScope.launch(dispatcherIO){
             name?.let {
-                repo.saveNewWeek(WeeksListElements.Week(
-                    name = it,
-                    sequence = findNextWeekPosition()
-                ))
+                repo.saveNewWeek(it)
                 getWeeksList()
             } ?: postMessage(R.string.week_name_not_provided)
         }
     }
-//todo wziac funkcje z repo
-    private fun findNextWeekPosition(): Int =
-        weeksListElements.value?.let { weeks ->
-            weeks.find { it is WeeksListElements.Week }?.let { (it as WeeksListElements.Week).sequence + 1 }
-        } ?: 1
 
 }

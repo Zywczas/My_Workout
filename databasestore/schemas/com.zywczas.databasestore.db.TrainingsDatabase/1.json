@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "39cc2197cbcb7c6282ede52aea01c223",
+    "identityHash": "919a8354fa7102d25d7390a7f0777069",
     "entities": [
       {
         "tableName": "Week",
@@ -62,7 +62,7 @@
       },
       {
         "tableName": "Day",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `foreignWeekId` INTEGER NOT NULL, `name` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `dateFinished` INTEGER, `isFinished` INTEGER NOT NULL, `timeStamp` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `foreignWeekId` INTEGER NOT NULL, `name` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `dateStarted` INTEGER, `dateFinished` INTEGER, `isFinished` INTEGER NOT NULL, `timeStamp` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -87,6 +87,12 @@
             "columnName": "sequence",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "dateStarted",
+            "columnName": "dateStarted",
+            "affinity": "INTEGER",
+            "notNull": false
           },
           {
             "fieldPath": "dateFinished",
@@ -118,7 +124,7 @@
       },
       {
         "tableName": "Exercise",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `foreignDayId` INTEGER NOT NULL, `name` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `setsQuantity` INTEGER NOT NULL, `repsQuantity` INTEGER NOT NULL, `weightInKg` REAL NOT NULL, `isFinished` INTEGER NOT NULL, `timeStamp` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `foreignDayId` INTEGER NOT NULL, `name` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `setsQuantity` INTEGER NOT NULL, `repsQuantity` TEXT NOT NULL, `weight` REAL NOT NULL, `isFinished` INTEGER NOT NULL, `timeStamp` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -153,12 +159,12 @@
           {
             "fieldPath": "repsQuantity",
             "columnName": "repsQuantity",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "weightInKg",
-            "columnName": "weightInKg",
+            "fieldPath": "weight",
+            "columnName": "weight",
             "affinity": "REAL",
             "notNull": true
           },
@@ -276,7 +282,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '39cc2197cbcb7c6282ede52aea01c223')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '919a8354fa7102d25d7390a7f0777069')"
     ]
   }
 }

@@ -38,7 +38,6 @@ class WeekActivity : BaseActivity() {
         binding = ActivityWeekBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.daysList.setup()
-        viewModel.getDaysList(weekId)
         setupLiveDataObservers()
         setupOnClickListeners()
     }
@@ -86,6 +85,11 @@ class WeekActivity : BaseActivity() {
 
     private fun setupOnClickListeners(){
         binding.emptyPlanMessage.setOnClickListener { voiceRecognitionLauncher.launch() }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getDaysList(weekId)
     }
 
 }

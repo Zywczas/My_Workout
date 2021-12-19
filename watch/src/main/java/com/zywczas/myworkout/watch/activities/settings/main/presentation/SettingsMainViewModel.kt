@@ -17,11 +17,7 @@ class SettingsMainViewModel @Inject constructor(
     private val _settingsElements = MutableLiveData<List<SettingsMainElements>>()
     val settingsElements: LiveData<List<SettingsMainElements>> = _settingsElements
 
-    init {
-        getSettingsList()
-    }
-
-    private fun getSettingsList() {
+    fun getSettingsList() {
         viewModelScope.launch(dispatcherIO){
             val settingsElements = mutableListOf<SettingsMainElements>().apply {
                 add(SettingsMainElements.Title())

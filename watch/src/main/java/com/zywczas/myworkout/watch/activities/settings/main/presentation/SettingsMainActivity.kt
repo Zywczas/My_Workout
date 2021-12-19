@@ -7,14 +7,16 @@ import androidx.wear.widget.WearableRecyclerView
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericItem
 import com.mikepenz.fastadapter.adapters.ItemAdapter
+import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.settings.main.domain.SettingsMainElements
+import com.zywczas.myworkout.watch.adapters.DiffUtilCallback
 import com.zywczas.myworkout.watch.adapters.SettingsItem
 import com.zywczas.myworkout.watch.adapters.TitleItem
 import com.zywczas.myworkout.watch.databinding.ActivitySettingsMainBinding
 import com.zywczas.myworkout.watch.utils.CustomScrollingLayoutCallback
-
+//todo pewnie do wylotu
 class SettingsMainActivity : BaseActivity() {
 
     private var binding: ActivitySettingsMainBinding by autoRelease()
@@ -26,9 +28,10 @@ class SettingsMainActivity : BaseActivity() {
         binding = ActivitySettingsMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.settingsList.setup()
+        viewModel.getSettingsList()
         setupObservers()
     }
-//todo pewnie do wylotu
+
     private fun WearableRecyclerView.setup(){
         isEdgeItemsCenteringEnabled = true
         layoutManager = WearableLinearLayoutManager(this@SettingsMainActivity, CustomScrollingLayoutCallback())

@@ -18,11 +18,7 @@ class SettingsTimerViewModel @Inject constructor(
     private val _breakPeriodInSeconds = MutableLiveData<Int>()
     val breakPeriodInSeconds: LiveData<Int> = _breakPeriodInSeconds
 
-    init {
-        getBreakPeriod()
-    }
-
-    private fun getBreakPeriod(){
+    fun getBreakPeriod(){
         viewModelScope.launch(dispatcherIO){
             _breakPeriodInSeconds.postValue(repo.getBreakPeriodInSeconds())
         }

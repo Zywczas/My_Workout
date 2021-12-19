@@ -17,6 +17,7 @@ class SettingsTimerActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsTimerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        viewModel.getBreakPeriod()
         setupLiveDataObservers()
         setupOnClickListeners()
     }
