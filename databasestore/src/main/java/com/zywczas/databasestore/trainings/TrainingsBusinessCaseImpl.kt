@@ -115,4 +115,8 @@ internal class TrainingsBusinessCaseImpl
         cardioDao.insert(cardio)
     }
 
+    override suspend fun getExercises(dayId: Long): List<ExerciseEntity> = exerciseDao.getExercises(dayId)
+
+    override suspend fun getDay(id: Long): DayEntity = dayDao.getDay(id)
+
 }

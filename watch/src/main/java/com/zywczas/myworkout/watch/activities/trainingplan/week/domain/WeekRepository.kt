@@ -2,7 +2,7 @@ package com.zywczas.myworkout.watch.activities.trainingplan.week.domain
 
 interface WeekRepository {
 
-    suspend fun getWeek(id: Long): WeekElements.WeekHeader
+    suspend fun getWeekHeader(id: Long): WeekElements.WeekHeader
 
     suspend fun getDays(weekId: Long): List<WeekElements.Day>
 

@@ -1,6 +1,7 @@
 package com.zywczas.databasestore.trainings
 
 import com.zywczas.databasestore.trainings.entities.DayEntity
+import com.zywczas.databasestore.trainings.entities.ExerciseEntity
 import com.zywczas.databasestore.trainings.entities.WeekEntity
 
 interface TrainingsBusinessCase {
@@ -18,5 +19,9 @@ interface TrainingsBusinessCase {
     suspend fun saveDay(day: DayEntity)
 
     suspend fun copyWeekAndTrainings(weekId: Long)
+
+    suspend fun getExercises(dayId: Long): List<ExerciseEntity>
+
+    suspend fun getDay(id: Long): DayEntity
 
 }

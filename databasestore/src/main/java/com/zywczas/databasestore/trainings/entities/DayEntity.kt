@@ -10,6 +10,7 @@ data class DayEntity(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") v
                      @ColumnInfo(name = "foreignWeekId") var foreignWeekId: Long = -1,
                      @ColumnInfo(name = "name") val name: String = "",
                      @ColumnInfo(name = "sequence") val sequence: Int = 0,
+                     @ColumnInfo(name = "dateStarted") val dateStarted: DateTime? = null,
                      @ColumnInfo(name = "dateFinished") val dateFinished: DateTime? = null,
                      @ColumnInfo(name = "isFinished") val isFinished: Boolean = false,
                      @ColumnInfo(name = "timeStamp") val timeStamp: DateTime = DateTime())

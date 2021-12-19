@@ -11,7 +11,7 @@ class WeekRepositoryImpl @Inject constructor(
     private val dateTime: DateTimeProvider
 ) : WeekRepository {
 
-    override suspend fun getWeek(id: Long): WeekElements.WeekHeader = trainings.getWeek(id).toDomain()
+    override suspend fun getWeekHeader(id: Long): WeekElements.WeekHeader = trainings.getWeek(id).toDomain()
 
     private fun WeekEntity.toDomain() = WeekElements.WeekHeader(
         weekName = name,

@@ -13,6 +13,9 @@ internal interface DayDao {
     @Query("SELECT * FROM Day WHERE foreignWeekId = :weekId")
     suspend fun getDays(weekId: Long): List<DayEntity>
 
+    @Query("SELECT * FROM Day WHERE id = :id")
+    suspend fun getDay(id: Long): DayEntity
+
     @Query("DELETE FROM Day WHERE id = :id")//todo sprawdzic czy tu nie powinno byc samo @Delete
     suspend fun deleteDay(id: Long)
 

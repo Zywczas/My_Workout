@@ -16,7 +16,7 @@ class WeekViewModel @Inject constructor(
     @DispatcherIO private val dispatcherIO: CoroutineDispatcher,
     private val repo: WeekRepository,
     private val stringProvider: StringProvider
-) : BaseViewModel(){
+) : BaseViewModel() {
 
     private val _weekElements = MutableLiveData<List<WeekElements>>()
     val weekElements: LiveData<List<WeekElements>> = _weekElements
@@ -27,18 +27,20 @@ class WeekViewModel @Inject constructor(
         }
     }
 
-    fun getDaysList(weekId: Long){
-        viewModelScope.launch(dispatcherIO){
-            val days = repo.getDays(weekId).sortedByDescending { it.sequence }.withDisplayedDate()
-            if (days.isNotEmpty()){
-                val week = repo.getWeek(weekId).withDisplayedDate()
+    fun getDaysList(weekId: Long) {
+        viewModelScope.launch(dispatcherIO) {
+            val days = repo.getDays(weekId).sortedByDescending { it.sequence }.withDisplayedDate() //todo dac tutaj w kolejnosci normalnej i poprawic funkcje find next day sequence - wyszukiwac w SQL najlepiej
+            if (days.isNotEmpty()) {
+                val weekHeader = repo.getWeekHeader(weekId).withDisplayedDate()
                 val weekElements = mutableListOf<WeekElements>().apply {
-                    add(week)
+                    add(weekHeader)
                     addAll(days)
                     add(WeekElements.AddNewDay())
                     add(WeekElements.CopyWeek())
                 }
                 _weekElements.postValue(weekElements)
+            } else {
+                _weekElements.postValue(emptyList())
             }
         }
     }
@@ -54,15 +56,15 @@ class WeekViewModel @Inject constructor(
 
     private suspend fun WeekElements.WeekHeader.withDisplayedDate(): WeekElements.WeekHeader {
         if (dateFinished != null) {
-            displayedDate =  stringProvider.getString(R.string.done, dateFinished.dayFormat())
+            displayedDate = stringProvider.getString(R.string.done, dateFinished.dayFormat())
         } else if (dateStarted != null) {
-            displayedDate =  stringProvider.getString(R.string.started, dateStarted.dayFormat())
+            displayedDate = stringProvider.getString(R.string.started, dateStarted.dayFormat())
         }
         return this
     }
 
     fun addNewDay(name: String?, weekId: Long) {
-        viewModelScope.launch(dispatcherIO){
+        viewModelScope.launch(dispatcherIO) {
             name?.let {
                 repo.saveNewDay(name = it, weekId = weekId, sequence = findNextDayPosition())
                 getDaysList(weekId)
@@ -75,8 +77,8 @@ class WeekViewModel @Inject constructor(
             days.find { it is WeekElements.Day }?.let { (it as WeekElements.Day).sequence + 1 }
         } ?: 1
 
-    fun copyWeek(id: Long){
-        viewModelScope.launch(dispatcherIO){
+    fun copyWeek(id: Long) {
+        viewModelScope.launch(dispatcherIO) {
             showProgressBar(true)
             repo.copyWeekAndTrainings(id)
             postMessage(R.string.week_copied)

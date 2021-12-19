@@ -1,28 +1,67 @@
 package com.zywczas.myworkout.watch.activities.trainingplan.day.presentation
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
+import com.zywczas.common.extetions.dayFormat
+import com.zywczas.common.utils.StringProvider
+import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseViewModel
+import com.zywczas.myworkout.watch.activities.trainingplan.day.domain.DayElements
 import com.zywczas.myworkout.watch.activities.trainingplan.day.domain.DayRepository
-import com.zywczas.myworkout.watch.activities.trainingplan.week.domain.WeekElements
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class DayViewModel @Inject constructor(
     @DispatcherIO private val dispatcherIO: CoroutineDispatcher,
     private val repo: DayRepository,
-) : BaseViewModel(){
+    private val stringProvider: StringProvider
+) : BaseViewModel() {
 
-    private val _daysElements = MutableLiveData<List<DaysElements>>()
-    val daysElements: LiveData<List<DaysElements>> = _daysElements
+    private val _dayElements = MutableLiveData<List<DayElements>>()
+    val dayElements: LiveData<List<DayElements>> = _dayElements
 
-    val isEmptyPlanMessageGone: LiveData<Boolean> = Transformations.switchMap(daysElements) { daysElements ->
+    val isEmptyPlanMessageGone: LiveData<Boolean> = Transformations.switchMap(dayElements) { dayElements ->
         liveData(dispatcherIO) {
-            emit(daysElements.isNotEmpty())
+            emit(dayElements.isNotEmpty())
         }
+    }
+
+    fun getExerciseList(dayId: Long) {
+        viewModelScope.launch(dispatcherIO) {
+            val exercises = repo.getExercises(dayId).sortedBy { it.sequence }
+            if (exercises.isNotEmpty()) {
+                val dayHeader = repo.getDayHeader(dayId).withDisplayedDate()
+                val dayElements = mutableListOf<DayElements>().apply {
+                    if (dayHeader.displayedDate.isNotBlank()){
+                        add(dayHeader)
+                    }
+                    if (dayHeader.dateFinished == null){
+                        add(DayElements.GoToExercise(title =
+                        if (dayHeader.dateStarted != null) {
+                            R.string.continue_exercise
+                        } else {
+                            R.string.start_exercise
+                        }))
+                    }
+                    addAll(exercises)
+                    add(DayElements.AddNewExercise())
+                    add(DayElements.CopyDay())
+                }
+                _dayElements.postValue(dayElements)
+            } else {
+                _dayElements.postValue(emptyList())
+            }
+        }
+    }
+
+    private suspend fun DayElements.DayHeader.withDisplayedDate(): DayElements.DayHeader {
+        if (dateFinished != null) {
+            displayedDate = stringProvider.getString(R.string.done, dateFinished.dayFormat())
+        } else if (dateStarted != null) {
+            displayedDate = stringProvider.getString(R.string.started, dateStarted.dayFormat())
+        }
+        return this
     }
 
 }
