@@ -3,6 +3,7 @@ package com.zywczas.myworkout.watch.activities.trainingplan.day.presentation
 import androidx.lifecycle.*
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.common.extetions.dayFormat
+import com.zywczas.common.utils.SingleLiveData
 import com.zywczas.common.utils.StringProvider
 import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseViewModel
@@ -26,6 +27,9 @@ class DayViewModel @Inject constructor(
             emit(dayElements.isNotEmpty())
         }
     }
+
+    private val _newExercise = SingleLiveData<String>()
+    val newExercise: LiveData<String> = _newExercise
 
     fun getExerciseList(dayId: Long) {
         viewModelScope.launch(dispatcherIO) {
@@ -70,7 +74,9 @@ class DayViewModel @Inject constructor(
 
     fun addNewExercise(name: String?, dayId: Long) {
         viewModelScope.launch(dispatcherIO) {
-            //todo
+            name?.let {
+                _newExercise.postValue(it)
+            } ?: postMessage(R.string.exercise_name_not_provided)
         }
     }
 

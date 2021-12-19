@@ -81,7 +81,7 @@ internal class TrainingsBusinessCaseImpl
                 sequence = it.sequence,
                 setsQuantity = it.setsQuantity,
                 repsQuantity = it.repsQuantity,
-                weightInKg = it.weightInKg,
+                weight = it.weight,
                 timeStamp = dateTime.now()
             )
             copiedExercises.add(newExercise)

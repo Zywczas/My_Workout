@@ -32,5 +32,8 @@
     <string name="exercise_name_not_provided">Nie podano nazwy ćwiczenia</string>
     <string name="continue_exercise">Kontynuuj ćwiczenia</string>
     <string name="start_exercise">Rozpocznij ćwiczenia</string>
+    <string name="sets_number">Ilość serii:</string>
+    <string name="reps_number">Ilość powtórzeń:</string>
+    <string name="weight">Ciężar:</string>
 </resources>
 <!--todo poprawic spacje na znak ascii albo cos-->
