@@ -2,8 +2,8 @@ package com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain
 
 interface WeeksListRepository {
 
-    suspend fun getWeeks(): List<WeeksElements.Week>
+    suspend fun getWeeks(): List<WeeksListElements.Week>
 
-    suspend fun saveNewWeek(week: WeeksElements.Week)
+    suspend fun saveNewWeek(week: WeeksListElements.Week)
 
 }

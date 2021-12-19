@@ -14,7 +14,7 @@ import com.zywczas.common.extetions.showToast
 import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.week.presentation.WeekActivity
-import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksElements
+import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksListElements
 import com.zywczas.myworkout.watch.activityresultcontracts.registerVoiceRecognition
 import com.zywczas.myworkout.watch.adapters.*
 import com.zywczas.myworkout.watch.databinding.ActivityWeeksListBinding
@@ -49,20 +49,20 @@ class WeeksListActivity : BaseActivity() {
 
     private fun setupLiveDataObservers(){
         viewModel.message.observe(this){ showToast(it) }
-        viewModel.weeksElements.observe(this){ weeks -> FastAdapterDiffUtil.set(itemAdapter, weeks.toAdapterItems(), DiffUtilCallback()) }
+        viewModel.weeksListElements.observe(this){ weeks -> FastAdapterDiffUtil.set(itemAdapter, weeks.toAdapterItems(), DiffUtilCallback()) }
         viewModel.isEmptyPlanMessageGone.observe(this){ binding.emptyPlanMessage.isGone = it }
     }
 
-    private fun List<WeeksElements>.toAdapterItems(): List<GenericItem> = map {
+    private fun List<WeeksListElements>.toAdapterItems(): List<GenericItem> = map {
         when(it){
-            is WeeksElements.Title -> TitleItem(getString(it.title))
-            is WeeksElements.Week -> WeekOrDayItem(
+            is WeeksListElements.Title -> TitleItem(getString(it.title))
+            is WeeksListElements.Week -> WeekOrDayItem(
                 weekOrDayId = it.id,
                 title = it.name,
                 dates = it.displayedDates,
                 isFinished = it.isFinished
             ){ id -> goToWeekActivity(id) }
-            is WeeksElements.AddNewWeek -> SettingsItem(getString(it.title)){ addNewWeek() }
+            is WeeksListElements.AddNewWeek -> SettingsItem(getString(it.title)){ addNewWeek() }
         }
     }
 

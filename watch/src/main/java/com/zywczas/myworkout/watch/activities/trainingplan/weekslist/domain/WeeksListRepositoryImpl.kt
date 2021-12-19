@@ -10,9 +10,9 @@ class WeeksListRepositoryImpl @Inject constructor(
     private val dateTime: DateTimeProvider
 ) : WeeksListRepository {
 
-    override suspend fun getWeeks(): List<WeeksElements.Week> = trainings.getWeeks().map { it.toDomain() }
+    override suspend fun getWeeks(): List<WeeksListElements.Week> = trainings.getWeeks().map { it.toDomain() }
 
-    private fun WeekEntity.toDomain() = WeeksElements.Week(
+    private fun WeekEntity.toDomain() = WeeksListElements.Week(
         id = id,
         name = name,
         sequence = sequence,
@@ -21,7 +21,7 @@ class WeeksListRepositoryImpl @Inject constructor(
         isFinished = isFinished
     )
 //todo poprawic i wyrzicuc ten caly element a podawac funkcji tylko nazwe i sequence
-    override suspend fun saveNewWeek(week: WeeksElements.Week) = trainings.saveNewWeek(
+    override suspend fun saveNewWeek(week: WeeksListElements.Week) = trainings.saveNewWeek(
         WeekEntity(
             name = week.name,
             sequence = week.sequence,

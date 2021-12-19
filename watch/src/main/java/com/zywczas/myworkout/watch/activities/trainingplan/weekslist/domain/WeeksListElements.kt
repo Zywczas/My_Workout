@@ -5,9 +5,9 @@ import com.zywczas.myworkout.watch.R
 import org.joda.time.DateTime
 
 @Suppress("CanSealedSubClassBeObject")
-sealed class WeeksElements {
+sealed class WeeksListElements {
 
-    data class Title(@StringRes val title: Int = R.string.planned_trainings) : WeeksElements()
+    data class Title(@StringRes val title: Int = R.string.planned_trainings) : WeeksListElements()
 
     data class Week(
         val id: Long = 0L,
@@ -17,8 +17,8 @@ sealed class WeeksElements {
         val dateFinished: DateTime? = null,
         val isFinished: Boolean = false,
         var displayedDates: String = ""
-    ) : WeeksElements()
+    ) : WeeksListElements()
 
-    data class AddNewWeek(@StringRes val title: Int = R.string.add_new_week) : WeeksElements()
+    data class AddNewWeek(@StringRes val title: Int = R.string.add_new_week) : WeeksListElements()
 
 }

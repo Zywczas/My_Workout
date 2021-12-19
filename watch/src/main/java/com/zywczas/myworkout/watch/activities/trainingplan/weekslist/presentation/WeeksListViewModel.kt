@@ -6,7 +6,7 @@ import com.zywczas.common.extetions.dayFormat
 import com.zywczas.common.utils.StringProvider
 import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseViewModel
-import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksElements
+import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksListElements
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksListRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -18,16 +18,16 @@ class WeeksListViewModel @Inject constructor(
     private val stringProvider: StringProvider
 ) : BaseViewModel() {
 
-    private val _weeksElements = MutableLiveData<List<WeeksElements>>()
-    val weeksElements: LiveData<List<WeeksElements>> = _weeksElements
+    private val _weeksListElements = MutableLiveData<List<WeeksListElements>>()
+    val weeksListElements: LiveData<List<WeeksListElements>> = _weeksListElements
 
     init {
         getWeeksList()
     }
 
-    val isEmptyPlanMessageGone: LiveData<Boolean> = Transformations.switchMap(weeksElements) { weeksElements ->
+    val isEmptyPlanMessageGone: LiveData<Boolean> = Transformations.switchMap(weeksListElements) { weeksListElements ->
         liveData(dispatcherIO) {
-            emit(weeksElements.isNotEmpty())
+            emit(weeksListElements.isNotEmpty())
         }
     }
 //todo dodac usuwanie jesli wiecej niz 5
@@ -35,19 +35,19 @@ class WeeksListViewModel @Inject constructor(
         viewModelScope.launch(dispatcherIO) {
             val weeks = repo.getWeeks().sortedByDescending { it.sequence }.withDisplayedDates()
             if (weeks.isNotEmpty()){
-                val weeksElements = mutableListOf<WeeksElements>().apply {
-                    add(WeeksElements.Title())
+                val weeksListElements = mutableListOf<WeeksListElements>().apply {
+                    add(WeeksListElements.Title())
                     addAll(weeks)
-                    add(WeeksElements.AddNewWeek())
+                    add(WeeksListElements.AddNewWeek())
                 }
-                _weeksElements.postValue(weeksElements)
+                _weeksListElements.postValue(weeksListElements)
             } else {
-                _weeksElements.postValue(emptyList())
+                _weeksListElements.postValue(emptyList())
             }
         }
     }
 
-    private suspend fun List<WeeksElements.Week>.withDisplayedDates(): List<WeeksElements.Week> {
+    private suspend fun List<WeeksListElements.Week>.withDisplayedDates(): List<WeeksListElements.Week> {
         forEach {
             if (it.dateStarted != null && it.dateFinished != null) {
                 it.displayedDates = "${it.dateStarted.dayFormat()}-${it.dateFinished.dayFormat()}"
@@ -61,7 +61,7 @@ class WeeksListViewModel @Inject constructor(
     fun addNewWeek(name: String?){
         viewModelScope.launch(dispatcherIO){
             name?.let {
-                repo.saveNewWeek(WeeksElements.Week(
+                repo.saveNewWeek(WeeksListElements.Week(
                     name = it,
                     sequence = findNextWeekPosition()
                 ))
@@ -71,8 +71,8 @@ class WeeksListViewModel @Inject constructor(
     }
 //todo wziac funkcje z repo
     private fun findNextWeekPosition(): Int =
-        weeksElements.value?.let { weeks ->
-            weeks.find { it is WeeksElements.Week }?.let { (it as WeeksElements.Week).sequence + 1 }
+        weeksListElements.value?.let { weeks ->
+            weeks.find { it is WeeksListElements.Week }?.let { (it as WeeksListElements.Week).sequence + 1 }
         } ?: 1
 
 }
