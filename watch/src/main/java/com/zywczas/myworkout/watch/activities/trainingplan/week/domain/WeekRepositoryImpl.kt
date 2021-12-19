@@ -7,8 +7,7 @@ import com.zywczas.databasestore.trainings.entities.WeekEntity
 import javax.inject.Inject
 
 class WeekRepositoryImpl @Inject constructor(
-    private val trainings: TrainingsBusinessCase,
-    private val dateTime: DateTimeProvider
+    private val trainings: TrainingsBusinessCase
 ) : WeekRepository {
 
     override suspend fun getWeekHeader(id: Long): WeekElements.WeekHeader = trainings.getWeek(id).toDomain()
@@ -34,8 +33,7 @@ class WeekRepositoryImpl @Inject constructor(
         DayEntity(
         foreignWeekId = weekId,
         name = name,
-        sequence = sequence,
-        timeStamp = dateTime.now()
+        sequence = sequence
     ))
 
     override suspend fun copyWeekAndTrainings(weekId: Long) = trainings.copyWeekAndTrainings(weekId)

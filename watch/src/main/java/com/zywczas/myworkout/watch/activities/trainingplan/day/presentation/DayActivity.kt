@@ -15,7 +15,6 @@ import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.addexercise.presentation.AddExerciseActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.day.domain.DayElements
-import com.zywczas.myworkout.watch.activities.trainingplan.week.domain.WeekElements
 import com.zywczas.myworkout.watch.activities.trainingplan.week.presentation.WeekActivity
 import com.zywczas.myworkout.watch.activityresultcontracts.registerVoiceRecognition
 import com.zywczas.myworkout.watch.adapters.*
@@ -25,6 +24,7 @@ import com.zywczas.myworkout.watch.utils.CustomScrollingLayoutCallback
 class DayActivity : BaseActivity() {
 
     companion object {
+        const val KEY_DAY_ID = "KEY_DAY_ID"
         const val KEY_EXERCISE_NAME = "KEY_EXERCISE_NAME"
     }
 
@@ -77,6 +77,7 @@ class DayActivity : BaseActivity() {
 
     private fun goToAddExerciseActivity(exerciseName: String){
         val intent = Intent(this, AddExerciseActivity::class.java).apply {
+            putExtra(KEY_DAY_ID, dayId)
             putExtra(KEY_EXERCISE_NAME, exerciseName)
         }
         startActivity(intent)

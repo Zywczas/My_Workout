@@ -1,13 +1,11 @@
 package com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain
 
-import com.zywczas.common.utils.DateTimeProvider
 import com.zywczas.databasestore.trainings.TrainingsBusinessCase
 import com.zywczas.databasestore.trainings.entities.WeekEntity
 import javax.inject.Inject
 
 class WeeksListRepositoryImpl @Inject constructor(
-    private val trainings: TrainingsBusinessCase,
-    private val dateTime: DateTimeProvider
+    private val trainings: TrainingsBusinessCase
 ) : WeeksListRepository {
 
     override suspend fun getWeeks(): List<WeeksListElements.Week> = trainings.getWeeks().map { it.toDomain() }
@@ -20,13 +18,7 @@ class WeeksListRepositoryImpl @Inject constructor(
         dateFinished = dateFinished,
         isFinished = isFinished
     )
-//todo poprawic i wyrzicuc ten caly element a podawac funkcji tylko nazwe i sequence
-    override suspend fun saveNewWeek(week: WeeksListElements.Week) = trainings.saveNewWeek(
-        WeekEntity(
-            name = week.name,
-            sequence = week.sequence,
-            timeStamp = dateTime.now()
-        )
-    )
+
+    override suspend fun saveNewWeek(name: String) = trainings.saveNewWeek(name)
 
 }

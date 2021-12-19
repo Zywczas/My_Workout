@@ -8,9 +8,7 @@ interface TrainingsBusinessCase {
 
     suspend fun getWeeks(): List<WeekEntity>
 
-    suspend fun findNextWeekPosition(): Int
-
-    suspend fun saveNewWeek(week: WeekEntity)
+    suspend fun saveNewWeek(name: String)
 
     suspend fun getWeek(id: Long): WeekEntity
 
@@ -23,5 +21,7 @@ interface TrainingsBusinessCase {
     suspend fun getExercises(dayId: Long): List<ExerciseEntity>
 
     suspend fun getDay(id: Long): DayEntity
+
+    suspend fun saveExercise(dayId: Long, name: String, sets: Int, reps: String, weight: Double)
 
 }

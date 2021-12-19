@@ -73,7 +73,7 @@ class WeekViewModel @Inject constructor(
             } ?: postMessage(R.string.day_name_not_provided)
         }
     }
-
+//todo chyba brac z bazy
     private fun findNextDayPosition(): Int =
         weekElements.value?.let { days ->
             days.find { it is WeekElements.Day }?.let { (it as WeekElements.Day).sequence + 1 }

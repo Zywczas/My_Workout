@@ -1,6 +1,5 @@
 package com.zywczas.databasestore.trainings
 
-import com.zywczas.common.utils.DateTimeProvider
 import com.zywczas.databasestore.trainings.dao.CardioDao
 import com.zywczas.databasestore.trainings.dao.DayDao
 import com.zywczas.databasestore.trainings.dao.ExerciseDao
@@ -18,17 +17,22 @@ internal class TrainingsBusinessCaseImpl
     private val weekDao: WeekDao,
     private val dayDao: DayDao,
     private val cardioDao: CardioDao,
-    private val exerciseDao: ExerciseDao,
-    private val dateTime: DateTimeProvider
+    private val exerciseDao: ExerciseDao
 ) : TrainingsBusinessCase {
 
     override suspend fun getWeeks(): List<WeekEntity> = weekDao.getWeeks()
 
-    override suspend fun findNextWeekPosition(): Int = weekDao.getWeeks().maxByOrNull { it.sequence }?.let { it.sequence + 1 } ?: 1
-
-    override suspend fun saveNewWeek(week: WeekEntity) {
-        weekDao.insert(week)
+    override suspend fun saveNewWeek(name: String) {
+        weekDao.insert(
+            WeekEntity(
+                name = name,
+                sequence = findNextWeekPosition(),
+            )
+        )
     }
+
+    //todo poprawic tak zeby bralo z sql
+    private suspend fun findNextWeekPosition(): Int = weekDao.getWeeks().maxByOrNull { it.sequence }?.let { it.sequence + 1 } ?: 1
 
     override suspend fun getWeek(id: Long): WeekEntity = weekDao.getWeek(id)
 
@@ -47,8 +51,7 @@ internal class TrainingsBusinessCaseImpl
     private suspend fun copyWeekRelations(oldWeekRelations: WeekRelations): WeekRelations {
         val newWeek = WeekEntity(
             name = oldWeekRelations.week.name,
-            sequence = findNextWeekPosition(),
-            timeStamp = dateTime.now()
+            sequence = findNextWeekPosition()
         )
         return WeekRelations(
             week = newWeek,
@@ -56,13 +59,12 @@ internal class TrainingsBusinessCaseImpl
         )
     }
 
-    private suspend fun copyDaysRelations(oldDaysRelations: List<DayRelations>): List<DayRelations> {
+    private fun copyDaysRelations(oldDaysRelations: List<DayRelations>): List<DayRelations> {
         val copiedDaysRelations = mutableListOf<DayRelations>()
         oldDaysRelations.forEach {
             val newDay = DayEntity(
                 name = it.day.name,
-                sequence = it.day.sequence,
-                timeStamp = dateTime.now()
+                sequence = it.day.sequence
             )
             val newDayRelation = DayRelations(
                 day = newDay,
@@ -73,7 +75,7 @@ internal class TrainingsBusinessCaseImpl
         return copiedDaysRelations
     }
 
-    private suspend fun copyExercises(oldExercises: List<ExerciseEntity>): List<ExerciseEntity> {
+    private fun copyExercises(oldExercises: List<ExerciseEntity>): List<ExerciseEntity> {
         val copiedExercises = mutableListOf<ExerciseEntity>()
         oldExercises.forEach {
             val newExercise = ExerciseEntity(
@@ -81,20 +83,19 @@ internal class TrainingsBusinessCaseImpl
                 sequence = it.sequence,
                 setsQuantity = it.setsQuantity,
                 repsQuantity = it.repsQuantity,
-                weight = it.weight,
-                timeStamp = dateTime.now()
+                weight = it.weight
             )
             copiedExercises.add(newExercise)
         }
         return copiedExercises
     }
 
-    private suspend fun saveDays(weekRelations: WeekRelations){
+    private suspend fun saveDays(weekRelations: WeekRelations) {
         val newWeekId = weekDao.insert(weekRelations.week)
         saveDays(newWeekId, weekRelations.days)
     }
 
-    private suspend fun saveDays(weekId: Long, daysRelations: List<DayRelations>){
+    private suspend fun saveDays(weekId: Long, daysRelations: List<DayRelations>) {
         daysRelations.forEach {
             it.day.foreignWeekId = weekId
             val newDayId = dayDao.insert(it.day)
@@ -103,7 +104,7 @@ internal class TrainingsBusinessCaseImpl
         }
     }
 
-    private suspend fun saveExercises(dayId: Long, exercises: List<ExerciseEntity>){
+    private suspend fun saveExercises(dayId: Long, exercises: List<ExerciseEntity>) {
         exercises.forEach {
             it.foreignDayId = dayId
             exerciseDao.insert(it)
@@ -118,5 +119,20 @@ internal class TrainingsBusinessCaseImpl
     override suspend fun getExercises(dayId: Long): List<ExerciseEntity> = exerciseDao.getExercises(dayId)
 
     override suspend fun getDay(id: Long): DayEntity = dayDao.getDay(id)
+
+    override suspend fun saveExercise(dayId: Long, name: String, sets: Int, reps: String, weight: Double) {
+        exerciseDao.insert(
+            ExerciseEntity(
+                foreignDayId = dayId,
+                name = name,
+                sequence = findNextExercisePosition(dayId),
+                setsQuantity = sets,
+                repsQuantity = reps,
+                weight = weight
+            )
+        )
+    }
+//todo wrzucic to w SQL
+    private suspend fun findNextExercisePosition(dayId: Long): Int = exerciseDao.getExercises(dayId).maxByOrNull { it.sequence }?.let { it.sequence + 1 } ?: 1
 
 }

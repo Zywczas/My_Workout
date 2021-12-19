@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.zywczas.common.di.qualifiers.ViewModelKey
 import com.zywczas.myworkout.watch.activities.settings.main.presentation.SettingsMainViewModel
 import com.zywczas.myworkout.watch.activities.settings.timer.presentation.SettingsTimerViewModel
+import com.zywczas.myworkout.watch.activities.trainingplan.addexercise.presentation.AddExerciseViewModel
 import com.zywczas.myworkout.watch.activities.trainingplan.day.presentation.DayViewModel
 import com.zywczas.myworkout.watch.activities.trainingplan.timer.presentation.TimerViewModel
 import com.zywczas.myworkout.watch.activities.trainingplan.week.presentation.WeekViewModel
@@ -44,5 +45,10 @@ abstract class ViewModelFactoryModule {
     @IntoMap
     @ViewModelKey(DayViewModel::class)
     abstract fun bindDayViewModel(vm: DayViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddExerciseViewModel::class)
+    abstract fun bindAddExerciseViewModel(vm: AddExerciseViewModel) : ViewModel
 
 }
