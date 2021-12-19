@@ -7,7 +7,7 @@ import org.joda.time.DateTime
 
 @Entity(tableName = "Day")
 data class DayEntity(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Long = 0,
-                     @ColumnInfo(name = "foreignWeekId") val foreignWeekId: Long = -1,
+                     @ColumnInfo(name = "foreignWeekId") var foreignWeekId: Long = -1,
                      @ColumnInfo(name = "name") val name: String = "",
                      @ColumnInfo(name = "sequence") val sequence: Int = 0,
                      @ColumnInfo(name = "dateFinished") val dateFinished: DateTime? = null,

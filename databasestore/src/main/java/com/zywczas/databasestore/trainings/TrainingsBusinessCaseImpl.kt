@@ -34,14 +34,14 @@ internal class TrainingsBusinessCaseImpl
 
     override suspend fun getDays(weekId: Long): List<DayEntity> = dayDao.getDays(weekId)
 
-    override suspend fun saveNewDay(day: DayEntity) {
+    override suspend fun saveDay(day: DayEntity) {
         dayDao.insert(day)
     }
 
     override suspend fun copyWeekAndTrainings(weekId: Long) {
         val weekRelationsToCopy = weekDao.getWeekRelations(weekId)
         val newWeekRelations = copyWeekRelations(weekRelationsToCopy)
-        save(newWeekRelations)
+        saveDays(newWeekRelations)
     }
 
     private suspend fun copyWeekRelations(oldWeekRelations: WeekRelations): WeekRelations {
@@ -89,8 +89,30 @@ internal class TrainingsBusinessCaseImpl
         return copiedExercises
     }
 
-    private suspend fun save(weekRelations: WeekRelations){
-        //todo
+    private suspend fun saveDays(weekRelations: WeekRelations){
+        val newWeekId = weekDao.insert(weekRelations.week)
+        saveDays(newWeekId, weekRelations.days)
+    }
+
+    private suspend fun saveDays(weekId: Long, daysRelations: List<DayRelations>){
+        daysRelations.forEach {
+            it.day.foreignWeekId = weekId
+            val newDayId = dayDao.insert(it.day)
+            saveExercises(newDayId, it.exercises)
+            saveCardio(newDayId, it.cardio)
+        }
+    }
+
+    private suspend fun saveExercises(dayId: Long, exercises: List<ExerciseEntity>){
+        exercises.forEach {
+            it.foreignDayId = dayId
+            exerciseDao.insert(it)
+        }
+    }
+
+    private suspend fun saveCardio(dayId: Long, cardio: CardioEntity?): Long? = cardio?.let {
+        cardio.foreignDayId = dayId
+        cardioDao.insert(cardio)
     }
 
 }

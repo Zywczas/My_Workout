@@ -27,7 +27,7 @@ class WeekRepositoryImpl @Inject constructor(
         isFinished = isFinished
     )
 
-    override suspend fun saveNewDay(name: String, weekId: Long, sequence: Int) = trainings.saveNewDay(
+    override suspend fun saveNewDay(name: String, weekId: Long, sequence: Int) = trainings.saveDay(
         DayEntity(
         foreignWeekId = weekId,
         name = name,

@@ -7,7 +7,7 @@ import org.joda.time.DateTime
 
 @Entity(tableName = "Cardio")
 data class CardioEntity(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Long = 0,
-                        @ColumnInfo(name = "foreignDayId") val foreignDayId: Long = -1,
+                        @ColumnInfo(name = "foreignDayId") var foreignDayId: Long = -1,
                         @ColumnInfo(name = "name") val name: String = "",
                         @ColumnInfo(name = "minutes") val minutes: Int = 0,
                         @ColumnInfo(name = "level") val level: Double = 0.0,
