@@ -18,6 +18,7 @@ sealed class WeekElements {
         val name: String = "",
         val sequence: Int = 0,
         val isFinished: Boolean = false,
+        val dateStarted: DateTime? = null,
         val dateFinished: DateTime? = null,
         var displayedDate: String = ""
     ) : WeekElements()

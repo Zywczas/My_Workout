@@ -24,7 +24,10 @@ class WeekRepositoryImpl @Inject constructor(
     private fun DayEntity.toDomain() = WeekElements.Day(
         id = id,
         name = name,
-        isFinished = isFinished
+        sequence = sequence,
+        isFinished = isFinished,
+        dateStarted = dateStarted,
+        dateFinished = dateFinished
     )
 
     override suspend fun saveNewDay(name: String, weekId: Long, sequence: Int) = trainings.saveDay(

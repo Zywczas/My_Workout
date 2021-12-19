@@ -49,6 +49,8 @@ class WeekViewModel @Inject constructor(
         forEach {
             if (it.dateFinished != null) {
                 it.displayedDate = stringProvider.getString(R.string.done, it.dateFinished.dayFormat())
+            } else if (it.dateStarted != null) {
+                it.displayedDate = stringProvider.getString(R.string.started, it.dateStarted.dayFormat())
             }
         }
         return this
