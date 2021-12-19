@@ -12,6 +12,7 @@ class DayRepositoryImpl @Inject constructor(
     override suspend fun getExercises(dayId: Long): List<DayElements.Exercise> = trainings.getExercises(dayId).map { it.toDomain() }
 
     private fun ExerciseEntity.toDomain() = DayElements.Exercise(
+        id = id,
         name = name,
         sequence = sequence,
         isFinished = isFinished

@@ -64,4 +64,10 @@ class DayViewModel @Inject constructor(
         return this
     }
 
+    fun addNewExercise(name: String?, dayId: Long){
+        viewModelScope.launch(dispatcherIO){
+            //todo
+        }
+    }
+
 }

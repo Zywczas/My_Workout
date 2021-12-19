@@ -12,9 +12,11 @@ import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import com.zywczas.common.extetions.showToast
 import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.activities.BaseActivity
+import com.zywczas.myworkout.watch.activities.trainingplan.day.domain.DayElements
+import com.zywczas.myworkout.watch.activities.trainingplan.week.domain.WeekElements
 import com.zywczas.myworkout.watch.activities.trainingplan.week.presentation.WeekActivity
 import com.zywczas.myworkout.watch.activityresultcontracts.registerVoiceRecognition
-import com.zywczas.myworkout.watch.adapters.DiffUtilCallback
+import com.zywczas.myworkout.watch.adapters.*
 import com.zywczas.myworkout.watch.databinding.ActivityDayBinding
 import com.zywczas.myworkout.watch.utils.CustomScrollingLayoutCallback
 
@@ -32,6 +34,7 @@ class DayActivity : BaseActivity() {
         setContentView(binding.root)
         binding.exerciseList.setup()
         setupLiveDataObservers()
+        viewModel.getExerciseList(dayId)
         setupOnClickListeners()
     }
 
@@ -44,9 +47,26 @@ class DayActivity : BaseActivity() {
     private fun setupLiveDataObservers(){
         viewModel.message.observe(this){ showToast(it) }
         viewModel.isEmptyPlanMessageGone.observe(this){ binding.emptyPlanMessage.isGone = it }
-//        viewModel.daysElements.observe(this){ days -> FastAdapterDiffUtil.set(itemAdapter, days.toAdapterItems(), DiffUtilCallback()) }
+        viewModel.dayElements.observe(this){ days -> FastAdapterDiffUtil.set(itemAdapter, days.toAdapterItems(), DiffUtilCallback()) }
     }
 
+    private fun List<DayElements>.toAdapterItems(): List<GenericItem> = map {
+        when(it){
+            is DayElements.DayHeader -> TitleItem(it.displayedDate)
+            is DayElements.GoToExercise -> GoToExerciseItem(getString(it.title))
+            is DayElements.Exercise -> ExerciseItem(it)
+            is DayElements.AddNewExercise -> SettingsItem(getString(it.title)){ addNewExercise() }
+            is DayElements.CopyDay -> SettingsItem(getString(it.title)){ copyDay() }
+        }
+    }
+
+    private fun addNewExercise(){
+
+    }
+
+    private fun copyDay(){
+
+    }
 
     private fun setupOnClickListeners(){
         binding.emptyPlanMessage.setOnClickListener { voiceRecognitionLauncher.launch() }

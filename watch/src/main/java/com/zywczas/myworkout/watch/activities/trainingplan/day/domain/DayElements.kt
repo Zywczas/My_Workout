@@ -15,6 +15,7 @@ sealed class DayElements {
     data class GoToExercise(@StringRes val title: Int) : DayElements()
 
     data class Exercise(
+        val id: Long,
         val name: String,
         val sequence: Int,
         val isFinished: Boolean
