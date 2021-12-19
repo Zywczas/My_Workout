@@ -33,16 +33,20 @@ class DayViewModel @Inject constructor(
             if (exercises.isNotEmpty()) {
                 val dayHeader = repo.getDayHeader(dayId).withDisplayedDate()
                 val dayElements = mutableListOf<DayElements>().apply {
-                    if (dayHeader.displayedDate.isNotBlank()){
+                    if (dayHeader.displayedDate.isNotBlank()) {
                         add(dayHeader)
                     }
-                    if (dayHeader.dateFinished == null){
-                        add(DayElements.GoToExercise(title =
-                        if (dayHeader.dateStarted != null) {
-                            R.string.continue_exercise
-                        } else {
-                            R.string.start_exercise
-                        }))
+                    if (dayHeader.dateFinished == null) {
+                        add(
+                            DayElements.GoToExercise(
+                                title =
+                                if (dayHeader.dateStarted != null) {
+                                    R.string.continue_exercise
+                                } else {
+                                    R.string.start_exercise
+                                }
+                            )
+                        )
                     }
                     addAll(exercises)
                     add(DayElements.AddNewExercise())
@@ -64,8 +68,14 @@ class DayViewModel @Inject constructor(
         return this
     }
 
-    fun addNewExercise(name: String?, dayId: Long){
-        viewModelScope.launch(dispatcherIO){
+    fun addNewExercise(name: String?, dayId: Long) {
+        viewModelScope.launch(dispatcherIO) {
+            //todo
+        }
+    }
+
+    fun goToNextExercise() {
+        viewModelScope.launch(dispatcherIO) {
             //todo
         }
     }
