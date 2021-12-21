@@ -25,4 +25,8 @@ class DayRepositoryImpl @Inject constructor(
         dateFinished = dateFinished
     )
 
+    override suspend fun copyDayAndTrainings(dayId: Long) {
+        //
+    }
+
 }

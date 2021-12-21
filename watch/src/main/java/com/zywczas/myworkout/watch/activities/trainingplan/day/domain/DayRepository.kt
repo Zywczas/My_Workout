@@ -6,4 +6,6 @@ interface DayRepository {
 
     suspend fun getDayHeader(dayId: Long): DayElements.DayHeader
 
+    suspend fun copyDayAndTrainings(dayId: Long)
+
 }

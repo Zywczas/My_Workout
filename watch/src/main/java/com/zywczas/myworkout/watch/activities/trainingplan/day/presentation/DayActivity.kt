@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.wear.widget.WearableLinearLayoutManager
 import androidx.wear.widget.WearableRecyclerView
 import com.mikepenz.fastadapter.FastAdapter
@@ -51,6 +52,7 @@ class DayActivity : BaseActivity() {
 
     private fun setupLiveDataObservers() {
         viewModel.message.observe(this) { showToast(it) }
+        viewModel.isProgressBarVisible.observe(this) { binding.progressBar.isVisible = it }
         viewModel.isEmptyPlanMessageGone.observe(this) { binding.emptyPlanMessage.isGone = it }
         viewModel.dayElements.observe(this) { days -> FastAdapterDiffUtil.set(itemAdapter, days.toAdapterItems(), DiffUtilCallback()) }
         viewModel.newExercise.observe(this) { goToAddExerciseActivity(it) }
@@ -71,7 +73,7 @@ class DayActivity : BaseActivity() {
     }
 
     private fun copyDay() {
-
+        viewModel.copyDay(dayId)
     }
 
     private fun goToAddExerciseActivity(exerciseName: String){

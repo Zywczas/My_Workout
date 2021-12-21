@@ -86,4 +86,13 @@ class DayViewModel @Inject constructor(
         }
     }
 
+    fun copyDay(id: Long) {
+        viewModelScope.launch(dispatcherIO) {
+            showProgressBar(true)
+            repo.copyDayAndTrainings(id)
+            postMessage(R.string.day_copied)
+            showProgressBar(false)
+        }
+    }
+
 }

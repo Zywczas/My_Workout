@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isGone
+import androidx.core.view.isVisible
+import androidx.lifecycle.viewModelScope
 import androidx.wear.widget.WearableLinearLayoutManager
 import androidx.wear.widget.WearableRecyclerView
 import com.mikepenz.fastadapter.FastAdapter
@@ -12,6 +14,7 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import com.zywczas.common.extetions.showToast
 import com.zywczas.common.utils.autoRelease
+import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.day.presentation.DayActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.week.domain.WeekElements
@@ -20,6 +23,7 @@ import com.zywczas.myworkout.watch.activityresultcontracts.registerVoiceRecognit
 import com.zywczas.myworkout.watch.adapters.*
 import com.zywczas.myworkout.watch.databinding.ActivityWeekBinding
 import com.zywczas.myworkout.watch.utils.CustomScrollingLayoutCallback
+import kotlinx.coroutines.launch
 
 class WeekActivity : BaseActivity() {
 
@@ -50,6 +54,7 @@ class WeekActivity : BaseActivity() {
 
     private fun setupLiveDataObservers(){
         viewModel.message.observe(this){ showToast(it) }
+        viewModel.isProgressBarVisible.observe(this){ binding.progressBar.isVisible = it }
         viewModel.isEmptyPlanMessageGone.observe(this){ binding.emptyPlanMessage.isGone = it }
         viewModel.weekElements.observe(this){ days -> FastAdapterDiffUtil.set(itemAdapter, days.toAdapterItems(), DiffUtilCallback()) }
     }

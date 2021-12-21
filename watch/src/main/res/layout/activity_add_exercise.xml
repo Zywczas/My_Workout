@@ -24,7 +24,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
+<!--todo zrobic tak zeby kalwiatura nie przeskakiwala do kolejnego pola po podaniu pierwszej wartosci dla pierwszego edit tekstu-->
             <EditText
                 android:id="@+id/sets"
                 android:layout_width="wrap_content"
