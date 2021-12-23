@@ -23,8 +23,8 @@
     <string name="copy_week">Skopiuj ten tydzień</string>
     <string name="week_name_not_provided">Nie podano nazwy tygodnia</string>
     <string name="day_name_not_provided">Nie podano nazwy dnia</string>
-    <string name="started">Zaczęty: </string>
-    <string name="done">Skończony: </string>
+    <string name="started">Zaczęty:\u0020</string>
+    <string name="done">Skończony:\u0020</string>
     <string name="week_copied">Skopiowano tydzień.</string>
     <string name="add_new_exercise">Dodaj nowe ćwiczenie</string>
     <string name="copy_day">Skopiuj ten dzień</string>
@@ -39,4 +39,3 @@
     <string name="empty_fields">Nie wszystkie pola są uzupełnione.</string>
     <string name="exercise_added">Dodano ćwiczenie.</string>
 </resources>
-<!--todo poprawic spacje na znak ascii albo cos-->

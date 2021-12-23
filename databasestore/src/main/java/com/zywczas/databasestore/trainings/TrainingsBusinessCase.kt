@@ -24,4 +24,6 @@ interface TrainingsBusinessCase {
 
     suspend fun saveExercise(dayId: Long, name: String, sets: Int, reps: String, weight: Double)
 
+    suspend fun copyDaysAndTrainings(dayId: Long)
+
 }

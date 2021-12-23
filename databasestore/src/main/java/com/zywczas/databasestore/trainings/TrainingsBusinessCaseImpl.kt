@@ -135,4 +135,9 @@ internal class TrainingsBusinessCaseImpl
 //todo wrzucic to w SQL
     private suspend fun findNextExercisePosition(dayId: Long): Int = exerciseDao.getExercises(dayId).maxByOrNull { it.sequence }?.let { it.sequence + 1 } ?: 1
 
+    override suspend fun copyDaysAndTrainings(dayId: Long) {
+        val day = dayDao.getDayRelations(dayId)
+        copyDaysRelations(listOf(day))
+    }
+
 }
