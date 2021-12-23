@@ -24,6 +24,7 @@ class AddExerciseViewModel @Inject constructor(
         viewModelScope.launch(dispatcherIO){
             if (sets.isBlank() || reps.isBlank() || weight.isBlank()){
                 postMessage(R.string.empty_fields)
+                //todo dac sprawdzenie czy ilosc serii nie jest zero, jesli jest to wyswietlic blad
             } else {
                 repo.saveExercise(
                     dayId = dayId,
