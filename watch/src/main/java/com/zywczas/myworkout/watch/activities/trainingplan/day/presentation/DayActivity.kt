@@ -16,6 +16,7 @@ import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.addexercise.presentation.AddExerciseActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.day.domain.DayElements
+import com.zywczas.myworkout.watch.activities.trainingplan.exercise.presentation.ExerciseActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.week.presentation.WeekActivity
 import com.zywczas.myworkout.watch.activityresultcontracts.registerVoiceRecognition
 import com.zywczas.myworkout.watch.adapters.*
@@ -27,13 +28,14 @@ class DayActivity : BaseActivity() {
     companion object {
         const val KEY_DAY_ID = "KEY_DAY_ID"
         const val KEY_EXERCISE_NAME = "KEY_EXERCISE_NAME"
+        const val KEY_EXERCISE_ID = "KEY_EXERCISE_ID"
     }
 
     private var binding: ActivityDayBinding by autoRelease()
     private val viewModel: DayViewModel by viewModels { viewModelFactory }
     private val itemAdapter by lazy { ItemAdapter<GenericItem>() }
     private val dayId by lazy { intent?.getLongExtra(WeekActivity.KEY_DAY_ID, 0) ?: 0L }
-    private val voiceRecognitionLauncher = registerVoiceRecognition { exerciseName -> viewModel.addNewExercise(exerciseName, dayId) }
+    private val voiceRecognitionLauncher = registerVoiceRecognition { exerciseName -> viewModel.addNewExercise(exerciseName) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +57,8 @@ class DayActivity : BaseActivity() {
         viewModel.isProgressBarVisible.observe(this) { binding.progressBar.isVisible = it }
         viewModel.isEmptyPlanMessageGone.observe(this) { binding.emptyPlanMessage.isGone = it }
         viewModel.dayElements.observe(this) { days -> FastAdapterDiffUtil.set(itemAdapter, days.toAdapterItems(), DiffUtilCallback()) }
-        viewModel.newExercise.observe(this) { goToAddExerciseActivity(it) }
+        viewModel.newExerciseName.observe(this) { goToAddExerciseActivity(it) }
+        viewModel.nextExerciseId.observe(this){ goToExerciseActivity(it) }
     }
 
     private fun List<DayElements>.toAdapterItems(): List<GenericItem> = map {
@@ -80,6 +83,13 @@ class DayActivity : BaseActivity() {
         val intent = Intent(this, AddExerciseActivity::class.java).apply {
             putExtra(KEY_DAY_ID, dayId)
             putExtra(KEY_EXERCISE_NAME, exerciseName)
+        }
+        startActivity(intent)
+    }
+
+    private fun goToExerciseActivity(exerciseId: Long){
+        val intent = Intent(this, ExerciseActivity::class.java).apply {
+            putExtra(KEY_DAY_ID, exerciseId)
         }
         startActivity(intent)
     }

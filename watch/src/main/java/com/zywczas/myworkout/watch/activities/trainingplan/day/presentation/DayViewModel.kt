@@ -28,8 +28,11 @@ class DayViewModel @Inject constructor(
         }
     }
 
-    private val _newExercise = SingleLiveData<String>()
-    val newExercise: LiveData<String> = _newExercise
+    private val _newExerciseName = SingleLiveData<String>()
+    val newExerciseName: LiveData<String> = _newExerciseName
+
+    private val _nextExerciseId = SingleLiveData<Long>()
+    val nextExerciseId: LiveData<Long> = _nextExerciseId
 
     fun getExerciseList(dayId: Long) {
         viewModelScope.launch(dispatcherIO) {
@@ -41,9 +44,7 @@ class DayViewModel @Inject constructor(
                         add(dayHeader)
                     }
                     if (dayHeader.dateFinished == null) {
-                        add(
-                            DayElements.GoToExercise(
-                                title =
+                        add(DayElements.GoToExercise(title =
                                 if (dayHeader.dateStarted != null) {
                                     R.string.continue_exercise
                                 } else {
@@ -72,17 +73,22 @@ class DayViewModel @Inject constructor(
         return this
     }
 
-    fun addNewExercise(name: String?, dayId: Long) {
+    fun addNewExercise(name: String?) {
         viewModelScope.launch(dispatcherIO) {
             name?.let {
-                _newExercise.postValue(it)
+                _newExerciseName.postValue(it)
             } ?: postMessage(R.string.exercise_name_not_provided)
         }
     }
 
     fun goToNextExercise() {
         viewModelScope.launch(dispatcherIO) {
-            //todo
+            dayElements.value?.let {
+                val nextExerciseId = (it.find { it is DayElements.Exercise && it.isFinished.not() } as? DayElements.Exercise)?.id
+                nextExerciseId?.let { _nextExerciseId.postValue(it) }
+            }
+            //3. laduje kolejne cwiczenie ktore nie jest skonczone i pokazuje szczegoly - to robi kolejna aktywnosc
+            //4. pokazuje ktora seria i guziki do timera - to robi kolejna aktywnosc
         }
     }
 
