@@ -22,8 +22,8 @@
     <string name="copy_week">Copy the week</string>
     <string name="week_name_not_provided">No week name provided</string>
     <string name="day_name_not_provided">No day name provided</string>
-    <string name="started">Started: </string>
-    <string name="done">Done: </string>
+    <string name="started">Started:\u0020</string>
+    <string name="done">Done:\u0020</string>
     <string name="week_copied">Week copied.</string>
     <string name="add_new_exercise">Add new exercise</string>
     <string name="copy_day">Copy the day</string>
@@ -37,4 +37,11 @@
     <string name="zero_integer">0</string>
     <string name="empty_fields">Some fields are empty.</string>
     <string name="exercise_added">Exercise added.</string>
+    <string name="actual">Actual:</string>
+    <string name="x">x</string>
+    <string name="kg">kg</string>
+    <string name="comma">,</string>
+    <string name="set">Set:</string>
+    <string name="timer">Timer</string>
 </resources>
+<!--todo pousuwac te znaki specjalne spacji i dac normalne dimensy-->

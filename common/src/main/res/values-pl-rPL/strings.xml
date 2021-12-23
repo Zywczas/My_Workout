@@ -38,4 +38,10 @@
     <string name="zero_integer">0</string>
     <string name="empty_fields">Nie wszystkie pola są uzupełnione.</string>
     <string name="exercise_added">Dodano ćwiczenie.</string>
+    <string name="actual">Aktualnie:</string>
+    <string name="x">x</string>
+    <string name="kg">kg</string>
+    <string name="comma">,</string>
+    <string name="set">Seria:</string>
+    <string name="timer">Minutnik</string>
 </resources>
