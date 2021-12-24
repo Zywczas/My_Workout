@@ -140,4 +140,6 @@ internal class TrainingsBusinessCaseImpl
         copyDaysRelations(listOf(day))
     }
 
+    override suspend fun getExercise(id: Long): ExerciseEntity = exerciseDao.getExercise(id)
+
 }

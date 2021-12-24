@@ -26,4 +26,6 @@ interface TrainingsBusinessCase {
 
     suspend fun copyDaysAndTrainings(dayId: Long)
 
+    suspend fun getExercise(id: Long): ExerciseEntity
+
 }

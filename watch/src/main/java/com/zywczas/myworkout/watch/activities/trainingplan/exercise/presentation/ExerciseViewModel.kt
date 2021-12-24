@@ -21,7 +21,7 @@ class ExerciseViewModel @Inject constructor(
 
     fun getCurrentExercise(id: Long){
         viewModelScope.launch(dispatcherIO){
-            _exercise.postValue(repo.getCurrentExercise(id))
+            _exercise.postValue(repo.getExercise(id))
         }
     }
 
