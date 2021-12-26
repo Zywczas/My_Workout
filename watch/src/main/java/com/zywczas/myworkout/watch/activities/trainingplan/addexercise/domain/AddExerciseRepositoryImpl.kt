@@ -7,6 +7,6 @@ class AddExerciseRepositoryImpl @Inject constructor(
     private val trainings: TrainingsBusinessCase
 ) : AddExerciseRepository {
 
-    override suspend fun saveExercise(dayId: Long, name: String, sets: Int, reps: String, weight: Double) = trainings.saveExercise(dayId, name, sets, reps, weight)
+    override suspend fun saveExercise(dayId: Long, name: String, sets: Int, reps: String, weight: Double) = trainings.saveNewExercise(dayId, name, sets, reps, weight)
 
 }

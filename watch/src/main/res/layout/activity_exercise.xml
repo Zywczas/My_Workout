@@ -45,7 +45,7 @@
             android:id="@+id/x"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="x"
+            android:text="@string/x"
             android:textColor="@color/accent"
             app:layout_constraintBottom_toBottomOf="@+id/sets"
             app:layout_constraintEnd_toStartOf="@+id/reps"

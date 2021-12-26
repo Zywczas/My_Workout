@@ -120,7 +120,7 @@ internal class TrainingsBusinessCaseImpl
 
     override suspend fun getDay(id: Long): DayEntity = dayDao.getDay(id)
 
-    override suspend fun saveExercise(dayId: Long, name: String, sets: Int, reps: String, weight: Double) {
+    override suspend fun saveNewExercise(dayId: Long, name: String, sets: Int, reps: String, weight: Double) {
         exerciseDao.insert(
             ExerciseEntity(
                 foreignDayId = dayId,
@@ -141,5 +141,7 @@ internal class TrainingsBusinessCaseImpl
     }
 
     override suspend fun getExercise(id: Long): ExerciseEntity = exerciseDao.getExercise(id)
+
+    override suspend fun saveExercise(exercise: ExerciseEntity): Long = exerciseDao.insert(exercise)
 
 }

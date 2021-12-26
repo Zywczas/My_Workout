@@ -13,6 +13,7 @@ import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.settings.timer.presentation.SettingsTimerActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.day.presentation.DayActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.exercise.presentation.ExerciseActivity
+import com.zywczas.myworkout.watch.activities.trainingplan.timer.domain.NextExercise
 import com.zywczas.myworkout.watch.databinding.ActivityTimerBinding
 import com.zywczas.myworkout.watch.services.timer.TimerService
 
@@ -63,7 +64,9 @@ class TimerActivity : BaseActivity() {
 
     private fun showFinishedCounter(){
         binding.counterHeader.isVisible = false
-        binding.nextExercise.isVisible = false
+        binding.exerciseLongDescriptionContainer.isVisible = false
+        binding.nextSetPlaceholder.isVisible = false
+        binding.nextSet.isVisible = false
         binding.goBack.isVisible = false
         binding.settings.isVisible = false
         binding.skipTimer.setText(R.string.nextExercise)
@@ -89,7 +92,25 @@ class TimerActivity : BaseActivity() {
     private fun getNextExerciseSet(): Int = intent.getIntExtra(ExerciseActivity.KEY_EXERCISE_SET, 0)
 
     private fun setupLiveDataObservers(){
-        //todo
+        viewModel.isExerciseLongDescriptionVisible.observe(this){ binding.exerciseLongDescriptionContainer.isVisible = it }
+        viewModel.nextExercise.observe(this){ showExercise(it) }
+        viewModel.nextExerciseId.observe(this){ goToExerciseActivityAndFinishThisActivity(it) }
+    }
+
+    private fun showExercise(exercise: NextExercise){
+        binding.exerciseName.text = exercise.name
+        binding.sets.text = exercise.setsQuantity.toString()
+        binding.reps.text = exercise.repsQuantity
+        binding.weight.text = exercise.weight.toString()
+        binding.nextSet.text = exercise.nextSet.toString()
+    }
+
+    private fun goToExerciseActivityAndFinishThisActivity(exerciseId: Long){
+        val intent = Intent(this, ExerciseActivity::class.java).apply {
+            putExtra(DayActivity.KEY_EXERCISE_ID, exerciseId)
+        }
+        startActivity(intent)
+        finish()
     }
 
     private fun setupOnClickListeners(){
@@ -97,7 +118,6 @@ class TimerActivity : BaseActivity() {
             turnAlarmOff()
             unBindAndCloseTimerService()
             goToNextExercise()
-            finish()
         }
         binding.goBack.setOnClickListener {
             turnAlarmOff()
@@ -130,8 +150,6 @@ class TimerActivity : BaseActivity() {
     private fun goToNextExercise(){
         isGoingToNextExercise = true
         viewModel.goToNextExercise()
-        //1. zapisanie do bazy kolejnej serii
-        //2. odpalanie aktywnosci i podanie id cwiczenia todo
     }
 
     private fun goToTimerSettingsActivity(){

@@ -35,17 +35,120 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/timeLeft" />
             <!--todo usunac tekst-->
-            <TextView
-                android:id="@+id/nextExercise"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Wyciskanie sztangi lezac na lawce plaskiej"
-                android:textAlignment="center"
-                android:textColor="@color/accent"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/exerciseLongDescriptionContainer"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/counterHeader" />
+                app:layout_constraintTop_toBottomOf="@+id/counterHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/exerciseName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    tools:text="Press ups"
+                    android:textAlignment="center"
+                    android:textColor="@color/accent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/sets"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/accent"
+                    app:layout_constraintEnd_toStartOf="@+id/x"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/exerciseName"
+                    tools:layout_editor_absoluteY="79dp"
+                    tools:text="12" />
+
+                <TextView
+                    android:id="@+id/x"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/x"
+                    android:textColor="@color/accent"
+                    app:layout_constraintBottom_toBottomOf="@+id/sets"
+                    app:layout_constraintEnd_toStartOf="@+id/reps"
+                    app:layout_constraintStart_toEndOf="@+id/sets"
+                    app:layout_constraintTop_toTopOf="@+id/sets" />
+
+                <TextView
+                    android:id="@+id/reps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/single_space"
+                    android:textColor="@color/accent"
+                    app:layout_constraintBottom_toBottomOf="@+id/sets"
+                    app:layout_constraintEnd_toStartOf="@+id/comma"
+                    app:layout_constraintStart_toEndOf="@+id/x"
+                    app:layout_constraintTop_toTopOf="@+id/sets"
+                    tools:text="15-8" />
+
+                <TextView
+                    android:id="@+id/comma"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/comma"
+                    android:textColor="@color/accent"
+                    app:layout_constraintBottom_toBottomOf="@+id/sets"
+                    app:layout_constraintEnd_toStartOf="@+id/weight"
+                    app:layout_constraintStart_toEndOf="@+id/reps"
+                    app:layout_constraintTop_toTopOf="@+id/sets" />
+
+                <TextView
+                    android:id="@+id/weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/single_space"
+                    android:textColor="@color/accent"
+                    app:layout_constraintBottom_toBottomOf="@+id/sets"
+                    app:layout_constraintEnd_toStartOf="@+id/kg"
+                    app:layout_constraintStart_toEndOf="@+id/comma"
+                    app:layout_constraintTop_toTopOf="@+id/sets"
+                    tools:text="35" />
+
+                <TextView
+                    android:id="@+id/kg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/single_space"
+                    android:text="@string/kg"
+                    android:textColor="@color/accent"
+                    app:layout_constraintBottom_toBottomOf="@+id/sets"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/weight"
+                    app:layout_constraintTop_toTopOf="@+id/sets" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/nextSetPlaceholder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/set"
+                android:textColor="@color/accent"
+                app:layout_constraintEnd_toStartOf="@+id/nextSet"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/exerciseLongDescriptionContainer" />
+
+            <TextView
+                android:id="@+id/nextSet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/single_space"
+                tools:text="1"
+                android:textColor="@color/accent"
+                app:layout_constraintBottom_toBottomOf="@+id/nextSetPlaceholder"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/nextSetPlaceholder"
+                app:layout_constraintTop_toTopOf="@+id/nextSetPlaceholder" />
+
             <!--todo dac im ikonki-->
             <TextView
                 android:id="@+id/skipTimer"
@@ -58,7 +161,7 @@
                 android:text="@string/skip"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nextExercise" />
+                app:layout_constraintTop_toBottomOf="@+id/nextSet" />
             <!--todo dac im ikonki-->
             <TextView
                 android:id="@+id/goBack"
