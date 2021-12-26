@@ -12,6 +12,7 @@ import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.settings.timer.presentation.SettingsTimerActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.day.presentation.DayActivity
+import com.zywczas.myworkout.watch.activities.trainingplan.exercise.presentation.ExerciseActivity
 import com.zywczas.myworkout.watch.databinding.ActivityTimerBinding
 import com.zywczas.myworkout.watch.services.timer.TimerService
 
@@ -19,7 +20,6 @@ class TimerActivity : BaseActivity() {
 
     private var binding: ActivityTimerBinding by autoRelease()
     private val viewModel: TimerViewModel by viewModels { viewModelFactory } //todo chyba do wylotu
-    private val nextExerciseId by lazy { intent.getLongExtra(DayActivity.KEY_EXERCISE_ID, 0L) }
     private var timerService: TimerService? = null
     private var isTimerServiceBound = false
     private var isConfigurationChange = false
@@ -75,12 +75,21 @@ class TimerActivity : BaseActivity() {
         setContentView(binding.root)
         isConfigurationChange = false
         bindTimerService()
+        viewModel.getExerciseDetails(getNextExerciseId(), getNextExerciseSet())
+        setupLiveDataObservers()
         setupOnClickListeners()
     }
 
     private fun bindTimerService(){ //todo dac jakies sprawdzenie gdzies czy ustawiony czas to nie jest zero albo 1, jezeli bedzie to jakos przeskakiwac timer service, moze dac sprawdzenie we wczesniejszej aktywnosci
         val serviceIntent = Intent(this, TimerService::class.java)
         bindService(serviceIntent, timerServiceConnection, Context.BIND_AUTO_CREATE)
+    }
+
+    private fun getNextExerciseId(): Long = intent.getLongExtra(DayActivity.KEY_EXERCISE_ID, 0L)
+    private fun getNextExerciseSet(): Int = intent.getIntExtra(ExerciseActivity.KEY_EXERCISE_SET, 0)
+
+    private fun setupLiveDataObservers(){
+        //todo
     }
 
     private fun setupOnClickListeners(){
@@ -120,8 +129,9 @@ class TimerActivity : BaseActivity() {
 
     private fun goToNextExercise(){
         isGoingToNextExercise = true
-        //todo zapisanie jakie jest kolejne cwiczenie jesli jeszcze nie zapisalem
-        //przejscie do Exercise Activity i wczytanie odpowiedniego cwiczenia i serii todo
+        viewModel.goToNextExercise()
+        //1. zapisanie do bazy kolejnej serii
+        //2. odpalanie aktywnosci i podanie id cwiczenia todo
     }
 
     private fun goToTimerSettingsActivity(){

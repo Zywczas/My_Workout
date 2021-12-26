@@ -35,7 +35,7 @@ class ExerciseViewModel @Inject constructor(
     private val _nextExercise = SingleLiveData<NextExercise>()
     val nextExercise: LiveData<NextExercise> = _nextExercise
 
-    fun getCurrentExercise(id: Long){
+    fun getExerciseDetails(id: Long){
         viewModelScope.launch(dispatcherIO){
             _exercise.postValue(repo.getExercise(id))
         }

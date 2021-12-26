@@ -51,6 +51,7 @@ class TimerService : LifecycleService() {
 
     private val localBinder = LocalBinder()
     private val notificationManager by lazy { getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager }
+//    private val notificationManager by lazy { getSystemService(NotificationManager::class.java) } todo dac tak pozniej, jak sprawdze czy dziala
     private var isServiceRunningInForeground = false
     private var isServiceRunning = false
     private var countTimeJob: Job? = null

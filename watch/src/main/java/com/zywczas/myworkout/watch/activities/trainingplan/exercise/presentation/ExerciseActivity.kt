@@ -80,7 +80,7 @@ class ExerciseActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getCurrentExercise(getExerciseIdFromUpdatedIntent())
+        viewModel.getExerciseDetails(getExerciseIdFromUpdatedIntent())
     }
 
     private fun getExerciseIdFromUpdatedIntent(): Long = intent.getLongExtra(DayActivity.KEY_EXERCISE_ID, 0)
