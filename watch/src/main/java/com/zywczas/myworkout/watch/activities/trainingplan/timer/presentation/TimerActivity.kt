@@ -11,6 +11,7 @@ import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.settings.timer.presentation.SettingsTimerActivity
+import com.zywczas.myworkout.watch.activities.trainingplan.day.presentation.DayActivity
 import com.zywczas.myworkout.watch.databinding.ActivityTimerBinding
 import com.zywczas.myworkout.watch.services.timer.TimerService
 
@@ -18,6 +19,7 @@ class TimerActivity : BaseActivity() {
 
     private var binding: ActivityTimerBinding by autoRelease()
     private val viewModel: TimerViewModel by viewModels { viewModelFactory } //todo chyba do wylotu
+    private val nextExerciseId by lazy { intent.getLongExtra(DayActivity.KEY_EXERCISE_ID, 0L) ?: 0L }
     private var timerService: TimerService? = null
     private var isTimerServiceBound = false
     private var isConfigurationChange = false

@@ -18,18 +18,13 @@
             android:exported="false" />
         <activity
             android:name=".activities.trainingplan.exercise.presentation.ExerciseActivity"
+            android:launchMode="singleTask"
             android:exported="false" />
         <activity
             android:name=".activities.trainingplan.day.presentation.DayActivity"
             android:exported="false" />
         <activity
             android:name=".activities.trainingplan.week.presentation.WeekActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.settings.days.presentation.SettingsDaysActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.settings.weeks.presentation.SettingsWeeksActivity"
             android:exported="false" />
 
         <service

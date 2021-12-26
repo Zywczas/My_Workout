@@ -2,8 +2,10 @@ package com.zywczas.myworkout.watch.activities.trainingplan.exercise.presentatio
 
 import androidx.lifecycle.*
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
+import com.zywczas.common.utils.SingleLiveData
 import com.zywczas.myworkout.watch.activities.trainingplan.exercise.domain.Exercise
 import com.zywczas.myworkout.watch.activities.trainingplan.exercise.domain.ExerciseRepository
+import com.zywczas.myworkout.watch.activities.trainingplan.exercise.domain.NextExercise
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,15 +32,26 @@ class ExerciseViewModel @Inject constructor(
         }
     }
 
+    private val _nextExercise = SingleLiveData<NextExercise>()
+    val nextExercise: LiveData<NextExercise> = _nextExercise
+
     fun getCurrentExercise(id: Long){
         viewModelScope.launch(dispatcherIO){
             _exercise.postValue(repo.getExercise(id))
         }
     }
 
-    fun startBreakTimeCounter(){
+    fun startTimerToNextExercise(){
         viewModelScope.launch(dispatcherIO){
-
+            exercise.value?.let { currentExercise ->
+                if (currentExercise.currentSet == currentExercise.setsQuantity){
+                   val exercises = repo.getExercises(currentExercise.foreignDayId).sortedBy { it.sequence }
+                    val nextExerciseInList = exercises[exercises.indexOf(currentExercise) + 1]
+                    _nextExercise.postValue(NextExercise(id = nextExerciseInList.id, set = 1))
+                } else {
+                    _nextExercise.postValue(NextExercise(id = currentExercise.id, set = currentExercise.currentSet + 1))
+                }
+            }
         }
     }
 
