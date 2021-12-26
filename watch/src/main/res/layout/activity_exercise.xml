@@ -132,20 +132,38 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:text="@string/timer"
+            android:visibility="invisible"
+            tools:visibility="visible"
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/currentSetPlaceholder" />
 
+        <TextView
+            android:id="@+id/finishExercises"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_background"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:visibility="invisible"
+            tools:visibility="visible"
+            android:text="@string/finish_exercises"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timer" />
+
         <ImageView
-            android:id="@+id/setting"
+            android:id="@+id/settings"
             android:layout_width="@dimen/small_icon_size"
             android:layout_height="@dimen/small_icon_size"
             android:background="@drawable/ic_settings"
             android:layout_marginTop="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timer"
+            app:layout_constraintTop_toBottomOf="@+id/finishExercises"
             tools:ignore="ContentDescription" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.wear.widget.BoxInsetLayout>

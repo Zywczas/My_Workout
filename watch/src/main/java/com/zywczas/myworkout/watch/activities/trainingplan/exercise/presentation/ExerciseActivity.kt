@@ -2,6 +2,7 @@ package com.zywczas.myworkout.watch.activities.trainingplan.exercise.presentatio
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.day.presentation.DayActivity
@@ -24,6 +25,8 @@ class ExerciseActivity : BaseActivity() {
 
     private fun setupLiveDataObservers(){
         viewModel.exercise.observe(this) { showExercise(it) }
+        viewModel.isTimerButtonVisible.observe(this){ binding.timer.isVisible = it }
+        viewModel.isFinishExerciseButtonVisible.observe(this){ binding.finishExercises.isVisible = it }
     }
 
     private fun showExercise(exercise: Exercise){
@@ -36,11 +39,21 @@ class ExerciseActivity : BaseActivity() {
 
     private fun setupOnClickListeners(){
         binding.timer.setOnClickListener { goToTimerActivity() }
-        binding.setting.setOnClickListener { goToChangeWeightActivity() }
+        binding.finishExercises.setOnClickListener { finishExercises() }
+        binding.settings.setOnClickListener { goToChangeWeightActivity() }
     }
 
     private fun goToTimerActivity(){
         //todo tutaj dac od razu podbicie serii - w view modelu
+    }
+    //todo
+    //jak klikam timer to:
+    //1. odpalam timer activity
+    //podbijam numer aktualnego cwiczenia - kiedy? -> jak w timerze przechodze do kolejnego cwiczenia
+
+
+    private fun finishExercises(){
+        //todo
     }
 
     private fun goToChangeWeightActivity(){

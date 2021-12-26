@@ -44,4 +44,5 @@
     <string name="comma">,</string>
     <string name="set">Seria:</string>
     <string name="timer">Minutnik</string>
+    <string name="finish_exercises">Zakończ ćwiczenia</string>
 </resources>

@@ -43,5 +43,6 @@
     <string name="comma">,</string>
     <string name="set">Set:</string>
     <string name="timer">Timer</string>
+    <string name="finish_exercises">Finish exercises</string>
 </resources>
 <!--todo pousuwac te znaki specjalne spacji i dac normalne dimensy-->

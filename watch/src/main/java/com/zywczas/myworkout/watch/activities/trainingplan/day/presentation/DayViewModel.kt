@@ -87,8 +87,6 @@ class DayViewModel @Inject constructor(
                 val nextExerciseId = (it.find { it is DayElements.Exercise && it.isFinished.not() } as? DayElements.Exercise)?.id
                 nextExerciseId?.let { _nextExerciseId.postValue(it) }
             }
-            //3. laduje kolejne cwiczenie ktore nie jest skonczone i pokazuje szczegoly - to robi kolejna aktywnosc
-            //4. pokazuje ktora seria i guziki do timera - to robi kolejna aktywnosc
         }
     }
 

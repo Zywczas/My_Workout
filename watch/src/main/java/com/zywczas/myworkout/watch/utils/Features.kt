@@ -18,7 +18,6 @@ pokazywanie jak dlugo faza ekscentryczna i koncentryczna (2s)
 pokazywanie aktualnej godziny podczas cwiczenia i minutnika
 
 USUWANIE:
-nie moze byc swipe to dismiss bo ekrany sa tak zamykane i bedzie sie klocic ze soba
 usuwanie tygodni na dlugi klik
 usuwanie dni na dlugi klik
 usuwanie cwiczen na dlugi klik
@@ -31,14 +30,11 @@ ustawianie kolejnosci tygodni treningowych
 ustawianie kolejnosci cwiczen
 
 LOGIKA:
-- mam tylko jedna baze danych - wszystko tworze juz w widoku treningow
-- mozna dodac dowolna ilosc dni treningowych do jednego tygodnia
 - cardio - jak dodaje cardio to otwieram okno CardioList i moge dodac nowe cardio i dowolne zmienic i wybieram z listy
 - wyswietlam 5 ostatnie tygodnie, reszte usuwam
 -zaznaczanie zrobionego tygodnia - jezeli wszystkie dni sa zrobione
 -zaznaczanie zrobionego dnia - jezeli wszystkie cwiczenia sa zrobione, pokazywanie daty "zrobione" jak sie wszystkie cwiczenia zrobi, a jak nie to bedzie
 -zaznaczanie zrobionego cwiczenia - jak sie przechodzi do kolejnego cwiczenia, a przy ostatnim cwiczeniu przy ostatniej serii guzik "Zakoncz cwiczenie"
--klikniecie nowy tydzien/dzien/cwiczenie przenosi do wpisywania tekstu a potem do szczegolow danego elementu
 -jak dodaje na koniec dnia jakies kardio to wczytac to co zapisane i pozwolic na zmiane przed zakonczeniem dodawania
 
 3 SCENARIUSZE:
@@ -65,10 +61,5 @@ Dodac kwestie bezpieczenstwa - zapisywanie na komorce, shared prefs, blokady zgr
 
  todo ustawic detekt tak zeby rowniez przy commitach skanowal kod
 todo dac scrollowanie do pierwszego elementu ktory teraz trzeba wykonac, np. do kolejnego tygodnia, dnia lub treningu (przy otwieraniu aktywnosci)
-
- Tworzenie nowego cwiczenia:
- 1. klikam guzik add
- 2. przechodze do wpisywania nazwy
- 3. przejscie do ekranu podania ilosci serii, powtorzen, ciezaru
 
  */
