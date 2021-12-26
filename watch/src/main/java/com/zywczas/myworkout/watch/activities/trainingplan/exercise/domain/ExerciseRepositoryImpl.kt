@@ -12,11 +12,15 @@ class ExerciseRepositoryImpl @Inject constructor(
 
     private fun ExerciseEntity.toDomain() = Exercise(
         id = id,
+        foreignDayId = foreignDayId,
         name = name,
+        sequence = sequence,
         setsQuantity = setsQuantity,
         currentSet = currentSet,
         repsQuantity = repsQuantity,
         weight = weight
     )
+
+    override suspend fun getExercises(dayId: Long): List<Exercise> = trainings.getExercises(dayId).map { it.toDomain() }
 
 }

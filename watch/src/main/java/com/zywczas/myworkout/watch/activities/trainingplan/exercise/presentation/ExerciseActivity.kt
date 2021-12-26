@@ -54,6 +54,9 @@ class ExerciseActivity : BaseActivity() {
 
     private fun finishExercises(){
         //todo
+       // przechodzi do widoku dnia ale najpierw
+        // zaznacza
+        //cwiczenie jako zrobione
     }
 
     private fun goToChangeWeightActivity(){

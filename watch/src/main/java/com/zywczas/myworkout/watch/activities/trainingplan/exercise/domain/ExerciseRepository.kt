@@ -4,4 +4,6 @@ interface ExerciseRepository {
 
     suspend fun getExercise(id: Long): Exercise
 
+    suspend fun getExercises(dayId: Long): List<Exercise>
+
 }

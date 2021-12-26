@@ -16,8 +16,13 @@ class ExerciseViewModel @Inject constructor(
     private val _exercise = MutableLiveData<Exercise>()
     val exercise: LiveData<Exercise> = _exercise
 
-    private val _isTimerButtonVisible = MutableLiveData<Boolean>()
-    val isTimerButtonVisible: LiveData<Boolean> = _isTimerButtonVisible
+    val isTimerButtonVisible: LiveData<Boolean> = Transformations.switchMap(exercise){ currentExercise ->
+        liveData(dispatcherIO){
+            val lastExercise = repo.getExercises(currentExercise.foreignDayId).maxByOrNull { it.sequence }
+            val isButtonVisible = currentExercise.id != lastExercise?.id && currentExercise.currentSet != lastExercise?.currentSet
+            emit(isButtonVisible)
+        }
+    }
 
     val isFinishExerciseButtonVisible: LiveData<Boolean> = Transformations.switchMap(isTimerButtonVisible){
         liveData(dispatcherIO) {
@@ -25,19 +30,9 @@ class ExerciseViewModel @Inject constructor(
         }
     }
 
-    //jezeli jest to ostatnie cwiczenie to zamiast guzika timer powinno byc cos ala Zakoncz sesje i po kliknieciu przechodzi do widoku dnia ale najpierw
-    // zaznacza
-    //cwiczenie jako zrobione
-
     fun getCurrentExercise(id: Long){
         viewModelScope.launch(dispatcherIO){
             _exercise.postValue(repo.getExercise(id))
-        }
-    }
-
-    fun getTimerButtonVisibility(){
-        viewModelScope.launch(dispatcherIO){
-            //todo
         }
     }
 
