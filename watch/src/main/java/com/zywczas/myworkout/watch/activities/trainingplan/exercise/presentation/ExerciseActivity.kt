@@ -83,6 +83,6 @@ class ExerciseActivity : BaseActivity() {
         viewModel.getCurrentExercise(getExerciseIdFromUpdatedIntent())
     }
 
-    private fun getExerciseIdFromUpdatedIntent(): Long = intent?.getLongExtra(DayActivity.KEY_EXERCISE_ID, 0) ?: 0L
+    private fun getExerciseIdFromUpdatedIntent(): Long = intent.getLongExtra(DayActivity.KEY_EXERCISE_ID, 0)
 
 }

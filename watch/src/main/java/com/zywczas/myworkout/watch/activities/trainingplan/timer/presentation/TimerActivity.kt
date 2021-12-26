@@ -19,7 +19,7 @@ class TimerActivity : BaseActivity() {
 
     private var binding: ActivityTimerBinding by autoRelease()
     private val viewModel: TimerViewModel by viewModels { viewModelFactory } //todo chyba do wylotu
-    private val nextExerciseId by lazy { intent.getLongExtra(DayActivity.KEY_EXERCISE_ID, 0L) ?: 0L }
+    private val nextExerciseId by lazy { intent.getLongExtra(DayActivity.KEY_EXERCISE_ID, 0L) }
     private var timerService: TimerService? = null
     private var isTimerServiceBound = false
     private var isConfigurationChange = false

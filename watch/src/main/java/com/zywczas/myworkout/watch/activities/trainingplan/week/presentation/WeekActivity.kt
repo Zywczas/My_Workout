@@ -34,7 +34,7 @@ class WeekActivity : BaseActivity() {
     private var binding: ActivityWeekBinding by autoRelease()
     private val viewModel: WeekViewModel by viewModels{ viewModelFactory }
     private val itemAdapter by lazy { ItemAdapter<GenericItem>() }
-    private val weekId by lazy { intent?.getLongExtra(WeeksListActivity.KEY_WEEK_ID, 0) ?: 0L }
+    private val weekId by lazy { intent.getLongExtra(WeeksListActivity.KEY_WEEK_ID, 0) }
     private val voiceRecognitionLauncher = registerVoiceRecognition { dayName -> viewModel.addNewDay(dayName, weekId) }
 
     override fun onCreate(savedInstanceState: Bundle?) {

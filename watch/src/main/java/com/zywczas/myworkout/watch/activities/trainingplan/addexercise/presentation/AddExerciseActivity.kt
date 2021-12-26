@@ -13,8 +13,8 @@ class AddExerciseActivity : BaseActivity() {
 
     private var binding: ActivityAddExerciseBinding by autoRelease()
     private val viewModel: AddExerciseViewModel by viewModels { viewModelFactory }
-    private val dayId by lazy { intent?.getLongExtra(DayActivity.KEY_DAY_ID, 0) ?: 0L }
-    private val exerciseName by lazy { intent?.getStringExtra(DayActivity.KEY_EXERCISE_NAME) ?: "" }
+    private val dayId by lazy { intent.getLongExtra(DayActivity.KEY_DAY_ID, 0) }
+    private val exerciseName by lazy { intent.getStringExtra(DayActivity.KEY_EXERCISE_NAME) ?: "" }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
