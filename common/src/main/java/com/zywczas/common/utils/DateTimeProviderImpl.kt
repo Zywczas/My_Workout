@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class DateTimeProviderImpl @Inject constructor() : DateTimeProvider {
 
-//    override suspend fun now(): DateTime = DateTime.now() todo nie uzywane
+    override suspend fun now(): DateTime = DateTime.now()
 
     override suspend fun getTimerRepresentationOf(seconds: Int): String = DateTime(seconds*1000L).timerFormat()
 

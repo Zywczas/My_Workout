@@ -10,6 +10,7 @@ import com.zywczas.myworkout.watch.activities.trainingplan.day.presentation.DayA
 import com.zywczas.myworkout.watch.activities.trainingplan.exercise.domain.Exercise
 import com.zywczas.myworkout.watch.activities.trainingplan.exercise.domain.NextExercise
 import com.zywczas.myworkout.watch.activities.trainingplan.timer.presentation.TimerActivity
+import com.zywczas.myworkout.watch.activities.trainingplan.week.presentation.WeekActivity
 import com.zywczas.myworkout.watch.databinding.ActivityExerciseBinding
 
 class ExerciseActivity : BaseActivity() {
@@ -34,6 +35,8 @@ class ExerciseActivity : BaseActivity() {
         viewModel.isTimerButtonVisible.observe(this){ binding.timer.isVisible = it }
         viewModel.isFinishExerciseButtonVisible.observe(this){ binding.finishExercises.isVisible = it }
         viewModel.nextExercise.observe(this){ goToTimerActivity(it) }
+        viewModel.isProgressBarVisible.observe(this){ binding.progressBar.isVisible = it }
+        viewModel.goToDayId.observe(this){ goToDayActivity(it) }
     }
 
     private fun showExercise(exercise: Exercise){
@@ -52,6 +55,13 @@ class ExerciseActivity : BaseActivity() {
         startActivity(intent)
     }
 
+    private fun goToDayActivity(dayId: Long){
+        val intent = Intent(this, DayActivity::class.java).apply {
+            putExtra(WeekActivity.KEY_DAY_ID, dayId)
+        }
+        startActivity(intent)
+    }
+
     private fun setupOnClickListeners(){
         binding.timer.setOnClickListener { startTimerToNextExercise() }
         binding.finishExercises.setOnClickListener { finishExercises() }
@@ -63,10 +73,7 @@ class ExerciseActivity : BaseActivity() {
     }
 
     private fun finishExercises(){
-        //todo
-       // przechodzi do widoku dnia ale najpierw
-        // zaznacza
-        //cwiczenie jako zrobione
+        viewModel.finishExercises()
     }
 
     private fun goToChangeWeightActivity(){

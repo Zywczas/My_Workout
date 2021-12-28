@@ -22,6 +22,7 @@
             android:exported="false" />
         <activity
             android:name=".activities.trainingplan.day.presentation.DayActivity"
+            android:launchMode="singleTask"
             android:exported="false" />
         <activity
             android:name=".activities.trainingplan.week.presentation.WeekActivity"

@@ -26,8 +26,16 @@ interface TrainingsBusinessCase {
 
     suspend fun copyDaysAndTrainings(dayId: Long)
 
+    suspend fun getWeekByExerciseId(exerciseId: Long): WeekEntity
+
     suspend fun getExercise(id: Long): ExerciseEntity
 
     suspend fun saveExercise(exercise: ExerciseEntity): Long
+
+    suspend fun markExerciseAsFinished(id: Long)
+
+    suspend fun markDayAsFinished(id: Long)
+
+    suspend fun markWeekAsFinished(id: Long)
 
 }

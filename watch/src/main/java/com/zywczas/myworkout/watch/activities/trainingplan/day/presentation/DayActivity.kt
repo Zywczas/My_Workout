@@ -34,7 +34,6 @@ class DayActivity : BaseActivity() {
     private var binding: ActivityDayBinding by autoRelease()
     private val viewModel: DayViewModel by viewModels { viewModelFactory }
     private val itemAdapter by lazy { ItemAdapter<GenericItem>() }
-    private val dayId by lazy { intent.getLongExtra(WeekActivity.KEY_DAY_ID, 0) }
     private val voiceRecognitionLauncher = registerVoiceRecognition { exerciseName -> viewModel.addNewExercise(exerciseName) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,12 +75,14 @@ class DayActivity : BaseActivity() {
     }
 
     private fun copyDay() {
-        viewModel.copyDay(dayId)
+        viewModel.copyDay(getDayId())
     }
+
+    private fun getDayId(): Long = intent.getLongExtra(WeekActivity.KEY_DAY_ID, 0)
 
     private fun goToAddExerciseActivity(exerciseName: String){
         val intent = Intent(this, AddExerciseActivity::class.java).apply {
-            putExtra(KEY_DAY_ID, dayId)
+            putExtra(KEY_DAY_ID, getDayId())
             putExtra(KEY_EXERCISE_NAME, exerciseName)
         }
         startActivity(intent)
@@ -100,7 +101,7 @@ class DayActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getExerciseList(dayId)
+        viewModel.getExerciseList(getDayId())
     }
 
 }

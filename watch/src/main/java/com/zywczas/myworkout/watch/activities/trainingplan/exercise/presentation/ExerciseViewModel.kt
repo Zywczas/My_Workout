@@ -3,6 +3,7 @@ package com.zywczas.myworkout.watch.activities.trainingplan.exercise.presentatio
 import androidx.lifecycle.*
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.common.utils.SingleLiveData
+import com.zywczas.myworkout.watch.activities.BaseViewModel
 import com.zywczas.myworkout.watch.activities.trainingplan.exercise.domain.Exercise
 import com.zywczas.myworkout.watch.activities.trainingplan.exercise.domain.ExerciseRepository
 import com.zywczas.myworkout.watch.activities.trainingplan.exercise.domain.NextExercise
@@ -13,14 +14,14 @@ import javax.inject.Inject
 class ExerciseViewModel @Inject constructor(
     @DispatcherIO private val dispatcherIO: CoroutineDispatcher,
     private val repo: ExerciseRepository
-) : ViewModel(){
+) : BaseViewModel(){
 
     private val _exercise = MutableLiveData<Exercise>()
     val exercise: LiveData<Exercise> = _exercise
 
     val isTimerButtonVisible: LiveData<Boolean> = Transformations.switchMap(exercise){ currentExercise ->
         liveData(dispatcherIO){
-            val lastExercise = repo.getExercises(currentExercise.foreignDayId).maxByOrNull { it.sequence }
+            val lastExercise = repo.getExercises(currentExercise.dayId, currentExercise.weekId).maxByOrNull { it.sequence }
             val isButtonVisible = currentExercise.id != lastExercise?.id && currentExercise.currentSet != lastExercise?.currentSet
             emit(isButtonVisible)
         }
@@ -35,6 +36,9 @@ class ExerciseViewModel @Inject constructor(
     private val _nextExercise = SingleLiveData<NextExercise>()
     val nextExercise: LiveData<NextExercise> = _nextExercise
 
+    private val _goToDayId = SingleLiveData<Long>()
+    val goToDayId: LiveData<Long> = _goToDayId
+
     fun getExerciseDetails(id: Long){
         viewModelScope.launch(dispatcherIO){
             _exercise.postValue(repo.getExercise(id))
@@ -45,12 +49,31 @@ class ExerciseViewModel @Inject constructor(
         viewModelScope.launch(dispatcherIO){
             exercise.value?.let { currentExercise ->
                 if (currentExercise.currentSet == currentExercise.setsQuantity){
-                   val exercises = repo.getExercises(currentExercise.foreignDayId).sortedBy { it.sequence }
+                   val exercises = repo.getExercises(currentExercise.dayId, currentExercise.weekId).sortedBy { it.sequence }
                     val nextExerciseInList = exercises[exercises.indexOf(currentExercise) + 1]
                     _nextExercise.postValue(NextExercise(id = nextExerciseInList.id, set = 1))
                 } else {
                     _nextExercise.postValue(NextExercise(id = currentExercise.id, set = currentExercise.currentSet + 1))
                 }
+            }
+        }
+    }
+
+    fun finishExercises(){
+        viewModelScope.launch(dispatcherIO){
+            exercise.value?.let { exercise ->
+                showProgressBar(true)
+                repo.markExerciseAsFinished(exercise.id)
+                val exercises = repo.getExercises(exercise.dayId, exercise.weekId)
+                if (exercises.all { it.isFinished }){
+                    repo.markDayAsFinished(exercise.dayId)
+                    val days = repo.getDays(exercise.weekId)
+                    if (days.all { it.isFinished }){
+                        repo.markWeekAsFinished(exercise.weekId)
+                    }
+                }
+                _goToDayId.postValue(exercise.dayId)
+                showProgressBar(false)
             }
         }
     }

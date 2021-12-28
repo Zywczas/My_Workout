@@ -1,5 +1,6 @@
 package com.zywczas.databasestore.trainings
 
+import com.zywczas.common.utils.DateTimeProvider
 import com.zywczas.databasestore.trainings.dao.CardioDao
 import com.zywczas.databasestore.trainings.dao.DayDao
 import com.zywczas.databasestore.trainings.dao.ExerciseDao
@@ -17,7 +18,8 @@ internal class TrainingsBusinessCaseImpl
     private val weekDao: WeekDao,
     private val dayDao: DayDao,
     private val cardioDao: CardioDao,
-    private val exerciseDao: ExerciseDao
+    private val exerciseDao: ExerciseDao,
+    private val dateTime: DateTimeProvider
 ) : TrainingsBusinessCase {
 
     override suspend fun getWeeks(): List<WeekEntity> = weekDao.getWeeks()
@@ -132,7 +134,8 @@ internal class TrainingsBusinessCaseImpl
             )
         )
     }
-//todo wrzucic to w SQL
+
+    //todo wrzucic to w SQL
     private suspend fun findNextExercisePosition(dayId: Long): Int = exerciseDao.getExercises(dayId).maxByOrNull { it.sequence }?.let { it.sequence + 1 } ?: 1
 
     override suspend fun copyDaysAndTrainings(dayId: Long) {
@@ -140,8 +143,38 @@ internal class TrainingsBusinessCaseImpl
         copyDaysRelations(listOf(day))
     }
 
+    override suspend fun getWeekByExerciseId(exerciseId: Long): WeekEntity {
+        val exercise = exerciseDao.getExercise(exerciseId)
+        val day = dayDao.getDay(exercise.foreignDayId)
+        return weekDao.getWeek(day.foreignWeekId)
+    }
+
     override suspend fun getExercise(id: Long): ExerciseEntity = exerciseDao.getExercise(id)
 
     override suspend fun saveExercise(exercise: ExerciseEntity): Long = exerciseDao.insert(exercise)
+
+    override suspend fun markExerciseAsFinished(id: Long) {
+        val exercise = exerciseDao.getExercise(id).apply {
+            isFinished = true
+            timeStamp = dateTime.now()
+        }
+        exerciseDao.insert(exercise)
+    }
+
+    override suspend fun markDayAsFinished(id: Long) {
+        val day = dayDao.getDay(id).apply {
+            isFinished = true
+            timeStamp = dateTime.now()
+        }
+        dayDao.insert(day)
+    }
+
+    override suspend fun markWeekAsFinished(id: Long) {
+        val week = weekDao.getWeek(id).apply {
+            isFinished = true
+            timeStamp = dateTime.now()
+        }
+        weekDao.insert(week)
+    }
 
 }

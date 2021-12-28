@@ -12,5 +12,5 @@ data class DayEntity(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") v
                      @ColumnInfo(name = "sequence") val sequence: Int = 0,
                      @ColumnInfo(name = "dateStarted") val dateStarted: DateTime? = null,
                      @ColumnInfo(name = "dateFinished") val dateFinished: DateTime? = null,
-                     @ColumnInfo(name = "isFinished") val isFinished: Boolean = false,
-                     @ColumnInfo(name = "timeStamp") val timeStamp: DateTime = DateTime())
+                     @ColumnInfo(name = "isFinished") var isFinished: Boolean = false,
+                     @ColumnInfo(name = "timeStamp") var timeStamp: DateTime = DateTime())
