@@ -4,5 +4,5 @@ import dagger.Module
 
 @Module
 class CommonProviderModule {
-//todo pewnie do wylotu
+//todo pewnie do wylotu, nie jest uzywane nigdzie
 }

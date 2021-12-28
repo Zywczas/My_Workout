@@ -62,11 +62,6 @@ class ExerciseActivity : BaseActivity() {
         viewModel.startTimerToNextExercise()
     }
 
-    //todo
-    //jak klikam timer to:
-    //1. odpalam timer activity
-    //podbijam numer aktualnego cwiczenia - kiedy? -> jak w timerze przechodze do kolejnego cwiczenia
-
     private fun finishExercises(){
         //todo
        // przechodzi do widoku dnia ale najpierw
