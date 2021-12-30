@@ -185,4 +185,13 @@ internal class TrainingsBusinessCaseImpl
         exerciseDao.insert(exercise)
     }
 
+    override suspend fun isCardioDone(dayId: Long): Boolean = dayDao.getDay(dayId).isCardioDone
+
+    override suspend fun addCardio(dayId: Long) {
+        val day = dayDao.getDay(dayId).apply {
+            isCardioDone = true
+        }
+        dayDao.insert(day)
+    }
+
 }

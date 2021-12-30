@@ -30,12 +30,9 @@ ustawianie kolejnosci tygodni treningowych
 ustawianie kolejnosci cwiczen
 
 LOGIKA:
-- cardio - jak dodaje cardio to otwieram okno CardioList i moge dodac nowe cardio i dowolne zmienic i wybieram z listy
+- cardio - uproszczone: daje tylko info ze kardio zrobione, nic wiecej
 - wyswietlam 5 ostatnie tygodnie, reszte usuwam
--zaznaczanie zrobionego tygodnia - jezeli wszystkie dni sa zrobione
--zaznaczanie zrobionego dnia - jezeli wszystkie cwiczenia sa zrobione, pokazywanie daty "zrobione" jak sie wszystkie cwiczenia zrobi, a jak nie to bedzie
 -zaznaczanie zrobionego cwiczenia - jak sie przechodzi do kolejnego cwiczenia, a przy ostatnim cwiczeniu przy ostatniej serii guzik "Zakoncz cwiczenie"
--jak dodaje na koniec dnia jakies kardio to wczytac to co zapisane i pozwolic na zmiane przed zakonczeniem dodawania
 
 3 SCENARIUSZE:
 Nowy uzytkownik ktory wszystko od nowa ustawia

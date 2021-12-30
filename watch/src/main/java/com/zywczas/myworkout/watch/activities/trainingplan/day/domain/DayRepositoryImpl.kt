@@ -25,6 +25,10 @@ class DayRepositoryImpl @Inject constructor(
         dateFinished = dateFinished
     )
 
+    override suspend fun isCardioDone(dayId: Long): Boolean = trainings.isCardioDone(dayId)
+
     override suspend fun copyDayAndTrainings(dayId: Long) = trainings.copyDaysAndTrainings(dayId)
+
+    override suspend fun addCardio(dayId: Long) = trainings.addCardio(dayId)
 
 }

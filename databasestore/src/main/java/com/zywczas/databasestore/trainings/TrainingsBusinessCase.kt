@@ -40,4 +40,8 @@ interface TrainingsBusinessCase {
 
     suspend fun saveWeight(exerciseId: Long, weight: Double)
 
+    suspend fun isCardioDone(dayId: Long): Boolean
+
+    suspend fun addCardio(dayId: Long)
+
 }

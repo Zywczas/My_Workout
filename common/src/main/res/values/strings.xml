@@ -26,6 +26,8 @@
     <string name="done">Done:\u0020</string>
     <string name="week_copied">Week copied.</string>
     <string name="add_new_exercise">Add new exercise</string>
+    <string name="add_cardio">Add cardio</string>
+    <string name="plus_cardio">+ cardio</string>
     <string name="copy_day">Copy the day</string>
     <string name="day_copied">Day copied.</string>
     <string name="exercise_name_not_provided">No exercise name provided</string>

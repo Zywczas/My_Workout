@@ -65,13 +65,19 @@ class DayActivity : BaseActivity() {
             is DayElements.DayHeader -> TitleItem(it.displayedDate)
             is DayElements.GoToExercise -> GoToExerciseItem(getString(it.title)) { viewModel.goToNextExercise() }
             is DayElements.Exercise -> ExerciseItem(it)
+            is DayElements.Cardio -> CardioItem()
             is DayElements.AddNewExercise -> SettingsItem(getString(it.title)) { addNewExercise() }
+            is DayElements.AddCardio -> SettingsItem(getString(it.title)) { addCardio() }
             is DayElements.CopyDay -> SettingsItem(getString(it.title)) { copyDay() }
         }
     }
 
     private fun addNewExercise() {
         voiceRecognitionLauncher.launch()
+    }
+
+    private fun addCardio(){
+        viewModel.addCardio(getDayIdFromUpdatedIntent())
     }
 
     private fun copyDay() {

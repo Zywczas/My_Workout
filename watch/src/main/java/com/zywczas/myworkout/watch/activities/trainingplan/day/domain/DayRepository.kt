@@ -6,6 +6,10 @@ interface DayRepository {
 
     suspend fun getDayHeader(dayId: Long): DayElements.DayHeader
 
+    suspend fun isCardioDone(dayId: Long): Boolean
+
     suspend fun copyDayAndTrainings(dayId: Long)
+
+    suspend fun addCardio(dayId: Long)
 
 }

@@ -40,7 +40,7 @@ class DayViewModel @Inject constructor(
             if (exercises.isNotEmpty()) {
                 val dayHeader = repo.getDayHeader(dayId).withDisplayedDate()
                 val dayElements = mutableListOf<DayElements>().apply {
-                    if (dayHeader.displayedDate.isNotBlank()) {
+                    if (dayHeader.displayedDate.isNotBlank()) { //todo poprawic na inna nazwe funkcji
                         add(dayHeader)
                     }
                     if (dayHeader.dateFinished == null) {
@@ -54,7 +54,11 @@ class DayViewModel @Inject constructor(
                         )
                     }
                     addAll(exercises)
+                    if (repo.isCardioDone(dayId)){
+                        add(DayElements.Cardio())
+                    }
                     add(DayElements.AddNewExercise())
+                    add(DayElements.AddCardio())
                     add(DayElements.CopyDay())
                 }
                 _dayElements.postValue(dayElements)
@@ -87,6 +91,15 @@ class DayViewModel @Inject constructor(
                 val nextExerciseId = (it.find { it is DayElements.Exercise && it.isFinished.not() } as? DayElements.Exercise)?.id
                 nextExerciseId?.let { _nextExerciseId.postValue(it) }
             }
+        }
+    }
+
+    fun addCardio(dayId: Long){
+        viewModelScope.launch(dispatcherIO){
+            showProgressBar(true)
+            repo.addCardio(dayId)
+            getExerciseList(dayId)
+            showProgressBar(false)
         }
     }
 
