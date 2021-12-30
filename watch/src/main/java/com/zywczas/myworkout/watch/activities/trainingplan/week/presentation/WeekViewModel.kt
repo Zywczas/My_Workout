@@ -29,7 +29,9 @@ class WeekViewModel @Inject constructor(
 
     fun getDaysList(weekId: Long) {
         viewModelScope.launch(dispatcherIO) {
-            val days = repo.getDays(weekId).sortedByDescending { it.sequence }.withDisplayedDate() //todo dac tutaj w kolejnosci normalnej i poprawic funkcje find next day sequence - wyszukiwac w SQL najlepiej
+            val days = repo.getDays(weekId).sortedByDescending { it.sequence }
+                .withDisplayedDate() //todo dac tutaj w kolejnosci normalnej i poprawic funkcje find next day sequence - wyszukiwac w SQL najlepiej
+                .withDisplayedCardio()
             if (days.isNotEmpty()) {
                 val weekHeader = repo.getWeekHeader(weekId).withDisplayedDate()
                 val weekElements = mutableListOf<WeekElements>().apply {
@@ -51,6 +53,15 @@ class WeekViewModel @Inject constructor(
                 it.displayedDate = stringProvider.getString(R.string.done, it.dateFinished.dayFormat())
             } else if (it.dateStarted != null) {
                 it.displayedDate = stringProvider.getString(R.string.started, it.dateStarted.dayFormat())
+            }
+        }
+        return this
+    }
+
+    private suspend fun List<WeekElements.Day>.withDisplayedCardio(): List<WeekElements.Day> {
+        forEach {
+            if (it.isCardioDone) {
+                it.name = "${it.name}\n${stringProvider.getString(R.string.plus_cardio)}"
             }
         }
         return this

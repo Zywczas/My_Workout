@@ -15,9 +15,10 @@ sealed class WeekElements {
 
     data class Day(
         val id: Long = 0L,
-        val name: String = "",
+        var name: String = "",
         val sequence: Int = 0,
         val isFinished: Boolean = false,
+        val isCardioDone: Boolean = false,
         val dateStarted: DateTime? = null,
         val dateFinished: DateTime? = null,
         var displayedDate: String = ""

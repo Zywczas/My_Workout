@@ -26,7 +26,8 @@ class WeekRepositoryImpl @Inject constructor(
         sequence = sequence,
         isFinished = isFinished,
         dateStarted = dateStarted,
-        dateFinished = dateFinished
+        dateFinished = dateFinished,
+        isCardioDone = isCardioDone
     )
 
     override suspend fun saveNewDay(name: String, weekId: Long, sequence: Int) = trainings.saveDay(
