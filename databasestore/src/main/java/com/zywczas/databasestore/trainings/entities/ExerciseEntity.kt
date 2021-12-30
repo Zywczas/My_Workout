@@ -13,6 +13,6 @@ data class ExerciseEntity(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "i
                           @ColumnInfo(name = "setsQuantity") val setsQuantity: Int = 0,
                           @ColumnInfo(name = "currentSet") val currentSet: Int = 1,
                           @ColumnInfo(name = "repsQuantity") val repsQuantity: String = "",
-                          @ColumnInfo(name = "weight") val weight: Double = 0.0,
+                          @ColumnInfo(name = "weight") var weight: Double = 0.0,
                           @ColumnInfo(name = "isFinished") var isFinished: Boolean = false,
                           @ColumnInfo(name = "timeStamp") var timeStamp: DateTime = DateTime())

@@ -38,4 +38,6 @@ interface TrainingsBusinessCase {
 
     suspend fun markWeekAsFinished(id: Long)
 
+    suspend fun saveWeight(exerciseId: Long, weight: Double)
+
 }

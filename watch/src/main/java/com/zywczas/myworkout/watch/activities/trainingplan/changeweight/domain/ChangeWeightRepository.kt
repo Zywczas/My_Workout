@@ -4,6 +4,6 @@ interface ChangeWeightRepository {
 
     suspend fun getExercise(id: Long): Exercise
 
-    suspend fun saveWeight(weight: Double)
+    suspend fun saveWeight(exerciseId: Long, weight: Double)
 
 }

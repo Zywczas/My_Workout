@@ -177,4 +177,12 @@ internal class TrainingsBusinessCaseImpl
         weekDao.insert(week)
     }
 
+    override suspend fun saveWeight(exerciseId: Long, weight: Double) {
+        val exercise = exerciseDao.getExercise(exerciseId).apply {
+            this.weight = weight
+            timeStamp = dateTime.now()
+        }
+        exerciseDao.insert(exercise)
+    }
+
 }
