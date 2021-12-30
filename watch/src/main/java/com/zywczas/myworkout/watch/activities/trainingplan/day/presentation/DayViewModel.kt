@@ -40,7 +40,7 @@ class DayViewModel @Inject constructor(
             if (exercises.isNotEmpty()) {
                 val dayHeader = repo.getDayHeader(dayId).withDisplayedDate()
                 val dayElements = mutableListOf<DayElements>().apply {
-                    if (dayHeader.displayedDate.isNotBlank()) { //todo poprawic na inna nazwe funkcji
+                    if (dayHeader.isDayStartedOrFinished()) {
                         add(dayHeader)
                     }
                     if (dayHeader.dateFinished == null) {
@@ -76,6 +76,8 @@ class DayViewModel @Inject constructor(
         }
         return this
     }
+
+    private fun DayElements.DayHeader.isDayStartedOrFinished() = displayedDate.isNotBlank()
 
     fun addNewExercise(name: String?) {
         viewModelScope.launch(dispatcherIO) {
