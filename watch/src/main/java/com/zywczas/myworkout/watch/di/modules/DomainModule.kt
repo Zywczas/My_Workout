@@ -4,6 +4,8 @@ import com.zywczas.myworkout.watch.activities.settings.timer.domain.SettingsTime
 import com.zywczas.myworkout.watch.activities.settings.timer.domain.SettingsTimerRepositoryImpl
 import com.zywczas.myworkout.watch.activities.trainingplan.addexercise.domain.AddExerciseRepository
 import com.zywczas.myworkout.watch.activities.trainingplan.addexercise.domain.AddExerciseRepositoryImpl
+import com.zywczas.myworkout.watch.activities.trainingplan.changeweight.domain.ChangeWeightRepository
+import com.zywczas.myworkout.watch.activities.trainingplan.changeweight.domain.ChangeWeightRepositoryImpl
 import com.zywczas.myworkout.watch.activities.trainingplan.day.domain.DayRepository
 import com.zywczas.myworkout.watch.activities.trainingplan.day.domain.DayRepositoryImpl
 import com.zywczas.myworkout.watch.activities.trainingplan.exercise.domain.ExerciseRepository
@@ -45,5 +47,8 @@ abstract class DomainModule {
 
     @Binds
     abstract fun bindExerciseRepository(repo: ExerciseRepositoryImpl): ExerciseRepository
+
+    @Binds
+    abstract fun bindChangeWeightRepository(repo: ChangeWeightRepositoryImpl): ChangeWeightRepository
 
 }

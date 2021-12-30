@@ -75,14 +75,14 @@ class DayActivity : BaseActivity() {
     }
 
     private fun copyDay() {
-        viewModel.copyDay(getDayId())
+        viewModel.copyDay(getDayIdFromUpdatedIntent())
     }
 
-    private fun getDayId(): Long = intent.getLongExtra(WeekActivity.KEY_DAY_ID, 0)
+    private fun getDayIdFromUpdatedIntent(): Long = intent.getLongExtra(WeekActivity.KEY_DAY_ID, 0)
 
     private fun goToAddExerciseActivity(exerciseName: String){
         val intent = Intent(this, AddExerciseActivity::class.java).apply {
-            putExtra(KEY_DAY_ID, getDayId())
+            putExtra(KEY_DAY_ID, getDayIdFromUpdatedIntent())
             putExtra(KEY_EXERCISE_NAME, exerciseName)
         }
         startActivity(intent)
@@ -101,7 +101,7 @@ class DayActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getExerciseList(getDayId())
+        viewModel.getExerciseList(getDayIdFromUpdatedIntent())
     }
 
 }

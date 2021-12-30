@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import org.joda.time.DateTime
-
+//todo pozamieniac te entity na Local
 @Entity(tableName = "Cardio")
 data class CardioEntity(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Long = 0,
                         @ColumnInfo(name = "foreignDayId") var foreignDayId: Long = -1,

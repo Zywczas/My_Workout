@@ -78,7 +78,7 @@ class TimerActivity : BaseActivity() {
         setContentView(binding.root)
         isConfigurationChange = false
         bindTimerService()
-        viewModel.getExerciseDetails(getNextExerciseId(), getNextExerciseSet())
+        viewModel.getExerciseDetails(getNextExerciseIdFromUpdatedIntent(), getNextExerciseSetFromUpdatedIntent())
         setupLiveDataObservers()
         setupOnClickListeners()
     }
@@ -88,8 +88,8 @@ class TimerActivity : BaseActivity() {
         bindService(serviceIntent, timerServiceConnection, Context.BIND_AUTO_CREATE)
     }
 
-    private fun getNextExerciseId(): Long = intent.getLongExtra(DayActivity.KEY_EXERCISE_ID, 0L)
-    private fun getNextExerciseSet(): Int = intent.getIntExtra(ExerciseActivity.KEY_EXERCISE_SET, 0)
+    private fun getNextExerciseIdFromUpdatedIntent(): Long = intent.getLongExtra(DayActivity.KEY_EXERCISE_ID, 0L)
+    private fun getNextExerciseSetFromUpdatedIntent(): Int = intent.getIntExtra(ExerciseActivity.KEY_EXERCISE_SET, 0)
 
     private fun setupLiveDataObservers(){
         viewModel.isExerciseLongDescriptionVisible.observe(this){ binding.exerciseLongDescriptionContainer.isVisible = it }

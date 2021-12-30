@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.activities.BaseActivity
+import com.zywczas.myworkout.watch.activities.trainingplan.changeweight.presentation.ChangeWeightActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.day.presentation.DayActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.exercise.domain.Exercise
 import com.zywczas.myworkout.watch.activities.trainingplan.exercise.domain.NextExercise
@@ -17,6 +18,7 @@ class ExerciseActivity : BaseActivity() {
 
     companion object {
         const val KEY_EXERCISE_SET = "KEY_EXERCISE_SET"
+        const val KEY_EXERCISE_ID = "KEY_EXERCISE_ID"
     }
 
     private var binding: ActivityExerciseBinding by autoRelease()
@@ -77,7 +79,10 @@ class ExerciseActivity : BaseActivity() {
     }
 
     private fun goToChangeWeightActivity(){
-        //todo
+        val intent = Intent(this, ChangeWeightActivity::class.java).apply {
+            putExtra(KEY_EXERCISE_ID, getExerciseIdFromUpdatedIntent())
+        }
+        startActivity(intent)
     }
 
     override fun onResume() {

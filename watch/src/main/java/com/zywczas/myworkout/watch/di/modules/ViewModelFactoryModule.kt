@@ -5,6 +5,7 @@ import com.zywczas.common.di.qualifiers.ViewModelKey
 import com.zywczas.myworkout.watch.activities.settings.main.presentation.SettingsMainViewModel
 import com.zywczas.myworkout.watch.activities.settings.timer.presentation.SettingsTimerViewModel
 import com.zywczas.myworkout.watch.activities.trainingplan.addexercise.presentation.AddExerciseViewModel
+import com.zywczas.myworkout.watch.activities.trainingplan.changeweight.presentation.ChangeWeightViewModel
 import com.zywczas.myworkout.watch.activities.trainingplan.day.presentation.DayViewModel
 import com.zywczas.myworkout.watch.activities.trainingplan.exercise.presentation.ExerciseViewModel
 import com.zywczas.myworkout.watch.activities.trainingplan.timer.presentation.TimerViewModel
@@ -56,5 +57,10 @@ abstract class ViewModelFactoryModule {
     @IntoMap
     @ViewModelKey(ExerciseViewModel::class)
     abstract fun bindExerciseViewModel(vm: ExerciseViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ChangeWeightViewModel::class)
+    abstract fun bindChangeWeightViewModel(vm: ChangeWeightViewModel) : ViewModel
 
 }

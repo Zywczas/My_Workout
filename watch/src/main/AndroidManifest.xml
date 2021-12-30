@@ -14,16 +14,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyWatch">
         <activity
+            android:name=".activities.trainingplan.changeweight.presentation.ChangeWeightActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.trainingplan.addexercise.presentation.AddExerciseActivity"
             android:exported="false" />
         <activity
             android:name=".activities.trainingplan.exercise.presentation.ExerciseActivity"
-            android:launchMode="singleTask"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTask" />
         <activity
             android:name=".activities.trainingplan.day.presentation.DayActivity"
-            android:launchMode="singleTask"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTask" />
         <activity
             android:name=".activities.trainingplan.week.presentation.WeekActivity"
             android:exported="false" />
