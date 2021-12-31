@@ -64,14 +64,30 @@ class ExerciseViewModel @Inject constructor(
             exercise.value?.let { exercise ->
                 showProgressBar(true)
                 repo.markExerciseAsFinished(exercise.id)
-                val exercises = repo.getExercises(exercise.dayId, exercise.weekId)
-                if (exercises.all { it.isFinished }){
-                    repo.markDayAsFinished(exercise.dayId)
-                    val days = repo.getDays(exercise.weekId)
-                    if (days.all { it.isFinished }){
-                        repo.markWeekAsFinished(exercise.weekId)
-                    }
-                }
+                checkIfDayAndWeekIsFinished(dayId = exercise.dayId, weekId = exercise.weekId)
+                _goToDayId.postValue(exercise.dayId)
+                showProgressBar(false)
+            }
+        }
+    }
+
+    private suspend fun checkIfDayAndWeekIsFinished(dayId: Long, weekId: Long){
+        val exercises = repo.getExercises(dayId, weekId)
+        if (exercises.all { it.isFinished }){
+            repo.markDayAsFinished(dayId)
+            val days = repo.getDays(weekId)
+            if (days.all { it.isFinished }){
+                repo.markWeekAsFinished(weekId)
+            }
+        }
+    }
+
+    fun deleteExercise(){
+        viewModelScope.launch(dispatcherIO){
+            exercise.value?.let { exercise ->
+                showProgressBar(true)
+                repo.deleteExercise(exercise.id)
+                checkIfDayAndWeekIsFinished(dayId = exercise.dayId, weekId = exercise.weekId)
                 _goToDayId.postValue(exercise.dayId)
                 showProgressBar(false)
             }

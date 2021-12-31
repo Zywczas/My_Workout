@@ -46,6 +46,8 @@
     <string name="set">Set:</string>
     <string name="timer">Timer</string>
     <string name="finish_exercises">Finish exercises</string>
+    <string name="change_weight">Change weight</string>
     <string name="set_weight">Set weight:</string>
+    <string name="delete_exercise">Delete the exercise</string>
 </resources>
 <!--todo pousuwac te znaki specjalne spacji i dac normalne dimensy-->

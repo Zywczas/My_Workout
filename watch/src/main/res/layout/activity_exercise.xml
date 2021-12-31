@@ -159,17 +159,38 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/timer"
                 tools:visibility="visible" />
-
-            <ImageView
-                android:id="@+id/settings"
-                android:layout_width="@dimen/small_icon_size"
-                android:layout_height="@dimen/small_icon_size"
+<!--todo potworzyc style dla tych guzikow-->
+            <TextView
+                android:id="@+id/changeWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/ic_settings"
+                android:paddingStart="10dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="3dp"
+                android:text="@string/change_weight"
+                android:background="@drawable/item_background"
+                android:backgroundTint="@color/settingsItemBackground"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/finishExercises"
-                tools:ignore="ContentDescription" />
+                app:layout_constraintTop_toBottomOf="@+id/finishExercises" />
+
+            <TextView
+                android:id="@+id/deleteExercise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:paddingStart="10dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="3dp"
+                android:text="@string/delete_exercise"
+                android:background="@drawable/item_background"
+                android:backgroundTint="@color/deleteItemBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/changeWeight" />
 <!--todo poprawci progress bar-->
             <ProgressBar
                 android:id="@+id/progressBar"

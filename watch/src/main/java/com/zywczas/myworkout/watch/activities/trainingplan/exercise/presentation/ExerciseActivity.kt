@@ -67,7 +67,8 @@ class ExerciseActivity : BaseActivity() {
     private fun setupOnClickListeners(){
         binding.timer.setOnClickListener { startTimerToNextExercise() }
         binding.finishExercises.setOnClickListener { finishExercises() }
-        binding.settings.setOnClickListener { goToChangeWeightActivity() }
+        binding.changeWeight.setOnClickListener { goToChangeWeightActivity() }
+        binding.deleteExercise.setOnClickListener { deleteExercise() }
     }
 
     private fun startTimerToNextExercise(){
@@ -83,6 +84,10 @@ class ExerciseActivity : BaseActivity() {
             putExtra(KEY_EXERCISE_ID, getExerciseIdFromUpdatedIntent())
         }
         startActivity(intent)
+    }
+
+    private fun deleteExercise(){
+        viewModel.deleteExercise()
     }
 
     override fun onResume() {

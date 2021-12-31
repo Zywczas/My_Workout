@@ -18,10 +18,11 @@ pokazywanie jak dlugo faza ekscentryczna i koncentryczna (2s)
 pokazywanie aktualnej godziny podczas cwiczenia i minutnika
 
 USUWANIE:
-usuwanie tygodni na dlugi klik
-usuwanie dni na dlugi klik
-usuwanie cwiczen na dlugi klik
-usuwanie w ustawieniach jest na stale
+todo dac usuwanie na guzik usun na koncu kazdej listy:
+usuwanie tygodnia
+usuwanie dnia
+usuwanie cwiczenia
+po kazdym usunieciu sprawdzic czy dany dzien lub tydzien jest skonczony, bo nagle skraca sie ilosc treningow, datetime dac taki jak moment usuniecia
 
 KOLEJNOSC:
 Sprobowac dac zmiane kolejnosci na drag and drop w fast adapterze

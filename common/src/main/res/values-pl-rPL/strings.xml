@@ -47,5 +47,7 @@
     <string name="set">Seria:</string>
     <string name="timer">Minutnik</string>
     <string name="finish_exercises">Zakończ ćwiczenia</string>
+    <string name="change_weight">Zmień ciężar</string>
     <string name="set_weight">Ustaw ciężar:</string>
+    <string name="delete_exercise">Usuń to ćwiczenie</string>
 </resources>
