@@ -69,6 +69,7 @@ class DayActivity : BaseActivity() {
             is DayElements.AddNewExercise -> SettingsItem(getString(it.title)) { addNewExercise() }
             is DayElements.AddCardio -> SettingsItem(getString(it.title)) { addCardio() }
             is DayElements.CopyDay -> SettingsItem(getString(it.title)) { copyDay() }
+            is DayElements.DeleteDay -> DeleteItem(getString(it.title)) { deleteDay() }
         }
     }
 
@@ -82,6 +83,10 @@ class DayActivity : BaseActivity() {
 
     private fun copyDay() {
         viewModel.copyDay(getDayIdFromUpdatedIntent())
+    }
+
+    private fun deleteDay(){
+        viewModel.deleteDay(getDayIdFromUpdatedIntent())
     }
 
     private fun getDayIdFromUpdatedIntent(): Long = intent.getLongExtra(WeekActivity.KEY_DAY_ID, 0)

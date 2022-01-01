@@ -14,6 +14,6 @@ interface ExerciseRepository {
 
     suspend fun markWeekAsFinished(id: Long)
 
-    suspend fun deleteExercise(exerciseId: Long)
+    suspend fun deleteExercise(id: Long)
 
 }

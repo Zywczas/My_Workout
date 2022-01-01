@@ -194,4 +194,32 @@ internal class TrainingsBusinessCaseImpl
         dayDao.insert(day)
     }
 
+    override suspend fun deleteExercise(id: Long) {
+        exerciseDao.deleteExercise(id)
+//        updateDayTimeStamp(dayId) //todo dac to tez przy innych operacjach bo brakuje - nie wiem jeszcze czy to bedzie potrzebne do synchronizacji czy nie
+    }
+
+//    private suspend fun updateDayTimeStamp(id: Long){ //todo
+//        val day = dayDao.getDay(id).apply {
+//            timeStamp = dateTime.now()
+//        }
+//        dayDao.insert(day)
+//    }
+
+    override suspend fun deleteDay(id: Long) {
+        exerciseDao.deleteExercises(dayId = id)
+        dayDao.deleteDay(id)
+    }
+
+    override suspend fun deleteWeek(id: Long) {
+        val dayIds = dayDao.getDaysIdsOfTheWeek(weekId = id)
+        dayIds.forEach { dayId ->
+            exerciseDao.deleteExercises(dayId)
+            dayDao.deleteDay(dayId)
+        }
+        weekDao.deleteWeek(id)
+    }
+
+    override suspend fun getWeekId(dayId: Long): Long = dayDao.getDay(dayId).foreignWeekId
+
 }

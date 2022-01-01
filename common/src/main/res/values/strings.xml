@@ -49,5 +49,7 @@
     <string name="change_weight">Change weight</string>
     <string name="set_weight">Set weight:</string>
     <string name="delete_exercise">Delete the exercise</string>
+    <string name="delete_day">Delete the day</string>
+    <string name="delete_week">Delete the week</string>
 </resources>
 <!--todo pousuwac te znaki specjalne spacji i dac normalne dimensy-->

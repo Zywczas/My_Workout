@@ -17,6 +17,7 @@ class DiffUtilCallback : DiffCallback<GenericItem> {
             oldItem is GoToExerciseItem && newItem is GoToExerciseItem -> true
             oldItem is ExerciseItem && newItem is ExerciseItem -> oldItem.exercise.id == newItem.exercise.id
             oldItem is CardioItem && newItem is CardioItem -> true
+            oldItem is DeleteItem && newItem is DeleteItem -> oldItem.title == newItem.title
             else -> false
         }
 
@@ -35,6 +36,7 @@ class DiffUtilCallback : DiffCallback<GenericItem> {
             is GoToExerciseItem -> oldItem.title == (newItem as GoToExerciseItem).title
             is ExerciseItem -> oldItem.exercise == (newItem as ExerciseItem).exercise
             is CardioItem -> true
+            is DeleteItem -> true
             else -> false
         }
 

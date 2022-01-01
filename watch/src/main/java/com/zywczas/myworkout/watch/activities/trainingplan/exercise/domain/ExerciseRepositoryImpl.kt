@@ -42,4 +42,6 @@ class ExerciseRepositoryImpl @Inject constructor(
 
     override suspend fun markWeekAsFinished(id: Long) = trainings.markWeekAsFinished(id)
 
+    override suspend fun deleteExercise(id: Long) = trainings.deleteExercise(id)
+
 }

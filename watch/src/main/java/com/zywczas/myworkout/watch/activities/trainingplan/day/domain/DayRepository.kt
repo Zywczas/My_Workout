@@ -12,4 +12,12 @@ interface DayRepository {
 
     suspend fun addCardio(dayId: Long)
 
+    suspend fun getWeekId(dayId: Long): Long
+
+    suspend fun deleteDay(id: Long)
+
+    suspend fun getDays(weekId: Long): List<Day>
+
+    suspend fun markWeekAsFinished(id: Long)
+
 }

@@ -44,4 +44,12 @@ interface TrainingsBusinessCase {
 
     suspend fun addCardio(dayId: Long)
 
+    suspend fun deleteExercise(id: Long)
+
+    suspend fun deleteDay(id: Long)
+
+    suspend fun deleteWeek(id: Long)
+
+    suspend fun getWeekId(dayId: Long): Long
+
 }

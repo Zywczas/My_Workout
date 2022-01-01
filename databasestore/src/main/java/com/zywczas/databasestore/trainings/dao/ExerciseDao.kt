@@ -16,7 +16,7 @@ internal interface ExerciseDao {
     @Query("SELECT * FROM Exercise WHERE id = :id")
     suspend fun getExercise(id: Long): ExerciseEntity
 
-    @Query("DELETE FROM Exercise WHERE id = :id")//todo sprawdzic czy tu nie powinno byc samo @Delete
+    @Query("DELETE FROM Exercise WHERE id = :id")
     suspend fun deleteExercise(id: Long)
 
     @Query("DELETE FROM Exercise WHERE foreignDayId = :dayId")

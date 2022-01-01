@@ -30,4 +30,6 @@ sealed class DayElements {
 
     data class CopyDay(@StringRes val title: Int = R.string.copy_day) : DayElements()
 
+    data class DeleteDay(@StringRes val title: Int = R.string.delete_day) : DayElements()
+
 }

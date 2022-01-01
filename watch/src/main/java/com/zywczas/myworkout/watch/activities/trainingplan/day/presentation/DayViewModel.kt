@@ -60,6 +60,7 @@ class DayViewModel @Inject constructor(
                     add(DayElements.AddNewExercise())
                     add(DayElements.AddCardio())
                     add(DayElements.CopyDay())
+                    add(DayElements.DeleteDay())
                 }
                 _dayElements.postValue(dayElements)
             } else {
@@ -111,6 +112,23 @@ class DayViewModel @Inject constructor(
             repo.copyDayAndTrainings(id)
             postMessage(R.string.day_copied)
             showProgressBar(false)
+        }
+    }
+//todo pomyslec nad synchro
+    fun deleteDay(id: Long){
+        viewModelScope.launch(dispatcherIO){
+            showProgressBar(true)
+            val weekId = repo.getWeekId(dayId = id)
+            repo.deleteDay(id)
+            checkIfWeekIsFinished(weekId)
+            showProgressBar(false)
+        }
+    }
+
+    private suspend fun checkIfWeekIsFinished(weekId: Long){
+        val days = repo.getDays(weekId)
+        if (days.all { it.isFinished }){
+            repo.markWeekAsFinished(weekId)
         }
     }
 

@@ -50,4 +50,6 @@
     <string name="change_weight">Zmień ciężar</string>
     <string name="set_weight">Ustaw ciężar:</string>
     <string name="delete_exercise">Usuń to ćwiczenie</string>
+    <string name="delete_day">Usuń ten dzień</string>
+    <string name="delete_week">Usuń ten tydzień</string>
 </resources>

@@ -6,11 +6,9 @@ todo
 SYNCHRONIZACJA:
 kazdy element bedzie mial swoj timestamp ktory bedzie uaktualniany przy kazdej zmianie elementu
 bede porownywac nazwe elementow i timestamp, z elementow o tej samej nazwie bedzie brany ten nowszy i zastapi wszystko w srodku
-dwa rozne tygodnie nie moga miec tej samej nazwy
-dwa rozne dni nie moga miec tej samej nazwy w jednym tygodniu
-dwa rozne cwiczenia nie moga miec tej samej nazwy w jednym dniu
-dwa rozne kardio nie moga miec tej samej nazwy w jednym dniu
-w bibliotece kardio nie moze byc dwoch roznych o tych samych nazwach
+dwa rozne elementy moga miec ta sama nazwe
+problem:
+jak zsynchronizowac cos co juz zostalo usuniete
 
 EKRANY:
 ...
