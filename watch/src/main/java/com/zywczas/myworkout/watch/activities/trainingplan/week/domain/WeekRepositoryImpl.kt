@@ -1,6 +1,5 @@
 package com.zywczas.myworkout.watch.activities.trainingplan.week.domain
 
-import com.zywczas.common.utils.DateTimeProvider
 import com.zywczas.databasestore.trainings.TrainingsBusinessCase
 import com.zywczas.databasestore.trainings.entities.DayEntity
 import com.zywczas.databasestore.trainings.entities.WeekEntity
@@ -38,5 +37,7 @@ class WeekRepositoryImpl @Inject constructor(
     ))
 
     override suspend fun copyWeekAndTrainings(weekId: Long) = trainings.copyWeekAndTrainings(weekId)
+
+    override suspend fun deleteWeek(id: Long) = trainings.deleteWeek(id)
 
 }

@@ -39,6 +39,7 @@ class WeekViewModel @Inject constructor(
                     addAll(days)
                     add(WeekElements.AddNewDay())
                     add(WeekElements.CopyWeek())
+                    add(WeekElements.DeleteWeek())
                 }
                 _weekElements.postValue(weekElements)
             } else {
@@ -95,6 +96,14 @@ class WeekViewModel @Inject constructor(
             showProgressBar(true)
             repo.copyWeekAndTrainings(id)
             postMessage(R.string.week_copied)
+            showProgressBar(false)
+        }
+    }
+
+    fun deleteWeek(id: Long){
+        viewModelScope.launch(dispatcherIO){
+            showProgressBar(true)
+            deleteWeek(id)
             showProgressBar(false)
         }
     }

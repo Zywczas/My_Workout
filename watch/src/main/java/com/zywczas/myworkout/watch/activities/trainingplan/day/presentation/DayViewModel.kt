@@ -44,7 +44,9 @@ class DayViewModel @Inject constructor(
                         add(dayHeader)
                     }
                     if (dayHeader.dateFinished == null) {
-                        add(DayElements.GoToExercise(title =
+                        add(
+                            DayElements.GoToExercise(
+                                title =
                                 if (dayHeader.dateStarted != null) {
                                     R.string.continue_exercise
                                 } else {
@@ -54,7 +56,7 @@ class DayViewModel @Inject constructor(
                         )
                     }
                     addAll(exercises)
-                    if (repo.isCardioDone(dayId)){
+                    if (repo.isCardioDone(dayId)) {
                         add(DayElements.Cardio())
                     }
                     add(DayElements.AddNewExercise())
@@ -97,8 +99,8 @@ class DayViewModel @Inject constructor(
         }
     }
 
-    fun addCardio(dayId: Long){
-        viewModelScope.launch(dispatcherIO){
+    fun addCardio(dayId: Long) {
+        viewModelScope.launch(dispatcherIO) {
             showProgressBar(true)
             repo.addCardio(dayId)
             getExerciseList(dayId)
@@ -114,9 +116,9 @@ class DayViewModel @Inject constructor(
             showProgressBar(false)
         }
     }
-//todo pomyslec nad synchro
-    fun deleteDay(id: Long){
-        viewModelScope.launch(dispatcherIO){
+
+    fun deleteDay(id: Long) {
+        viewModelScope.launch(dispatcherIO) {
             showProgressBar(true)
             val weekId = repo.getWeekId(dayId = id)
             repo.deleteDay(id)
@@ -125,9 +127,9 @@ class DayViewModel @Inject constructor(
         }
     }
 
-    private suspend fun checkIfWeekIsFinished(weekId: Long){
+    private suspend fun checkIfWeekIsFinished(weekId: Long) {
         val days = repo.getDays(weekId)
-        if (days.all { it.isFinished }){
+        if (days.all { it.isFinished }) {
             repo.markWeekAsFinished(weekId)
         }
     }

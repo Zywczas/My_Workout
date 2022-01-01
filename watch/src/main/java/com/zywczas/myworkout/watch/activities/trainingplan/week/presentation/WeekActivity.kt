@@ -70,6 +70,7 @@ class WeekActivity : BaseActivity() {
             ){ id -> goToDayActivity(id) }
             is WeekElements.AddNewDay -> SettingsItem(getString(it.title)){ addNewDay() }
             is WeekElements.CopyWeek -> SettingsItem(getString(it.title)){ copyWeek() }
+            is WeekElements.DeleteWeek -> DeleteItem(getString(it.title)){ deleteWeek() }
         }
     }
 
@@ -86,6 +87,10 @@ class WeekActivity : BaseActivity() {
 
     private fun copyWeek(){
         viewModel.copyWeek(weekId)
+    }
+
+    private fun deleteWeek(){
+        viewModel.deleteWeek(weekId)
     }
 
     private fun setupOnClickListeners(){

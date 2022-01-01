@@ -10,4 +10,6 @@ interface WeekRepository {
 
     suspend fun copyWeekAndTrainings(weekId: Long)
 
+    suspend fun deleteWeek(id: Long)
+
 }

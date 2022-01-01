@@ -2,6 +2,7 @@ package com.zywczas.myworkout.watch.activities.trainingplan.week.domain
 
 import androidx.annotation.StringRes
 import com.zywczas.myworkout.watch.R
+import com.zywczas.myworkout.watch.activities.trainingplan.day.domain.DayElements
 import org.joda.time.DateTime
 
 sealed class WeekElements {
@@ -27,5 +28,7 @@ sealed class WeekElements {
     data class AddNewDay(@StringRes val title: Int = R.string.add_new_day) : WeekElements()
 
     data class CopyWeek(@StringRes val title: Int = R.string.copy_week) : WeekElements()
+
+    data class DeleteWeek(@StringRes val title: Int = R.string.delete_week) : WeekElements()
 
 }

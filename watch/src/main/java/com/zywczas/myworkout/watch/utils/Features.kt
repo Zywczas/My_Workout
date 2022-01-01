@@ -4,11 +4,9 @@ package com.zywczas.myworkout.watch.utils
 todo
 
 SYNCHRONIZACJA:
-kazdy element bedzie mial swoj timestamp ktory bedzie uaktualniany przy kazdej zmianie elementu
-bede porownywac nazwe elementow i timestamp, z elementow o tej samej nazwie bedzie brany ten nowszy i zastapi wszystko w srodku
-dwa rozne elementy moga miec ta sama nazwe
-problem:
-jak zsynchronizowac cos co juz zostalo usuniete
+
+podejscie 2: mam jednego timestampa dla calej bazy treningi i osobnego dla timera
+patrze ktory timestamp jest nowszy i biore wszystko z niego
 
 EKRANY:
 ...
