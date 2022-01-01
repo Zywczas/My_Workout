@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Room
 import com.zywczas.databasestore.db.TrainingsDatabase
 import com.zywczas.databasestore.timer.dao.TimerDao
-import com.zywczas.databasestore.trainings.dao.CardioDao
 import com.zywczas.databasestore.trainings.dao.DayDao
 import com.zywczas.databasestore.trainings.dao.ExerciseDao
 import com.zywczas.databasestore.trainings.dao.WeekDao
@@ -22,9 +21,6 @@ class DatabaseModule {
 
     @Provides
     internal fun provideTimerDao(db: TrainingsDatabase): TimerDao = db.timerDao()
-
-    @Provides
-    internal fun provideCardioDao(db: TrainingsDatabase): CardioDao = db.cardioDao()
 
     @Provides
     internal fun provideDayDao(db: TrainingsDatabase): DayDao = db.dayDao()

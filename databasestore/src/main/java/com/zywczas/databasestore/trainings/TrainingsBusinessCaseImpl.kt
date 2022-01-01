@@ -1,11 +1,9 @@
 package com.zywczas.databasestore.trainings
 
 import com.zywczas.common.utils.DateTimeProvider
-import com.zywczas.databasestore.trainings.dao.CardioDao
 import com.zywczas.databasestore.trainings.dao.DayDao
 import com.zywczas.databasestore.trainings.dao.ExerciseDao
 import com.zywczas.databasestore.trainings.dao.WeekDao
-import com.zywczas.databasestore.trainings.entities.CardioEntity
 import com.zywczas.databasestore.trainings.entities.DayEntity
 import com.zywczas.databasestore.trainings.entities.ExerciseEntity
 import com.zywczas.databasestore.trainings.entities.WeekEntity
@@ -17,7 +15,6 @@ internal class TrainingsBusinessCaseImpl
 @Inject constructor(
     private val weekDao: WeekDao,
     private val dayDao: DayDao,
-    private val cardioDao: CardioDao,
     private val exerciseDao: ExerciseDao,
     private val dateTime: DateTimeProvider
 ) : TrainingsBusinessCase {
@@ -102,7 +99,6 @@ internal class TrainingsBusinessCaseImpl
             it.day.foreignWeekId = weekId
             val newDayId = dayDao.insert(it.day)
             saveExercises(newDayId, it.exercises)
-            saveCardio(newDayId, it.cardio)
         }
     }
 
@@ -111,11 +107,6 @@ internal class TrainingsBusinessCaseImpl
             it.foreignDayId = dayId
             exerciseDao.insert(it)
         }
-    }
-
-    private suspend fun saveCardio(dayId: Long, cardio: CardioEntity?): Long? = cardio?.let {
-        cardio.foreignDayId = dayId
-        cardioDao.insert(cardio)
     }
 
     override suspend fun getExercises(dayId: Long): List<ExerciseEntity> = exerciseDao.getExercises(dayId)
