@@ -1,6 +1,7 @@
 package com.zywczas.databasestore.trainings
 
 import com.zywczas.common.utils.DateTimeProvider
+import com.zywczas.databasestore.synchronisation.SynchronisationBusinessCase
 import com.zywczas.databasestore.trainings.dao.DayDao
 import com.zywczas.databasestore.trainings.dao.ExerciseDao
 import com.zywczas.databasestore.trainings.dao.WeekDao
@@ -16,7 +17,8 @@ internal class TrainingsBusinessCaseImpl
     private val weekDao: WeekDao,
     private val dayDao: DayDao,
     private val exerciseDao: ExerciseDao,
-    private val dateTime: DateTimeProvider
+    private val dateTime: DateTimeProvider,
+    private val synchronisation: SynchronisationBusinessCase
 ) : TrainingsBusinessCase {
 
     override suspend fun getWeeks(): List<WeekEntity> = weekDao.getWeeks()
@@ -28,6 +30,7 @@ internal class TrainingsBusinessCaseImpl
                 sequence = findNextWeekPosition(),
             )
         )
+        synchronisation.updateDatabaseTimeStamp()
     }
 
     //todo poprawic tak zeby bralo z sql
@@ -39,12 +42,14 @@ internal class TrainingsBusinessCaseImpl
 
     override suspend fun saveDay(day: DayEntity) {
         dayDao.insert(day)
+        synchronisation.updateDatabaseTimeStamp()
     }
 
     override suspend fun copyWeekAndTrainings(weekId: Long) {
         val weekRelationsToCopy = weekDao.getWeekRelations(weekId)
         val newWeekRelations = copyWeekRelations(weekRelationsToCopy)
         saveDays(newWeekRelations)
+        synchronisation.updateDatabaseTimeStamp()
     }
 
     private suspend fun copyWeekRelations(oldWeekRelations: WeekRelations): WeekRelations {
@@ -91,12 +96,8 @@ internal class TrainingsBusinessCaseImpl
 
     private suspend fun saveDays(weekRelations: WeekRelations) {
         val newWeekId = weekDao.insert(weekRelations.week)
-        saveDays(newWeekId, weekRelations.days)
-    }
-
-    private suspend fun saveDays(weekId: Long, daysRelations: List<DayRelations>) {
-        daysRelations.forEach {
-            it.day.foreignWeekId = weekId
+        weekRelations.days.forEach {
+            it.day.foreignWeekId = newWeekId
             val newDayId = dayDao.insert(it.day)
             saveExercises(newDayId, it.exercises)
         }
@@ -124,6 +125,7 @@ internal class TrainingsBusinessCaseImpl
                 weight = weight
             )
         )
+        synchronisation.updateDatabaseTimeStamp()
     }
 
     //todo wrzucic to w SQL
@@ -132,6 +134,7 @@ internal class TrainingsBusinessCaseImpl
     override suspend fun copyDaysAndTrainings(dayId: Long) {
         val day = dayDao.getDayRelations(dayId)
         copyDaysRelations(listOf(day))
+        synchronisation.updateDatabaseTimeStamp()
     }
 
     override suspend fun getWeekByExerciseId(exerciseId: Long): WeekEntity {
@@ -142,7 +145,10 @@ internal class TrainingsBusinessCaseImpl
 
     override suspend fun getExercise(id: Long): ExerciseEntity = exerciseDao.getExercise(id)
 
-    override suspend fun saveExercise(exercise: ExerciseEntity): Long = exerciseDao.insert(exercise)
+    override suspend fun saveExercise(exercise: ExerciseEntity) {
+        exerciseDao.insert(exercise)
+        synchronisation.updateDatabaseTimeStamp()
+    }
 
     override suspend fun markExerciseAsFinished(id: Long) {
         val exercise = exerciseDao.getExercise(id).apply {
@@ -150,6 +156,7 @@ internal class TrainingsBusinessCaseImpl
             timeStamp = dateTime.now()
         }
         exerciseDao.insert(exercise)
+        synchronisation.updateDatabaseTimeStamp()
     }
 
     override suspend fun markDayAsFinished(id: Long) {
@@ -158,6 +165,7 @@ internal class TrainingsBusinessCaseImpl
             timeStamp = dateTime.now()
         }
         dayDao.insert(day)
+        synchronisation.updateDatabaseTimeStamp()
     }
 
     override suspend fun markWeekAsFinished(id: Long) {
@@ -166,6 +174,7 @@ internal class TrainingsBusinessCaseImpl
             timeStamp = dateTime.now()
         }
         weekDao.insert(week)
+        synchronisation.updateDatabaseTimeStamp()
     }
 
     override suspend fun saveWeight(exerciseId: Long, weight: Double) {
@@ -174,6 +183,7 @@ internal class TrainingsBusinessCaseImpl
             timeStamp = dateTime.now()
         }
         exerciseDao.insert(exercise)
+        synchronisation.updateDatabaseTimeStamp()
     }
 
     override suspend fun isCardioDone(dayId: Long): Boolean = dayDao.getDay(dayId).isCardioDone
@@ -183,23 +193,18 @@ internal class TrainingsBusinessCaseImpl
             isCardioDone = true
         }
         dayDao.insert(day)
+        synchronisation.updateDatabaseTimeStamp()
     }
 
     override suspend fun deleteExercise(id: Long) {
         exerciseDao.deleteExercise(id)
-//        updateDayTimeStamp(dayId) //todo dac to tez przy innych operacjach bo brakuje - nie wiem jeszcze czy to bedzie potrzebne do synchronizacji czy nie
+        synchronisation.updateDatabaseTimeStamp()
     }
-
-//    private suspend fun updateDayTimeStamp(id: Long){ //todo
-//        val day = dayDao.getDay(id).apply {
-//            timeStamp = dateTime.now()
-//        }
-//        dayDao.insert(day)
-//    }
 
     override suspend fun deleteDay(id: Long) {
         exerciseDao.deleteExercises(dayId = id)
         dayDao.deleteDay(id)
+        synchronisation.updateDatabaseTimeStamp()
     }
 
     override suspend fun deleteWeek(id: Long) {
@@ -209,6 +214,7 @@ internal class TrainingsBusinessCaseImpl
             dayDao.deleteDay(dayId)
         }
         weekDao.deleteWeek(id)
+        synchronisation.updateDatabaseTimeStamp()
     }
 
     override suspend fun getWeekId(dayId: Long): Long = dayDao.getDay(dayId).foreignWeekId

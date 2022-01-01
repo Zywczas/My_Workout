@@ -1,5 +1,7 @@
 package com.zywczas.databasestore.di.modules
 
+import com.zywczas.databasestore.synchronisation.SynchronisationBusinessCase
+import com.zywczas.databasestore.synchronisation.SynchronisationBusinessCaseImpl
 import com.zywczas.databasestore.timer.TimerBusinessCase
 import com.zywczas.databasestore.timer.TimerBusinessCaseImpl
 import com.zywczas.databasestore.trainings.TrainingsBusinessCase
@@ -15,5 +17,8 @@ abstract class BusinessCaseModule {
 
     @Binds
     internal abstract fun bindTimerBusinessCase(case: TimerBusinessCaseImpl) : TimerBusinessCase
+
+    @Binds
+    internal abstract fun bindSynchronisationBusinessCase(case: SynchronisationBusinessCaseImpl) : SynchronisationBusinessCase
 
 }

@@ -20,9 +20,7 @@ class TimerRepositoryImpl @Inject constructor(
         weight = weight
     )
 
-    override suspend fun save(exercise: NextExercise) {
-        trainings.saveExercise(exercise.toEntity())
-    }
+    override suspend fun save(exercise: NextExercise) = trainings.saveExercise(exercise.toEntity())
 
     private fun NextExercise.toEntity() = ExerciseEntity(
         id = id,

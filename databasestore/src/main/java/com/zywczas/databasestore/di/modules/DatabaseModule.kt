@@ -3,6 +3,7 @@ package com.zywczas.databasestore.di.modules
 import android.content.Context
 import androidx.room.Room
 import com.zywczas.databasestore.db.TrainingsDatabase
+import com.zywczas.databasestore.synchronisation.dao.LastUpdateDao
 import com.zywczas.databasestore.timer.dao.TimerDao
 import com.zywczas.databasestore.trainings.dao.DayDao
 import com.zywczas.databasestore.trainings.dao.ExerciseDao
@@ -30,5 +31,8 @@ class DatabaseModule {
 
     @Provides
     internal fun provideWeekDao(db: TrainingsDatabase): WeekDao = db.weekDao()
+
+    @Provides
+    internal fun provideLastUpdateDao(db: TrainingsDatabase): LastUpdateDao = db.lastUpdateDao()
 
 }

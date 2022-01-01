@@ -30,7 +30,7 @@ interface TrainingsBusinessCase {
 
     suspend fun getExercise(id: Long): ExerciseEntity
 
-    suspend fun saveExercise(exercise: ExerciseEntity): Long
+    suspend fun saveExercise(exercise: ExerciseEntity)
 
     suspend fun markExerciseAsFinished(id: Long)
 
