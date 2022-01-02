@@ -14,7 +14,7 @@ pokazywanie jak dlugo faza ekscentryczna i koncentryczna (2s)
 pokazywanie aktualnej godziny podczas cwiczenia i minutnika
 
 USUWANIE:
-todo dac usuwanie na guzik usun na koncu kazdej listy:
+usuwanie na guzik usun na koncu kazdej listy:
 usuwanie tygodnia
 usuwanie dnia
 usuwanie cwiczenia

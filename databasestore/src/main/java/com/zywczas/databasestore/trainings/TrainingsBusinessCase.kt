@@ -5,7 +5,7 @@ import com.zywczas.databasestore.trainings.entities.ExerciseEntity
 import com.zywczas.databasestore.trainings.entities.WeekEntity
 
 interface TrainingsBusinessCase {
-    //todo poprawic i tam gdzie jest zapis do bazy to wracac id nowego wiersza
+
     suspend fun getWeeks(): List<WeekEntity>
 
     suspend fun saveNewWeek(name: String)

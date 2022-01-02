@@ -20,7 +20,7 @@ import com.zywczas.myworkout.watch.services.timer.TimerService
 class TimerActivity : BaseActivity() {
 
     private var binding: ActivityTimerBinding by autoRelease()
-    private val viewModel: TimerViewModel by viewModels { viewModelFactory } //todo chyba do wylotu
+    private val viewModel: TimerViewModel by viewModels { viewModelFactory }
     private var timerService: TimerService? = null
     private var isTimerServiceBound = false
     private var isConfigurationChange = false
