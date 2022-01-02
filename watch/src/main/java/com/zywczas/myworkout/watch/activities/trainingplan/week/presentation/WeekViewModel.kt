@@ -3,6 +3,7 @@ package com.zywczas.myworkout.watch.activities.trainingplan.week.presentation
 import androidx.lifecycle.*
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.common.extetions.dayFormat
+import com.zywczas.common.utils.SingleLiveData
 import com.zywczas.common.utils.StringProvider
 import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseViewModel
@@ -26,6 +27,9 @@ class WeekViewModel @Inject constructor(
             emit(daysElements.isNotEmpty())
         }
     }
+
+    private val _closeActivity = SingleLiveData<Boolean>()
+    val closeActivity: LiveData<Boolean> = _closeActivity
 
     fun getDaysList(weekId: Long) {
         viewModelScope.launch(dispatcherIO) {
@@ -85,7 +89,8 @@ class WeekViewModel @Inject constructor(
             } ?: postMessage(R.string.day_name_not_provided)
         }
     }
-//todo chyba brac z bazy
+
+    //todo chyba brac z bazy
     private fun findNextDayPosition(): Int =
         weekElements.value?.let { days ->
             days.find { it is WeekElements.Day }?.let { (it as WeekElements.Day).sequence + 1 }
@@ -100,10 +105,11 @@ class WeekViewModel @Inject constructor(
         }
     }
 
-    fun deleteWeek(id: Long){
-        viewModelScope.launch(dispatcherIO){
+    fun deleteWeek(id: Long) {
+        viewModelScope.launch(dispatcherIO) {
             showProgressBar(true)
-            deleteWeek(id)
+            repo.deleteWeek(id)
+            _closeActivity.postValue(true)
             showProgressBar(false)
         }
     }

@@ -31,13 +31,15 @@ class ChangeWeightViewModel @Inject constructor(
 
     fun saveWeight(weightString: String){
         viewModelScope.launch(dispatcherIO){
-            val weight: Double =
-                if (weightString.isBlank()){
-                    0.0
-                } else {
-                    weightString.toDouble()
-                }
-            repo.saveWeight(weight)
+            exercise.value?.let { exercise ->
+                val weight: Double =
+                    if (weightString.isBlank()){
+                        0.0
+                    } else {
+                        weightString.toDouble()
+                    }
+                repo.saveWeight(exercise.id, weight)
+            }
             _isWeightSaved.postValue(true)
         }
     }

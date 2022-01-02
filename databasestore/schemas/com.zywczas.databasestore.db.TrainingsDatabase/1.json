@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "919a8354fa7102d25d7390a7f0777069",
+    "identityHash": "06b90a55ddcc12851d924d41e6835b37",
     "entities": [
       {
         "tableName": "Week",
@@ -62,7 +62,7 @@
       },
       {
         "tableName": "Day",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `foreignWeekId` INTEGER NOT NULL, `name` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `dateStarted` INTEGER, `dateFinished` INTEGER, `isFinished` INTEGER NOT NULL, `timeStamp` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `foreignWeekId` INTEGER NOT NULL, `name` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `dateStarted` INTEGER, `dateFinished` INTEGER, `isCardioDone` INTEGER NOT NULL, `isFinished` INTEGER NOT NULL, `timeStamp` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -101,6 +101,12 @@
             "notNull": false
           },
           {
+            "fieldPath": "isCardioDone",
+            "columnName": "isCardioDone",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
             "fieldPath": "isFinished",
             "columnName": "isFinished",
             "affinity": "INTEGER",
@@ -124,7 +130,7 @@
       },
       {
         "tableName": "Exercise",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `foreignDayId` INTEGER NOT NULL, `name` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `setsQuantity` INTEGER NOT NULL, `repsQuantity` TEXT NOT NULL, `weight` REAL NOT NULL, `isFinished` INTEGER NOT NULL, `timeStamp` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `foreignDayId` INTEGER NOT NULL, `name` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `setsQuantity` INTEGER NOT NULL, `currentSet` INTEGER NOT NULL, `repsQuantity` TEXT NOT NULL, `weight` REAL NOT NULL, `isFinished` INTEGER NOT NULL, `timeStamp` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -153,6 +159,12 @@
           {
             "fieldPath": "setsQuantity",
             "columnName": "setsQuantity",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "currentSet",
+            "columnName": "currentSet",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -191,42 +203,12 @@
         "foreignKeys": []
       },
       {
-        "tableName": "Cardio",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `foreignDayId` INTEGER NOT NULL, `name` TEXT NOT NULL, `minutes` INTEGER NOT NULL, `level` REAL NOT NULL, `isFinished` INTEGER NOT NULL, `timeStamp` INTEGER NOT NULL)",
+        "tableName": "LastUpdate",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `timeStamp` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "foreignDayId",
-            "columnName": "foreignDayId",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "name",
-            "columnName": "name",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "minutes",
-            "columnName": "minutes",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "level",
-            "columnName": "level",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "isFinished",
-            "columnName": "isFinished",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -241,7 +223,7 @@
           "columnNames": [
             "id"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
@@ -282,7 +264,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '919a8354fa7102d25d7390a7f0777069')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '06b90a55ddcc12851d924d41e6835b37')"
     ]
   }
 }

@@ -57,6 +57,7 @@ class WeekActivity : BaseActivity() {
         viewModel.isProgressBarVisible.observe(this){ binding.progressBar.isVisible = it }
         viewModel.isEmptyPlanMessageGone.observe(this){ binding.emptyPlanMessage.isGone = it }
         viewModel.weekElements.observe(this){ days -> FastAdapterDiffUtil.set(itemAdapter, days.toAdapterItems(), DiffUtilCallback()) }
+        viewModel.closeActivity.observe(this){ if (it) finish() }
     }
 
     private fun List<WeekElements>.toAdapterItems(): List<GenericItem> = map {
