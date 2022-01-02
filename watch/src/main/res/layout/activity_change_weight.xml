@@ -7,6 +7,9 @@
     tools:context=".activities.trainingplan.changeweight.presentation.ChangeWeightActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_boxedEdges="left|right"
+        android:paddingTop="15dp"
+        android:paddingBottom="25dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
         <!--todo dimensy-->

@@ -7,4 +7,6 @@ todo
 2. dac cos ala dialog are you sure przed usuwaniem elementow
 3. Dac ikonke
 4. Progress bar jakos dziwnie wyglada
+5. rozpocznij cwiczenia / kontynuuj cwiczenia zle sie wyswietla
+6. nie przechodzi poprawnie do kolejnego cwiczenia
  */

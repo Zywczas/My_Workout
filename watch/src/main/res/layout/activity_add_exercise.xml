@@ -6,13 +6,15 @@
     android:layout_height="match_parent">
 
     <ScrollView
+        app:layout_boxedEdges="left|right"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:paddingTop="15dp"
+            android:paddingBottom="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             tools:context=".activities.trainingplan.addexercise.presentation.AddExerciseActivity">
             <!--todo dimensy-->
 

@@ -21,9 +21,9 @@ class ExerciseViewModel @Inject constructor(
 
     val isTimerButtonVisible: LiveData<Boolean> = Transformations.switchMap(exercise){ currentExercise ->
         liveData(dispatcherIO){
-            val lastExercise = repo.getExercises(currentExercise.dayId, currentExercise.weekId).maxByOrNull { it.sequence }
-            val isButtonVisible = currentExercise.id != lastExercise?.id && currentExercise.currentSet != lastExercise?.currentSet
-            emit(isButtonVisible)
+            val lastExercise = repo.getExercises(dayId = currentExercise.dayId, weekId = currentExercise.weekId).maxByOrNull { it.sequence }
+            val isNowDoingLastExercise = currentExercise.id == lastExercise?.id && currentExercise.currentSet == lastExercise.setsQuantity
+            emit(isNowDoingLastExercise.not())
         }
     }
 
