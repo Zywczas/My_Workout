@@ -101,7 +101,7 @@ class DayActivity : BaseActivity() {
 
     private fun goToExerciseActivity(exerciseId: Long){
         val intent = Intent(this, ExerciseActivity::class.java).apply {
-            putExtra(KEY_DAY_ID, exerciseId)
+            putExtra(KEY_EXERCISE_ID, exerciseId)
         }
         startActivity(intent)
     }
