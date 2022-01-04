@@ -89,12 +89,20 @@ class DayViewModel @Inject constructor(
             } ?: postMessage(R.string.exercise_name_not_provided)
         }
     }
-
-    fun goToNextExercise() {
+//todo sprawdzic czy dobrze zaznacza zakonczenie dnia
+    //todo zle mi sie pokazuje started header- nie pokazuje daty, i powinno pokazywac finished date
+    //todo jak zakoncze cwiczenia to dalej widze guzik contiune exercises
+    fun startExercises() {
         viewModelScope.launch(dispatcherIO) {
             dayElements.value?.let {
-                val nextExerciseId = (it.find { it is DayElements.Exercise && it.isFinished.not() } as? DayElements.Exercise)?.id
-                nextExerciseId?.let { _nextExerciseId.postValue(it) }
+                val firstExerciseInDay = it.find { it is DayElements.Exercise } as? DayElements.Exercise
+                val nextExercise = it.find { it is DayElements.Exercise && it.isFinished.not() } as? DayElements.Exercise
+                val isTheFirstExerciseSetOfTheDay = nextExercise?.id == firstExerciseInDay?.id && nextExercise?.currentSet == 1
+                if (isTheFirstExerciseSetOfTheDay){
+                    repo.markDayAsStarted(nextExercise!!.dayId)
+                    repo.markWeekAsStartedIfNotStarted(dayId = nextExercise.dayId)
+                }
+                nextExercise?.id?.let { _nextExerciseId.postValue(it) }
             }
         }
     }

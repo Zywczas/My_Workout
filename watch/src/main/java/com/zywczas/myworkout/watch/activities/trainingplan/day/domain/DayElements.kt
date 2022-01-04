@@ -17,9 +17,11 @@ sealed class DayElements {
 
     data class Exercise(
         val id: Long,
+        val dayId: Long,
         val name: String,
         val sequence: Int,
-        val isFinished: Boolean
+        val isFinished: Boolean,
+        val currentSet: Int
     ) : DayElements()
 
     class Cardio : DayElements()

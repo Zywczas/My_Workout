@@ -65,7 +65,7 @@ class DayActivity : BaseActivity() {
     private fun List<DayElements>.toAdapterItems(): List<GenericItem> = map {
         when (it) {
             is DayElements.DayHeader -> TitleItem(it.displayedDate)
-            is DayElements.GoToExercise -> GoToExerciseItem(getString(it.title)) { viewModel.goToNextExercise() }
+            is DayElements.GoToExercise -> GoToExerciseItem(getString(it.title)) { startExercises() }
             is DayElements.Exercise -> ExerciseItem(it)
             is DayElements.Cardio -> CardioItem()
             is DayElements.AddNewExercise -> SettingsItem(getString(it.title)) { addNewExercise() }
@@ -73,6 +73,10 @@ class DayActivity : BaseActivity() {
             is DayElements.CopyDay -> SettingsItem(getString(it.title)) { copyDay() }
             is DayElements.DeleteDay -> DeleteItem(getString(it.title)) { deleteDay() }
         }
+    }
+
+    private fun startExercises(){
+        viewModel.startExercises()
     }
 
     private fun addNewExercise() {

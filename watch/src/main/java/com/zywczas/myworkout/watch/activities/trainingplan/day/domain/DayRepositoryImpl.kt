@@ -13,9 +13,11 @@ class DayRepositoryImpl @Inject constructor(
 
     private fun ExerciseEntity.toDayHeader() = DayElements.Exercise(
         id = id,
+        dayId = foreignDayId,
         name = name,
         sequence = sequence,
-        isFinished = isFinished
+        isFinished = isFinished,
+        currentSet = currentSet
     )
 
     override suspend fun getDayHeader(dayId: Long): DayElements.DayHeader = trainings.getDay(dayId).toDayHeader()
@@ -38,6 +40,10 @@ class DayRepositoryImpl @Inject constructor(
     override suspend fun getDays(weekId: Long): List<Day> = trainings.getDays(weekId).map { it.toDomain() }
 
     private fun DayEntity.toDomain() = Day(isFinished = isFinished)
+
+    override suspend fun markDayAsStarted(id: Long) = trainings.markDayAsStarted(id)
+
+    override suspend fun markWeekAsStartedIfNotStarted(dayId: Long) = trainings.markWeekAsStartedIfNotStarted(dayId)
 
     override suspend fun markWeekAsFinished(id: Long) = trainings.markWeekAsFinished(id)
 

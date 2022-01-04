@@ -34,6 +34,10 @@ interface TrainingsBusinessCase {
 
     suspend fun markExerciseAsFinished(id: Long)
 
+    suspend fun markDayAsStarted(id: Long)
+
+    suspend fun markWeekAsStartedIfNotStarted(dayId: Long)
+
     suspend fun markDayAsFinished(id: Long)
 
     suspend fun markWeekAsFinished(id: Long)

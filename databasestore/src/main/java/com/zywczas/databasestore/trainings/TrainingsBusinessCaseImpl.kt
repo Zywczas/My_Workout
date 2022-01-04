@@ -159,9 +159,28 @@ internal class TrainingsBusinessCaseImpl
         synchronisation.updateDatabaseTimeStamp()
     }
 
+    override suspend fun markDayAsStarted(id: Long) {
+        val day = dayDao.getDay(id).apply {
+            dateStarted = dateTime.now()
+        }
+        dayDao.insert(day)
+        synchronisation.updateDatabaseTimeStamp()
+    }
+
+    override suspend fun markWeekAsStartedIfNotStarted(dayId: Long) {
+        val day = dayDao.getDay(dayId)
+        val week = weekDao.getWeek(day.foreignWeekId)
+        if (week.dateStarted == null){
+            week.dateStarted = dateTime.now()
+            weekDao.insert(week)
+            synchronisation.updateDatabaseTimeStamp()
+        }
+    }
+
     override suspend fun markDayAsFinished(id: Long) {
         val day = dayDao.getDay(id).apply {
             isFinished = true
+            dateFinished = dateTime.now()
             timeStamp = dateTime.now()
         }
         dayDao.insert(day)
@@ -171,6 +190,7 @@ internal class TrainingsBusinessCaseImpl
     override suspend fun markWeekAsFinished(id: Long) {
         val week = weekDao.getWeek(id).apply {
             isFinished = true
+            dateFinished = dateTime.now()
             timeStamp = dateTime.now()
         }
         weekDao.insert(week)

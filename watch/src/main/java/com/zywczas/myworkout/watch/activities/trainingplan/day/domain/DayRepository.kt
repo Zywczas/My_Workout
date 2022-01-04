@@ -18,6 +18,10 @@ interface DayRepository {
 
     suspend fun getDays(weekId: Long): List<Day>
 
+    suspend fun markDayAsStarted(id: Long)
+
+    suspend fun markWeekAsStartedIfNotStarted(dayId: Long)
+
     suspend fun markWeekAsFinished(id: Long)
 
 }
