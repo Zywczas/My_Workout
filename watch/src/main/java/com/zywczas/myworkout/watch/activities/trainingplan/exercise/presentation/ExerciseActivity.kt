@@ -67,14 +67,14 @@ class ExerciseActivity : BaseActivity() {
     }
 
     private fun setupOnClickListeners(){
-        binding.timer.setOnClickListener { startTimerToNextExercise() }
+        binding.timer.setOnClickListener { startTimerToNextExerciseAndMarkAsFinished() }
         binding.finishExercises.setOnClickListener { finishExercises() }
         binding.changeWeight.setOnClickListener { goToChangeWeightActivity() }
         binding.deleteExercise.setOnClickListener { deleteExercise() }
     }
 
-    private fun startTimerToNextExercise(){
-        viewModel.startTimerToNextExercise()
+    private fun startTimerToNextExerciseAndMarkAsFinished(){
+        viewModel.startTimerToNextExerciseAndMarkAsFinished()
     }
 
     private fun finishExercises(){

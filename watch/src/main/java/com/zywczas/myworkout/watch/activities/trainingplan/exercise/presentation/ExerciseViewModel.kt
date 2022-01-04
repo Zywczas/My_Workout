@@ -14,42 +14,43 @@ import javax.inject.Inject
 class ExerciseViewModel @Inject constructor(
     @DispatcherIO private val dispatcherIO: CoroutineDispatcher,
     private val repo: ExerciseRepository
-) : BaseViewModel(){
+) : BaseViewModel() {
 
     private val _exercise = MutableLiveData<Exercise>()
     val exercise: LiveData<Exercise> = _exercise
 
-    val isTimerButtonVisible: LiveData<Boolean> = Transformations.switchMap(exercise){ currentExercise ->
-        liveData(dispatcherIO){
+    val isTimerButtonVisible: LiveData<Boolean> = Transformations.switchMap(exercise) { currentExercise ->
+        liveData(dispatcherIO) {
             val lastExercise = repo.getExercises(dayId = currentExercise.dayId, weekId = currentExercise.weekId).maxByOrNull { it.sequence }
             val isNowDoingLastExercise = currentExercise.id == lastExercise?.id && currentExercise.currentSet == lastExercise.setsQuantity
             emit(isNowDoingLastExercise.not())
         }
     }
 
-    val isFinishExerciseButtonVisible: LiveData<Boolean> = Transformations.switchMap(isTimerButtonVisible){
+    val isFinishExerciseButtonVisible: LiveData<Boolean> = Transformations.switchMap(isTimerButtonVisible) {
         liveData(dispatcherIO) {
             emit(it.not())
         }
     }
-//todo nie dziala zaznaczanie cwiczenia jako skonczonego
+
     private val _nextExercise = SingleLiveData<NextExercise>()
     val nextExercise: LiveData<NextExercise> = _nextExercise
 
     private val _goToDayId = SingleLiveData<Long>()
     val goToDayId: LiveData<Long> = _goToDayId
 
-    fun getExerciseDetails(id: Long){
-        viewModelScope.launch(dispatcherIO){
+    fun getExerciseDetails(id: Long) {
+        viewModelScope.launch(dispatcherIO) {
             _exercise.postValue(repo.getExercise(id))
         }
     }
 
-    fun startTimerToNextExercise(){
-        viewModelScope.launch(dispatcherIO){
+    fun startTimerToNextExerciseAndMarkAsFinished() {
+        viewModelScope.launch(dispatcherIO) {
             exercise.value?.let { currentExercise ->
-                if (currentExercise.currentSet == currentExercise.setsQuantity){
-                   val exercises = repo.getExercises(currentExercise.dayId, currentExercise.weekId).sortedBy { it.sequence }
+                if (currentExercise.currentSet == currentExercise.setsQuantity) {
+                    repo.markExerciseAsFinished(currentExercise.id)
+                    val exercises = repo.getExercises(currentExercise.dayId, currentExercise.weekId).sortedBy { it.sequence }
                     val nextExerciseInList = exercises[exercises.indexOf(currentExercise) + 1]
                     _nextExercise.postValue(NextExercise(id = nextExerciseInList.id, set = 1))
                 } else {
@@ -59,8 +60,8 @@ class ExerciseViewModel @Inject constructor(
         }
     }
 
-    fun finishExercises(){
-        viewModelScope.launch(dispatcherIO){
+    fun finishExercises() {
+        viewModelScope.launch(dispatcherIO) {
             exercise.value?.let { exercise ->
                 showProgressBar(true)
                 repo.markExerciseAsFinished(exercise.id)
@@ -71,19 +72,19 @@ class ExerciseViewModel @Inject constructor(
         }
     }
 
-    private suspend fun checkIfDayAndWeekIsFinished(dayId: Long, weekId: Long){
+    private suspend fun checkIfDayAndWeekIsFinished(dayId: Long, weekId: Long) {
         val exercises = repo.getExercises(dayId, weekId)
-        if (exercises.all { it.isFinished }){
+        if (exercises.all { it.isFinished }) {
             repo.markDayAsFinished(dayId)
             val days = repo.getDays(weekId)
-            if (days.all { it.isFinished }){
+            if (days.all { it.isFinished }) {
                 repo.markWeekAsFinished(weekId)
             }
         }
     }
 
-    fun deleteExercise(){
-        viewModelScope.launch(dispatcherIO){
+    fun deleteExercise() {
+        viewModelScope.launch(dispatcherIO) {
             exercise.value?.let { exercise ->
                 showProgressBar(true)
                 repo.deleteExercise(exercise.id)
