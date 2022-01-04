@@ -9,4 +9,5 @@ todo
 4. Progress bar jakos dziwnie wyglada
 5. rozpocznij cwiczenia / kontynuuj cwiczenia zle sie wyswietla
 6. nie przechodzi poprawnie do kolejnego cwiczenia
+7. timer wczytuje tylko 2 sekundy zamiast 60 domyslnych
  */

@@ -32,7 +32,7 @@ class ExerciseViewModel @Inject constructor(
             emit(it.not())
         }
     }
-
+//todo nie dziala zaznaczanie cwiczenia jako skonczonego
     private val _nextExercise = SingleLiveData<NextExercise>()
     val nextExercise: LiveData<NextExercise> = _nextExercise
 

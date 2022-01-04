@@ -23,11 +23,13 @@ class ExerciseActivity : BaseActivity() {
 
     private var binding: ActivityExerciseBinding by autoRelease()
     private val viewModel: ExerciseViewModel by viewModels { viewModelFactory }
+    private var exerciseId = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityExerciseBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        exerciseId = intent.getLongExtra(DayActivity.KEY_EXERCISE_ID, 0)
         setupLiveDataObservers()
         setupOnClickListeners()
     }
@@ -81,7 +83,7 @@ class ExerciseActivity : BaseActivity() {
 
     private fun goToChangeWeightActivity(){
         val intent = Intent(this, ChangeWeightActivity::class.java).apply {
-            putExtra(KEY_EXERCISE_ID, getExerciseIdFromUpdatedIntent())
+            putExtra(KEY_EXERCISE_ID, exerciseId)
         }
         startActivity(intent)
     }
@@ -92,9 +94,12 @@ class ExerciseActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getExerciseDetails(getExerciseIdFromUpdatedIntent())
+        viewModel.getExerciseDetails(exerciseId)
     }
 
-    private fun getExerciseIdFromUpdatedIntent(): Long = intent.getLongExtra(DayActivity.KEY_EXERCISE_ID, 0)
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        exerciseId = intent?.getLongExtra(DayActivity.KEY_EXERCISE_ID, 0) ?: 0L
+    }
 
 }
