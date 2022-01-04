@@ -26,6 +26,8 @@ class TimerActivity : BaseActivity() {
     private var isConfigurationChange = false
     private val vibrator by lazy { getSystemService(Vibrator::class.java) }
     private var isGoingToNextExercise = false
+    private val exerciseId by lazy { intent.getLongExtra(DayActivity.KEY_EXERCISE_ID, 0L) }
+    private val nextExerciseSet by lazy { intent.getIntExtra(ExerciseActivity.KEY_EXERCISE_SET, 0) }
 
     private val timerServiceConnection = object : ServiceConnection { //todo dac to nizej, tam gdzie uzywane i poustawiac wszystkie funkcje
 
@@ -78,7 +80,7 @@ class TimerActivity : BaseActivity() {
         setContentView(binding.root)
         isConfigurationChange = false
         bindTimerService()
-        viewModel.getExerciseDetails(getNextExerciseIdFromUpdatedIntent(), getNextExerciseSetFromUpdatedIntent())
+        viewModel.getExerciseDetails(exerciseId, nextExerciseSet)
         setupLiveDataObservers()
         setupOnClickListeners()
     }
@@ -87,9 +89,6 @@ class TimerActivity : BaseActivity() {
         val serviceIntent = Intent(this, TimerService::class.java)
         bindService(serviceIntent, timerServiceConnection, Context.BIND_AUTO_CREATE)
     }
-
-    private fun getNextExerciseIdFromUpdatedIntent(): Long = intent.getLongExtra(DayActivity.KEY_EXERCISE_ID, 0L)
-    private fun getNextExerciseSetFromUpdatedIntent(): Int = intent.getIntExtra(ExerciseActivity.KEY_EXERCISE_SET, 0)
 
     private fun setupLiveDataObservers(){
         viewModel.isExerciseLongDescriptionVisible.observe(this){ binding.exerciseLongDescriptionContainer.isVisible = it }

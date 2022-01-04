@@ -34,12 +34,14 @@ class DayActivity : BaseActivity() {
     private var binding: ActivityDayBinding by autoRelease()
     private val viewModel: DayViewModel by viewModels { viewModelFactory }
     private val itemAdapter by lazy { ItemAdapter<GenericItem>() }
+    private var dayId = 0L
     private val voiceRecognitionLauncher = registerVoiceRecognition { exerciseName -> viewModel.addNewExercise(exerciseName) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDayBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        dayId = intent.getLongExtra(WeekActivity.KEY_DAY_ID, 0)
         binding.exerciseList.setup()
         setupLiveDataObservers()
         setupOnClickListeners()
@@ -78,22 +80,20 @@ class DayActivity : BaseActivity() {
     }
 
     private fun addCardio(){
-        viewModel.addCardio(getDayIdFromUpdatedIntent())
+        viewModel.addCardio(dayId)
     }
 
     private fun copyDay() {
-        viewModel.copyDay(getDayIdFromUpdatedIntent())
+        viewModel.copyDay(dayId)
     }
 
     private fun deleteDay(){
-        viewModel.deleteDay(getDayIdFromUpdatedIntent())
+        viewModel.deleteDay(dayId)
     }
-
-    private fun getDayIdFromUpdatedIntent(): Long = intent.getLongExtra(WeekActivity.KEY_DAY_ID, 0)
 
     private fun goToAddExerciseActivity(exerciseName: String){
         val intent = Intent(this, AddExerciseActivity::class.java).apply {
-            putExtra(KEY_DAY_ID, getDayIdFromUpdatedIntent())
+            putExtra(KEY_DAY_ID, dayId)
             putExtra(KEY_EXERCISE_NAME, exerciseName)
         }
         startActivity(intent)
@@ -112,7 +112,12 @@ class DayActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getExerciseList(getDayIdFromUpdatedIntent())
+        viewModel.getExerciseList(dayId)
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        dayId = intent?.getLongExtra(WeekActivity.KEY_DAY_ID, 0) ?: 0L
     }
 
 }
