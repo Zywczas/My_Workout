@@ -14,5 +14,4 @@ todo
 java.lang.RuntimeException: Unable to create service com.zywczas.myworkout.watch.services.timer.TimerService: java.lang.IllegalStateException: Not allowed to start service Intent
 { cmp=com.zywczas.myworkout.watch/.services.timer.TimerService }: app is in background uid UidRecord{17447 u0a65 SVC  idle change:uncached procs:1 seq(0,0,0)}
 10. dac minimalna wysokosc dla kazdego elementu listy, np 60dp - wtedy bedzie mozna usunac te wielkie paddingi
-11. nie odswieza prawidlowo listy jak zaznaczam tydzien lub dzien jako rozpoczety
  */

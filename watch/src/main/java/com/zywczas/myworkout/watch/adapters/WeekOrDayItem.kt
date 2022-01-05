@@ -20,6 +20,7 @@ class WeekOrDayItem(val weekOrDayId: Long, val title: String, val dates: String,
         binding.title.text = title
         if (dates.isNotBlank()) {
             binding.dates.text = dates
+            binding.dates.isVisible = true
         } else {
             binding.dates.isVisible = false
         }
