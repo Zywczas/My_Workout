@@ -2,7 +2,6 @@ package com.zywczas.myworkout.watch.activities.trainingplan.week.domain
 
 import androidx.annotation.StringRes
 import com.zywczas.myworkout.watch.R
-import com.zywczas.myworkout.watch.activities.trainingplan.day.domain.DayElements
 import org.joda.time.DateTime
 
 sealed class WeekElements {

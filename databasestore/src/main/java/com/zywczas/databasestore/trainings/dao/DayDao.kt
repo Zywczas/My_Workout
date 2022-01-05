@@ -3,7 +3,6 @@ package com.zywczas.databasestore.trainings.dao
 import androidx.room.*
 import com.zywczas.databasestore.trainings.entities.DayEntity
 import com.zywczas.databasestore.trainings.relations.DayRelations
-import com.zywczas.databasestore.trainings.relations.WeekRelations
 
 @Dao
 internal interface DayDao {
