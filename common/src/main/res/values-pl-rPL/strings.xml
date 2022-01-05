@@ -4,6 +4,7 @@
     <string name="train_hard_win_easily">Trenuj ciężko\nWygrywaj łatwo</string>
     <string name="empty_training_plan_weeks">Brak zaplanowanych treningów.\nMożesz mieć max 5 tygodni treningowych w jednym czasie. Kliknij aby dodać.</string>
     <string name="empty_training_plan_days">Brak zaplanowanych treningów.\nKliknij aby dodać nowy dzień treningowy.</string>
+    <string name="empty_training_plan_exercises">No exercises planned.\nClick here to add new.</string>
     <string name="planned_trainings">Zaplanowane treningi</string>
     <string name="settings">Ustawienia</string>
     <string name="trainings">Treningi</string>

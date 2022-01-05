@@ -179,7 +179,7 @@ internal class TrainingsBusinessCaseImpl
 
     override suspend fun markDayAsFinished(id: Long) {
         val day = dayDao.getDay(id).apply {
-            isFinished = true
+            isFinished = true //todo chyba pousuwac te zmienne w bazie danych, bo w sumie to ich nie potrzebuje
             dateFinished = dateTime.now()
             timeStamp = dateTime.now()
         }
