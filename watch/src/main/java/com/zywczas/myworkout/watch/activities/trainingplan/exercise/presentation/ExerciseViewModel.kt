@@ -52,7 +52,6 @@ class ExerciseViewModel @Inject constructor(
                 if (isItLastSetInExercise) {
                     repo.markExerciseAsFinished(currentExercise.id)
                     val exercises = repo.getExercises(currentExercise.dayId, currentExercise.weekId).sortedBy { it.sequence }
-//                    val nextExerciseInList = exercises[exercises.indexOf(currentExercise) + 1] //todo current exercise ma inny hash niz to samo exercise ale z listy
                     val currentExerciseIndex = exercises.indexOfFirst { it.id == currentExercise.id }
                     val nextExerciseInList = exercises[currentExerciseIndex + 1]
                     _nextExercise.postValue(NextExercise(id = nextExerciseInList.id, set = 1))
