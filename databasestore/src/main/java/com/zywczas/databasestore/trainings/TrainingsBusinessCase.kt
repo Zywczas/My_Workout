@@ -24,7 +24,7 @@ interface TrainingsBusinessCase {
 
     suspend fun saveNewExercise(dayId: Long, name: String, sets: Int, reps: String, weight: Double)
 
-    suspend fun copyDaysAndTrainings(dayId: Long)
+    suspend fun copyDayAndTrainingsInTheSameWeek(dayId: Long)
 
     suspend fun getWeekByExerciseId(exerciseId: Long): WeekEntity
 
