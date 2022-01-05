@@ -2,7 +2,6 @@ package com.zywczas.myworkout.watch.services.timer
 
 import android.annotation.SuppressLint
 import android.app.*
-import android.content.Context
 import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
@@ -47,13 +46,9 @@ class TimerService : LifecycleService() {
     lateinit var repo: TimerServiceRepository
     @Inject
     lateinit var dateTime: DateTimeProvider
-    var timerActivity: TimerActivity? = null
 
     private val localBinder = LocalBinder()
-    private val notificationManager by lazy { getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager }
-//    private val notificationManager by lazy { getSystemService(NotificationManager::class.java) } todo dac tak pozniej, jak sprawdze czy dziala
-    private var isServiceRunningInForeground = false
-    private var isServiceRunning = false
+    private val notificationManager by lazy { getSystemService(NotificationManager::class.java) }
     private var countTimeJob: Job? = null
 
     private val _timeLeft = MutableLiveData<String>()
@@ -67,12 +62,7 @@ class TimerService : LifecycleService() {
         AppInjector.watchComponent!!.inject(this) //todo poprawic to zeby nie wystawiac komponentu
         super.onCreate()
         logD("onCreateService")
-        startThisService()//todo sprawdzic na moim zegarku czy przez to nie powoduje uruchomienia dwoch serwisow
-    }
-
-    private fun startThisService() {
-        startService(Intent(this, TimerService::class.java))
-        isServiceRunning = false
+        startService(Intent(this, TimerService::class.java))//todo sprawdzic na moim zegarku czy przez to nie powoduje uruchomienia dwoch serwisow
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -131,7 +121,6 @@ class TimerService : LifecycleService() {
                 // Waits until DataStore data is saved before shutting down service. //todo wyczyscic
 //                job.join()
                 stopSelf()
-                isServiceRunning = false
             }
         }
     }
@@ -145,7 +134,6 @@ class TimerService : LifecycleService() {
 
     private fun notForegroundService() {
         stopForeground(true)
-        isServiceRunningInForeground = false
     }
 
     override fun onRebind(intent: Intent?) {
@@ -169,7 +157,6 @@ class TimerService : LifecycleService() {
         logD("goToForegroundService")
         val notification = generateNotification("jakis tekst main") //todo poprawic
         startForeground(NOTIFICATION_ID, notification)
-        isServiceRunningInForeground = true
     }
 
     private fun generateNotification(mainText: String): Notification {
