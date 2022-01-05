@@ -24,4 +24,6 @@ interface DayRepository {
 
     suspend fun markWeekAsFinished(id: Long)
 
+    suspend fun isDayStarted(id: Long): Boolean
+
 }

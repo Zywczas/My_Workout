@@ -56,4 +56,6 @@ interface TrainingsBusinessCase {
 
     suspend fun getWeekId(dayId: Long): Long
 
+    suspend fun isDayStarted(id: Long): Boolean
+
 }

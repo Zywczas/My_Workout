@@ -47,4 +47,6 @@ class DayRepositoryImpl @Inject constructor(
 
     override suspend fun markWeekAsFinished(id: Long) = trainings.markWeekAsFinished(id)
 
+    override suspend fun isDayStarted(id: Long): Boolean = trainings.isDayStarted(id)
+
 }

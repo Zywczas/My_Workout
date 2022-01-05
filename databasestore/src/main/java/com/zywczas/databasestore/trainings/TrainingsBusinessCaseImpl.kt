@@ -255,4 +255,6 @@ internal class TrainingsBusinessCaseImpl
 
     override suspend fun getWeekId(dayId: Long): Long = dayDao.getDay(dayId).foreignWeekId
 
+    override suspend fun isDayStarted(id: Long): Boolean = dayDao.getDay(id).dateStarted != null
+
 }

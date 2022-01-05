@@ -112,6 +112,10 @@ class DayViewModel @Inject constructor(
             showProgressBar(true)
             repo.addCardio(dayId)
             getExerciseList(dayId)
+            if (repo.isDayStarted(dayId).not()){
+                repo.markDayAsStarted(dayId)
+                repo.markWeekAsStartedIfNotStarted(dayId = dayId)
+            }
             showProgressBar(false)
         }
     }
