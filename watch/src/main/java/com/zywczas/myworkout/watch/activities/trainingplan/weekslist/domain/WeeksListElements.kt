@@ -4,7 +4,6 @@ import androidx.annotation.StringRes
 import com.zywczas.myworkout.watch.R
 import org.joda.time.DateTime
 
-@Suppress("CanSealedSubClassBeObject")
 sealed class WeeksListElements {
 
     data class Title(@StringRes val title: Int = R.string.planned_trainings) : WeeksListElements()

@@ -2,7 +2,7 @@ package com.zywczas.myworkout.watch.activities.trainingplan.timer.domain
 
 data class NextExercise(
     val id: Long = 0,
-    val foreignDayId: Long = -1,
+    val dayId: Long = -1,
     val name: String = "",
     val sequence: Int = 0,
     val setsQuantity: Int = 0,

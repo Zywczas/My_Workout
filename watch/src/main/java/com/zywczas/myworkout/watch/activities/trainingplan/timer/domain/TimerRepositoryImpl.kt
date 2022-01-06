@@ -12,7 +12,7 @@ class TimerRepositoryImpl @Inject constructor(
 
     private fun ExerciseLocal.toDomain() = NextExercise(
         id = id,
-        foreignDayId = foreignDayId,
+        dayId = foreignDayId,
         name = name,
         sequence = sequence,
         setsQuantity = setsQuantity,
@@ -24,7 +24,7 @@ class TimerRepositoryImpl @Inject constructor(
 
     private fun NextExercise.toLocal() = ExerciseLocal(
         id = id,
-        foreignDayId = foreignDayId,
+        foreignDayId = dayId,
         name = name,
         sequence = sequence,
         setsQuantity = setsQuantity,
