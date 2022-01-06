@@ -22,15 +22,18 @@ class SettingsTimerActivity : BaseActivity() {
         setupOnClickListeners()
     }
 
-    private fun setupLiveDataObservers(){
-        viewModel.breakPeriodInSeconds.observe(this) { binding.time.setText(it.toString())}
+    private fun setupLiveDataObservers() {
+        viewModel.breakPeriodInSeconds.observe(this) { binding.time.setText(it.toString()) }
+        viewModel.isBreakPeriodSaved.observe(this) {
+            if (it) {
+                showToast(R.string.saved)
+                finish()
+            }
+        }
     }
 
-    private fun setupOnClickListeners(){
-        binding.save.setOnClickListener {
-            viewModel.saveBreakPeriod(binding.time.text.toString().toInt())
-            showToast(R.string.saved)
-        }
+    private fun setupOnClickListeners() {
+        binding.save.setOnClickListener { viewModel.saveBreakPeriod(binding.time.text.toString().toInt()) }
     }
 
 }

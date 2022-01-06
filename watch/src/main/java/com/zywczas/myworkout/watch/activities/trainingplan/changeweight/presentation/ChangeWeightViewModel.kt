@@ -20,8 +20,8 @@ class ChangeWeightViewModel @Inject constructor(
     private val _exercise = MediatorLiveData<Exercise>()
     val exercise: LiveData<Exercise> = _exercise
 
-    private val _isWeightSaved = SingleLiveData<Boolean>()
-    val isWeightSaved: LiveData<Boolean> = _isWeightSaved
+    private val _finishActivity = SingleLiveData<Boolean>()
+    val finishActivity: LiveData<Boolean> = _finishActivity
 
     fun getCurrentExercise(id: Long){
         viewModelScope.launch(dispatcherIO){
@@ -40,7 +40,7 @@ class ChangeWeightViewModel @Inject constructor(
                     }
                 repo.saveWeight(exercise.id, weight)
             }
-            _isWeightSaved.postValue(true)
+            _finishActivity.postValue(true)
         }
     }
 

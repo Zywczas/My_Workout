@@ -24,7 +24,7 @@ class ChangeWeightActivity : BaseActivity() {
 
     private fun setupLiveDataObservers(){
         viewModel.exercise.observe(this){ binding.weight.setText(it.weight.toString()) }
-        viewModel.isWeightSaved.observe(this){ if (it) { finish() } }
+        viewModel.finishActivity.observe(this){ if (it) { finish() } }
     }
 
     private fun setupOnClickListeners(){
