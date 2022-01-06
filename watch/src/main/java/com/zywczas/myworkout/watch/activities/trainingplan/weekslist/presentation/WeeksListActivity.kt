@@ -44,7 +44,7 @@ class WeeksListActivity : BaseActivity() {
     }
 
     private fun WearableRecyclerView.setup(){
-        addVerticalItemDivider(R.drawable.divider_transparent_horizontal)
+        addVerticalItemDivider(R.drawable.divider_transparent_vertical)
         isEdgeItemsCenteringEnabled = true
         layoutManager = WearableLinearLayoutManager(this@WeeksListActivity, CustomScrollingLayoutCallback())
         adapter = FastAdapter.with(itemAdapter)

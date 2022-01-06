@@ -66,7 +66,7 @@ class WeekViewModel @Inject constructor(
     private suspend fun List<WeekElements.Day>.withDisplayedCardio(): List<WeekElements.Day> {
         forEach {
             if (it.isCardioDone) {
-                it.name = "${it.name}\n${stringProvider.getString(R.string.plus_cardio)}"
+                it.name = "${it.name} ${stringProvider.getString(R.string.plus_cardio)}"
             }
         }
         return this

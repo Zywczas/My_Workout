@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/titleItem"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="10dp">
-    <!--    todo zamiast paddingu to dac poprawny line separator-->
+    android:layout_height="wrap_content" >
 
     <TextView
         android:id="@+id/title"

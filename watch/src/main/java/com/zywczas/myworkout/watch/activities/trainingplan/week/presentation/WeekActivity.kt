@@ -10,8 +10,10 @@ import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericItem
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
+import com.zywczas.common.extetions.addVerticalItemDivider
 import com.zywczas.common.extetions.showToast
 import com.zywczas.common.utils.autoRelease
+import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.day.presentation.DayActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.week.domain.WeekElements
@@ -43,6 +45,7 @@ class WeekActivity : BaseActivity() {
     }
 
     private fun WearableRecyclerView.setup(){
+        addVerticalItemDivider(R.drawable.divider_transparent_vertical)
         isEdgeItemsCenteringEnabled = true
         layoutManager = WearableLinearLayoutManager(this@WeekActivity, CustomScrollingLayoutCallback())
         adapter = FastAdapter.with(itemAdapter)
