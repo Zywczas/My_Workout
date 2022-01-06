@@ -2,7 +2,6 @@ package com.zywczas.myworkout.watch.utils
 
 /*
 todo
-0. dac automatyczne przechodzenie z pierwszego ekranu
 2. dac cos ala dialog are you sure przed usuwaniem elementow
 11. sprawdzic dimensy wszedzie
 12. sprawdzic co to jest to SpeakableTextPresentCheck bo daje ignore we wszystkich layoutow

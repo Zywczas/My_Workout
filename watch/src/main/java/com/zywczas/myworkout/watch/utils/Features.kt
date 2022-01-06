@@ -19,7 +19,6 @@ ustawianie kolejnosci tygodni treningowych
 ustawianie kolejnosci cwiczen
 
 LOGIKA:
-- cardio - uproszczone: daje tylko info ze kardio zrobione, nic wiecej
 - wyswietlam 5 ostatnie tygodnie, reszte usuwam
 -zaznaczanie zrobionego cwiczenia - jak sie przechodzi do kolejnego cwiczenia, a przy ostatnim cwiczeniu przy ostatniej serii guzik "Zakoncz cwiczenie"
 

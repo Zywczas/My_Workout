@@ -2,6 +2,7 @@ package com.zywczas.myworkout.watch.di
 
 import com.zywczas.common.di.modules.CommonBinderModule
 import com.zywczas.common.di.modules.DispatchersModule
+import com.zywczas.common.di.modules.UtilsModule
 import com.zywczas.databasestore.di.modules.BusinessCaseModule
 import com.zywczas.databasestore.di.modules.DatabaseModule
 import com.zywczas.myworkout.watch.activities.BaseActivity
@@ -20,7 +21,8 @@ import javax.inject.Singleton
     ViewModelFactoryModule::class,
     DatabaseModule::class,
     BusinessCaseModule::class,
-    CommonBinderModule::class
+    CommonBinderModule::class,
+    UtilsModule::class
 ])
 interface WatchComponent {
 

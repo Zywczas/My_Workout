@@ -2,6 +2,7 @@ package com.zywczas.myworkout.watch.di.modules
 
 import androidx.lifecycle.ViewModel
 import com.zywczas.common.di.qualifiers.ViewModelKey
+import com.zywczas.myworkout.watch.activities.main.MainViewModel
 import com.zywczas.myworkout.watch.activities.settings.timer.presentation.SettingsTimerViewModel
 import com.zywczas.myworkout.watch.activities.trainingplan.addexercise.presentation.AddExerciseViewModel
 import com.zywczas.myworkout.watch.activities.trainingplan.changeweight.presentation.ChangeWeightViewModel
@@ -16,6 +17,11 @@ import dagger.multibindings.IntoMap
 
 @Module
 abstract class ViewModelFactoryModule {
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    abstract fun bindMainViewModel(vm: MainViewModel) : ViewModel
 
     @Binds
     @IntoMap
