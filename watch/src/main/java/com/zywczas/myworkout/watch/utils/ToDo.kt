@@ -7,9 +7,5 @@ todo
 2. dac cos ala dialog are you sure przed usuwaniem elementow
 3. Dac ikonke
 4. Progress bar jakos dziwnie wyglada
-7. timer wczytuje tylko 2 sekundy zamiast 60 domyslnych
-8. crash jak podczas timera wcisnalem guzik back, ale bylem w debuggerze wiec moze to zawadzilo:
-java.lang.RuntimeException: Unable to create service com.zywczas.myworkout.watch.services.timer.TimerService: java.lang.IllegalStateException: Not allowed to start service Intent
-{ cmp=com.zywczas.myworkout.watch/.services.timer.TimerService }: app is in background uid UidRecord{17447 u0a65 SVC  idle change:uncached procs:1 seq(0,0,0)}
 10. dac minimalna wysokosc dla kazdego elementu listy, np 60dp - wtedy bedzie mozna usunac te wielkie paddingi
  */

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="launcherIconBackground">#607D8B</color>
+    <color name="launcherIconMain">@color/green400</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="accent">#0072F8</color>
@@ -10,7 +12,7 @@
     <color name="deleteItemBackground">@color/deepPurple900</color>
 
     <color name="deepPurple900">#311b92</color>
-    <color name="purple_500">#6200EE</color>
+    <color name="green400">#66bb6a</color>
     <color name="purple_700">#3700B3</color>
     <color name="teal_200">#03DAC5</color>
     <color name="teal_700">#018786</color>
