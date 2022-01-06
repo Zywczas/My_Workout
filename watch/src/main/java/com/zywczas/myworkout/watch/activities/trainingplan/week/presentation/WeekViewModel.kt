@@ -22,9 +22,9 @@ class WeekViewModel @Inject constructor(
     private val _weekElements = MutableLiveData<List<WeekElements>>()
     val weekElements: LiveData<List<WeekElements>> = _weekElements
 
-    val isEmptyPlanMessageGone: LiveData<Boolean> = Transformations.switchMap(weekElements) { daysElements ->
+    val isEmptyPlanMessageVisible: LiveData<Boolean> = Transformations.switchMap(weekElements) { daysElements ->
         liveData(dispatcherIO) {
-            emit(daysElements.isNotEmpty())
+            emit(daysElements.isEmpty())
         }
     }
 

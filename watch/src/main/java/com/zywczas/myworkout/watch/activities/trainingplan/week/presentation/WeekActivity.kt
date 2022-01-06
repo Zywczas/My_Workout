@@ -3,7 +3,6 @@ package com.zywczas.myworkout.watch.activities.trainingplan.week.presentation
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.wear.widget.WearableLinearLayoutManager
 import androidx.wear.widget.WearableRecyclerView
@@ -52,7 +51,7 @@ class WeekActivity : BaseActivity() {
     private fun setupLiveDataObservers(){
         viewModel.message.observe(this){ showToast(it) }
         viewModel.isProgressBarVisible.observe(this){ binding.progressBar.isVisible = it }
-        viewModel.isEmptyPlanMessageGone.observe(this){ binding.emptyPlanMessage.isGone = it }
+        viewModel.isEmptyPlanMessageVisible.observe(this){ binding.emptyPlanMessage.isVisible = it }
         viewModel.weekElements.observe(this){ days -> FastAdapterDiffUtil.set(itemAdapter, days.toAdapterItems(), DiffUtilCallback()) }
         viewModel.closeActivity.observe(this){ if (it) finish() }
     }

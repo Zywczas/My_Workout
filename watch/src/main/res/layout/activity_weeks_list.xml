@@ -30,9 +30,11 @@
         android:paddingEnd="10dp"
         android:text="@string/empty_training_plan_weeks"
         android:textAlignment="center"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TextContrastCheck" />
+        tools:ignore="TextContrastCheck"
+        tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

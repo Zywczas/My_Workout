@@ -22,9 +22,9 @@ class DayViewModel @Inject constructor(
     private val _dayElements = MutableLiveData<List<DayElements>>()
     val dayElements: LiveData<List<DayElements>> = _dayElements
 
-    val isEmptyPlanMessageGone: LiveData<Boolean> = Transformations.switchMap(dayElements) { dayElements ->
+    val isEmptyPlanMessageVisible: LiveData<Boolean> = Transformations.switchMap(dayElements) { dayElements ->
         liveData(dispatcherIO) {
-            emit(dayElements.isNotEmpty())
+            emit(dayElements.isEmpty())
         }
     }
 

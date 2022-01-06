@@ -21,9 +21,9 @@ class WeeksListViewModel @Inject constructor(
     private val _weeksListElements = MutableLiveData<List<WeeksListElements>>()
     val weeksListElements: LiveData<List<WeeksListElements>> = _weeksListElements
 
-    val isEmptyPlanMessageGone: LiveData<Boolean> = Transformations.switchMap(weeksListElements) { weeksListElements ->
+    val isEmptyPlanMessageVisible: LiveData<Boolean> = Transformations.switchMap(weeksListElements) { weeksListElements ->
         liveData(dispatcherIO) {
-            emit(weeksListElements.isNotEmpty())
+            emit(weeksListElements.isEmpty())
         }
     }
 //todo dodac usuwanie jesli wiecej niz 5
