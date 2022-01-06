@@ -1,7 +1,7 @@
 package com.zywczas.myworkout.watch.activities.trainingplan.changeweight.domain
 
 import com.zywczas.databasestore.trainings.TrainingsBusinessCase
-import com.zywczas.databasestore.trainings.entities.ExerciseEntity
+import com.zywczas.databasestore.trainings.entities.ExerciseLocal
 import javax.inject.Inject
 
 class ChangeWeightRepositoryImpl @Inject constructor(
@@ -10,7 +10,7 @@ class ChangeWeightRepositoryImpl @Inject constructor(
 
     override suspend fun getExercise(id: Long): Exercise = trainings.getExercise(id).toDomain()
 
-    private fun ExerciseEntity.toDomain() = Exercise(
+    private fun ExerciseLocal.toDomain() = Exercise(
         id = id,
         weight = weight
     )

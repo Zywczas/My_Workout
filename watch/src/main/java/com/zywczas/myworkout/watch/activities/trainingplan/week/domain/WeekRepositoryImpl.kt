@@ -1,8 +1,8 @@
 package com.zywczas.myworkout.watch.activities.trainingplan.week.domain
 
 import com.zywczas.databasestore.trainings.TrainingsBusinessCase
-import com.zywczas.databasestore.trainings.entities.DayEntity
-import com.zywczas.databasestore.trainings.entities.WeekEntity
+import com.zywczas.databasestore.trainings.entities.DayLocal
+import com.zywczas.databasestore.trainings.entities.WeekLocal
 import javax.inject.Inject
 
 class WeekRepositoryImpl @Inject constructor(
@@ -11,7 +11,7 @@ class WeekRepositoryImpl @Inject constructor(
 
     override suspend fun getWeekHeader(id: Long): WeekElements.WeekHeader = trainings.getWeek(id).toDomain()
 
-    private fun WeekEntity.toDomain() = WeekElements.WeekHeader(
+    private fun WeekLocal.toDomain() = WeekElements.WeekHeader(
         weekName = name,
         dateStarted = dateStarted,
         dateFinished = dateFinished
@@ -19,18 +19,18 @@ class WeekRepositoryImpl @Inject constructor(
 
     override suspend fun getDays(weekId: Long): List<WeekElements.Day> = trainings.getDays(weekId).map { it.toDomain() }
 
-    private fun DayEntity.toDomain() = WeekElements.Day(
+    private fun DayLocal.toDomain() = WeekElements.Day(
         id = id,
         name = name,
         sequence = sequence,
-        isFinished = isFinished,
+        isFinished = dateFinished != null,
         dateStarted = dateStarted,
         dateFinished = dateFinished,
         isCardioDone = isCardioDone
     )
 
     override suspend fun saveNewDay(name: String, weekId: Long, sequence: Int) = trainings.saveDay(
-        DayEntity(
+        DayLocal(
         foreignWeekId = weekId,
         name = name,
         sequence = sequence

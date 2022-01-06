@@ -1,7 +1,7 @@
 package com.zywczas.myworkout.watch.activities.trainingplan.timer.domain
 
 import com.zywczas.databasestore.trainings.TrainingsBusinessCase
-import com.zywczas.databasestore.trainings.entities.ExerciseEntity
+import com.zywczas.databasestore.trainings.entities.ExerciseLocal
 import javax.inject.Inject
 
 class TimerRepositoryImpl @Inject constructor(
@@ -10,7 +10,7 @@ class TimerRepositoryImpl @Inject constructor(
 
     override suspend fun getNextExercise(id: Long): NextExercise = trainings.getExercise(id).toDomain()
 
-    private fun ExerciseEntity.toDomain() = NextExercise(
+    private fun ExerciseLocal.toDomain() = NextExercise(
         id = id,
         foreignDayId = foreignDayId,
         name = name,
@@ -20,9 +20,9 @@ class TimerRepositoryImpl @Inject constructor(
         weight = weight
     )
 
-    override suspend fun save(exercise: NextExercise) = trainings.saveExercise(exercise.toEntity())
+    override suspend fun save(exercise: NextExercise) = trainings.saveExercise(exercise.toLocal())
 
-    private fun NextExercise.toEntity() = ExerciseEntity(
+    private fun NextExercise.toLocal() = ExerciseLocal(
         id = id,
         foreignDayId = foreignDayId,
         name = name,

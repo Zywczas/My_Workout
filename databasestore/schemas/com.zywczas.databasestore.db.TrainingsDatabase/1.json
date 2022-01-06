@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "298a26b51e471fa84fe005f004730c2b",
+    "identityHash": "4d2101d8d9ac69556c48c0902c2f5f01",
     "entities": [
       {
         "tableName": "Week",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `dateStarted` INTEGER, `dateFinished` INTEGER, `isFinished` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `dateStarted` INTEGER, `dateFinished` INTEGER)",
         "fields": [
           {
             "fieldPath": "id",
@@ -37,12 +37,6 @@
             "columnName": "dateFinished",
             "affinity": "INTEGER",
             "notNull": false
-          },
-          {
-            "fieldPath": "isFinished",
-            "columnName": "isFinished",
-            "affinity": "INTEGER",
-            "notNull": true
           }
         ],
         "primaryKey": {
@@ -56,7 +50,7 @@
       },
       {
         "tableName": "Day",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `foreignWeekId` INTEGER NOT NULL, `name` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `dateStarted` INTEGER, `dateFinished` INTEGER, `isCardioDone` INTEGER NOT NULL, `isFinished` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `foreignWeekId` INTEGER NOT NULL, `name` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `dateStarted` INTEGER, `dateFinished` INTEGER, `isCardioDone` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -97,12 +91,6 @@
           {
             "fieldPath": "isCardioDone",
             "columnName": "isCardioDone",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "isFinished",
-            "columnName": "isFinished",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -240,7 +228,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '298a26b51e471fa84fe005f004730c2b')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4d2101d8d9ac69556c48c0902c2f5f01')"
     ]
   }
 }

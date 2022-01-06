@@ -1,20 +1,20 @@
 package com.zywczas.databasestore.trainings.dao
 
 import androidx.room.*
-import com.zywczas.databasestore.trainings.entities.WeekEntity
+import com.zywczas.databasestore.trainings.entities.WeekLocal
 import com.zywczas.databasestore.trainings.relations.WeekRelations
 
 @Dao
 internal interface WeekDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(model: WeekEntity): Long
+    suspend fun insert(model: WeekLocal): Long
 
     @Query("SELECT * FROM Week")
-    suspend fun getWeeks(): List<WeekEntity>
+    suspend fun getWeeks(): List<WeekLocal>
 
     @Query("SELECT * FROM Week WHERE id = :id")
-    suspend fun getWeek(id: Long): WeekEntity
+    suspend fun getWeek(id: Long): WeekLocal
 
     @Transaction
     @Query("SELECT * FROM Week WHERE id = :id")

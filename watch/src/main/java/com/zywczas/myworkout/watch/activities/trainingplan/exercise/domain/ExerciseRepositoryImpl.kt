@@ -1,8 +1,8 @@
 package com.zywczas.myworkout.watch.activities.trainingplan.exercise.domain
 
 import com.zywczas.databasestore.trainings.TrainingsBusinessCase
-import com.zywczas.databasestore.trainings.entities.DayEntity
-import com.zywczas.databasestore.trainings.entities.ExerciseEntity
+import com.zywczas.databasestore.trainings.entities.DayLocal
+import com.zywczas.databasestore.trainings.entities.ExerciseLocal
 import javax.inject.Inject
 
 class ExerciseRepositoryImpl @Inject constructor(
@@ -14,7 +14,7 @@ class ExerciseRepositoryImpl @Inject constructor(
         return trainings.getExercise(id).toDomain(week.id)
     }
 
-    private fun ExerciseEntity.toDomain(weekId: Long) = Exercise(
+    private fun ExerciseLocal.toDomain(weekId: Long) = Exercise(
         id = id,
         dayId = foreignDayId,
         weekId = weekId,
@@ -38,7 +38,7 @@ class ExerciseRepositoryImpl @Inject constructor(
 
     override suspend fun getDays(weekId: Long): List<Day> = trainings.getDays(weekId).map { it.toDomain() }
 
-    private fun DayEntity.toDomain() = Day(isFinished = isFinished)
+    private fun DayLocal.toDomain() = Day(isFinished = dateFinished != null)
 
     override suspend fun markWeekAsFinished(id: Long) = trainings.markWeekAsFinished(id)
 
