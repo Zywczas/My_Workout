@@ -44,9 +44,6 @@
             android:name=".activities.settings.timer.presentation.SettingsTimerActivity"
             android:exported="true" />
         <activity
-            android:name=".activities.settings.main.presentation.SettingsMainActivity"
-            android:exported="true" />
-        <activity
             android:name=".activities.trainingplan.weekslist.presentation.WeeksListActivity"
             android:exported="true" />
 

@@ -6,9 +6,6 @@
     <string name="empty_training_plan_days">Brak zaplanowanych treningów.\nKliknij aby dodać nowy dzień treningowy.</string>
     <string name="empty_training_plan_exercises">No exercises planned.\nClick here to add new.</string>
     <string name="planned_trainings">Zaplanowane treningi</string>
-    <string name="settings">Ustawienia</string>
-    <string name="trainings">Treningi</string>
-    <string name="break_interval">Długość przerwy</string>
     <string name="time_between_series">Czas pomiędzy seriami</string>
     <string name="save">Zapisz</string>
     <string name="saved">Zapisano</string>
