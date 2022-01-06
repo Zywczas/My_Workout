@@ -3,22 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/weekOrDayItem"
+    android:background="@drawable/item_background"
+    android:minHeight="@dimen/listItemMinHeight"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="10dp">
-    <!--    todo zamiast paddingu to dac poprawny line separator-->
-    <!--todo dimensy-->
-    <!--    todo dac tak ze jak nie ma drugiej linijki to i tak zachowuje grubosc dwoch linijek-->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/backgroundLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/item_background"
-        app:layout_constraintBottom_toBottomOf="@+id/dates"
-        app:layout_constraintEnd_toEndOf="@+id/title"
-        app:layout_constraintStart_toStartOf="@+id/title"
-        app:layout_constraintTop_toTopOf="@+id/title"
-        tools:ignore="ContentDescription" />
+    android:layout_height="wrap_content" >
 
     <TextView
         android:id="@+id/title"
@@ -29,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Tydzien 1" />
+        tools:text="Week 1" />
 
     <TextView
         android:id="@+id/dates"
@@ -40,6 +28,6 @@
         app:layout_constraintEnd_toEndOf="@+id/title"
         app:layout_constraintStart_toStartOf="@+id/title"
         app:layout_constraintTop_toBottomOf="@+id/title"
-        tools:text="21.07" />
+        tools:text="Started: 21.07" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

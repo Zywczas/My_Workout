@@ -41,6 +41,7 @@ dependencies {
     implementation appDependencies.jodatime
 
     implementation viewDependencies.navigationFragment
+    implementation viewDependencies.recyclerView
 
     implementation diDependencies.dagger
     implementation diDependencies.daggerAndroid

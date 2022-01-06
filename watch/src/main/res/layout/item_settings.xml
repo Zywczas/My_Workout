@@ -3,17 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/settingsItem"
+    android:background="@drawable/item_background"
+    android:backgroundTint="@color/settingsItemBackground"
+    android:minHeight="@dimen/listSettingsItemMinHeight"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="10dp">
-    <!--    todo zamiast paddingu to dac poprawny line separator-->
-    <!--todo dimensy-->
+    android:layout_height="wrap_content" >
+
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/item_background"
-        android:backgroundTint="@color/settingsItemBackground"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,5 +20,4 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextContrastCheck"
         tools:text="Settings 1" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

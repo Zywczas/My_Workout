@@ -53,7 +53,7 @@ dependencies {
 //    implementation viewDependencies.composeMaterial
 //    implementation viewDependencies.composeUIToolingPreview
 //    implementation viewDependencies.composeActivity
-    implementation viewDependencies.recyclerview
+    implementation viewDependencies.recyclerView
     implementation viewDependencies.percentlayout
     implementation viewDependencies.constraintlayout
     implementation viewDependencies.fastAdapter

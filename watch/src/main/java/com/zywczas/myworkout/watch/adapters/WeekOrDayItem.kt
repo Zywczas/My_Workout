@@ -27,7 +27,7 @@ class WeekOrDayItem(val weekOrDayId: Long, val title: String, val dates: String,
         if (isFinished) {
             binding.title.setTextColor(binding.root.context.getColor(R.color.exerciseDoneText))
             binding.dates.setTextColor(binding.root.context.getColor(R.color.exerciseDoneText))
-            binding.backgroundLayout.backgroundTintList = ColorStateList.valueOf(binding.root.context.getColor(R.color.exerciseDoneBackground))
+            binding.weekOrDayItem.backgroundTintList = ColorStateList.valueOf(binding.root.context.getColor(R.color.exerciseDoneBackground))
         }
         binding.root.setOnClickListener { onClickAction(weekOrDayId) }
     }

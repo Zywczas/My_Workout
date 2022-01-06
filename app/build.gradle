@@ -58,7 +58,7 @@ dependencies {
 //    implementation viewDependencies.composeActivity
     implementation viewDependencies.navigationFragment
     implementation viewDependencies.navigationUi
-    implementation viewDependencies.recyclerview
+    implementation viewDependencies.recyclerView
     implementation viewDependencies.percentlayout
 
     //    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"

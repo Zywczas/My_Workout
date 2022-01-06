@@ -33,7 +33,7 @@ ext {
             fastAdapter                     : "com.mikepenz:fastadapter:$fast_adapter_version",
             fastAdapterBinding              : "com.mikepenz:fastadapter-extensions-binding:$fast_adapter_version",
             fastAdapterDiffUtil             : "com.mikepenz:fastadapter-extensions-diff:$fast_adapter_version",
-            recyclerview                    : 'androidx.recyclerview:recyclerview:1.2.1',
+            recyclerView                    : 'androidx.recyclerview:recyclerview:1.2.1',
             percentlayout                   : 'androidx.percentlayout:percentlayout:1.0.0',
             constraintlayout                : 'androidx.constraintlayout:constraintlayout:2.1.2'
     ]
