@@ -3,20 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/goToExerciseItem"
+    android:minHeight="@dimen/listSettingsItemMinHeight"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
-    <!--    todo zamiast paddingu to dac poprawny line separator-->
-    <!--todo dimensy-->
+    android:background="@drawable/item_background" >
+
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/item_background"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Start exercise" />
+        tools:text="Start exercises" />
 </androidx.constraintlayout.widget.ConstraintLayout>

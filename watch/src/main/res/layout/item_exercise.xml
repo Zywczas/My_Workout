@@ -3,31 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:minHeight="@dimen/listItemMinHeight"
     android:id="@+id/exerciseItem"
-    android:paddingStart="10dp"
-    android:paddingEnd="10dp"
-    android:paddingTop="10dp"
     android:layout_height="wrap_content">
-    <!--    todo zamiast paddingu to dac poprawny line separator-->
-    <!--todo dimensy-->
+
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@color/accent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Press ups" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/lightGrey"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" >
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
