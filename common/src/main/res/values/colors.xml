@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="launcherIconBackground">#607D8B</color>
-    <color name="launcherIconMain">@color/green400</color>
+    <color name="accentFirst">#0E7DD4</color>
+    <color name="accentSecond">#3CEB52</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="accent">#0072F8</color>
