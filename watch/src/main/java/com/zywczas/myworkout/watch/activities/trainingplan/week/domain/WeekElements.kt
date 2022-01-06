@@ -7,10 +7,11 @@ import org.joda.time.DateTime
 sealed class WeekElements {
 
     data class WeekHeader(
-        val weekName: String = "",
+        var weekName: String = "",
         val dateStarted: DateTime? = null,
         val dateFinished: DateTime? = null,
-        var displayedDate: String = ""
+        var displayedDate: String = "",
+        val copyVersion: Int = 1,
     ) : WeekElements()
 
     data class Day(

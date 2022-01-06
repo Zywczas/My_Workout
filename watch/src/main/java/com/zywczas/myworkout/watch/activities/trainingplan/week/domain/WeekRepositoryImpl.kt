@@ -14,7 +14,8 @@ class WeekRepositoryImpl @Inject constructor(
     private fun WeekLocal.toDomain() = WeekElements.WeekHeader(
         weekName = name,
         dateStarted = dateStarted,
-        dateFinished = dateFinished
+        dateFinished = dateFinished,
+        copyVersion = copyVersion
     )
 
     override suspend fun getDays(weekId: Long): List<WeekElements.Day> = trainings.getDays(weekId).map { it.toDomain() }

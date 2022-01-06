@@ -10,8 +10,9 @@ sealed class WeeksListElements {
 
     data class Week(
         val id: Long = 0L,
-        val name: String = "",
+        var name: String = "",
         val sequence: Int = 0,
+        val copyVersion: Int = 1,
         val dateStarted: DateTime? = null,
         val dateFinished: DateTime? = null,
         val isFinished: Boolean = false,

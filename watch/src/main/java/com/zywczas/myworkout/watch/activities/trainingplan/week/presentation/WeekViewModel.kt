@@ -37,7 +37,9 @@ class WeekViewModel @Inject constructor(
                 .withDisplayedDate() //todo dac tutaj w kolejnosci normalnej i poprawic funkcje find next day sequence - wyszukiwac w SQL najlepiej
                 .withDisplayedCardio()
             if (days.isNotEmpty()) {
-                val weekHeader = repo.getWeekHeader(weekId).withDisplayedDate()
+                val weekHeader = repo.getWeekHeader(weekId)
+                    .withDisplayedDate()
+                    .withCopyVersion()
                 val weekElements = mutableListOf<WeekElements>().apply {
                     add(weekHeader)
                     addAll(days)
@@ -77,6 +79,13 @@ class WeekViewModel @Inject constructor(
             displayedDate = stringProvider.getString(R.string.done, dateFinished.dayFormat())
         } else if (dateStarted != null) {
             displayedDate = stringProvider.getString(R.string.started, dateStarted.dayFormat())
+        }
+        return this
+    }
+
+    private fun WeekElements.WeekHeader.withCopyVersion(): WeekElements.WeekHeader {
+        if (copyVersion > 1){
+            weekName = "$weekName - $copyVersion"
         }
         return this
     }

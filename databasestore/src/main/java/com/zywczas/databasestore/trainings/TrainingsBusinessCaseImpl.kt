@@ -55,13 +55,21 @@ internal class TrainingsBusinessCaseImpl
     private suspend fun copyWeekRelations(oldWeekRelations: WeekRelations): WeekRelations {
         val newWeek = WeekLocal(
             name = oldWeekRelations.week.name,
-            sequence = findNextWeekPosition()
+            sequence = findNextWeekPosition(),
+            copyVersion = findNextWeekCopyVersion(oldWeekRelations.week.name)
         )
         return WeekRelations(
             week = newWeek,
             days = copyDaysRelationsForNewWeek(oldWeekRelations.days)
         )
     }
+
+    //todo wrzucic to w SQL
+    private suspend fun findNextWeekCopyVersion(nameOfWeekToBeCopied: String): Int =
+        weekDao.getWeeks()
+            .filter { it.name == nameOfWeekToBeCopied }
+            .maxByOrNull { it.sequence }
+            ?.let { it.copyVersion + 1 } ?: 1
 
     private fun copyDaysRelationsForNewWeek(oldDaysRelations: List<DayRelations>): List<DayRelations> {
         val copiedDaysRelations = mutableListOf<DayRelations>()

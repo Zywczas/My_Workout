@@ -9,5 +9,6 @@ import org.joda.time.DateTime
 data class WeekLocal(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Long = 0,
                      @ColumnInfo(name = "name") val name: String = "",
                      @ColumnInfo(name = "sequence") val sequence: Int = 0,
+                     @ColumnInfo(name = "copyVersion") val copyVersion: Int = 1,
                      @ColumnInfo(name = "dateStarted") var dateStarted: DateTime? = null,
                      @ColumnInfo(name = "dateFinished") var dateFinished: DateTime? = null)

@@ -14,6 +14,7 @@ class WeeksListRepositoryImpl @Inject constructor(
         id = id,
         name = name,
         sequence = sequence,
+        copyVersion = copyVersion,
         dateStarted = dateStarted,
         dateFinished = dateFinished,
         isFinished = dateFinished != null
