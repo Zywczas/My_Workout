@@ -34,6 +34,9 @@ class DayViewModel @Inject constructor(
     private val _nextExerciseId = SingleLiveData<Long>()
     val nextExerciseId: LiveData<Long> = _nextExerciseId
 
+    private val _closeActivity = SingleLiveData<Boolean>()
+    val closeActivity: LiveData<Boolean> = _closeActivity
+
     fun getExerciseList(dayId: Long) {
         viewModelScope.launch(dispatcherIO) {
             val exercises = repo.getExercises(dayId).sortedBy { it.sequence }
@@ -135,6 +138,7 @@ class DayViewModel @Inject constructor(
             val weekId = repo.getWeekId(dayId = id)
             repo.deleteDay(id)
             checkIfWeekIsFinished(weekId)
+            _closeActivity.postValue(true)
             showProgressBar(false)
         }
     }

@@ -62,6 +62,7 @@ class DayActivity : BaseActivity() {
         viewModel.dayElements.observe(this) { days -> FastAdapterDiffUtil.set(itemAdapter, days.toAdapterItems(), DiffUtilCallback()) }
         viewModel.newExerciseName.observe(this) { goToAddExerciseActivity(it) }
         viewModel.nextExerciseId.observe(this){ goToExerciseActivity(it) }
+        viewModel.closeActivity.observe(this){ if (it) finish() }
     }
 
     private fun List<DayElements>.toAdapterItems(): List<GenericItem> = map {
