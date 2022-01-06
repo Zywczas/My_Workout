@@ -13,5 +13,4 @@ data class DayEntity(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") v
                      @ColumnInfo(name = "dateStarted") var dateStarted: DateTime? = null,
                      @ColumnInfo(name = "dateFinished") var dateFinished: DateTime? = null,
                      @ColumnInfo(name = "isCardioDone") var isCardioDone: Boolean = false,
-                     @ColumnInfo(name = "isFinished") var isFinished: Boolean = false,
-                     @ColumnInfo(name = "timeStamp") var timeStamp: DateTime = DateTime())
+                     @ColumnInfo(name = "isFinished") var isFinished: Boolean = false)

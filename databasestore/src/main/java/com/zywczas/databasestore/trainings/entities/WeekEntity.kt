@@ -11,5 +11,4 @@ data class WeekEntity(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") 
                       @ColumnInfo(name = "sequence") val sequence: Int = 0,
                       @ColumnInfo(name = "dateStarted") var dateStarted: DateTime? = null,
                       @ColumnInfo(name = "dateFinished") var dateFinished: DateTime? = null,
-                      @ColumnInfo(name = "isFinished") var isFinished: Boolean = false,
-                      @ColumnInfo(name = "timeStamp") var timeStamp: DateTime = DateTime())
+                      @ColumnInfo(name = "isFinished") var isFinished: Boolean = false)

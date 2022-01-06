@@ -7,5 +7,4 @@ import org.joda.time.DateTime
 
 @Entity(tableName = "Timer") //todo pozamieniac nazwy wszytkich na local, a funkcji na toLocal()
 data class TimerEntity(@PrimaryKey(autoGenerate = false) @ColumnInfo(name = "id") val id: Long = 1,
-                       @ColumnInfo(name = "seconds") val seconds: Int = 60,
-                       @ColumnInfo(name = "timeStamp") val timeStamp: DateTime = DateTime())
+                       @ColumnInfo(name = "seconds") val seconds: Int = 60)

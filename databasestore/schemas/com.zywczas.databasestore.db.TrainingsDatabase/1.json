@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "06b90a55ddcc12851d924d41e6835b37",
+    "identityHash": "298a26b51e471fa84fe005f004730c2b",
     "entities": [
       {
         "tableName": "Week",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `dateStarted` INTEGER, `dateFinished` INTEGER, `isFinished` INTEGER NOT NULL, `timeStamp` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `dateStarted` INTEGER, `dateFinished` INTEGER, `isFinished` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -43,12 +43,6 @@
             "columnName": "isFinished",
             "affinity": "INTEGER",
             "notNull": true
-          },
-          {
-            "fieldPath": "timeStamp",
-            "columnName": "timeStamp",
-            "affinity": "INTEGER",
-            "notNull": true
           }
         ],
         "primaryKey": {
@@ -62,7 +56,7 @@
       },
       {
         "tableName": "Day",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `foreignWeekId` INTEGER NOT NULL, `name` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `dateStarted` INTEGER, `dateFinished` INTEGER, `isCardioDone` INTEGER NOT NULL, `isFinished` INTEGER NOT NULL, `timeStamp` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `foreignWeekId` INTEGER NOT NULL, `name` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `dateStarted` INTEGER, `dateFinished` INTEGER, `isCardioDone` INTEGER NOT NULL, `isFinished` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -111,12 +105,6 @@
             "columnName": "isFinished",
             "affinity": "INTEGER",
             "notNull": true
-          },
-          {
-            "fieldPath": "timeStamp",
-            "columnName": "timeStamp",
-            "affinity": "INTEGER",
-            "notNull": true
           }
         ],
         "primaryKey": {
@@ -130,7 +118,7 @@
       },
       {
         "tableName": "Exercise",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `foreignDayId` INTEGER NOT NULL, `name` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `setsQuantity` INTEGER NOT NULL, `currentSet` INTEGER NOT NULL, `repsQuantity` TEXT NOT NULL, `weight` REAL NOT NULL, `isFinished` INTEGER NOT NULL, `timeStamp` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `foreignDayId` INTEGER NOT NULL, `name` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `setsQuantity` INTEGER NOT NULL, `currentSet` INTEGER NOT NULL, `repsQuantity` TEXT NOT NULL, `weight` REAL NOT NULL, `isFinished` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -185,12 +173,6 @@
             "columnName": "isFinished",
             "affinity": "INTEGER",
             "notNull": true
-          },
-          {
-            "fieldPath": "timeStamp",
-            "columnName": "timeStamp",
-            "affinity": "INTEGER",
-            "notNull": true
           }
         ],
         "primaryKey": {
@@ -230,7 +212,7 @@
       },
       {
         "tableName": "Timer",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `seconds` INTEGER NOT NULL, `timeStamp` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `seconds` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -241,12 +223,6 @@
           {
             "fieldPath": "seconds",
             "columnName": "seconds",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "timeStamp",
-            "columnName": "timeStamp",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -264,7 +240,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '06b90a55ddcc12851d924d41e6835b37')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '298a26b51e471fa84fe005f004730c2b')"
     ]
   }
 }

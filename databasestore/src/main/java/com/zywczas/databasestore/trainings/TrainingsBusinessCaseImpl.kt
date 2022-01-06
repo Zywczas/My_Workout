@@ -169,7 +169,6 @@ internal class TrainingsBusinessCaseImpl
     override suspend fun markExerciseAsFinished(id: Long) {
         val exercise = exerciseDao.getExercise(id).apply {
             isFinished = true
-            timeStamp = dateTime.now()
         }
         exerciseDao.insert(exercise)
         synchronisation.updateDatabaseTimeStamp()
@@ -197,7 +196,6 @@ internal class TrainingsBusinessCaseImpl
         val day = dayDao.getDay(id).apply {
             isFinished = true //todo chyba pousuwac te zmienne w bazie danych, bo w sumie to ich nie potrzebuje
             dateFinished = dateTime.now()
-            timeStamp = dateTime.now()
         }
         dayDao.insert(day)
         synchronisation.updateDatabaseTimeStamp()
@@ -207,7 +205,6 @@ internal class TrainingsBusinessCaseImpl
         val week = weekDao.getWeek(id).apply {
             isFinished = true
             dateFinished = dateTime.now()
-            timeStamp = dateTime.now()
         }
         weekDao.insert(week)
         synchronisation.updateDatabaseTimeStamp()
@@ -216,7 +213,6 @@ internal class TrainingsBusinessCaseImpl
     override suspend fun saveWeight(exerciseId: Long, weight: Double) {
         val exercise = exerciseDao.getExercise(exerciseId).apply {
             this.weight = weight
-            timeStamp = dateTime.now()
         }
         exerciseDao.insert(exercise)
         synchronisation.updateDatabaseTimeStamp()
