@@ -7,6 +7,7 @@ import android.content.ServiceConnection
 import android.os.*
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
+import com.zywczas.common.extetions.logD
 import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseActivity
@@ -29,8 +30,28 @@ class TimerActivity : BaseActivity() {
     private val exerciseId by lazy { intent.getLongExtra(DayActivity.KEY_EXERCISE_ID, 0L) }
     private val nextExerciseSet by lazy { intent.getIntExtra(ExerciseActivity.KEY_EXERCISE_SET, 0) }
 
-    private val timerServiceConnection = object : ServiceConnection { //todo dac to nizej, tam gdzie uzywane i poustawiac wszystkie funkcje
+    init {
+        logD("init")
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityTimerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        isConfigurationChange = false
+        logD("oncreate") //todo sprawdzic czy to jest tu potrzebne
+        bindTimerService()
+        viewModel.getExerciseDetails(exerciseId, nextExerciseSet)
+        setupLiveDataObservers()
+        setupOnClickListeners()
+    }
+
+    private fun bindTimerService(){ //todo dac jakies sprawdzenie gdzies czy ustawiony czas to nie jest zero albo 1, jezeli bedzie to jakos przeskakiwac timer service, moze dac sprawdzenie we wczesniejszej aktywnosci
+        val serviceIntent = Intent(this, TimerService::class.java)
+        bindService(serviceIntent, timerServiceConnection, Context.BIND_AUTO_CREATE)
+    }
+
+    private val timerServiceConnection = object : ServiceConnection { //todo dac to nizej, tam gdzie uzywane i poustawiac wszystkie funkcje
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             val binder = service as? TimerService.LocalBinder
             timerService = binder?.timerService
@@ -74,22 +95,6 @@ class TimerActivity : BaseActivity() {
         binding.skipTimer.setText(R.string.nextExercise)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityTimerBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        isConfigurationChange = false
-        bindTimerService()
-        viewModel.getExerciseDetails(exerciseId, nextExerciseSet)
-        setupLiveDataObservers()
-        setupOnClickListeners()
-    }
-
-    private fun bindTimerService(){ //todo dac jakies sprawdzenie gdzies czy ustawiony czas to nie jest zero albo 1, jezeli bedzie to jakos przeskakiwac timer service, moze dac sprawdzenie we wczesniejszej aktywnosci
-        val serviceIntent = Intent(this, TimerService::class.java)
-        bindService(serviceIntent, timerServiceConnection, Context.BIND_AUTO_CREATE)
-    }
-
     private fun setupLiveDataObservers(){
         viewModel.isExerciseLongDescriptionVisible.observe(this){ binding.exerciseLongDescriptionContainer.isVisible = it }
         viewModel.nextExercise.observe(this){ showExercise(it) }
@@ -123,9 +128,8 @@ class TimerActivity : BaseActivity() {
             onBackPressed()
         }
         binding.settings.setOnClickListener {
-            turnAlarmOff()
-            unBindAndCloseTimerService()
             goToTimerSettingsActivity()
+            finish()
         }
     }
 
@@ -137,11 +141,13 @@ class TimerActivity : BaseActivity() {
 
     private fun unBindAndCloseTimerService(){
         if (isTimerServiceBound){
+            logD("unbindService and remove live data observers")
             timerService?.timeLeft?.removeObservers(this)
             timerService?.isAlarmOff?.removeObservers(this)
             unbindService(timerServiceConnection)
             isTimerServiceBound = false
         }
+        logD("stopService")
         val intent = Intent(this, TimerService::class.java)
         stopService(intent)
     }
@@ -158,7 +164,9 @@ class TimerActivity : BaseActivity() {
 
     override fun onStop() {
         super.onStop()
+        logD("onStop")
         if (isConfigurationChange.not() && isGoingToNextExercise.not()){
+            logD("goToForegroundService")
             timerService?.goToForegroundService()
         }
     }
@@ -166,6 +174,7 @@ class TimerActivity : BaseActivity() {
     override fun onDestroy() {
         if (isConfigurationChange.not()){
             unBindAndCloseTimerService()
+            logD("onDestroy")
         }
         super.onDestroy()
     }
@@ -173,6 +182,22 @@ class TimerActivity : BaseActivity() {
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
         super.onSaveInstanceState(outState, outPersistentState)
         isConfigurationChange = true
+    }
+
+    //todo do usuniecia
+    override fun onStart() {
+        super.onStart()
+        logD("onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        logD("onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        logD("onPause")
     }
 
 }

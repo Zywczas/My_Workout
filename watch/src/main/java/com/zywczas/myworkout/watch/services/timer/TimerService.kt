@@ -49,8 +49,7 @@ class TimerService : LifecycleService() {
     lateinit var dateTime: DateTimeProvider
 
     private val localBinder = LocalBinder()
-//    private val notificationManager by lazy { getSystemService(NotificationManager::class.java) }
-    private val notificationManager by lazy { getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager }
+    private val notificationManager by lazy { getSystemService(NotificationManager::class.java) }
     private var countTimeJob: Job? = null
 
     private val _timeLeft = MutableLiveData<String>()
@@ -82,6 +81,7 @@ class TimerService : LifecycleService() {
     }
 
     private fun startCountingTime(seconds: Int) {
+        logD("zaczyna liczyc czas")
         countTimeJob = lifecycleScope.launch(dispatcherIO) {
             _timeLeft.postValue(dateTime.getTimerRepresentationOf(seconds))
             val oneSecond = 1000L
@@ -98,18 +98,21 @@ class TimerService : LifecycleService() {
     }
 
     private fun finishCounting(){
+        logD("konczy liczyc czas")
         notForegroundService()
         bringActivityToFront()
         setAlarmOff()
     }
 
     private fun bringActivityToFront(){
+        logD("bringActivityToFront")
         val intent = Intent(this, TimerActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK
         }
         startActivity(intent)
     }
     private fun setAlarmOff(){
+        logD("setAlarmOff")
         _isAlarmOff.postValue(true)
     }
 
@@ -135,6 +138,7 @@ class TimerService : LifecycleService() {
     }
 
     private fun notForegroundService() {
+        logD("stopForeground")
         stopForeground(true)
     }
 
@@ -146,23 +150,24 @@ class TimerService : LifecycleService() {
 
     override fun onUnbind(intent: Intent?): Boolean {
         super.onUnbind(intent)
+        logD("onUnbind")
         //Ensures onRebind() is called if TimerActivity (client) rebinds.
         return true
     }
 
     override fun onDestroy() {
-        logD("onDestroyService") //todo sprawdzic
+        logD("onDestroy") //todo sprawdzic
         super.onDestroy()
     }
 
     fun goToForegroundService() {
-        logD("goToForegroundService")
+        logD("startForeground")
         val notification = generateNotification("jakis tekst main") //todo poprawic
         startForeground(NOTIFICATION_ID, notification)
     }
 
     private fun generateNotification(mainText: String): Notification {
-        Log.d(TAG, "generateNotification()")
+        Log.d(TAG, "generateNotification")
 
         // Main steps for building a BIG_TEXT_STYLE notification:
         //      0. Get data
