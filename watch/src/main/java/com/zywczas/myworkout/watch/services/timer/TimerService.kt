@@ -45,6 +45,7 @@ class TimerService : LifecycleService() {
 
     @Inject
     lateinit var repo: TimerServiceRepository
+
     @Inject
     lateinit var dateTime: DateTimeProvider
 
@@ -69,7 +70,7 @@ class TimerService : LifecycleService() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
         logD("onStartCommand")
-        lifecycleScope.launch(dispatcherIO){
+        lifecycleScope.launch(dispatcherIO) {
             startCountingTime(repo.getBreakPeriodInSeconds())
         }
         val cancelWorkoutFromNotification = intent?.getBooleanExtra(EXTRA_CANCEL_WORKOUT_FROM_NOTIFICATION, false) ?: false //todo sprawdzic jak to dziala i pewnie usunac
@@ -86,10 +87,10 @@ class TimerService : LifecycleService() {
             _timeLeft.postValue(dateTime.getTimerRepresentationOf(seconds))
             val oneSecond = 1000L
             delay(oneSecond)
-            for (i: Int in seconds-1 downTo 0) {
+            for (i: Int in seconds - 1 downTo 0) {
                 logD("i = $i") //todo usunac jak juz bedzie dzialac
                 _timeLeft.postValue(dateTime.getTimerRepresentationOf(i))
-                if(i == 0){
+                if (i == 0) {
                     finishCounting()
                 }
                 delay(oneSecond) //todo zamienic na poprawny miernik czasu
@@ -97,23 +98,19 @@ class TimerService : LifecycleService() {
         }
     }
 
-    private fun finishCounting(){
+    private fun finishCounting() {
         logD("konczy liczyc czas")
         notForegroundService()
         bringActivityToFront()
-        setAlarmOff()
+        _isAlarmOff.postValue(true)
     }
 
-    private fun bringActivityToFront(){
+    private fun bringActivityToFront() {
         logD("bringActivityToFront")
         val intent = Intent(this, TimerActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK
         }
         startActivity(intent)
-    }
-    private fun setAlarmOff(){
-        logD("setAlarmOff")
-        _isAlarmOff.postValue(true)
     }
 
     private fun stopCountingTimeWithServiceShutdownOption(stopService: Boolean) {
