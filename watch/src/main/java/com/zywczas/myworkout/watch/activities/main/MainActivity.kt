@@ -24,6 +24,7 @@ class MainActivity : BaseActivity() {
     private fun setupLiveDataObservers() {
         viewModel.goToNextActivity.observe(this) { if (it) {
                 startActivity(Intent(this, WeeksListActivity::class.java))
+            //todo dodac finish()
         }}
     }
 

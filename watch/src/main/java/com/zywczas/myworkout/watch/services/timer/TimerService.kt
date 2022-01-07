@@ -12,6 +12,7 @@ import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.wear.ongoing.OngoingActivity
 import androidx.wear.ongoing.Status
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
@@ -28,6 +29,10 @@ import java.util.*
 import javax.inject.Inject
 
 class TimerService : LifecycleService() {
+
+    companion object {
+        const val BROADCAST_BRING_APP_TO_FRONT = "BROADCAST_BRING_APP_TO_FRONT" //todo przeniesc do jakis stalych do commona
+    }
 
     private val TAG = "TimerService"
 
@@ -102,15 +107,17 @@ class TimerService : LifecycleService() {
         logD("konczy liczyc czas")
         notForegroundService()
         bringActivityToFront()
+        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_BRING_APP_TO_FRONT))
         _isAlarmOff.postValue(true)
     }
 
     private fun bringActivityToFront() {
-        logD("bringActivityToFront")
-        val intent = Intent(this, TimerActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        }
-        startActivity(intent)
+//        logD("bringActivityToFront")
+//        val intent = Intent(this, TimerActivity::class.java).apply {
+////            setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//        }
+//        startActivity(intent)
     }
 
     private fun stopCountingTimeWithServiceShutdownOption(stopService: Boolean) {

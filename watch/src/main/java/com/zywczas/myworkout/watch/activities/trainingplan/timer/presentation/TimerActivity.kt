@@ -1,12 +1,10 @@
 package com.zywczas.myworkout.watch.activities.trainingplan.timer.presentation
 
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
-import android.content.ServiceConnection
+import android.content.*
 import android.os.*
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.zywczas.common.extetions.logD
 import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.R
@@ -17,6 +15,14 @@ import com.zywczas.myworkout.watch.activities.trainingplan.exercise.presentation
 import com.zywczas.myworkout.watch.activities.trainingplan.timer.domain.NextExercise
 import com.zywczas.myworkout.watch.databinding.ActivityTimerBinding
 import com.zywczas.myworkout.watch.services.timer.TimerService
+import android.app.ActivityManager
+import android.app.ActivityManager.AppTask
+
+import android.app.ActivityManager.RunningTaskInfo
+
+import android.os.Build
+import android.util.Log
+
 
 class TimerActivity : BaseActivity() {
 
@@ -38,12 +44,66 @@ class TimerActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTimerBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        isConfigurationChange = false
-        logD("oncreate") //todo sprawdzic czy to jest tu potrzebne
+        isConfigurationChange = false //todo sprawdzic czy to jest potrzebne
+        logD("oncreate")
+        logD("jest task root: $isTaskRoot")
         bindTimerService()
         viewModel.getExerciseDetails(exerciseId, nextExerciseSet)
         setupLiveDataObservers()
         setupOnClickListeners()
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, IntentFilter(TimerService.BROADCAST_BRING_APP_TO_FRONT))
+    }
+
+    private val broadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent?) {
+            logD("broadcast przyjety")
+//            val intent = Intent(this@TimerActivity, TimerActivity::class.java).apply {
+////            setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+////            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//        }
+//        startActivity(intent)
+//            moveToFront()
+            setTopApp(this@TimerActivity)
+        }
+    }
+
+    fun setTopApp(context: Context) {
+        val activityManager = context.getSystemService(ACTIVITY_SERVICE) as ActivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val list = activityManager.appTasks
+            for (appTask in list) {
+                logD("appTask.moveToFront()")
+                appTask.moveToFront()
+                break
+            }
+        } else {
+            val taskInfoList = activityManager.getRunningTasks(100)
+            for (taskInfo in taskInfoList) {
+                if (taskInfo.topActivity!!.packageName == context.packageName) {
+                    activityManager.moveTaskToFront(taskInfo.id, 0)
+                    break
+                }
+            }
+        }
+    }
+
+    private fun moveToFront() {
+        if (Build.VERSION.SDK_INT >= 11) { // honeycomb
+            val activityManager = getSystemService(ACTIVITY_SERVICE) as ActivityManager
+            val recentTasks = activityManager.getRunningTasks(Int.MAX_VALUE)
+            for (i in recentTasks.indices) {
+                logD(
+                    "Application executed : "
+                            + recentTasks[i].baseActivity!!.toShortString()
+                            + "\t\t ID: " + recentTasks[i].id + ""
+                )
+                // bring to front
+                if (recentTasks[i].baseActivity!!.toShortString().indexOf("com.zywczas.myworkout.watch") > -1) {
+                    logD("wynosi apke na powierzchnie")
+                    activityManager.moveTaskToFront(recentTasks[i].id, ActivityManager.MOVE_TASK_WITH_HOME)
+                }
+            }
+        }
     }
 
     private fun bindTimerService(){ //todo dac jakies sprawdzenie gdzies czy ustawiony czas to nie jest zero albo 1, jezeli bedzie to jakos przeskakiwac timer service, moze dac sprawdzenie we wczesniejszej aktywnosci
@@ -67,9 +127,11 @@ class TimerActivity : BaseActivity() {
 
     private fun setupServiceLiveDataObservers(){
         timerService?.timeLeft?.observe(this){
+            logD("live data: $it")
             binding.timeLeft.text = it
         }
         timerService?.isAlarmOff?.observe(this) {
+            logD("alarm live data: $it")
             if (it) {
                 turnAlarmOn()
                 showFinishedCounter()
@@ -176,6 +238,8 @@ class TimerActivity : BaseActivity() {
             unBindAndCloseTimerService()
             logD("onDestroy")
         }
+        turnAlarmOff()
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver)
         super.onDestroy()
     }
 
