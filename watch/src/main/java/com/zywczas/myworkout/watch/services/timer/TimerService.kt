@@ -18,6 +18,7 @@ import androidx.wear.ongoing.Status
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.common.extetions.logD
 import com.zywczas.common.utils.DateTimeProvider
+import com.zywczas.myworkout.watch.BaseWatchApp
 import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.trainingplan.timer.presentation.TimerActivity
 import com.zywczas.myworkout.watch.di.AppInjector
@@ -41,6 +42,11 @@ class TimerService : LifecycleService() {
     private val EXTRA_CANCEL_WORKOUT_FROM_NOTIFICATION = "$PACKAGE_NAME.extra.CANCEL_SUBSCRIPTION_FROM_NOTIFICATION"
 
     private val NOTIFICATION_ID = 12345678 //todo poprawic i dac do jakiegos wspolnego zbiornika
+    private val requestCode1 = 1
+    private val requestCode2 = 2
+    private val requestCode3 = 3
+    private val requestCode4 = 4
+    private val requestCode5 = 5
 
     private val NOTIFICATION_CHANNEL_ID = "my_workout_channel_01" //todo poprawic i dac do jakiegos wspolnego zbiornika
 
@@ -106,18 +112,17 @@ class TimerService : LifecycleService() {
     private fun finishCounting() {
         logD("konczy liczyc czas")
         notForegroundService()
-        bringActivityToFront()
+//        bringActivityToFront()
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_BRING_APP_TO_FRONT))
         _isAlarmOff.postValue(true)
     }
 
     private fun bringActivityToFront() {
-//        logD("bringActivityToFront")
-//        val intent = Intent(this, TimerActivity::class.java).apply {
-////            setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//            flags = Intent.FLAG_ACTIVITY_NEW_TASK
-//        }
-//        startActivity(intent)
+        logD("bringActivityToFront")
+        val intent = Intent(this, TimerActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+        startActivity(intent)
     }
 
     private fun stopCountingTimeWithServiceShutdownOption(stopService: Boolean) {
@@ -181,7 +186,7 @@ class TimerService : LifecycleService() {
         //      4. Build and issue the notification
 
         // 0. Get data (note, the main notification text comes from the parameter above).
-        val titleText = "jakis tytul notyfikacji" //todo poprawic
+        val titleText = "jakis tytul" //todo poprawic
 
         // 1. Create Notification Channel.
         val notificationChannel = NotificationChannel(NOTIFICATION_CHANNEL_ID, titleText, NotificationManager.IMPORTANCE_DEFAULT)
@@ -202,9 +207,8 @@ class TimerService : LifecycleService() {
             putExtra(EXTRA_CANCEL_WORKOUT_FROM_NOTIFICATION, true)
         }
 
-        val servicePendingIntent = PendingIntent.getService(this, 0, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT) //todo chyba do wylotu
-
-        val activityPendingIntent = PendingIntent.getActivity(this, 0, launchActivityIntent, 0)
+        val servicePendingIntent = PendingIntent.getService(this, requestCode1, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT) //todo chyba do wylotu
+        val activityPendingIntent = PendingIntent.getActivity(this, requestCode2, launchActivityIntent, PendingIntent.FLAG_IMMUTABLE)
 
         // 4. Build and issue the notification.
         val notificationCompatBuilder = NotificationCompat.Builder(applicationContext, NOTIFICATION_CHANNEL_ID)

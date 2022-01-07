@@ -22,6 +22,10 @@ import android.app.ActivityManager.RunningTaskInfo
 
 import android.os.Build
 import android.util.Log
+import android.content.Intent
+import androidx.lifecycle.lifecycleScope
+import com.zywczas.myworkout.watch.activities.main.MainActivity
+import java.lang.String
 
 
 class TimerActivity : BaseActivity() {
@@ -56,54 +60,19 @@ class TimerActivity : BaseActivity() {
 
     private val broadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent?) {
-            logD("broadcast przyjety")
-//            val intent = Intent(this@TimerActivity, TimerActivity::class.java).apply {
-////            setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-////            flags = Intent.FLAG_ACTIVITY_NEW_TASK
-//        }
-//        startActivity(intent)
-//            moveToFront()
+            logD("broadcast przyjety, 10")
             setTopApp(this@TimerActivity)
         }
     }
 
     fun setTopApp(context: Context) {
         val activityManager = context.getSystemService(ACTIVITY_SERVICE) as ActivityManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             val list = activityManager.appTasks
             for (appTask in list) {
                 logD("appTask.moveToFront()")
                 appTask.moveToFront()
                 break
             }
-        } else {
-            val taskInfoList = activityManager.getRunningTasks(100)
-            for (taskInfo in taskInfoList) {
-                if (taskInfo.topActivity!!.packageName == context.packageName) {
-                    activityManager.moveTaskToFront(taskInfo.id, 0)
-                    break
-                }
-            }
-        }
-    }
-
-    private fun moveToFront() {
-        if (Build.VERSION.SDK_INT >= 11) { // honeycomb
-            val activityManager = getSystemService(ACTIVITY_SERVICE) as ActivityManager
-            val recentTasks = activityManager.getRunningTasks(Int.MAX_VALUE)
-            for (i in recentTasks.indices) {
-                logD(
-                    "Application executed : "
-                            + recentTasks[i].baseActivity!!.toShortString()
-                            + "\t\t ID: " + recentTasks[i].id + ""
-                )
-                // bring to front
-                if (recentTasks[i].baseActivity!!.toShortString().indexOf("com.zywczas.myworkout.watch") > -1) {
-                    logD("wynosi apke na powierzchnie")
-                    activityManager.moveTaskToFront(recentTasks[i].id, ActivityManager.MOVE_TASK_WITH_HOME)
-                }
-            }
-        }
     }
 
     private fun bindTimerService(){ //todo dac jakies sprawdzenie gdzies czy ustawiony czas to nie jest zero albo 1, jezeli bedzie to jakos przeskakiwac timer service, moze dac sprawdzenie we wczesniejszej aktywnosci
@@ -133,17 +102,22 @@ class TimerActivity : BaseActivity() {
         timerService?.isAlarmOff?.observe(this) {
             logD("alarm live data: $it")
             if (it) {
-                turnAlarmOn()
-                showFinishedCounter()
+                lifecycleScope.launchWhenResumed {
+                    turnAlarmOn()
+                    showFinishedCounter()
+                }
             }
         }
     }
 
     private fun turnAlarmOn(){
         if (vibrator.hasVibrator()) {
+            logD("ma wibrator")
             val breakBetweenVibrations = 1000L
             val vibrationLength = 1000L
             vibrator.vibrate(VibrationEffect.createWaveform(longArrayOf(breakBetweenVibrations, vibrationLength), 0))
+        } else {
+            logD("nie ma wibratora")
         }
     }
 
