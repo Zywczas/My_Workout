@@ -2,6 +2,7 @@ package com.zywczas.myworkout.watch.services.timer
 
 import android.annotation.SuppressLint
 import android.app.*
+import android.content.Context
 import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
@@ -48,7 +49,8 @@ class TimerService : LifecycleService() {
     lateinit var dateTime: DateTimeProvider
 
     private val localBinder = LocalBinder()
-    private val notificationManager by lazy { getSystemService(NotificationManager::class.java) }
+//    private val notificationManager by lazy { getSystemService(NotificationManager::class.java) }
+    private val notificationManager by lazy { getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager }
     private var countTimeJob: Job? = null
 
     private val _timeLeft = MutableLiveData<String>()
@@ -85,7 +87,7 @@ class TimerService : LifecycleService() {
             val oneSecond = 1000L
             delay(oneSecond)
             for (i: Int in seconds-1 downTo 0) {
-                logD("i = $i")
+                logD("i = $i") //todo usunac jak juz bedzie dzialac
                 _timeLeft.postValue(dateTime.getTimerRepresentationOf(i))
                 if(i == 0){
                     finishCounting()
