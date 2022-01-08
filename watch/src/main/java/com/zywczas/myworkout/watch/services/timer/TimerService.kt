@@ -5,6 +5,7 @@ import android.app.*
 import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
+import android.provider.AlarmClock
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.LiveData
@@ -14,6 +15,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.wear.ongoing.OngoingActivity
 import androidx.wear.ongoing.Status
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
+import com.zywczas.common.extetions.logD
 import com.zywczas.common.utils.DateTimeProvider
 import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.trainingplan.timer.presentation.TimerActivity
@@ -53,6 +55,8 @@ class TimerService : LifecycleService() {
 
     private val localBinder = LocalBinder()
     private val notificationManager by lazy { getSystemService(NotificationManager::class.java) }
+//    private val alarmClock by lazy { getSystemService(AlarmClock::class.java) } todo sprobowac tega jak manager nie zadziala
+    private val alarmManager by lazy { getSystemService(AlarmManager::class.java) }
     private var countTimeJob: Job? = null
 
     private val _timeLeft = MutableLiveData<String>()
@@ -81,12 +85,27 @@ class TimerService : LifecycleService() {
         return Service.START_NOT_STICKY
     }
 
+//    private fun startCountingTime(seconds: Int) {
+//        countTimeJob = lifecycleScope.launch(dispatcherIO) {
+//            _timeLeft.postValue(dateTime.getTimerRepresentationOf(seconds))
+//            val oneSecond = 1000L
+//            delay(oneSecond)
+//            for (i: Int in seconds-1 downTo 0) {
+//                _timeLeft.postValue(dateTime.getTimerRepresentationOf(i))
+//                if (i == 0) {
+//                    finishCounting()
+//                }
+//                delay(oneSecond) //todo zamienic na poprawny miernik czasu
+//            }
+//        }
+//    }
+
     private fun startCountingTime(seconds: Int) {
         countTimeJob = lifecycleScope.launch(dispatcherIO) {
             _timeLeft.postValue(dateTime.getTimerRepresentationOf(seconds))
             val oneSecond = 1000L
             delay(oneSecond)
-            for (i: Int in seconds - 1 downTo 0) {
+            for (i: Int in seconds-1 downTo 0) {
                 _timeLeft.postValue(dateTime.getTimerRepresentationOf(i))
                 if (i == 0) {
                     finishCounting()
@@ -98,9 +117,28 @@ class TimerService : LifecycleService() {
 
     private fun finishCounting() {
         notForegroundService()
-//        bringActivityToFront()
-        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_BRING_APP_TO_FRONT))
+        bringActivityToFront()
+//        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_BRING_APP_TO_FRONT))
         _isAlarmOff.postValue(true)
+    }
+
+//    private fun bringActivityToFront() {
+//        logD("bringActivityToFront")
+//        val intent = Intent(this, TimerActivity::class.java).apply {
+//            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//        }
+//        startActivity(intent)
+//    }
+
+    val intent by lazy { Intent(this, TimerActivity::class.java).apply {
+        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+    }}
+    val activityPendingIntentAlarmManager by lazy { PendingIntent.getActivity(this, requestCode2, intent, PendingIntent.FLAG_IMMUTABLE) } //todo poukladac
+
+    private fun bringActivityToFront() {
+        logD("bringActivityToFront")
+        alarmManager.set(AlarmManager.RTC_WAKEUP, 1000L, activityPendingIntentAlarmManager)
+        startActivity(intent)
     }
 
     private fun stopCountingTimeWithServiceShutdownOption(stopService: Boolean) {
@@ -166,14 +204,12 @@ class TimerService : LifecycleService() {
             .bigText(mainText)
             .setBigContentTitle(titleText)
 
-        val launchActivityIntent = Intent(this, TimerActivity::class.java)
-
         val cancelIntent = Intent(this, TimerService::class.java).apply {
             putExtra(EXTRA_CANCEL_WORKOUT_FROM_NOTIFICATION, true)
         }
 
         val servicePendingIntent = PendingIntent.getService(this, requestCode1, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT) //todo chyba do wylotu
-        val activityPendingIntent = PendingIntent.getActivity(this, requestCode2, launchActivityIntent, PendingIntent.FLAG_IMMUTABLE)
+        val activityPendingIntent = PendingIntent.getActivity(this, requestCode2, Intent(this, TimerActivity::class.java), PendingIntent.FLAG_IMMUTABLE)
 
         // 4. Build and issue the notification.
         val notificationCompatBuilder = NotificationCompat.Builder(applicationContext, NOTIFICATION_CHANNEL_ID)
@@ -222,6 +258,11 @@ class TimerService : LifecycleService() {
         ongoingActivity.apply(applicationContext)
 
         return notificationBuilder.build()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        alarmManager.cancel(activityPendingIntentAlarmManager)
     }
 
     /**

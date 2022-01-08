@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.zywczas.common.extetions.logD
 import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseActivity
@@ -20,6 +21,10 @@ import com.zywczas.myworkout.watch.services.timer.TimerService
 
 class TimerActivity : BaseActivity() {
 
+    init {
+        logD("init")
+    }
+
     private var binding: ActivityTimerBinding by autoRelease()
     private val viewModel: TimerViewModel by viewModels { viewModelFactory }
     private var timerService: TimerService? = null
@@ -27,8 +32,8 @@ class TimerActivity : BaseActivity() {
     private var isConfigurationChange = false
     private val vibrator by lazy { getSystemService(Vibrator::class.java) }
     private var isGoingToNextExercise = false
-    private val exerciseId by lazy { intent.getLongExtra(DayActivity.KEY_EXERCISE_ID, 0L) }
-    private val nextExerciseSet by lazy { intent.getIntExtra(ExerciseActivity.KEY_EXERCISE_SET, 0) }
+//    private val exerciseId by lazy { intent.getLongExtra(DayActivity.KEY_EXERCISE_ID, 0L) }
+//    private val nextExerciseSet by lazy { intent.getIntExtra(ExerciseActivity.KEY_EXERCISE_SET, 0) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,13 +41,13 @@ class TimerActivity : BaseActivity() {
         setContentView(binding.root)
         isConfigurationChange = false //todo sprawdzic czy to jest potrzebne
         bindTimerService()
-        viewModel.getExerciseDetails(exerciseId, nextExerciseSet)
+//        viewModel.getExerciseDetails(exerciseId, nextExerciseSet)
         setupLiveDataObservers()
         setupOnClickListeners()
         LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, IntentFilter(TimerService.BROADCAST_BRING_APP_TO_FRONT))
     }
 
-    private val broadcastReceiver = object : BroadcastReceiver() {
+    private val broadcastReceiver = object : BroadcastReceiver() { //todo poustawiac pokolei
         override fun onReceive(context: Context, intent: Intent?) {
             setTopApp(this@TimerActivity)
         }
@@ -52,6 +57,7 @@ class TimerActivity : BaseActivity() {
         val activityManager = context.getSystemService(ACTIVITY_SERVICE) as ActivityManager
             val list = activityManager.appTasks
             for (appTask in list) {
+                logD("wynosze apke")
                 appTask.moveToFront()
                 break
             }
