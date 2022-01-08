@@ -3,7 +3,7 @@ ext {
     build_gradle_version = '7.0.3'
     compose_version = '1.0.5'
     kotlin_version = "1.5.32"
-
+//todo wyczyscis niepotrzebe importy
     appDependencies = [
 //            compose                         : "androidx.compose.ui:ui:$compose_version",
             kotlin                          : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",

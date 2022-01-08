@@ -106,6 +106,7 @@ class TimerService : LifecycleService() {
             val oneSecond = 1000L
             delay(oneSecond)
             for (i: Int in seconds-1 downTo 0) {
+                logD("czas: $i")
                 _timeLeft.postValue(dateTime.getTimerRepresentationOf(i))
                 if (i == 0) {
                     finishCounting()
