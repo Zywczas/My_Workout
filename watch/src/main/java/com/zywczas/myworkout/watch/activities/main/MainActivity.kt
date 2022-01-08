@@ -17,14 +17,18 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel.goToNextDestination()
         setupLiveDataObservers()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.goToNextDestination()
     }
 
     private fun setupLiveDataObservers() {
         viewModel.goToNextActivity.observe(this) { if (it) {
-                startActivity(Intent(this, WeeksListActivity::class.java))
-            //todo dodac finish()
+            startActivity(Intent(this, WeeksListActivity::class.java))
+            finish()
         }}
     }
 
