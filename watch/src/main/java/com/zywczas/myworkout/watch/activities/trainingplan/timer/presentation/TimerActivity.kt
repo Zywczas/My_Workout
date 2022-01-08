@@ -1,11 +1,12 @@
 package com.zywczas.myworkout.watch.activities.trainingplan.timer.presentation
 
+import android.app.ActivityManager
 import android.content.*
 import android.os.*
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.zywczas.common.extetions.logD
 import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseActivity
@@ -15,17 +16,6 @@ import com.zywczas.myworkout.watch.activities.trainingplan.exercise.presentation
 import com.zywczas.myworkout.watch.activities.trainingplan.timer.domain.NextExercise
 import com.zywczas.myworkout.watch.databinding.ActivityTimerBinding
 import com.zywczas.myworkout.watch.services.timer.TimerService
-import android.app.ActivityManager
-import android.app.ActivityManager.AppTask
-
-import android.app.ActivityManager.RunningTaskInfo
-
-import android.os.Build
-import android.util.Log
-import android.content.Intent
-import androidx.lifecycle.lifecycleScope
-import com.zywczas.myworkout.watch.activities.main.MainActivity
-import java.lang.String
 
 
 class TimerActivity : BaseActivity() {
@@ -40,17 +30,11 @@ class TimerActivity : BaseActivity() {
     private val exerciseId by lazy { intent.getLongExtra(DayActivity.KEY_EXERCISE_ID, 0L) }
     private val nextExerciseSet by lazy { intent.getIntExtra(ExerciseActivity.KEY_EXERCISE_SET, 0) }
 
-    init {
-        logD("init")
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTimerBinding.inflate(layoutInflater)
         setContentView(binding.root)
         isConfigurationChange = false //todo sprawdzic czy to jest potrzebne
-        logD("oncreate")
-        logD("jest task root: $isTaskRoot")
         bindTimerService()
         viewModel.getExerciseDetails(exerciseId, nextExerciseSet)
         setupLiveDataObservers()
@@ -60,7 +44,6 @@ class TimerActivity : BaseActivity() {
 
     private val broadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent?) {
-            logD("broadcast przyjety, 10")
             setTopApp(this@TimerActivity)
         }
     }
@@ -69,7 +52,6 @@ class TimerActivity : BaseActivity() {
         val activityManager = context.getSystemService(ACTIVITY_SERVICE) as ActivityManager
             val list = activityManager.appTasks
             for (appTask in list) {
-                logD("appTask.moveToFront()")
                 appTask.moveToFront()
                 break
             }
@@ -96,11 +78,9 @@ class TimerActivity : BaseActivity() {
 
     private fun setupServiceLiveDataObservers(){
         timerService?.timeLeft?.observe(this){
-            logD("live data: $it")
             binding.timeLeft.text = it
         }
         timerService?.isAlarmOff?.observe(this) {
-            logD("alarm live data: $it")
             if (it) {
                 lifecycleScope.launchWhenResumed {
                     turnAlarmOn()
@@ -112,12 +92,9 @@ class TimerActivity : BaseActivity() {
 
     private fun turnAlarmOn(){
         if (vibrator.hasVibrator()) {
-            logD("ma wibrator")
             val breakBetweenVibrations = 1000L
             val vibrationLength = 1000L
             vibrator.vibrate(VibrationEffect.createWaveform(longArrayOf(breakBetweenVibrations, vibrationLength), 0))
-        } else {
-            logD("nie ma wibratora")
         }
     }
 
@@ -177,13 +154,11 @@ class TimerActivity : BaseActivity() {
 
     private fun unBindAndCloseTimerService(){
         if (isTimerServiceBound){
-            logD("unbindService and remove live data observers")
             timerService?.timeLeft?.removeObservers(this)
             timerService?.isAlarmOff?.removeObservers(this)
             unbindService(timerServiceConnection)
             isTimerServiceBound = false
         }
-        logD("stopService")
         val intent = Intent(this, TimerService::class.java)
         stopService(intent)
     }
@@ -200,42 +175,23 @@ class TimerActivity : BaseActivity() {
 
     override fun onStop() {
         super.onStop()
-        logD("onStop")
         if (isConfigurationChange.not() && isGoingToNextExercise.not()){
-            logD("goToForegroundService")
             timerService?.goToForegroundService()
         }
     }
 
     override fun onDestroy() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver)
         if (isConfigurationChange.not()){
             unBindAndCloseTimerService()
-            logD("onDestroy")
         }
         turnAlarmOff()
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver)
         super.onDestroy()
     }
 
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
         super.onSaveInstanceState(outState, outPersistentState)
         isConfigurationChange = true
-    }
-
-    //todo do usuniecia
-    override fun onStart() {
-        super.onStart()
-        logD("onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        logD("onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        logD("onPause")
     }
 
 }

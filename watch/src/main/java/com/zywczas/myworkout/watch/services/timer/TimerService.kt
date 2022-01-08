@@ -2,11 +2,9 @@ package com.zywczas.myworkout.watch.services.timer
 
 import android.annotation.SuppressLint
 import android.app.*
-import android.content.Context
 import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.LiveData
@@ -16,9 +14,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.wear.ongoing.OngoingActivity
 import androidx.wear.ongoing.Status
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
-import com.zywczas.common.extetions.logD
 import com.zywczas.common.utils.DateTimeProvider
-import com.zywczas.myworkout.watch.BaseWatchApp
 import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.trainingplan.timer.presentation.TimerActivity
 import com.zywczas.myworkout.watch.di.AppInjector
@@ -35,18 +31,13 @@ class TimerService : LifecycleService() {
         const val BROADCAST_BRING_APP_TO_FRONT = "BROADCAST_BRING_APP_TO_FRONT" //todo przeniesc do jakis stalych do commona
     }
 
-    private val TAG = "TimerService"
-
     private val PACKAGE_NAME = "com.zywczas.myworkout.watch"
 
     private val EXTRA_CANCEL_WORKOUT_FROM_NOTIFICATION = "$PACKAGE_NAME.extra.CANCEL_SUBSCRIPTION_FROM_NOTIFICATION"
 
     private val NOTIFICATION_ID = 12345678 //todo poprawic i dac do jakiegos wspolnego zbiornika
     private val requestCode1 = 1
-    private val requestCode2 = 2
-    private val requestCode3 = 3
-    private val requestCode4 = 4
-    private val requestCode5 = 5
+    private val requestCode2 = 2 //todo poprawic
 
     private val NOTIFICATION_CHANNEL_ID = "my_workout_channel_01" //todo poprawic i dac do jakiegos wspolnego zbiornika
 
@@ -74,13 +65,11 @@ class TimerService : LifecycleService() {
     override fun onCreate() {
         AppInjector.watchComponent!!.inject(this) //todo poprawic to zeby nie wystawiac komponentu
         super.onCreate()
-        logD("onCreateService")
         startService(Intent(this, TimerService::class.java))//todo sprawdzic na moim zegarku czy przez to nie powoduje uruchomienia dwoch serwisow
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
-        logD("onStartCommand")
         lifecycleScope.launch(dispatcherIO) {
             startCountingTime(repo.getBreakPeriodInSeconds())
         }
@@ -93,13 +82,11 @@ class TimerService : LifecycleService() {
     }
 
     private fun startCountingTime(seconds: Int) {
-        logD("zaczyna liczyc czas")
         countTimeJob = lifecycleScope.launch(dispatcherIO) {
             _timeLeft.postValue(dateTime.getTimerRepresentationOf(seconds))
             val oneSecond = 1000L
             delay(oneSecond)
             for (i: Int in seconds - 1 downTo 0) {
-                logD("i = $i") //todo usunac jak juz bedzie dzialac
                 _timeLeft.postValue(dateTime.getTimerRepresentationOf(i))
                 if (i == 0) {
                     finishCounting()
@@ -110,23 +97,13 @@ class TimerService : LifecycleService() {
     }
 
     private fun finishCounting() {
-        logD("konczy liczyc czas")
         notForegroundService()
 //        bringActivityToFront()
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent(BROADCAST_BRING_APP_TO_FRONT))
         _isAlarmOff.postValue(true)
     }
 
-    private fun bringActivityToFront() {
-        logD("bringActivityToFront")
-        val intent = Intent(this, TimerActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        }
-        startActivity(intent)
-    }
-
     private fun stopCountingTimeWithServiceShutdownOption(stopService: Boolean) {
-        logD("stopCountingTimeWithServiceShutdownOption()")
         countTimeJob?.cancel()
 
         lifecycleScope.launch { //todo do wylotu
@@ -141,43 +118,31 @@ class TimerService : LifecycleService() {
 
     override fun onBind(intent: Intent): IBinder {
         super.onBind(intent)
-        logD("onBindService")
         notForegroundService()
         return localBinder
     }
 
     private fun notForegroundService() {
-        logD("stopForeground")
         stopForeground(true)
     }
 
     override fun onRebind(intent: Intent?) {
         super.onRebind(intent)
-        logD("onRebind")
         notForegroundService()
     }
 
     override fun onUnbind(intent: Intent?): Boolean {
         super.onUnbind(intent)
-        logD("onUnbind")
         //Ensures onRebind() is called if TimerActivity (client) rebinds.
         return true
     }
 
-    override fun onDestroy() {
-        logD("onDestroy") //todo sprawdzic
-        super.onDestroy()
-    }
-
     fun goToForegroundService() {
-        logD("startForeground")
         val notification = generateNotification("jakis tekst main") //todo poprawic
         startForeground(NOTIFICATION_ID, notification)
     }
 
     private fun generateNotification(mainText: String): Notification {
-        Log.d(TAG, "generateNotification")
-
         // Main steps for building a BIG_TEXT_STYLE notification:
         //      0. Get data
         //      1. Create Notification Channel for O+
@@ -227,7 +192,6 @@ class TimerService : LifecycleService() {
             .addAction(R.drawable.ic_walk, "uruchom aktywnosc", activityPendingIntent)
             .addAction(R.drawable.ic_close_circle, "zakoncz aktywnosc", servicePendingIntent) //todo pewnie do wylotu
 
-        // TODO: Create an Ongoing Activity.
         val ongoingActivityStatus = Status.Builder()
             // Sets the text used across various surfaces.
             .addTemplate(mainText)
