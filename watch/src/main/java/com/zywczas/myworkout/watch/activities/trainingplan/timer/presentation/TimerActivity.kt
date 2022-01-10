@@ -6,7 +6,6 @@ import android.provider.AlarmClock
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.zywczas.common.utils.autoRelease
-import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.settings.timer.presentation.SettingsTimerActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.day.presentation.DayActivity
@@ -31,7 +30,7 @@ class TimerActivity : BaseActivity() {
     }
 
     private fun setupLiveDataObservers() {
-        viewModel.breakPeriodDisplayFormat.observe(this) { binding.breakPeriod.text = getString(R.string.break_period, it) }
+        viewModel.breakPeriodDisplayFormat.observe(this) { binding.breakPeriodSetTime.text = it }
         viewModel.isExerciseLongDescriptionVisible.observe(this) { binding.exerciseLongDescriptionContainer.isVisible = it }
         viewModel.nextExercise.observe(this) { showExercise(it) }
         viewModel.nextExerciseId.observe(this) { goToExerciseActivityAndFinishThisActivity(it) }
