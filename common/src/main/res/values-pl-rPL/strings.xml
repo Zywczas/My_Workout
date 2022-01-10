@@ -50,4 +50,5 @@
     <string name="delete_exercise">Usuń to ćwiczenie</string>
     <string name="delete_day">Usuń ten dzień</string>
     <string name="delete_week">Usuń ten tydzień</string>
+    <string name="break_period">$1%s min</string>
 </resources>

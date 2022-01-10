@@ -30,13 +30,15 @@ class TimerActivity : BaseActivity() {
         setupOnClickListeners()
     }
 
-    private fun setupLiveDataObservers(){
-        viewModel.isExerciseLongDescriptionVisible.observe(this){ binding.exerciseLongDescriptionContainer.isVisible = it }
-        viewModel.nextExercise.observe(this){ showExercise(it) }
-        viewModel.nextExerciseId.observe(this){ goToExerciseActivityAndFinishThisActivity(it) }
+    private fun setupLiveDataObservers() {
+        viewModel.breakPeriodDisplayFormat.observe(this) { binding.breakPeriod.text = getString(R.string.break_period, it) }
+        viewModel.isExerciseLongDescriptionVisible.observe(this) { binding.exerciseLongDescriptionContainer.isVisible = it }
+        viewModel.nextExercise.observe(this) { showExercise(it) }
+        viewModel.nextExerciseId.observe(this) { goToExerciseActivityAndFinishThisActivity(it) }
+        viewModel.breakPeriodInSeconds.observe(this) { startTimer(it) }
     }
 
-    private fun showExercise(exercise: NextExercise){
+    private fun showExercise(exercise: NextExercise) {
         binding.exerciseName.text = exercise.name
         binding.sets.text = exercise.setsQuantity.toString()
         binding.reps.text = exercise.repsQuantity
@@ -44,7 +46,7 @@ class TimerActivity : BaseActivity() {
         binding.nextSet.text = exercise.nextSet.toString()
     }
 
-    private fun goToExerciseActivityAndFinishThisActivity(exerciseId: Long){ //todo potrzebne, w momencie klikniecia timera powinno przeskoczyc
+    private fun goToExerciseActivityAndFinishThisActivity(exerciseId: Long) {
         val intent = Intent(this, ExerciseActivity::class.java).apply {
             putExtra(DayActivity.KEY_EXERCISE_ID, exerciseId)
         }
@@ -52,7 +54,19 @@ class TimerActivity : BaseActivity() {
         finish()
     }
 
-    private fun setupOnClickListeners(){
+    private fun startTimer(seconds: Int) {
+        val intent = Intent(AlarmClock.ACTION_SET_TIMER).apply {
+            putExtra(AlarmClock.EXTRA_LENGTH, seconds)
+        }
+        if (intent.resolveActivity(packageManager) != null) { //todo pozniej dac to queries dla resolve Activity
+            startActivity(intent)
+        }
+    }
+
+    private fun setupOnClickListeners() {
+        binding.timer.setOnClickListener {
+            startBreak()
+        }
         binding.skipTimer.setOnClickListener {
             goToNextExercise()
         }
@@ -64,24 +78,22 @@ class TimerActivity : BaseActivity() {
         }
     }
 
-    private fun startTimer(message: String, seconds: Int) {
-        val intent = Intent(AlarmClock.ACTION_SET_TIMER).apply {
-            putExtra(AlarmClock.EXTRA_MESSAGE, message)
-            putExtra(AlarmClock.EXTRA_LENGTH, seconds)
-            putExtra(AlarmClock.EXTRA_SKIP_UI, false)
-        }
-        if (intent.resolveActivity(packageManager) != null) { //todo pozniej dac to queries dla resolve Activity
-            startActivity(intent)
-        }
+    private fun startBreak() {
+        viewModel.startBreak()
     }
 
-    private fun goToNextExercise(){
+    private fun goToNextExercise() {
         viewModel.goToNextExercise()
     }
 
-    private fun goToTimerSettingsActivity(){
+    private fun goToTimerSettingsActivity() {
         val intent = Intent(this, SettingsTimerActivity::class.java)
         startActivity(intent)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getBreakPeriod()
     }
 
 }

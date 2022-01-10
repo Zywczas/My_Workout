@@ -1,11 +1,13 @@
 package com.zywczas.myworkout.watch.activities.trainingplan.timer.domain
 
+import com.zywczas.databasestore.timer.TimerBusinessCase
 import com.zywczas.databasestore.trainings.TrainingsBusinessCase
 import com.zywczas.databasestore.trainings.entities.ExerciseLocal
 import javax.inject.Inject
 
 class TimerRepositoryImpl @Inject constructor(
-    private val trainings: TrainingsBusinessCase
+    private val trainings: TrainingsBusinessCase,
+    private val timerBusinessCase: TimerBusinessCase
 ) : TimerRepository {
 
     override suspend fun getNextExercise(id: Long): NextExercise = trainings.getExercise(id).toDomain()
@@ -19,6 +21,8 @@ class TimerRepositoryImpl @Inject constructor(
         repsQuantity = repsQuantity,
         weight = weight
     )
+
+    override suspend fun getBreakPeriodInSeconds(): Int = timerBusinessCase.getTimer().seconds
 
     override suspend fun save(exercise: NextExercise) = trainings.saveExercise(exercise.toLocal())
 

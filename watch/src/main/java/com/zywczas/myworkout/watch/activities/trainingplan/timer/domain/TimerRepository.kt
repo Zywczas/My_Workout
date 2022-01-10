@@ -5,6 +5,8 @@ interface TimerRepository {
 
     suspend fun getNextExercise(id: Long): NextExercise
 
+    suspend fun getBreakPeriodInSeconds(): Int
+
     suspend fun save(exercise: NextExercise)
 
 }
