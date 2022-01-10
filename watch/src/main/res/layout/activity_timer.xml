@@ -15,7 +15,7 @@
             android:layout_height="wrap_content">
             <!--todo dimensy-->
             <TextView
-                android:id="@+id/timeLeft"
+                android:id="@+id/breakPeriod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -23,7 +23,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="1:20" />
+                tools:text="1:20 min" />
 
             <TextView
                 android:id="@+id/counterHeader"
@@ -33,7 +33,7 @@
                 android:text="@string/counting_to"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/timeLeft" />
+                app:layout_constraintTop_toBottomOf="@+id/breakPeriod" />
             <!--todo usunac tekst-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/exerciseLongDescriptionContainer"
@@ -151,17 +151,34 @@
 
             <!--todo dac im ikonki-->
             <TextView
+                android:id="@+id/timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/item_background"
+                android:paddingStart="10dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:paddingEnd="10dp"
+                android:text="@string/timer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nextSet" />
+
+            <TextView
                 android:id="@+id/skipTimer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/item_background"
                 android:paddingStart="10dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
                 android:paddingEnd="10dp"
                 android:text="@string/skip"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nextSet" />
+                app:layout_constraintTop_toBottomOf="@+id/timer" />
             <!--todo dac im ikonki-->
             <TextView
                 android:id="@+id/goBack"
@@ -171,6 +188,8 @@
                 android:background="@drawable/item_background"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
                 android:text="@string/back"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

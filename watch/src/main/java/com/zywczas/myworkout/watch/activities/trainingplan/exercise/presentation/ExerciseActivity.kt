@@ -36,7 +36,7 @@ class ExerciseActivity : BaseActivity() {
 
     private fun setupLiveDataObservers(){
         viewModel.exercise.observe(this) { showExercise(it) }
-        viewModel.isTimerButtonVisible.observe(this){ binding.timer.isVisible = it }
+        viewModel.isNextExerciseButtonVisible.observe(this){ binding.nextExercise.isVisible = it }
         viewModel.isFinishExerciseButtonVisible.observe(this){ binding.finishExercises.isVisible = it }
         viewModel.nextExercise.observe(this){ goToTimerActivity(it) }
         viewModel.isProgressBarVisible.observe(this){ binding.progressBar.isVisible = it }
@@ -67,14 +67,14 @@ class ExerciseActivity : BaseActivity() {
     }
 
     private fun setupOnClickListeners(){
-        binding.timer.setOnClickListener { startTimerToNextExerciseAndMarkAsFinished() }
+        binding.nextExercise.setOnClickListener { goToTimerActivityAndMarkExerciseAsFinished() }
         binding.finishExercises.setOnClickListener { finishExercises() }
         binding.changeWeight.setOnClickListener { goToChangeWeightActivity() }
         binding.deleteExercise.setOnClickListener { deleteExercise() }
     }
 
-    private fun startTimerToNextExerciseAndMarkAsFinished(){
-        viewModel.startTimerToNextExerciseAndMarkAsFinished()
+    private fun goToTimerActivityAndMarkExerciseAsFinished(){
+        viewModel.goToTimerActivityAndMarkExerciseAsFinished()
     }
 
     private fun finishExercises(){

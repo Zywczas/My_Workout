@@ -12,7 +12,7 @@
     <string name="counting_to">Counting to:</string>
     <string name="skip">Skip</string>
     <string name="back">Back</string>
-    <string name="nextExercise">Next</string>
+    <string name="next_exercise">Next exercise</string>
     <string name="in_seconds">in seconds</string>
     <string name="training_weeks">Training weeks</string>
     <string name="add_new_week">Add new week</string>

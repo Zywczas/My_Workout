@@ -19,7 +19,7 @@ class ExerciseViewModel @Inject constructor(
     private val _exercise = MutableLiveData<Exercise>()
     val exercise: LiveData<Exercise> = _exercise
 
-    val isTimerButtonVisible: LiveData<Boolean> = Transformations.switchMap(exercise) { currentExercise ->
+    val isNextExerciseButtonVisible: LiveData<Boolean> = Transformations.switchMap(exercise) { currentExercise ->
         liveData(dispatcherIO) {
             val lastExercise = repo.getExercises(dayId = currentExercise.dayId, weekId = currentExercise.weekId).maxByOrNull { it.sequence }
             val isNowDoingLastExercise = currentExercise.id == lastExercise?.id && currentExercise.currentSet == lastExercise.setsQuantity
@@ -27,7 +27,7 @@ class ExerciseViewModel @Inject constructor(
         }
     }
 
-    val isFinishExerciseButtonVisible: LiveData<Boolean> = Transformations.switchMap(isTimerButtonVisible) {
+    val isFinishExerciseButtonVisible: LiveData<Boolean> = Transformations.switchMap(isNextExerciseButtonVisible) {
         liveData(dispatcherIO) {
             emit(it.not())
         }
@@ -45,7 +45,7 @@ class ExerciseViewModel @Inject constructor(
         }
     }
 
-    fun startTimerToNextExerciseAndMarkAsFinished() {
+    fun goToTimerActivityAndMarkExerciseAsFinished() {
         viewModelScope.launch(dispatcherIO) {
             exercise.value?.let { currentExercise ->
                 val isItLastSetInExercise = currentExercise.currentSet == currentExercise.setsQuantity

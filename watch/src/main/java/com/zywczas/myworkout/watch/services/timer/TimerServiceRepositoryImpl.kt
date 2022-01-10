@@ -3,7 +3,7 @@ package com.zywczas.myworkout.watch.services.timer
 import com.zywczas.databasestore.timer.TimerBusinessCase
 import javax.inject.Inject
 
-class TimerServiceRepositoryImpl @Inject constructor(
+class TimerServiceRepositoryImpl @Inject constructor( //todo przeniesc
     private val timerBusinessCase: TimerBusinessCase
 ) : TimerServiceRepository {
 

@@ -9,7 +9,7 @@ import com.zywczas.myworkout.watch.di.modules.AppModule
 
 object AppInjector {
 
-    var watchComponent: WatchComponent? = null
+    private var watchComponent: WatchComponent? = null
 
     fun init(app: Application){
         buildAppComponent(app)

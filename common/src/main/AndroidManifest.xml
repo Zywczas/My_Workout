@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest package="com.zywczas.common"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
+<!--todo posprzatac-->
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.REORDER_TASKS" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
 </manifest>
