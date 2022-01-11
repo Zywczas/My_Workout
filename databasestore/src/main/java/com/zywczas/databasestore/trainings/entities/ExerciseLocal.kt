@@ -3,7 +3,6 @@ package com.zywczas.databasestore.trainings.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import org.joda.time.DateTime
 
 @Entity(tableName = "Exercise")
 data class ExerciseLocal(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Long = 0,
