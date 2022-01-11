@@ -156,3 +156,5 @@ fabric.properties
 /captures
 .cxx
 /.idea/sonarlint
+
+google-services.json
