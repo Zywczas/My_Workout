@@ -41,7 +41,7 @@ android {
 
 dependencies {
 
-    implementation project(path: ':common')
+//    implementation project(path: ':common')
 
     implementation appDependencies.kotlin
     implementation appDependencies.corektx
@@ -51,14 +51,12 @@ dependencies {
     implementation diDependencies.daggerAndroid
     kapt diDependencies.daggerCompiler
     kapt diDependencies.daggerCompilerAndroid
-//todo poprawic
-//    def proto_version = '3.19.2'
-//    api("io.grpc:grpc-protobuf:$proto_version")
-//    api("com.google.protobuf:protobuf-java-util:$proto_version")
-//    api("com.google.protobuf:protobuf-kotlin:$proto_version")
-//    api("io.grpc:grpc-kotlin-stub:$proto_version")
 
-    implementation 'com.google.protobuf:protobuf-lite:3.0.0'
+//todo poprawic
+    implementation 'com.google.protobuf:protobuf-lite:3.0.1'
+    implementation 'io.grpc:grpc-okhttp:1.43.2'
+    implementation 'io.grpc:grpc-protobuf-lite:1.43.2'
+    implementation 'io.grpc:grpc-stub:1.43.2'
 
 }
 
