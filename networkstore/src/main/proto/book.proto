@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package book; //todo nie wiem czy to dobrze
+package book;
 
 option java_package = "com.zywczas.networkstore.przykladowe";
 option java_outer_classname = "BookFromProto";
