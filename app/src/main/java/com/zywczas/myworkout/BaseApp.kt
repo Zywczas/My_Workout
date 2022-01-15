@@ -1,5 +1,12 @@
 package com.zywczas.myworkout
 
-import android.app.Application
+import com.zywczas.myworkout.di.DaggerAppComponent
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 
-class BaseApp : Application() {} //todo dac daggera
+class BaseApp : DaggerApplication(){
+
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
+        DaggerAppComponent.factory().create(this)
+
+}
