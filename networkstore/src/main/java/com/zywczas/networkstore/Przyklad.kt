@@ -1,6 +1,7 @@
 package com.zywczas.networkstore
 
 import com.zywczas.networkstore.przykladowe.BookFromProto
+import com.zywczas.networkstore.przykladowe.BookServiceGrpc
 import io.grpc.ManagedChannelBuilder
 
 class Przyklad {
@@ -15,5 +16,7 @@ class Przyklad {
 
     private val jakisPort = 123;
     private val managedChannel = ManagedChannelBuilder.forAddress("adres servera", jakisPort).build()
+    private val blockingStub = BookServiceGrpc.newBlockingStub(managedChannel)
+        //todo dokonczyc
 
 }
