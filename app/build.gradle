@@ -46,6 +46,7 @@ dependencies {
 
     implementation project(path: ':common')
     implementation project(path: ':databasestore')
+    implementation project(path: ':networkstore')
 
     implementation appDependencies.corektx
     implementation appDependencies.kotlin

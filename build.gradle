@@ -5,11 +5,14 @@ buildscript {
         mavenCentral()
     }
     apply from: "${rootProject.projectDir}/config/gradle/libs.gradle"
+
+    ext.protobufVersion = '0.8.18' //todo przeniesc i podbic wersje
     dependencies {
         classpath "com.android.tools.build:gradle:$build_gradle_version"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.0"
         classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.18.1"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$androidx_navigation_version"
+        classpath "com.google.protobuf:protobuf-gradle-plugin:$protobufVersion"
     }
 }
 

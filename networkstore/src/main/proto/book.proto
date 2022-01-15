@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package book; //todo nie wiem czy to dobrze
+
+option java_package = "com.zywczas.networkstore.przykladowe";
+option java_outer_classname = "BookFromProto";
+
+message Book {
+  int64 isbn = 1;
+  string title = 2;
+  string author = 3;
+}
+
+message GetBookRequest {
+  int64 isbn = 1;
+}
+
+service BookService {
+  rpc GetBook (GetBookRequest) returns (Book);
+}

@@ -3,7 +3,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        jcenter() // Warning: this repository is going to shut down soon
+        jcenter() // Warning: this repository is going to shut down soon //todo usunac
     }
 }
 rootProject.name = "My Workout"
@@ -11,3 +11,4 @@ include ':app'
 include ':watch'
 include ':databasestore'
 include ':common'
+include ':networkstore'
