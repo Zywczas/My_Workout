@@ -1,25 +1,27 @@
 package com.zywczas.myworkout.activity
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material.Text
 import com.zywczas.common.di.factories.UniversalFragmentFactory
 import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.databinding.ActivityMainBinding
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
 
-    @Inject
-    lateinit var fragmentFactory: UniversalFragmentFactory
-
-    private var binding: ActivityMainBinding by autoRelease()
+//    @Inject
+//    lateinit var fragmentFactory: UniversalFragmentFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
+//        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContent { 
+            Text(text = "Compose dziala!")
+        }
     }
 
 }
