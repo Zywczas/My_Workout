@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Mój plan</string>
+    <string name="app_name">Mój Trening</string>
     <string name="train_hard_win_easily">Trenuj ciężko\nWygrywaj łatwo</string>
     <string name="empty_training_plan_weeks">Brak zaplanowanych treningów.\nMożesz mieć max 5 tygodni treningowych w jednym czasie. Kliknij aby dodać.</string>
     <string name="empty_training_plan_days">Brak zaplanowanych treningów.\nKliknij aby dodać nowy dzień treningowy.</string>
