@@ -30,8 +30,12 @@ android {
         }
     }
     buildFeatures {
-        viewBinding true
-        dataBinding true
+        viewBinding true //todo pewnie do usuniecia
+        dataBinding true //todo pewnie do usuniecia
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion project.compose_version
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -47,22 +51,30 @@ dependencies {
     implementation project(path: ':common')
     implementation project(path: ':databasestore')
     implementation project(path: ':networkstore')
-
+//todo wyczyscis niepotrzebe importy
     implementation appDependencies.corektx
     implementation appDependencies.kotlin
     implementation appDependencies.legacySupport
 
     implementation viewDependencies.appCompat
     implementation viewDependencies.material
-//    implementation viewDependencies.composeMaterial
-//    implementation viewDependencies.composeUIToolingPreview
-//    implementation viewDependencies.composeActivity
     implementation viewDependencies.navigationFragment
     implementation viewDependencies.navigationUi
     implementation viewDependencies.recyclerView
     implementation viewDependencies.percentlayout
 
-    //    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+    //todo sprawdzic ktore nie potrzebne
+    implementation composeDependencies.activity
+    implementation composeDependencies.ui
+    implementation composeDependencies.foundation
+    implementation composeDependencies.animation
+    implementation composeDependencies.uiTooling
+    implementation composeDependencies.material
+    implementation composeDependencies.accompanist
+    implementation composeDependencies.iconsCore
+    implementation composeDependencies.iconsExtended
+    implementation composeDependencies.livedata
+    implementation composeDependencies.viewModel
 
     implementation kotlinCoroutines
 
