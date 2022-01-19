@@ -10,6 +10,6 @@
     <color name="lightGrey">#9A9797</color>
     <color name="settingsItemBackground">#28950C</color>
     <color name="deleteItemBackground">@color/deepPurple900</color>
-
+<!--todo po compose usunac-->
     <color name="deepPurple900">#311b92</color>
 </resources>

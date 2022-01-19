@@ -47,6 +47,7 @@ dependencies {
     implementation viewDependencies.recyclerView
 
     implementation composeDependencies.uiTooling
+    implementation composeDependencies.material
 
     implementation diDependencies.dagger
     implementation diDependencies.daggerAndroid

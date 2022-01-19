@@ -19,22 +19,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zywczas.myworkout.R
+import com.zywczas.myworkout.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
 
 //    @Inject
 //    lateinit var fragmentFactory: UniversalFragmentFactory
 
-    private var isDarkMode = false
-
     override fun onCreate(savedInstanceState: Bundle?) {
 //        AndroidInjection.inject(this)
 //        supportFragmentManager.fragmentFactory = fragmentFactory
         super.onCreate(savedInstanceState)
         setContent {
-            MaterialTheme(
-                colors = if (isDarkMode) DarkColors else LightColors
-            ) {
+            AppTheme {
                 MessageCard(Message("Piotr", "ładne body"))
             }
         }
@@ -81,9 +78,7 @@ fun MessageCard(msg: Message) {
 @Preview
 @Composable
 fun PreviewMessageCard(){
-    MaterialTheme(
-        colors = LightColors
-    ) {
+    AppTheme {
         MessageCard(Message("Piotr", "ładne body"))
     }
 }
