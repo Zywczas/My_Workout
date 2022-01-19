@@ -4,16 +4,12 @@
     <color name="logoSecond">#00FF8B</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="accent">#0072F8</color>
+    <color name="primary">#0072F8</color>
     <color name="exerciseDoneText">@color/lightGrey</color>
-    <color name="exerciseDoneBackground">#33374E</color>
+    <color name="exerciseDoneBackgroundBackground">#33374E</color>
     <color name="lightGrey">#9A9797</color>
     <color name="settingsItemBackground">#28950C</color>
     <color name="deleteItemBackground">@color/deepPurple900</color>
 
     <color name="deepPurple900">#311b92</color>
-    <color name="green400">#66bb6a</color>
-    <color name="purple_700">#3700B3</color>
-    <color name="teal_200">#03DAC5</color>
-    <color name="teal_700">#018786</color>
 </resources>
