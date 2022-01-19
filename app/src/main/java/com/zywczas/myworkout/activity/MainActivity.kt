@@ -39,17 +39,6 @@ class MainActivity : ComponentActivity() {
 
 }
 
-val LightColors = lightColors(
-    primary = Color.Magenta,
-    secondary = Color.Red,
-    secondaryVariant = Color.Cyan
-)
-
-val DarkColors = darkColors(
-    primary = Color.DarkGray,
-    secondaryVariant = Color.Blue
-)
-
 data class Message(val author: String, val body: String)
 
 @Composable
@@ -63,7 +52,7 @@ fun MessageCard(msg: Message) {
                 .border(3.dp, MaterialTheme.colors.secondary, CircleShape)
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Column() {
+        Column {
             Text(text = msg.author,
                 color = MaterialTheme.colors.secondaryVariant
             )
