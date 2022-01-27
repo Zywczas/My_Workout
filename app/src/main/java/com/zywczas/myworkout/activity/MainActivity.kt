@@ -1,16 +1,17 @@
 package com.zywczas.myworkout.activity
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,15 +32,45 @@ class MainActivity : ComponentActivity() {
 //        supportFragmentManager.fragmentFactory = fragmentFactory
         super.onCreate(savedInstanceState)
         setContent {
-            AppTheme {
-                MessageCard(Message("Piotr", "ładne body"))
-            }
+            MainActivityCompose()
         }
     }
 
 }
 
 data class Message(val author: String, val body: String)
+
+private val przykladowaLista = listOf(
+    Message("Piotr1", "niezle1"),
+    Message("Piotr2", "niezle2"),
+    Message("Piotr3", "niezle3"),
+    Message("Piotr4", "niezle4"),
+    Message("Piotr5", "niezle5"),
+    Message("Piotr6", "niezle6"),
+    Message("Piotr7", "niezle7"),
+    Message("Piotr8", "niezle8"),
+    Message("Piotr9", "niezle9"),
+    Message("Piotr10", "niezle10"),
+    Message("Piotr11", "niezle9"),
+    Message("Piotr12", "niezle9"),
+    Message("Piotr13", "niezle9"),
+)
+
+@Composable
+private fun MainActivityCompose(){
+    AppTheme {
+        Conversation(przykladowaLista)
+    }
+}
+
+@Composable
+private fun Conversation(messages: List<Message>){
+    LazyColumn {
+        items(messages) { message ->  
+            MessageCard(message)
+        }
+    }
+}
 
 @Composable
 fun MessageCard(msg: Message) {
@@ -52,22 +83,40 @@ fun MessageCard(msg: Message) {
                 .border(3.dp, MaterialTheme.colors.secondary, CircleShape)
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Column {
+        Column(modifier = Modifier.background(color = Color.DarkGray)) {
             Text(text = msg.author,
                 color = MaterialTheme.colors.secondaryVariant
             )
-            Spacer(modifier = Modifier.width(10.dp))
-            Text(text = msg.body)
-
+            Spacer(modifier = Modifier.height(10.dp))
+            Surface(shape = MaterialTheme.shapes.medium, elevation = 3.dp) {
+                Text(text = msg.body,
+                    style = MaterialTheme.typography.body2,
+                    modifier = Modifier.padding(10.dp)
+                )
+            }
         }
     }
-
 }
 
-@Preview
+@Preview(
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+    showBackground = true,
+    name = "MainActivityCompose",
+    showSystemUi = true
+)
 @Composable
 fun PreviewMessageCard(){
+    MainActivityCompose()
+}
+
+@Preview(
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+    showBackground = true,
+    name = "MessageCard",
+)
+@Composable
+fun Preview2MessageCard(){
     AppTheme {
-        MessageCard(Message("Piotr", "ładne body"))
+        MessageCard(Message("Maciej", "ładne body"))
     }
 }
