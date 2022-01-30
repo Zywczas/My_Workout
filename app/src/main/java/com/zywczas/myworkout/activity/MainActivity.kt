@@ -4,15 +4,18 @@ import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -41,9 +44,9 @@ class MainActivity : ComponentActivity() {
 data class Message(val author: String, val body: String)
 
 private val przykladowaLista = listOf(
-    Message("Piotr1", "niezle1"),
-    Message("Piotr2", "niezle2"),
-    Message("Piotr3", "niezle3"),
+    Message("Piotr1", "niezle1\nniezle1\nniezle1\nniezle1\nniezle1\nniezle1\nniezle1\n"),
+    Message("Piotr2", "niezle2\nniezle1\nniezle1\nniezle1\nniezle1\n"),
+    Message("Piotr3", "niezle3\nniezle1"),
     Message("Piotr4", "niezle4"),
     Message("Piotr5", "niezle5"),
     Message("Piotr6", "niezle6"),
@@ -57,16 +60,16 @@ private val przykladowaLista = listOf(
 )
 
 @Composable
-private fun MainActivityCompose(){
+private fun MainActivityCompose() {
     AppTheme {
         Conversation(przykladowaLista)
     }
 }
 
 @Composable
-private fun Conversation(messages: List<Message>){
+private fun Conversation(messages: List<Message>) {
     LazyColumn {
-        items(messages) { message ->  
+        items(messages) { message ->
             MessageCard(message)
         }
     }
@@ -75,7 +78,8 @@ private fun Conversation(messages: List<Message>){
 @Composable
 fun MessageCard(msg: Message) {
     Row(modifier = Modifier.padding(8.dp)) {
-        Image(painter = painterResource(id = R.drawable.profile_picture),
+        Image(
+            painter = painterResource(id = R.drawable.profile_picture),
             contentDescription = "Zdjęcie profilowe",
             modifier = Modifier
                 .size(40.dp)
@@ -83,15 +87,31 @@ fun MessageCard(msg: Message) {
                 .border(3.dp, MaterialTheme.colors.secondary, CircleShape)
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Column(modifier = Modifier.background(color = Color.DarkGray)) {
-            Text(text = msg.author,
+
+        var isExpanded by remember { mutableStateOf(false) }
+        val surfaceColor: Color by animateColorAsState(targetValue = if (isExpanded) MaterialTheme.colors.primary else MaterialTheme.colors.surface)
+
+        Column(
+            modifier = Modifier
+                .background(color = Color.DarkGray)
+                .clickable { isExpanded = isExpanded.not() }
+        ) {
+            Text(
+                text = msg.author,
                 color = MaterialTheme.colors.secondaryVariant
             )
             Spacer(modifier = Modifier.height(10.dp))
-            Surface(shape = MaterialTheme.shapes.medium, elevation = 3.dp) {
-                Text(text = msg.body,
+            Surface(
+                shape = MaterialTheme.shapes.medium,
+                elevation = 3.dp,
+                color = surfaceColor,
+                modifier = Modifier.animateContentSize().padding(1.dp)
+            ) {
+                Text(
+                    text = msg.body,
                     style = MaterialTheme.typography.body2,
-                    modifier = Modifier.padding(10.dp)
+                    modifier = Modifier.padding(10.dp),
+                    maxLines = if (isExpanded) Int.MAX_VALUE else 1
                 )
             }
         }
@@ -105,7 +125,7 @@ fun MessageCard(msg: Message) {
     showSystemUi = true
 )
 @Composable
-fun PreviewMessageCard(){
+fun PreviewMessageCard() {
     MainActivityCompose()
 }
 
@@ -115,7 +135,7 @@ fun PreviewMessageCard(){
     name = "MessageCard",
 )
 @Composable
-fun Preview2MessageCard(){
+fun Preview2MessageCard() {
     AppTheme {
         MessageCard(Message("Maciej", "ładne body"))
     }
