@@ -26,7 +26,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.zywczas.myworkout.R
 import com.zywczas.myworkout.fragments.welcome.presentation.WelcomeViewModel
 import com.zywczas.myworkout.theme.AppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

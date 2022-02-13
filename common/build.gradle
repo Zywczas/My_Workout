@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 apply from: "${rootProject.projectDir}/config/gradle/commonLibraryConfig.gradle"
@@ -52,10 +53,13 @@ dependencies {
     implementation composeDependencies.uiTooling
     implementation composeDependencies.material
 
-    implementation diDependencies.dagger
+    implementation diDependencies.dagger //todo sprawdzic czy to potrzebne jak juz mam hilta tutaj
     implementation diDependencies.daggerAndroid
     kapt diDependencies.daggerCompiler
     kapt diDependencies.daggerCompilerAndroid
+
+    implementation "com.google.dagger:hilt-android:2.40.5" //todo poprawic
+    kapt "com.google.dagger:hilt-compiler:2.40.5"
 
     implementation lifeCycleDependencies.liveData
 
