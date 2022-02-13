@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-parcelize'
+    id 'dagger.hilt.android.plugin'
 }
 
 apply from: "${rootProject.projectDir}/config/detekt/detekt.gradle"
@@ -56,12 +57,12 @@ dependencies {
     implementation appDependencies.kotlin
     implementation appDependencies.legacySupport
 
-    implementation viewDependencies.appCompat
+//    implementation viewDependencies.appCompat
     implementation viewDependencies.material
-    implementation viewDependencies.navigationFragment
-    implementation viewDependencies.navigationUi
-    implementation viewDependencies.recyclerView
-    implementation viewDependencies.percentlayout
+//    implementation viewDependencies.navigationFragment
+//    implementation viewDependencies.navigationUi
+//    implementation viewDependencies.recyclerView
+//    implementation viewDependencies.percentlayout
 
     //todo sprawdzic ktore nie potrzebne
     implementation composeDependencies.activity
@@ -75,13 +76,19 @@ dependencies {
     implementation composeDependencies.iconsExtended
     implementation composeDependencies.livedata
     implementation composeDependencies.viewModel
+    implementation "androidx.navigation:navigation-compose:2.4.1" //todo poprawic
 
     implementation kotlinCoroutines
 
-    implementation diDependencies.dagger
-    implementation diDependencies.daggerAndroid
-    kapt diDependencies.daggerCompiler
-    kapt diDependencies.daggerCompilerAndroid
+//    implementation diDependencies.dagger
+//    implementation diDependencies.daggerAndroid
+//    kapt diDependencies.daggerCompiler
+//    kapt diDependencies.daggerCompilerAndroid
+
+    implementation "com.google.dagger:hilt-android:2.40.5" //todo poprawic
+    kapt "com.google.dagger:hilt-compiler:2.40.5"
+    implementation "androidx.hilt:hilt-navigation-compose:1.0.0" //todo poprawic
+
 
     implementation lifeCycleDependencies.liveData
 

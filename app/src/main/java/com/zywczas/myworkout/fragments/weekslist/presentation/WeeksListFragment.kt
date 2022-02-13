@@ -12,18 +12,18 @@ import androidx.fragment.app.Fragment
 import com.zywczas.myworkout.theme.AppTheme
 import javax.inject.Inject
 
-class WeeksListFragment @Inject constructor(): Fragment() {
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return ComposeView(requireContext()).apply {
-            setContent { WeeksListFragmentScreen() }
-        }
-    }
-
-}
+//class WeeksListFragment @Inject constructor(): Fragment() {
+//
+//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+//        return ComposeView(requireContext()).apply {
+//            setContent { WeeksListFragmentScreen() }
+//        }
+//    }
+//
+//}
 
 @Composable
-private fun WeeksListFragmentScreen() {
+fun WeeksListFragmentScreen() {
     AppTheme {
         Column {
             Text(text = "WeeksListFragment")

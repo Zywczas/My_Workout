@@ -2,7 +2,8 @@ package com.zywczas.myworkout.activity
 
 import android.content.res.Configuration
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
@@ -21,29 +22,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.zywczas.common.di.factories.UniversalFragmentFactory
-import com.zywczas.common.utils.autoRelease
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.zywczas.myworkout.R
-import com.zywczas.myworkout.databinding.ActivityMainBinding
+import com.zywczas.myworkout.fragments.welcome.presentation.WelcomeViewModel
 import com.zywczas.myworkout.theme.AppTheme
-import dagger.android.AndroidInjection
-import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
-
-    @Inject
-    lateinit var fragmentFactory: UniversalFragmentFactory
-    private var binding: ActivityMainBinding by autoRelease()
+class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
-        supportFragmentManager.fragmentFactory = fragmentFactory
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-//        setContent { //todo poprawka
-//            MainActivityCompose()
-//        }
+        setContent {
+            MainActivityScreen()
+        }
     }
 
 }
@@ -67,7 +57,9 @@ private val przykladowaLista = listOf(
 )
 
 @Composable
-private fun MainActivityScreen() {
+private fun MainActivityScreen(
+    viewModel: WelcomeViewModel = hiltViewModel()
+) {
     AppTheme {
         Conversation(przykladowaLista)
     }
