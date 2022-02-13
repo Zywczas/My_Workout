@@ -13,10 +13,10 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.zywczas.common.di.factories.UniversalViewModelFactory
 import com.zywczas.common.utils.autoRelease
-import com.zywczas.myworkout.activity.Message
-import com.zywczas.myworkout.activity.MessageCard
 import com.zywczas.myworkout.databinding.FragmentWelcomeBinding
 import com.zywczas.myworkout.theme.AppTheme
 import javax.inject.Inject
@@ -30,19 +30,20 @@ class WelcomeFragment @Inject constructor(viewModelFactory: UniversalViewModelFa
         binding = FragmentWelcomeBinding.inflate(inflater, container, false)
         binding.composeView.apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-            setContent { WelcomeFragmentScreen() }
+            setContent { WelcomeFragmentScreen(findNavController(), viewModel) }
         }
         return binding.root
     }
 
+
 }
 
 @Composable
-private fun WelcomeFragmentScreen() {
+private fun WelcomeFragmentScreen(navController: NavController?, viewModel: WelcomeViewModel) {
     AppTheme {
         Column {
             Text(text = "welcome fragment")
-            Button(onClick = {  }) {
+            Button(onClick = { navController?.navigate(WelcomeFragmentDirections.toWeeksListFragment()) }) {
                 Text(text = "idz do drugiego fragmentu")
             }
         }
@@ -56,6 +57,6 @@ private fun WelcomeFragmentScreen() {
 )
 @Composable
 fun PreviewWelcomeFragmentScreen() {
-    WelcomeFragmentScreen()
+    WelcomeFragmentScreen(null, WelcomeViewModel())
 }
 

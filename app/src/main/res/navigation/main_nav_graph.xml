@@ -9,5 +9,14 @@
         android:id="@+id/welcomeFragment"
         android:name="com.zywczas.myworkout.fragments.welcome.presentation.WelcomeFragment"
         android:label="fragment_welcome"
-        tools:layout="@layout/fragment_welcome" />
+        tools:layout="@layout/fragment_welcome" >
+        <action
+            android:id="@+id/toWeeksListFragment"
+            app:destination="@id/weeksListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/weeksListFragment"
+        android:name="com.zywczas.myworkout.fragments.weekslist.presentation.WeeksListFragment"
+        android:label="fragment_weeks_list"
+        tools:layout="@layout/fragment_weeks_list" />
 </navigation>
