@@ -5,9 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".fragments.welcome.presentation.WelcomeFragment">
 
-    <TextView
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/composeView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="fragment 1" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>

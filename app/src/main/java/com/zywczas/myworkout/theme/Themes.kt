@@ -9,7 +9,7 @@ import com.zywczas.common.theme.LightColorsPalette
 @Composable
 fun AppTheme(content: @Composable () -> Unit){
     MaterialTheme(
-        colors = if (isSystemInDarkTheme()) DarkColorsPalette else LightColorsPalette,
+        colors = if (isSystemInDarkTheme()) DarkColorsPalette else LightColorsPalette, //todo przetestowac czy dobrze przelacza theme'y
         content = content
     )
 }

@@ -2,8 +2,7 @@ package com.zywczas.myworkout.activity
 
 import android.content.res.Configuration
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
@@ -22,21 +21,29 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.zywczas.common.di.factories.UniversalFragmentFactory
+import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.R
+import com.zywczas.myworkout.databinding.ActivityMainBinding
 import com.zywczas.myworkout.theme.AppTheme
+import dagger.android.AndroidInjection
+import javax.inject.Inject
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
 
-//    @Inject
-//    lateinit var fragmentFactory: UniversalFragmentFactory
+    @Inject
+    lateinit var fragmentFactory: UniversalFragmentFactory
+    private var binding: ActivityMainBinding by autoRelease()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-//        AndroidInjection.inject(this)
-//        supportFragmentManager.fragmentFactory = fragmentFactory
+        AndroidInjection.inject(this)
+        supportFragmentManager.fragmentFactory = fragmentFactory
         super.onCreate(savedInstanceState)
-        setContent {
-            MainActivityCompose()
-        }
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+//        setContent { //todo poprawka
+//            MainActivityCompose()
+//        }
     }
 
 }
@@ -60,7 +67,7 @@ private val przykladowaLista = listOf(
 )
 
 @Composable
-private fun MainActivityCompose() {
+private fun MainActivityScreen() {
     AppTheme {
         Conversation(przykladowaLista)
     }
@@ -126,7 +133,7 @@ fun MessageCard(msg: Message) {
 )
 @Composable
 fun PreviewMessageCard() {
-    MainActivityCompose()
+    MainActivityScreen()
 }
 
 @Preview(
