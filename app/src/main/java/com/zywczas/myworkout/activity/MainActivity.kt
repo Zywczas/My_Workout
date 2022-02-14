@@ -22,9 +22,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.zywczas.common.extetions.logD
 import com.zywczas.myworkout.R
-import com.zywczas.myworkout.fragments.welcome.presentation.WelcomeViewModel
+import com.zywczas.myworkout.fragments.weekslist.presentation.WeeksListScreen
+import com.zywczas.myworkout.fragments.welcome.presentation.WelcomeScreen
 import com.zywczas.myworkout.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,7 +38,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainActivityScreen()
+            AppTheme {
+                MainActivityScreen()
+            }
         }
     }
 
@@ -59,13 +65,18 @@ private val przykladowaLista = listOf(
 )
 
 @Composable
-private fun MainActivityScreen(
-    viewModel: WelcomeViewModel = hiltViewModel()
-) {
-    AppTheme {
-        Conversation(przykladowaLista)
+private fun MainActivityScreen() {
+    val mainNavController = rememberNavController()
+    NavHost(navController = mainNavController, startDestination = "welcome") {
+        composable("welcome") { WelcomeScreen(navController = mainNavController) }
+        composable("weekList") { WeeksListScreen(navController = mainNavController) }
     }
 }
+
+
+
+
+
 
 @Composable
 private fun Conversation(messages: List<Message>) {
@@ -77,7 +88,7 @@ private fun Conversation(messages: List<Message>) {
 }
 
 @Composable
-fun MessageCard(msg: Message) {
+fun MessageCard(msg: Message) { //todo do usuniecia
     Row(modifier = Modifier.padding(8.dp)) {
         Image(
             painter = painterResource(id = R.drawable.profile_picture),
@@ -106,7 +117,9 @@ fun MessageCard(msg: Message) {
                 shape = MaterialTheme.shapes.medium,
                 elevation = 3.dp,
                 color = surfaceColor,
-                modifier = Modifier.animateContentSize().padding(1.dp)
+                modifier = Modifier
+                    .animateContentSize()
+                    .padding(1.dp)
             ) {
                 Text(
                     text = msg.body,

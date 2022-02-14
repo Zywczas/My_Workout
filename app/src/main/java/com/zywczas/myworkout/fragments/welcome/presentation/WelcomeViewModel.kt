@@ -11,8 +11,8 @@ class WelcomeViewModel @Inject constructor(
     private val dateTime: DateTimeProvider
 ) : ViewModel() {
 
-    init {
-        logD("init")
+    fun zrobcos(){
+
     }
 
 }
