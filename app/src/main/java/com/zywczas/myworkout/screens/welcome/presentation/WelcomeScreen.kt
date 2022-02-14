@@ -15,7 +15,7 @@ import com.zywczas.myworkout.navigation.MainDestinations
 
 @Composable
 fun WelcomeScreen(
-    navController: NavController?,
+    navController: NavController,
     viewModel: WelcomeViewModel = hiltViewModel(),
 ) {
     Column(
@@ -27,7 +27,7 @@ fun WelcomeScreen(
             color = MaterialTheme.colors.primary
         )
         Button(onClick = {
-            navController?.navigate(MainDestinations.WeeksList.route) {
+            navController.navigate(MainDestinations.WeeksList.route) {
                 popUpTo(MainDestinations.Welcome.route) { inclusive = true }
             }
         }) {
@@ -43,6 +43,6 @@ fun WelcomeScreen(
 )
 @Composable
 fun PreviewWelcomeFragmentScreen() {
-    WelcomeScreen(null)
+
 }
 

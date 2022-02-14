@@ -29,7 +29,7 @@ private fun MainActivityScreen() {
     NavHostMain()
 }
 
-//todo to wszystko ponizej do usuniecia
+//todo do usuniecia
 //@Composable
 //private fun Conversation(messages: List<Message>) {
 //    LazyColumn {
@@ -40,7 +40,7 @@ private fun MainActivityScreen() {
 //}
 
 //@Composable
-//fun MessageCard(msg: Message) { //todo do usuniecia
+//fun MessageCard(msg: Message) {
 //    Row(modifier = Modifier.padding(8.dp)) {
 //        Image(
 //            painter = painterResource(id = R.drawable.profile_picture),
