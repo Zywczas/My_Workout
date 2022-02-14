@@ -18,6 +18,19 @@ fun WelcomeScreen(
     navController: NavController,
     viewModel: WelcomeViewModel = hiltViewModel(),
 ) {
+    WelcomeScreen(
+        navigateToWeekListAction = {
+            navController.navigate(MainDestinations.WeeksList.route) {
+                popUpTo(MainDestinations.Welcome.route) { inclusive = true }
+            }
+        }
+    )
+}
+
+@Composable
+private fun WelcomeScreen(
+    navigateToWeekListAction: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -26,11 +39,7 @@ fun WelcomeScreen(
             text = "welcome fragment",
             color = MaterialTheme.colors.primary
         )
-        Button(onClick = {
-            navController.navigate(MainDestinations.WeeksList.route) {
-                popUpTo(MainDestinations.Welcome.route) { inclusive = true }
-            }
-        }) {
+        Button(onClick = navigateToWeekListAction) {
             Text(text = "idz do WeeksList fragmentu")
         }
     }
@@ -39,10 +48,24 @@ fun WelcomeScreen(
 @Preview(
     uiMode = Configuration.UI_MODE_NIGHT_NO,
     showBackground = true,
-    name = "WelcomeFragmentScreen",
+    name = "WelcomeScreen UI_MODE_NIGHT_NO",
 )
 @Composable
-fun PreviewWelcomeFragmentScreen() {
+private fun PreviewWelcomeScreenDayMode() {
+    WelcomeScreen(
+        navigateToWeekListAction = {}
+    )
+}
 
+@Preview(
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true,
+    name = "WelcomeScreen UI_MODE_NIGHT_YES",
+)
+@Composable
+private fun PreviewWelcomeScreenNighMode() {
+    WelcomeScreen(
+        navigateToWeekListAction = {}
+    )
 }
 
