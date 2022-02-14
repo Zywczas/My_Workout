@@ -1,7 +1,6 @@
-package com.zywczas.myworkout.fragments.welcome.presentation
+package com.zywczas.myworkout.screens.welcome.presentation
 
 import androidx.lifecycle.ViewModel
-import com.zywczas.common.extetions.logD
 import com.zywczas.common.utils.DateTimeProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -10,9 +9,5 @@ import javax.inject.Inject
 class WelcomeViewModel @Inject constructor(
     private val dateTime: DateTimeProvider
 ) : ViewModel() {
-
-    fun zrobcos(){
-
-    }
 
 }

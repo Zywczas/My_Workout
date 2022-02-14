@@ -1,29 +1,37 @@
-package com.zywczas.myworkout.fragments.welcome.presentation
+package com.zywczas.myworkout.screens.welcome.presentation
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.zywczas.myworkout.theme.AppTheme
+import com.zywczas.myworkout.navigation.MainDestinations
 
 @Composable
 fun WelcomeScreen(
-    navController: NavController,
-    viewModel: WelcomeViewModel = hiltViewModel()
+    navController: NavController?,
+    viewModel: WelcomeViewModel = hiltViewModel(),
 ) {
-    Column {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
         Text(
             text = "welcome fragment",
             color = MaterialTheme.colors.primary
         )
-        Button(onClick = { navController.navigate("weekList") }) {
-            Text(text = "idz do drugiego fragmentu")
+        Button(onClick = {
+            navController?.navigate(MainDestinations.WeeksList.route) {
+                popUpTo(MainDestinations.Welcome.route) { inclusive = true }
+            }
+        }) {
+            Text(text = "idz do WeeksList fragmentu")
         }
     }
 }
@@ -35,6 +43,6 @@ fun WelcomeScreen(
 )
 @Composable
 fun PreviewWelcomeFragmentScreen() {
-//    WelcomeFragmentScreen(WelcomeViewModel())
+    WelcomeScreen(null)
 }
 
