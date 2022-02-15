@@ -19,7 +19,7 @@ fun WelcomeScreen(
     viewModel: WelcomeViewModel = hiltViewModel(),
 ) {
     WelcomeScreen(
-        navigateToWeekListAction = {
+        actionNavigateToWeekList = {
             navController.navigate(MainDestinations.WeeksList.route) {
                 popUpTo(MainDestinations.Welcome.route) { inclusive = true }
             }
@@ -29,7 +29,7 @@ fun WelcomeScreen(
 
 @Composable
 private fun WelcomeScreen(
-    navigateToWeekListAction: () -> Unit
+    actionNavigateToWeekList: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -39,7 +39,7 @@ private fun WelcomeScreen(
             text = "welcome fragment",
             color = MaterialTheme.colors.primary
         )
-        Button(onClick = navigateToWeekListAction) {
+        Button(onClick = actionNavigateToWeekList) {
             Text(text = "idz do WeeksList fragmentu")
         }
     }
@@ -53,7 +53,7 @@ private fun WelcomeScreen(
 @Composable
 private fun PreviewWelcomeScreenDayMode() {
     WelcomeScreen(
-        navigateToWeekListAction = {}
+        actionNavigateToWeekList = {}
     )
 }
 
@@ -65,7 +65,7 @@ private fun PreviewWelcomeScreenDayMode() {
 @Composable
 private fun PreviewWelcomeScreenNighMode() {
     WelcomeScreen(
-        navigateToWeekListAction = {}
+        actionNavigateToWeekList = {}
     )
 }
 
