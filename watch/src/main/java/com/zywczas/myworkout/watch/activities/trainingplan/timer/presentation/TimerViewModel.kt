@@ -6,10 +6,12 @@ import com.zywczas.common.utils.DateTimeProvider
 import com.zywczas.common.utils.SingleLiveData
 import com.zywczas.myworkout.watch.activities.trainingplan.timer.domain.NextExercise
 import com.zywczas.myworkout.watch.activities.trainingplan.timer.domain.TimerRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class TimerViewModel @Inject constructor(
     @DispatcherIO private val dispatcherIO: CoroutineDispatcher,
     private val repo: TimerRepository,

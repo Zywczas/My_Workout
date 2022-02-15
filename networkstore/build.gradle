@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'com.google.protobuf'
+    id 'dagger.hilt.android.plugin'
 }
 
 apply from: "${rootProject.projectDir}/config/gradle/commonLibraryConfig.gradle"
@@ -45,16 +46,14 @@ dependencies {
     implementation appDependencies.corektx
     implementation appDependencies.jodatime
 
-    implementation diDependencies.dagger
-    implementation diDependencies.daggerAndroid
-    kapt diDependencies.daggerCompiler
-    kapt diDependencies.daggerCompilerAndroid
+    implementation hiltDependencies.hilt
+    kapt hiltDependencies.compiler
 
     implementation networkDependencies.protobufLite
     implementation networkDependencies.grpcOkhttp
     implementation networkDependencies.grpcProtobufLite
     implementation networkDependencies.grpcStub
-    implementation appDependencies.javaxAnnotation //needed for protobuf
+    implementation appDependencies.javaxAnnotation //for protobuf
 
 }
 
@@ -62,7 +61,7 @@ protobuf {
     protoc { artifact = 'com.google.protobuf:protoc:3.10.0' }
     plugins {
         javalite { artifact = "com.google.protobuf:protoc-gen-javalite:3.0.0" }
-        grpc { artifact = 'io.grpc:protoc-gen-grpc-java:1.25.0' // CURRENT_GRPC_VERSION
+        grpc { artifact = "io.grpc:protoc-gen-grpc-java:$grpc_version"
         }
     }
     generateProtoTasks {

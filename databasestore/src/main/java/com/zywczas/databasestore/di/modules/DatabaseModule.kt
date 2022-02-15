@@ -10,14 +10,18 @@ import com.zywczas.databasestore.trainings.dao.ExerciseDao
 import com.zywczas.databasestore.trainings.dao.WeekDao
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
+@InstallIn(SingletonComponent::class)
 class DatabaseModule {
 
     @Provides
     @Singleton
-    internal fun provideTrainingsDatabase(context: Context): TrainingsDatabase =
+    internal fun provideTrainingsDatabase(@ApplicationContext context: Context): TrainingsDatabase =
         Room.databaseBuilder(context, TrainingsDatabase::class.java, "TrainingsDatabase").build()
 
     @Provides

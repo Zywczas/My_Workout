@@ -1,16 +1,18 @@
 package com.zywczas.myworkout.watch.activities.trainingplan.changeweight.presentation
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import com.zywczas.common.utils.autoRelease
-import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.exercise.presentation.ExerciseActivity
 import com.zywczas.myworkout.watch.databinding.ActivityChangeWeightBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class ChangeWeightActivity : BaseActivity() {
+@AndroidEntryPoint
+class ChangeWeightActivity : ComponentActivity() {
 
     private var binding: ActivityChangeWeightBinding by autoRelease()
-    private val viewModel: ChangeWeightViewModel by viewModels { viewModelFactory }
+    private val viewModel: ChangeWeightViewModel by viewModels()
     private val exerciseId by lazy { intent.getLongExtra(ExerciseActivity.KEY_EXERCISE_ID, 0L) }
 
     override fun onCreate(savedInstanceState: Bundle?) {

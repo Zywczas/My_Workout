@@ -1,17 +1,19 @@
 package com.zywczas.myworkout.watch.activities.settings.timer.presentation
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import com.zywczas.common.extetions.showToast
 import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.R
-import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.databinding.ActivitySettingsTimerBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class SettingsTimerActivity : BaseActivity() {
+@AndroidEntryPoint
+class SettingsTimerActivity : ComponentActivity() {
 
     private var binding: ActivitySettingsTimerBinding by autoRelease()
-    private val viewModel: SettingsTimerViewModel by viewModels { viewModelFactory }
+    private val viewModel: SettingsTimerViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

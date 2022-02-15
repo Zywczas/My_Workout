@@ -3,20 +3,22 @@ package com.zywczas.myworkout.watch.activities.trainingplan.timer.presentation
 import android.content.Intent
 import android.os.Bundle
 import android.provider.AlarmClock
+import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.zywczas.common.utils.autoRelease
-import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.settings.timer.presentation.SettingsTimerActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.day.presentation.DayActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.exercise.presentation.ExerciseActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.timer.domain.NextExercise
 import com.zywczas.myworkout.watch.databinding.ActivityTimerBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class TimerActivity : BaseActivity() {
+@AndroidEntryPoint
+class TimerActivity : ComponentActivity() {
 
     private var binding: ActivityTimerBinding by autoRelease()
-    private val viewModel: TimerViewModel by viewModels { viewModelFactory }
+    private val viewModel: TimerViewModel by viewModels()
     private val exerciseId by lazy { intent.getLongExtra(DayActivity.KEY_EXERCISE_ID, 0L) }
     private val nextExerciseSet by lazy { intent.getIntExtra(ExerciseActivity.KEY_EXERCISE_SET, 0) }
 

@@ -7,10 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.common.utils.SingleLiveData
 import com.zywczas.myworkout.watch.activities.settings.timer.domain.SettingsTimerRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class SettingsTimerViewModel @Inject constructor(
     private val repo: SettingsTimerRepository,
     @DispatcherIO private val dispatcherIO: CoroutineDispatcher

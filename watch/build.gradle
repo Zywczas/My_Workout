@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
+    id 'dagger.hilt.android.plugin'
 }
 
 apply from: "${rootProject.projectDir}/config/detekt/detekt.gradle"
@@ -64,10 +65,9 @@ dependencies {
 
     implementation kotlinCoroutines
 
-    implementation diDependencies.dagger
-    implementation diDependencies.daggerAndroid
-    kapt diDependencies.daggerCompiler
-    kapt diDependencies.daggerCompilerAndroid
+    implementation hiltDependencies.hilt
+    kapt hiltDependencies.compiler
+    implementation hiltDependencies.navigationCompose //todo nie uzywane poki co
 
     implementation lifeCycleDependencies.liveData
 

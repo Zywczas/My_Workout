@@ -7,10 +7,12 @@ import com.zywczas.myworkout.watch.activities.BaseViewModel
 import com.zywczas.myworkout.watch.activities.trainingplan.exercise.domain.Exercise
 import com.zywczas.myworkout.watch.activities.trainingplan.exercise.domain.ExerciseRepository
 import com.zywczas.myworkout.watch.activities.trainingplan.exercise.domain.NextExercise
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class ExerciseViewModel @Inject constructor(
     @DispatcherIO private val dispatcherIO: CoroutineDispatcher,
     private val repo: ExerciseRepository

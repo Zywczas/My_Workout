@@ -6,11 +6,13 @@ import androidx.lifecycle.viewModelScope
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.common.di.modules.UtilsModule.WelcomeScreenDelay
 import com.zywczas.common.utils.SingleLiveData
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class MainViewModel @Inject constructor(
     @DispatcherIO private val dispatcherIO: CoroutineDispatcher,
     @WelcomeScreenDelay private val welcomeScreenDelay: Long

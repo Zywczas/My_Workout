@@ -8,7 +8,7 @@ import com.zywczas.common.utils.SingleLiveData
 
 abstract class BaseViewModel : ViewModel(){
 
-    private val _message = SingleLiveData<@StringRes Int>()
+    private val _message = SingleLiveData<Int>()
     val message: LiveData<Int> = _message
 
     private val _isProgressBarVisible = MutableLiveData<Boolean>()

@@ -53,11 +53,6 @@ dependencies {
     implementation composeDependencies.uiTooling
     implementation composeDependencies.material
 
-    implementation diDependencies.dagger //todo sprawdzic czy to potrzebne jak juz mam hilta tutaj
-    implementation diDependencies.daggerAndroid
-    kapt diDependencies.daggerCompiler
-    kapt diDependencies.daggerCompilerAndroid
-
     implementation hiltDependencies.hilt
     kapt hiltDependencies.compiler
 

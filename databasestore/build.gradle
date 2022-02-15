@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 apply from: "${rootProject.projectDir}/config/gradle/commonLibraryConfig.gradle"
@@ -48,10 +49,8 @@ dependencies {
     implementation appDependencies.corektx
     implementation appDependencies.jodatime
 
-    implementation diDependencies.dagger
-    implementation diDependencies.daggerAndroid
-    kapt diDependencies.daggerCompiler
-    kapt diDependencies.daggerCompilerAndroid
+    implementation hiltDependencies.hilt
+    kapt hiltDependencies.compiler
 
     implementation dbDependencies.room
     implementation dbDependencies.roomktx

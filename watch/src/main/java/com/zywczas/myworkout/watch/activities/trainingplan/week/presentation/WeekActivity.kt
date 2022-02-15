@@ -2,6 +2,7 @@ package com.zywczas.myworkout.watch.activities.trainingplan.week.presentation
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.wear.widget.WearableLinearLayoutManager
@@ -14,7 +15,6 @@ import com.zywczas.common.extetions.addVerticalItemDivider
 import com.zywczas.common.extetions.showToast
 import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.R
-import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.day.presentation.DayActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.week.domain.WeekElements
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.presentation.WeeksListActivity
@@ -22,15 +22,17 @@ import com.zywczas.myworkout.watch.activityresultcontracts.registerVoiceRecognit
 import com.zywczas.myworkout.watch.adapters.*
 import com.zywczas.myworkout.watch.databinding.ActivityWeekBinding
 import com.zywczas.myworkout.watch.utils.CustomScrollingLayoutCallback
+import dagger.hilt.android.AndroidEntryPoint
 
-class WeekActivity : BaseActivity() {
+@AndroidEntryPoint
+class WeekActivity : ComponentActivity() {
 
     companion object {
         const val KEY_DAY_ID = "KEY_DAY_ID"
     }
 
     private var binding: ActivityWeekBinding by autoRelease()
-    private val viewModel: WeekViewModel by viewModels{ viewModelFactory }
+    private val viewModel: WeekViewModel by viewModels()
     private val itemAdapter by lazy { ItemAdapter<GenericItem>() }
     private val weekId by lazy { intent.getLongExtra(WeeksListActivity.KEY_WEEK_ID, 0) }
     private val voiceRecognitionLauncher = registerVoiceRecognition { dayName -> viewModel.addNewDay(dayName, weekId) }

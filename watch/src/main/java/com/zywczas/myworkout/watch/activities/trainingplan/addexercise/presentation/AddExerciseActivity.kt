@@ -1,18 +1,20 @@
 package com.zywczas.myworkout.watch.activities.trainingplan.addexercise.presentation
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import com.zywczas.common.extetions.showToast
 import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.R
-import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.day.presentation.DayActivity
 import com.zywczas.myworkout.watch.databinding.ActivityAddExerciseBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class AddExerciseActivity : BaseActivity() {
+@AndroidEntryPoint
+class AddExerciseActivity : ComponentActivity() {
 
     private var binding: ActivityAddExerciseBinding by autoRelease()
-    private val viewModel: AddExerciseViewModel by viewModels { viewModelFactory }
+    private val viewModel: AddExerciseViewModel by viewModels()
     private val dayId by lazy { intent.getLongExtra(DayActivity.KEY_DAY_ID, 0) }
     private val exerciseName by lazy { intent.getStringExtra(DayActivity.KEY_EXERCISE_NAME) ?: "" }
 

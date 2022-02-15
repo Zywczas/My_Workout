@@ -2,13 +2,7 @@ package com.zywczas.myworkout.watch
 
 
 import android.app.Application
-import com.zywczas.myworkout.watch.di.AppInjector
+import dagger.hilt.android.HiltAndroidApp
 
-class BaseWatchApp : Application() {
-
-    override fun onCreate() {
-        super.onCreate()
-        AppInjector.init(this)
-    }
-
-}
+@HiltAndroidApp
+class BaseWatchApp : Application()

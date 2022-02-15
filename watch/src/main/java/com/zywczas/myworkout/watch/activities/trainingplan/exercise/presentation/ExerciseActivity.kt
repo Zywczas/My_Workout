@@ -2,10 +2,10 @@ package com.zywczas.myworkout.watch.activities.trainingplan.exercise.presentatio
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.zywczas.common.utils.autoRelease
-import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.changeweight.presentation.ChangeWeightActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.day.presentation.DayActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.exercise.domain.Exercise
@@ -13,8 +13,10 @@ import com.zywczas.myworkout.watch.activities.trainingplan.exercise.domain.NextE
 import com.zywczas.myworkout.watch.activities.trainingplan.timer.presentation.TimerActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.week.presentation.WeekActivity
 import com.zywczas.myworkout.watch.databinding.ActivityExerciseBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class ExerciseActivity : BaseActivity() {
+@AndroidEntryPoint
+class ExerciseActivity : ComponentActivity() {
 
     companion object {
         const val KEY_EXERCISE_SET = "KEY_EXERCISE_SET"
@@ -22,7 +24,7 @@ class ExerciseActivity : BaseActivity() {
     }
 
     private var binding: ActivityExerciseBinding by autoRelease()
-    private val viewModel: ExerciseViewModel by viewModels { viewModelFactory }
+    private val viewModel: ExerciseViewModel by viewModels()
     private var exerciseId = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {

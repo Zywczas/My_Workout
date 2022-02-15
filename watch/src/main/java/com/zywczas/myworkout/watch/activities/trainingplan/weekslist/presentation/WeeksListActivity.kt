@@ -2,6 +2,7 @@ package com.zywczas.myworkout.watch.activities.trainingplan.weekslist.presentati
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.wear.widget.WearableLinearLayoutManager
@@ -14,21 +15,22 @@ import com.zywczas.common.extetions.addVerticalItemDivider
 import com.zywczas.common.extetions.showToast
 import com.zywczas.common.utils.autoRelease
 import com.zywczas.myworkout.watch.R
-import com.zywczas.myworkout.watch.activities.BaseActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.week.presentation.WeekActivity
 import com.zywczas.myworkout.watch.activities.trainingplan.weekslist.domain.WeeksListElements
 import com.zywczas.myworkout.watch.activityresultcontracts.registerVoiceRecognition
 import com.zywczas.myworkout.watch.adapters.*
 import com.zywczas.myworkout.watch.databinding.ActivityWeeksListBinding
 import com.zywczas.myworkout.watch.utils.CustomScrollingLayoutCallback
+import dagger.hilt.android.AndroidEntryPoint
 
-class WeeksListActivity : BaseActivity() {
+@AndroidEntryPoint
+class WeeksListActivity : ComponentActivity() {
 
     companion object {
         const val KEY_WEEK_ID = "KEY_WEEK_ID"
     }
 
-    private val viewModel: WeeksListViewModel by viewModels { viewModelFactory }
+    private val viewModel: WeeksListViewModel by viewModels()
     private var binding: ActivityWeeksListBinding by autoRelease()
     private val itemAdapter by lazy { ItemAdapter<GenericItem>() }
 

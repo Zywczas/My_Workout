@@ -8,10 +8,12 @@ import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.common.utils.SingleLiveData
 import com.zywczas.myworkout.watch.activities.trainingplan.changeweight.domain.ChangeWeightRepository
 import com.zywczas.myworkout.watch.activities.trainingplan.changeweight.domain.Exercise
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class ChangeWeightViewModel @Inject constructor(
  @DispatcherIO private val dispatcherIO: CoroutineDispatcher,
  private val repo: ChangeWeightRepository

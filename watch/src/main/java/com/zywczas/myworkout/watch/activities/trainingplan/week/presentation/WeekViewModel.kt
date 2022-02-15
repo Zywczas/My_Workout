@@ -3,21 +3,28 @@ package com.zywczas.myworkout.watch.activities.trainingplan.week.presentation
 import androidx.lifecycle.*
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.common.extetions.dayFormat
+import com.zywczas.common.extetions.logD
 import com.zywczas.common.utils.SingleLiveData
 import com.zywczas.common.utils.StringProvider
 import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseViewModel
 import com.zywczas.myworkout.watch.activities.trainingplan.week.domain.WeekElements
 import com.zywczas.myworkout.watch.activities.trainingplan.week.domain.WeekRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class WeekViewModel @Inject constructor(
     @DispatcherIO private val dispatcherIO: CoroutineDispatcher,
     private val repo: WeekRepository,
     private val stringProvider: StringProvider
 ) : BaseViewModel() {
+
+    init {
+        logD("init")
+    }
 
     private val _weekElements = MutableLiveData<List<WeekElements>>()
     val weekElements: LiveData<List<WeekElements>> = _weekElements
