@@ -2,7 +2,6 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-parcelize'
     id 'dagger.hilt.android.plugin'
 }
@@ -31,8 +30,6 @@ android {
         }
     }
     buildFeatures {
-        viewBinding true //todo pewnie do usuniecia
-        dataBinding true //todo pewnie do usuniecia
         compose true
     }
     composeOptions {
@@ -52,18 +49,12 @@ dependencies {
     implementation project(path: ':common')
     implementation project(path: ':databasestore')
     implementation project(path: ':networkstore')
-//todo wyczyscis niepotrzebe importy
+
     implementation appDependencies.corektx
     implementation appDependencies.kotlin
     implementation appDependencies.legacySupport
 
-//    implementation viewDependencies.appCompat
     implementation viewDependencies.material
-//    implementation viewDependencies.navigationFragment
-//    implementation viewDependencies.navigationUi
-//    implementation viewDependencies.recyclerView
-//    implementation viewDependencies.percentlayout
-
     //todo sprawdzic ktore nie potrzebne
     implementation composeDependencies.activity
     implementation composeDependencies.ui
@@ -76,21 +67,15 @@ dependencies {
     implementation composeDependencies.iconsExtended
     implementation composeDependencies.livedata
     implementation composeDependencies.viewModel
-    implementation "androidx.navigation:navigation-compose:2.4.1" //todo poprawic
+    implementation composeDependencies.navigation
 
     implementation kotlinCoroutines
 
-//    implementation diDependencies.dagger
-//    implementation diDependencies.daggerAndroid
-//    kapt diDependencies.daggerCompiler
-//    kapt diDependencies.daggerCompilerAndroid
+    implementation hiltDependencies.hilt
+    kapt hiltDependencies.compiler
+    implementation hiltDependencies.navigationCompose
 
-    implementation "com.google.dagger:hilt-android:2.40.5" //todo poprawic
-    kapt "com.google.dagger:hilt-compiler:2.40.5"
-    implementation "androidx.hilt:hilt-navigation-compose:1.0.0" //todo poprawic
-
-
+    //todo sprawdzic czy potrzebne, w innych modulach tez
     implementation lifeCycleDependencies.liveData
-
 
 }

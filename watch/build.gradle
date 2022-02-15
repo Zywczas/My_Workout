@@ -18,7 +18,6 @@ android {
         targetSdk project.targetSdkVersion
         versionCode 1
         versionName "1.0"
-
     }
 
     buildTypes {
@@ -28,8 +27,9 @@ android {
         }
     }
     buildFeatures {
-        viewBinding true
-        dataBinding true
+        viewBinding true //todo do usuniecia po compose
+        dataBinding true //todo do usuniecia po compose
+//        compose true
     }
 }
 
@@ -46,8 +46,8 @@ dependencies {
     implementation appDependencies.kotlin
     implementation appDependencies.legacySupport
     implementation appDependencies.jodatime
-
-//    implementation viewDependencies.appCompat
+//todo wyczyscic importy
+    implementation viewDependencies.appCompat
     implementation viewDependencies.material
     implementation viewDependencies.activity
 //    implementation viewDependencies.composeMaterial
@@ -66,7 +66,6 @@ dependencies {
 
     implementation diDependencies.dagger
     implementation diDependencies.daggerAndroid
-    implementation 'androidx.appcompat:appcompat:1.4.0' //todo poprawic
     kapt diDependencies.daggerCompiler
     kapt diDependencies.daggerCompilerAndroid
 

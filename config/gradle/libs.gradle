@@ -8,7 +8,8 @@ ext {
             kotlin                          : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
             corektx                         : "androidx.core:core-ktx:1.7.0",
             jodatime                        : "joda-time:joda-time:2.10.13",
-            legacySupport                   : 'androidx.legacy:legacy-support-v4:1.0.0'
+            legacySupport                   : 'androidx.legacy:legacy-support-v4:1.0.0',
+            javaxAnnotation                 : 'javax.annotation:javax.annotation-api:1.3.2',
     ]
 
     wearDependencies = [
@@ -21,7 +22,7 @@ ext {
     fast_adapter_version = '5.6.0'
 
     viewDependencies = [
-            appCompat                       : "androidx.appcompat:appcompat:1.3.1",
+            appCompat                       : "androidx.appcompat:appcompat:1.4.0",
             activity                        : "androidx.activity:activity-ktx:1.4.0",
             material                        : "com.google.android.material:material:1.4.0",
             navigationFragment              : "androidx.navigation:navigation-fragment-ktx:$androidx_navigation_version",
@@ -47,7 +48,8 @@ ext {
             iconsCore                       : "androidx.compose.material:material-icons-core:$compose_version",
             iconsExtended                   : "androidx.compose.material:material-icons-extended:$compose_version",
             livedata                        : "androidx.compose.runtime:runtime-livedata:$compose_version",
-            viewModel                       : "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
+            viewModel                       : "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07",
+            navigation                      : "androidx.navigation:navigation-compose:2.4.1"
     ]
 
     kotlinCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2"
@@ -59,13 +61,21 @@ ext {
     ]
 
     dagger_version = '2.36'
-//    dagger_version = '2.40.1'
 
     diDependencies = [
             dagger                          : "com.google.dagger:dagger:$dagger_version",
             daggerCompiler                  : "com.google.dagger:dagger-compiler:$dagger_version",
             daggerAndroid                   : "com.google.dagger:dagger-android:$dagger_version",
             daggerCompilerAndroid           : "com.google.dagger:dagger-android-processor:$dagger_version"
+    ]
+
+
+    hilt_version = '2.40.5'
+
+    hiltDependencies = [
+            hilt                            : "com.google.dagger:hilt-android:$hilt_version",
+            compiler                        : "com.google.dagger:hilt-compiler:$hilt_version",
+            navigationCompose               : "androidx.hilt:hilt-navigation-compose:1.0.0"
     ]
 
     room_version = '2.3.0'
@@ -76,15 +86,16 @@ ext {
             roomCompiler                    : "androidx.room:room-compiler:$room_version"
     ]
 
-//    retrofit_version = '2.9.0'
-//    ok_http_version = '4.9.1'
-
+    protobuf_version = '0.8.18'
+    grpc_version = '1.25.0'
+//todo sprawdzic czy potrzebuje obu protobuf lite
     networkDependencies = [
-//            retrofit                            : "com.squareup.retrofit2:retrofit:$retrofit_version",
-//            gsonConverter                       : "com.squareup.retrofit2:converter-gson:$retrofit_version",
-//            okHttpInterceptor            : "com.squareup.okhttp3:logging-interceptor:$ok_http_version",
-//            okHttp                              : "com.squareup.okhttp3:okhttp:$ok_http_version"
+            protobufLite                    : "com.google.protobuf:protobuf-lite:3.0.1",
+            grpcOkhttp                      : "io.grpc:grpc-okhttp:$grpc_version",
+            grpcProtobufLite                : "io.grpc:grpc-protobuf-lite:$grpc_version",
+            grpcStub                        : "io.grpc:grpc-stub:$grpc_version",
     ]
+
 
     lifeCycleDependencies = [
             liveData                        : "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0"

@@ -58,8 +58,8 @@ dependencies {
     kapt diDependencies.daggerCompiler
     kapt diDependencies.daggerCompilerAndroid
 
-    implementation "com.google.dagger:hilt-android:2.40.5" //todo poprawic
-    kapt "com.google.dagger:hilt-compiler:2.40.5"
+    implementation hiltDependencies.hilt
+    kapt hiltDependencies.compiler
 
     implementation lifeCycleDependencies.liveData
 
