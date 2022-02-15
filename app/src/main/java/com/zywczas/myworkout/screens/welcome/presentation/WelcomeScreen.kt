@@ -50,22 +50,16 @@ private fun WelcomeScreen(
     showBackground = true,
     name = "WelcomeScreen UI_MODE_NIGHT_NO",
 )
-@Composable
-private fun PreviewWelcomeScreenDayMode() {
-    WelcomeScreen(
-        actionNavigateToWeekList = {}
-    )
-}
-
 @Preview(
     uiMode = Configuration.UI_MODE_NIGHT_YES,
     showBackground = true,
     name = "WelcomeScreen UI_MODE_NIGHT_YES",
 )
 @Composable
-private fun PreviewWelcomeScreenNighMode() {
+private fun PreviewWelcomeScreen() {
     WelcomeScreen(
         actionNavigateToWeekList = {}
     )
 }
+
 
