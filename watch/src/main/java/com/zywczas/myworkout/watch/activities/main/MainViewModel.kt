@@ -18,13 +18,13 @@ class MainViewModel @Inject constructor(
     @WelcomeScreenDelay private val welcomeScreenDelay: Long
 ) : ViewModel() {
 
-    private val _goToNextActivity = SingleLiveData<Boolean>()
-    val goToNextActivity: LiveData<Boolean> = _goToNextActivity
+    private val _shouldGoToNextActivity = SingleLiveData<Boolean>()
+    val shouldGoToNextActivity: LiveData<Boolean> = _shouldGoToNextActivity
 
     fun goToNextDestination(){
         viewModelScope.launch(dispatcherIO) {
             presentMotto()
-            _goToNextActivity.postValue(true)
+            _shouldGoToNextActivity.postValue(true)
         }
     }
 

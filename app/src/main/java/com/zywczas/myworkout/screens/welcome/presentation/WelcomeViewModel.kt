@@ -1,32 +1,38 @@
 package com.zywczas.myworkout.screens.welcome.presentation
 
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.MutableLiveData
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.zywczas.common.extetions.logD
-import com.zywczas.common.utils.DateTimeProvider
+import androidx.lifecycle.viewModelScope
+import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
+import com.zywczas.common.di.modules.UtilsModule.WelcomeScreenDelay
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.math.absoluteValue
 
 @HiltViewModel
 class WelcomeViewModel @Inject constructor(
-    private val dateTime: DateTimeProvider
+    @DispatcherIO private val dispatcherIO: CoroutineDispatcher,
+    @WelcomeScreenDelay private val welcomeScreenDelay: Long
 ) : ViewModel() {
 
     init {
-        logD("init")
+        goToNextDestination()
     }
 
-    private val jakasLiveData = MutableLiveData<Int>()
-
-    var todoItems = mutableStateListOf("siema") //todo tak robic teraz, zamiast live daty
+    var shouldGoToNextScreen by mutableStateOf(false)
         private set
 
-    fun cos(){
-
+    private fun goToNextDestination() {
+        viewModelScope.launch(dispatcherIO) {
+            presentMotto()
+            shouldGoToNextScreen = true
+        }
     }
+
+    private suspend fun presentMotto() = delay(welcomeScreenDelay)
 
 }

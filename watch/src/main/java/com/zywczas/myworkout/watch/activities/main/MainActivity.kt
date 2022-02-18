@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun setupLiveDataObservers() {
-        viewModel.goToNextActivity.observe(this) { if (it) {
+        viewModel.shouldGoToNextActivity.observe(this) { if (it) {
             startActivity(Intent(this, WeeksListActivity::class.java))
             finish()
         }}
