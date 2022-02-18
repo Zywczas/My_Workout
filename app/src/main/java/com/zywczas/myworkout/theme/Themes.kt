@@ -7,7 +7,7 @@ import com.zywczas.common.theme.DarkColorsPalette
 import com.zywczas.common.theme.LightColorsPalette
 
 @Composable
-fun AppTheme(content: @Composable () -> Unit) {
+fun AppTheme(content: @Composable () -> Unit) { //todo pewnie przeniesc do common, jesli darko mode bedzie dobrze czytac
     MaterialTheme(
         colors = if (isSystemInDarkTheme()) DarkColorsPalette else LightColorsPalette, //todo przetestowac czy dobrze przelacza theme'y
         content = content

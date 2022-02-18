@@ -6,7 +6,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -16,6 +17,7 @@ import androidx.navigation.NavController
 import com.zywczas.myworkout.R
 import com.zywczas.myworkout.navigation.MainDestinations
 import com.zywczas.myworkout.theme.AppTheme
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun WelcomeScreen(
@@ -25,10 +27,14 @@ fun WelcomeScreen(
 
     WelcomeScreen()
 
-    var hasHandledNavigation by remember { mutableStateOf(false) }
-    if (viewModel.shouldGoToNextScreen && hasHandledNavigation.not()) {
-        hasHandledNavigation = true
-        navigateToWeekList(navController)
+    LaunchedEffect(Unit) {
+        viewModel.shouldGoToNextScreen.collectLatest { if (it) {
+            navigateToWeekList(navController)
+        }}
+    }
+
+    LaunchedEffect(Unit) {
+        viewModel.goToNextDestination()
     }
 
 }
@@ -57,16 +63,15 @@ private fun WelcomeScreen() {
 @Preview(
     uiMode = Configuration.UI_MODE_NIGHT_NO,
     showBackground = true,
-    name = "WelcomeScreen UI_MODE_NIGHT_NO",
-
+    name = "WelcomeScreen DayMode"
 )
 @Preview(
     uiMode = Configuration.UI_MODE_NIGHT_YES,
     showBackground = true,
-    name = "WelcomeScreen UI_MODE_NIGHT_YES",
+    name = "WelcomeScreen NightMode"
 )
 @Composable
-private fun PreviewWelcomeScreen() {
+private fun PreviewScreen() {
     AppTheme {
         WelcomeScreen()
     }
