@@ -16,7 +16,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.zywczas.myworkout.R
 import com.zywczas.myworkout.navigation.MainDestinations
-import com.zywczas.myworkout.theme.AppTheme
+import com.zywczas.myworkout.composeitems.AppTheme
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -24,13 +24,14 @@ fun WelcomeScreen(
     navController: NavController,
     viewModel: WelcomeViewModel = hiltViewModel()
 ) {
-
     WelcomeScreen()
 
     LaunchedEffect(Unit) {
-        viewModel.shouldGoToNextScreen.collectLatest { if (it) {
-            navigateToWeekList(navController)
-        }}
+        viewModel.shouldGoToNextScreen.collectLatest {
+            if (it) {
+                navigateToWeekList(navController)
+            }
+        }
     }
 
     LaunchedEffect(Unit) {
@@ -39,7 +40,7 @@ fun WelcomeScreen(
 
 }
 
-private fun navigateToWeekList(navController: NavController){
+private fun navigateToWeekList(navController: NavController) {
     navController.navigate(MainDestinations.WeeksList.route) {
         popUpTo(MainDestinations.Welcome.route) { inclusive = true }
     }
@@ -63,12 +64,12 @@ private fun WelcomeScreen() {
 @Preview(
     uiMode = Configuration.UI_MODE_NIGHT_NO,
     showBackground = true,
-    name = "WelcomeScreen DayMode"
+    name = "Screen DayMode"
 )
 @Preview(
     uiMode = Configuration.UI_MODE_NIGHT_YES,
     showBackground = true,
-    name = "WelcomeScreen NightMode"
+    name = "Screen NightMode"
 )
 @Composable
 private fun PreviewScreen() {

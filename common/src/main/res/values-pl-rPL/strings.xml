@@ -15,7 +15,6 @@
     <string name="back">Wróc</string>
     <string name="next_exercise">Następne</string>
     <string name="in_seconds">w sekundach</string>
-    <string name="training_weeks">Tygodnie treningowe</string>
     <string name="add_new_week">Dodaj nowy tydzień</string>
     <string name="add_new_day">Dodaj nowy dzień</string>
     <string name="copy_week">Skopiuj ten tydzień</string>
@@ -51,4 +50,5 @@
     <string name="delete_day">Usuń ten dzień</string>
     <string name="delete_week">Usuń ten tydzień</string>
     <string name="min">min</string>
+    <string name="title_training_weeks">Tygodnie Treningowe</string>
 </resources>

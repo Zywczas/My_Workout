@@ -7,7 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.zywczas.myworkout.navigation.NavHostMain
-import com.zywczas.myworkout.theme.AppTheme
+import com.zywczas.myworkout.composeitems.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
