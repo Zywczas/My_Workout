@@ -21,10 +21,6 @@ class WeeksListViewModel @Inject constructor(
     private val stringProvider: StringProvider
 ) : BaseViewModel() {
 
-    init {
-        logD("init")
-    }
-
     private val _weeksListElements = MutableLiveData<List<WeeksListElements>>()
     val weeksListElements: LiveData<List<WeeksListElements>> = _weeksListElements
 

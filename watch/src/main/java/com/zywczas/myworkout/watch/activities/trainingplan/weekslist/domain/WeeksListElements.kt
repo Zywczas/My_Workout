@@ -6,7 +6,7 @@ import org.joda.time.DateTime
 
 sealed class WeeksListElements {
 
-    data class Title(@StringRes val title: Int = R.string.planned_trainings) : WeeksListElements()
+    data class Title(@StringRes val title: Int = R.string.title_training_weeks) : WeeksListElements()
 
     data class Week(
         val id: Long = 0L,

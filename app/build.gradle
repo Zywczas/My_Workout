@@ -53,6 +53,7 @@ dependencies {
     implementation appDependencies.corektx
     implementation appDependencies.kotlin
     implementation appDependencies.legacySupport
+    implementation appDependencies.jodatime
 
     implementation viewDependencies.material
     //todo sprawdzic ktore nie potrzebne

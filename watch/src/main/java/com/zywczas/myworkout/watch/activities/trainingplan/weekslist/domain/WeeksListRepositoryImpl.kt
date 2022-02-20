@@ -20,6 +20,6 @@ class WeeksListRepositoryImpl @Inject constructor(
         isFinished = dateFinished != null
     )
 
-    override suspend fun saveNewWeek(name: String) = trainings.saveNewWeek(name)
+    override suspend fun saveNewWeek(name: String) = trainings.saveNewWeek(name) //todo pozamieniac wszedzie na blok funkcji
 
 }
