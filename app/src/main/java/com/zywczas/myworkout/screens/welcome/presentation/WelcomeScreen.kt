@@ -16,7 +16,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.zywczas.myworkout.R
 import com.zywczas.myworkout.navigation.MainDestinations
-import com.zywczas.myworkout.composeitems.AppTheme
+import com.zywczas.myworkout.theme.AppTheme
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable

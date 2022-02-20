@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">My Workout</string>
     <string name="train_hard_win_easily">Train hard\nWin easily</string>
-    <string name="empty_training_plan_weeks">No trainings planned.\nYou can have max 5 training weeks at a time. Click here to add new week.</string>
-    <string name="empty_training_plan_days">No training days planned.\nClick here to add new.</string>
-    <string name="empty_training_plan_exercises">No exercises planned.\nClick here to add new.</string>
     <string name="title_training_weeks">Training Weeks</string>
     <string name="time_between_series">Time between series</string>
     <string name="save">Save</string>

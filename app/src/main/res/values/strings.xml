@@ -1,4 +1,5 @@
 <resources>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="empty_training_plan_weeks">No trainings planned. You can have max 5 training weeks at a time.</string>
+    <string name="empty_training_plan_days">No training days planned</string>
+    <string name="empty_training_plan_exercises">No exercises planned</string>
 </resources>

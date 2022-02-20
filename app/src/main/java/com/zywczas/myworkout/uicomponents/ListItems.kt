@@ -1,4 +1,4 @@
-package com.zywczas.myworkout.composeitems.listitems
+package com.zywczas.myworkout.uicomponents
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="empty_training_plan_weeks">Brak zaplanowanych treningów.\nMożesz mieć max 5 tygodni treningowych w jednym czasie. Kliknij aby dodać.</string>
+    <string name="empty_training_plan_days">Brak zaplanowanych treningów.\nKliknij aby dodać nowy dzień treningowy.</string>
+    <string name="empty_training_plan_exercises">Brak zaplanowanych ćwiczen.\nKliknij aby dodać nowe.</string>
+</resources>

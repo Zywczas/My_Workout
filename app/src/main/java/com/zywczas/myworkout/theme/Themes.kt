@@ -1,4 +1,4 @@
-package com.zywczas.myworkout.composeitems
+package com.zywczas.myworkout.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
