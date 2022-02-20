@@ -62,7 +62,7 @@ private fun WeeksListScreen(
                     listState.animateScrollToItem(0)
                 }
             }) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "")
+                Icon(imageVector = Icons.Default.Add, null)
             }}
     ) {
         Column(
