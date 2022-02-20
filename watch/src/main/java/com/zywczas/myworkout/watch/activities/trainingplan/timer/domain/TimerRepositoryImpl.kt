@@ -24,7 +24,9 @@ class TimerRepositoryImpl @Inject constructor(
 
     override suspend fun getBreakPeriodInSeconds(): Int = timerBusinessCase.getTimer().seconds
 
-    override suspend fun save(exercise: NextExercise) = trainings.saveExercise(exercise.toLocal())
+    override suspend fun save(exercise: NextExercise) {
+        trainings.saveExercise(exercise.toLocal())
+    }
 
     private fun NextExercise.toLocal() = ExerciseLocal(
         id = id,

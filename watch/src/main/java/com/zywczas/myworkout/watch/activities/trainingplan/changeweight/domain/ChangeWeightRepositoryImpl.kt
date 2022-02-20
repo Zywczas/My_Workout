@@ -15,6 +15,8 @@ class ChangeWeightRepositoryImpl @Inject constructor(
         weight = weight
     )
 
-    override suspend fun saveWeight(exerciseId: Long, weight: Double) = trainings.saveWeight(exerciseId, weight)
+    override suspend fun saveWeight(exerciseId: Long, weight: Double) {
+        trainings.saveWeight(exerciseId, weight)
+    }
 
 }

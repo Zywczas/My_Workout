@@ -29,23 +29,35 @@ class DayRepositoryImpl @Inject constructor(
 
     override suspend fun isCardioDone(dayId: Long): Boolean = trainings.isCardioDone(dayId)
 
-    override suspend fun copyDayAndTrainings(dayId: Long) = trainings.copyDayAndTrainingsInTheSameWeek(dayId)
+    override suspend fun copyDayAndTrainings(dayId: Long) {
+        trainings.copyDayAndTrainingsInTheSameWeek(dayId)
+    }
 
-    override suspend fun addCardio(dayId: Long) = trainings.addCardio(dayId)
+    override suspend fun addCardio(dayId: Long) {
+        trainings.addCardio(dayId)
+    }
 
     override suspend fun getWeekId(dayId: Long): Long = trainings.getWeekId(dayId)
 
-    override suspend fun deleteDay(id: Long) = trainings.deleteDay(id)
+    override suspend fun deleteDay(id: Long) {
+        trainings.deleteDay(id)
+    }
 
     override suspend fun getDays(weekId: Long): List<Day> = trainings.getDays(weekId).map { it.toDomain() }
 
     private fun DayLocal.toDomain() = Day(isFinished = dateFinished != null)
 
-    override suspend fun markDayAsStarted(id: Long) = trainings.markDayAsStarted(id)
+    override suspend fun markDayAsStarted(id: Long) {
+        trainings.markDayAsStarted(id)
+    }
 
-    override suspend fun markWeekAsStartedIfNotStarted(dayId: Long) = trainings.markWeekAsStartedIfNotStarted(dayId)
+    override suspend fun markWeekAsStartedIfNotStarted(dayId: Long) {
+        trainings.markWeekAsStartedIfNotStarted(dayId)
+    }
 
-    override suspend fun markWeekAsFinished(id: Long) = trainings.markWeekAsFinished(id)
+    override suspend fun markWeekAsFinished(id: Long) {
+        trainings.markWeekAsFinished(id)
+    }
 
     override suspend fun isDayStarted(id: Long): Boolean = trainings.isDayStarted(id)
 

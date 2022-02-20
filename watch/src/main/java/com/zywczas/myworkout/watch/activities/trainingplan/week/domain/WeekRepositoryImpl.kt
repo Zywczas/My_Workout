@@ -30,15 +30,21 @@ class WeekRepositoryImpl @Inject constructor(
         isCardioDone = isCardioDone
     )
 
-    override suspend fun saveNewDay(name: String, weekId: Long, sequence: Int) = trainings.saveDay(
-        DayLocal(
-        foreignWeekId = weekId,
-        name = name,
-        sequence = sequence
-    ))
+    override suspend fun saveNewDay(name: String, weekId: Long, sequence: Int) {
+        trainings.saveDay(
+            DayLocal(
+                foreignWeekId = weekId,
+                name = name,
+                sequence = sequence
+            ))
+    }
 
-    override suspend fun copyWeekAndTrainings(weekId: Long) = trainings.copyWeekAndTrainings(weekId)
+    override suspend fun copyWeekAndTrainings(weekId: Long) {
+        trainings.copyWeekAndTrainings(weekId)
+    }
 
-    override suspend fun deleteWeek(id: Long) = trainings.deleteWeek(id)
+    override suspend fun deleteWeek(id: Long) {
+        trainings.deleteWeek(id)
+    }
 
 }

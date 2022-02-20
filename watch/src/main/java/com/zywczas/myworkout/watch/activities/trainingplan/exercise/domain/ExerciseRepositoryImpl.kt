@@ -32,16 +32,24 @@ class ExerciseRepositoryImpl @Inject constructor(
         return trainings.getExercises(dayId).map { it.toDomain(week.id) }
     }
 
-    override suspend fun markExerciseAsFinished(id: Long) = trainings.markExerciseAsFinished(id)
+    override suspend fun markExerciseAsFinished(id: Long) {
+        trainings.markExerciseAsFinished(id)
+    }
 
-    override suspend fun markDayAsFinished(id: Long) = trainings.markDayAsFinished(id)
+    override suspend fun markDayAsFinished(id: Long) {
+        trainings.markDayAsFinished(id)
+    }
 
     override suspend fun getDays(weekId: Long): List<Day> = trainings.getDays(weekId).map { it.toDomain() }
 
     private fun DayLocal.toDomain() = Day(isFinished = dateFinished != null)
 
-    override suspend fun markWeekAsFinished(id: Long) = trainings.markWeekAsFinished(id)
+    override suspend fun markWeekAsFinished(id: Long) {
+        trainings.markWeekAsFinished(id)
+    }
 
-    override suspend fun deleteExercise(id: Long) = trainings.deleteExercise(id)
+    override suspend fun deleteExercise(id: Long) {
+        trainings.deleteExercise(id)
+    }
 
 }

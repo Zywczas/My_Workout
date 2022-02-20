@@ -9,6 +9,8 @@ class SettingsTimerRepositoryImpl @Inject constructor(
 
     override suspend fun getBreakPeriodInSeconds(): Int = timerBusinessCase.getTimer().seconds
 
-    override suspend fun saveBreakPeriod(seconds: Int) = timerBusinessCase.saveBreakPeriod(seconds)
+    override suspend fun saveBreakPeriod(seconds: Int) {
+        timerBusinessCase.saveBreakPeriod(seconds)
+    }
 
 }
