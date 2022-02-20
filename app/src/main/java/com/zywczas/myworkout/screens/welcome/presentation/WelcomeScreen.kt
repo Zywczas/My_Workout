@@ -37,7 +37,6 @@ fun WelcomeScreen(
     LaunchedEffect(Unit) {
         viewModel.goToNextDestination()
     }
-
 }
 
 private fun navigateToWeekList(navController: NavController) {
