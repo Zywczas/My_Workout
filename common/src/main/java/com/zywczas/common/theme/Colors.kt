@@ -18,12 +18,12 @@ val ColorDeleteItemBackground = ColorDeepPurple900
 
 val DarkColorsPalette = darkColors(
     primary = ColorPrimary,
-    primaryVariant = ColorPrimary,
-    secondary = ColorLogoSecond
+    primaryVariant = ColorLogoFirst,
+    secondary = ColorPrimary
 )
 
 val LightColorsPalette = lightColors(
     primary = ColorPrimary,
-    primaryVariant = ColorPrimary,
-    secondary = ColorLogoSecond
+    primaryVariant = ColorLogoFirst,
+    secondary = ColorPrimary
 )
