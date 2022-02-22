@@ -42,10 +42,10 @@ class WeeksListViewModel @Inject constructor(
         val weeksToBeDeleted = weeks.subtract(weeksToBeDisplayed.toSet())
         if (weeksToBeDisplayed.isNotEmpty()) {
             isEmptyPlanMessageVisible.value = false
-            this@WeeksListViewModel.weeksList.clear()
-            this@WeeksListViewModel.weeksList.addAll(weeksToBeDisplayed)
+            weeksList.clear()
+            weeksList.addAll(weeksToBeDisplayed)
         } else {
-            this@WeeksListViewModel.weeksList.clear()
+            weeksList.clear()
             isEmptyPlanMessageVisible.value = true
         }
         weeksToBeDeleted.forEach { repo.deleteWeek(it.id) }
