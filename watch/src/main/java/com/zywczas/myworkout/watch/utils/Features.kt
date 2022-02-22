@@ -39,4 +39,8 @@ Sworzyc apke na komorke z wykorzystaniem patentow z OpsenioHRM i jetpack compose
 Dac zapis do Firebase.
 Dodac kwestie bezpieczenstwa - zapisywanie na komorce, shared prefs, blokady zgrywania ekranu.
 
+ telefon:
+ poprawic albo status bar color albo dac przezroczysty statusbar, lub go wylaczyc
+ dac chowanego FABa na scrollu
+
  */

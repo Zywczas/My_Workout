@@ -20,6 +20,10 @@ class WeeksListRepositoryImpl @Inject constructor(
         isFinished = dateFinished != null
     )
 
+    override suspend fun deleteWeek(id: Long) {
+        trainings.deleteWeek(id)
+    }
+
     override suspend fun saveNewWeek(name: String) {
         trainings.saveNewWeek(name)
     }

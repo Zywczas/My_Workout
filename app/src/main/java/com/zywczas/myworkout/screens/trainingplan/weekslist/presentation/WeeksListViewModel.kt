@@ -1,9 +1,7 @@
 package com.zywczas.myworkout.screens.trainingplan.weekslist.presentation
 
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
@@ -24,7 +22,7 @@ class WeeksListViewModel @Inject constructor(
     private val stringProvider: StringProvider
 ) : ViewModel() {
 
-    var weeks = mutableStateListOf<Week>()
+    var weeksList = mutableStateListOf<Week>()
         private set
 
     var isEmptyPlanMessageVisible = mutableStateOf(false)
@@ -32,19 +30,25 @@ class WeeksListViewModel @Inject constructor(
 
     fun getWeeksList() {
         viewModelScope.launch(dispatcherIO) {
-            val weeksList = repo.getWeeks()
-                .sortedByDescending { it.sequence }
-                .withCopyVersion()
-                .withDisplayedDates()
-            if (weeksList.isNotEmpty()) {
-                isEmptyPlanMessageVisible.value = false
-                weeks.clear()
-                weeks.addAll(weeksList)
-            } else {
-                weeks.clear()
-                isEmptyPlanMessageVisible.value = true
-            }
+            val weeks = repo.getWeeks().sortedByDescending { it.sequence }
+            keepOnlyLast5Weeks(weeks)
         }
+    }
+    
+    private suspend fun keepOnlyLast5Weeks(weeks: List<Week>) {
+        val weeksToBeDisplayed = weeks.take(5)
+            .withCopyVersion()
+            .withDisplayedDates()
+        val weeksToBeDeleted = weeks.subtract(weeksToBeDisplayed.toSet())
+        if (weeksToBeDisplayed.isNotEmpty()) {
+            isEmptyPlanMessageVisible.value = false
+            this@WeeksListViewModel.weeksList.clear()
+            this@WeeksListViewModel.weeksList.addAll(weeksToBeDisplayed)
+        } else {
+            this@WeeksListViewModel.weeksList.clear()
+            isEmptyPlanMessageVisible.value = true
+        }
+        weeksToBeDeleted.forEach { repo.deleteWeek(it.id) }
     }
 
     private fun List<Week>.withCopyVersion(): List<Week> {
@@ -67,7 +71,7 @@ class WeeksListViewModel @Inject constructor(
         return this
     }
 
-//    fun addNewWeek(name: String?) {
+//    fun addNewWeek(name: String?) { //todo dokonczyc
 //        viewModelScope.launch(dispatcherIO){
 //            name?.let {
 //                repo.saveNewWeek(it)
