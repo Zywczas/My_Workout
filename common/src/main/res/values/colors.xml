@@ -2,6 +2,7 @@
 <resources>
     <color name="logoFirst">#0E7DD4</color>
     <color name="logoSecond">#00FF8B</color>
+    <color name="toolbarFirst">#FF00528D</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="primary">#FF0072F8</color>
