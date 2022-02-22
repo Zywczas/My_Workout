@@ -39,7 +39,6 @@ class WeeksListViewModel @Inject constructor(
         val weeksToBeDisplayed = weeks.take(5)
             .withCopyVersion()
             .withDisplayedDates()
-        val weeksToBeDeleted = weeks.subtract(weeksToBeDisplayed.toSet())
         if (weeksToBeDisplayed.isNotEmpty()) {
             isEmptyPlanMessageVisible.value = false
             weeksList.clear()
@@ -48,6 +47,7 @@ class WeeksListViewModel @Inject constructor(
             weeksList.clear()
             isEmptyPlanMessageVisible.value = true
         }
+        val weeksToBeDeleted = weeks.subtract(weeksToBeDisplayed.toSet())
         weeksToBeDeleted.forEach { repo.deleteWeek(it.id) }
     }
 

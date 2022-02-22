@@ -29,24 +29,30 @@ class WeeksListViewModel @Inject constructor(
             emit(weeksListElements.isEmpty())
         }
     }
-//todo dodac usuwanie jesli wiecej niz 5
+
     fun getWeeksList() {
         viewModelScope.launch(dispatcherIO) {
-            val weeks = repo.getWeeks()
-                .sortedByDescending { it.sequence }
-                .withCopyVersion()
-                .withDisplayedDates()
-            if (weeks.isNotEmpty()){
-                val weeksListElements = mutableListOf<WeeksListElements>().apply {
-                    add(WeeksListElements.Title())
-                    addAll(weeks)
-                    add(WeeksListElements.AddNewWeek())
-                }
-                _weeksListElements.postValue(weeksListElements)
-            } else {
-                _weeksListElements.postValue(emptyList())
-            }
+            val weeks = repo.getWeeks().sortedByDescending { it.sequence }
+            keepOnlyLast5Weeks(weeks)
         }
+    }
+
+    private suspend fun keepOnlyLast5Weeks(weeks: List<WeeksListElements.Week>) {
+        val weeksToBeDisplayed = weeks.take(5)
+            .withCopyVersion()
+            .withDisplayedDates()
+        if (weeksToBeDisplayed.isNotEmpty()){
+            val weeksListElements = mutableListOf<WeeksListElements>().apply {
+                add(WeeksListElements.Title())
+                addAll(weeksToBeDisplayed)
+                add(WeeksListElements.AddNewWeek())
+            }
+            _weeksListElements.postValue(weeksListElements)
+        } else {
+            _weeksListElements.postValue(emptyList())
+        }
+        val weeksToBeDeleted = weeks.subtract(weeksToBeDisplayed.toSet())
+        weeksToBeDeleted.forEach { repo.deleteWeek(it.id) }
     }
 
     private fun List<WeeksListElements.Week>.withCopyVersion(): List<WeeksListElements.Week> {
