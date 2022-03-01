@@ -54,12 +54,13 @@ private fun WeeksListScreen(
         topBar = { TopAppBar(R.string.title_training_weeks) },
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
-            FloatingActionButton(onClick = {
-                actionAddNewWeek.invoke()
-                coroutineScope.launch {
-                    listState.animateScrollToItem(0)
-                }
-            }) {
+            FloatingActionButton(
+                onClick = {
+                    actionAddNewWeek.invoke()
+                    coroutineScope.launch {
+                        listState.animateScrollToItem(0)
+                    }
+                }) {
                 Icon(imageVector = Icons.Default.Add, null)
             }}
     ) {
