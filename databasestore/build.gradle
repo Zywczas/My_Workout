@@ -42,6 +42,11 @@ android {
     packagingOptions {
         exclude "META-INF/LICENSE*"
     }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -55,14 +60,7 @@ dependencies {
     implementation hiltDependencies.hilt
     kapt hiltDependencies.compiler
 
-    implementation dbDependencies.room
+    api dbDependencies.room
     implementation dbDependencies.roomktx
     kapt dbDependencies.roomCompiler
-
-    testImplementation testDependencies.robolectric
-    testImplementation testDependencies.junit
-    testImplementation testDependencies.mockk
-    testImplementation testDependencies.androidxCore
-    testImplementation testDependencies.coroutines
-    testImplementation testDependencies.assertK
 }

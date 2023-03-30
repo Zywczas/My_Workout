@@ -1,4 +1,4 @@
-package com.zywczas.databasestore.mockeddata
+package com.zywczas.myworkout.mockeddata
 
 import com.zywczas.databasestore.trainings.entities.DayLocal
 

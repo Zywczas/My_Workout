@@ -1,7 +1,8 @@
-package com.zywczas.databasestore.db
+package com.zywczas.myworkout.db
 
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
+import com.zywczas.databasestore.db.TrainingsDatabase
 import org.junit.After
 import org.junit.Before
 

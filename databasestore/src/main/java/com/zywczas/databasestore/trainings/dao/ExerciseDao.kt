@@ -7,7 +7,7 @@ import androidx.room.Query
 import com.zywczas.databasestore.trainings.entities.ExerciseLocal
 
 @Dao
-internal interface ExerciseDao {
+interface ExerciseDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(model: ExerciseLocal): Long

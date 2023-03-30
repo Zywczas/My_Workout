@@ -1,11 +1,13 @@
 package com.zywczas.databasestore.trainings.dao
 
+import androidx.annotation.VisibleForTesting
 import androidx.room.*
 import com.zywczas.databasestore.trainings.entities.WeekLocal
 import com.zywczas.databasestore.trainings.relations.WeekRelations
 
 @Dao
-internal interface WeekDao {
+@VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
+interface WeekDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(model: WeekLocal): Long

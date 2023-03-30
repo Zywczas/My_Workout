@@ -5,7 +5,7 @@ import com.zywczas.databasestore.trainings.entities.DayLocal
 import com.zywczas.databasestore.trainings.relations.DayRelations
 
 @Dao
-internal interface DayDao {
+interface DayDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(model: DayLocal): Long

@@ -1,16 +1,19 @@
-package com.zywczas.databasestore.trainings.dao
+package com.zywczas.myworkout.dao
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import com.zywczas.databasestore.db.TrainingsDatabaseTest
-import com.zywczas.databasestore.mockeddata.MockedDayLocal
+import com.zywczas.databasestore.trainings.dao.DayDao
+import com.zywczas.myworkout.db.TrainingsDatabaseTest
+import com.zywczas.myworkout.mockeddata.MockedDayLocal
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
 
 @OptIn(ExperimentalCoroutinesApi::class)
+@RunWith(RobolectricTestRunner::class)
 internal class DayDaoTest : TrainingsDatabaseTest() {
 
     private lateinit var dao: DayDao

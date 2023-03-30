@@ -40,6 +40,11 @@ android {
     packagingOptions {
         exclude "META-INF/LICENSE*"
     }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {

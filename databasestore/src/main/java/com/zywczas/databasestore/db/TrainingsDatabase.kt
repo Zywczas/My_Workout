@@ -25,7 +25,7 @@ import com.zywczas.databasestore.utils.Converters
         version = 1
 )
 @TypeConverters(Converters::class)
-internal abstract class TrainingsDatabase : RoomDatabase() {
+abstract class TrainingsDatabase : RoomDatabase() {
 
     abstract fun dayDao(): DayDao
     abstract fun exerciseDao(): ExerciseDao
