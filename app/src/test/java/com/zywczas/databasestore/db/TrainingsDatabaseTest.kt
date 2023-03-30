@@ -10,10 +10,10 @@ import org.junit.Before
 
 abstract class TrainingsDatabaseTest {
 
-    lateinit var trainingsDatabase: TrainingsDatabase
-    lateinit var weekDao: WeekDao
-    lateinit var dayDao: DayDao
-    lateinit var exerciseDao: ExerciseDao
+    private lateinit var trainingsDatabase: TrainingsDatabase
+    protected lateinit var weekDao: WeekDao
+    protected lateinit var dayDao: DayDao
+    protected lateinit var exerciseDao: ExerciseDao
 
     @Before
     fun setupDatabase() {
