@@ -5,4 +5,5 @@ ext {
     targetSdkVersion = 31
     compileSdkVersion = 31
 
+    instrumentationTestRunner = "androidx.test.runner.AndroidJUnitRunner"
 }

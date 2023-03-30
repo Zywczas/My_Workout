@@ -20,7 +20,6 @@ android {
         versionCode 1
         versionName "1.0"
     }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -31,6 +30,9 @@ android {
         viewBinding true //todo do usuniecia po compose
         dataBinding true //todo do usuniecia po compose
 //        compose true
+    }
+    packagingOptions {
+        exclude "META-INF/LICENSE*"
     }
 }
 
@@ -72,5 +74,4 @@ dependencies {
     implementation lifeCycleDependencies.liveData
 
     implementation dbDependencies.room
-
 }

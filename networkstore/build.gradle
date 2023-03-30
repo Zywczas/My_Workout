@@ -17,14 +17,12 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner project.instrumentationTestRunner
         consumerProguardFiles "consumer-rules.pro"
     }
-
     sourceSets{
         main.java.srcDirs += "${protobuf.generatedFilesBaseDir}/main/javalite"
     }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -37,6 +35,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = '11'
+        freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+    }
+    packagingOptions {
+        exclude "META-INF/LICENSE*"
     }
 }
 
@@ -54,7 +56,6 @@ dependencies {
     implementation networkDependencies.grpcProtobufLite
     implementation networkDependencies.grpcStub
     implementation appDependencies.javaxAnnotation //for protobuf
-
 }
 
 protobuf {

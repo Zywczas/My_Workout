@@ -20,7 +20,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner project.instrumentationTestRunner
     }
 
     buildTypes {
@@ -41,6 +41,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = '11'
+        freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+    }
+    packagingOptions {
+        exclude "META-INF/LICENSE*"
     }
 }
 
@@ -78,5 +82,4 @@ dependencies {
 
     //todo sprawdzic czy potrzebne, w innych modulach tez
     implementation lifeCycleDependencies.liveData
-
 }

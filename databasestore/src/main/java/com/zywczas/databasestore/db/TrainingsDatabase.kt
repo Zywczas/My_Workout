@@ -32,5 +32,4 @@ internal abstract class TrainingsDatabase : RoomDatabase() {
     abstract fun weekDao(): WeekDao
     abstract fun timerDao(): TimerDao
     abstract fun lastUpdateDao(): LastUpdateDao
-
 }
