@@ -20,7 +20,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner project.instrumentationTestRunner
     }
 
     buildTypes {
@@ -41,6 +41,15 @@ android {
     }
     kotlinOptions {
         jvmTarget = '11'
+        freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+    }
+    packagingOptions {
+        exclude "META-INF/LICENSE*"
+    }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
     }
 }
 
@@ -79,4 +88,10 @@ dependencies {
     //todo sprawdzic czy potrzebne, w innych modulach tez
     implementation lifeCycleDependencies.liveData
 
+    testImplementation testDependencies.robolectric
+    testImplementation testDependencies.junit
+    testImplementation testDependencies.mockk
+    testImplementation testDependencies.androidxCore
+    testImplementation testDependencies.coroutines
+    testImplementation testDependencies.assertK
 }

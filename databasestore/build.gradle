@@ -16,7 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner project.instrumentationTestRunner
         consumerProguardFiles "consumer-rules.pro"
         javaCompileOptions {
             annotationProcessorOptions {
@@ -25,7 +25,6 @@ android {
             }
         }
     }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -38,6 +37,15 @@ android {
     }
     kotlinOptions {
         jvmTarget = '11'
+        freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+    }
+    packagingOptions {
+        exclude "META-INF/LICENSE*"
+    }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
     }
 }
 
@@ -52,8 +60,7 @@ dependencies {
     implementation hiltDependencies.hilt
     kapt hiltDependencies.compiler
 
-    implementation dbDependencies.room
+    api dbDependencies.room
     implementation dbDependencies.roomktx
     kapt dbDependencies.roomCompiler
-
 }
