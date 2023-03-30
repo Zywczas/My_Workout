@@ -16,5 +16,4 @@ internal class TimerBusinessCaseImpl @Inject constructor(
         timerDao.insert(TimerLocal(seconds = seconds))
         synchronisation.updateDatabaseTimeStamp()
     }
-
 }

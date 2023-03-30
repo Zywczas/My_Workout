@@ -1,5 +1,7 @@
 package com.zywczas.databasestore.trainings
 
+import android.annotation.SuppressLint
+import androidx.annotation.VisibleForTesting
 import com.zywczas.common.utils.DateTimeProvider
 import com.zywczas.databasestore.synchronisation.SynchronisationBusinessCase
 import com.zywczas.databasestore.trainings.dao.DayDao
@@ -12,8 +14,9 @@ import com.zywczas.databasestore.trainings.relations.DayRelations
 import com.zywczas.databasestore.trainings.relations.WeekRelations
 import javax.inject.Inject
 
-internal class TrainingsBusinessCaseImpl
-@Inject constructor(
+@SuppressLint("VisibleForTests")
+@VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
+class TrainingsBusinessCaseImpl @Inject constructor(
     private val weekDao: WeekDao,
     private val dayDao: DayDao,
     private val exerciseDao: ExerciseDao,
@@ -258,5 +261,4 @@ internal class TrainingsBusinessCaseImpl
     override suspend fun getWeekId(dayId: Long): Long = dayDao.getDay(dayId).foreignWeekId
 
     override suspend fun isDayStarted(id: Long): Boolean = dayDao.getDay(id).dateStarted != null
-
 }

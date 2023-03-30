@@ -7,7 +7,7 @@ import androidx.room.Query
 import com.zywczas.databasestore.timer.entities.TimerLocal
 
 @Dao
-interface TimerDao {
+internal interface TimerDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(model: TimerLocal): Long

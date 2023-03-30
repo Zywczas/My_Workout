@@ -6,9 +6,8 @@ import androidx.room.OnConflictStrategy
 import com.zywczas.databasestore.synchronisation.entities.LastUpdateLocal
 
 @Dao
-interface LastUpdateDao {
+internal interface LastUpdateDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(model: LastUpdateLocal)
-
 }

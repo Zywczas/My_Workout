@@ -6,7 +6,7 @@ import com.zywczas.databasestore.trainings.entities.WeekLocal
 import com.zywczas.databasestore.trainings.relations.WeekRelations
 
 @Dao
-@VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
+@VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
 interface WeekDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

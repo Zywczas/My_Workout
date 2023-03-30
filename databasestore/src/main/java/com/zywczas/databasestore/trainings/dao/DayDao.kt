@@ -1,10 +1,12 @@
 package com.zywczas.databasestore.trainings.dao
 
+import androidx.annotation.VisibleForTesting
 import androidx.room.*
 import com.zywczas.databasestore.trainings.entities.DayLocal
 import com.zywczas.databasestore.trainings.relations.DayRelations
 
 @Dao
+@VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
 interface DayDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
