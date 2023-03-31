@@ -13,15 +13,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
+import com.zywczas.common.utils.Action
 import com.zywczas.myworkout.R
-import com.zywczas.myworkout.navigation.MainDestinations
 import com.zywczas.myworkout.theme.AppTheme
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun WelcomeScreen(
-    navController: NavController,
+    navigateToNextScreen: Action,
     viewModel: WelcomeViewModel = hiltViewModel()
 ) {
     WelcomeScreen()
@@ -29,19 +28,13 @@ fun WelcomeScreen(
     LaunchedEffect(Unit) {
         viewModel.shouldGoToNextScreen.collectLatest {
             if (it) {
-                navigateToWeekList(navController)
+                navigateToNextScreen()
             }
         }
     }
 
     LaunchedEffect(Unit) {
         viewModel.goToNextDestination()
-    }
-}
-
-private fun navigateToWeekList(navController: NavController) {
-    navController.navigate(MainDestinations.WeeksList.route) {
-        popUpTo(MainDestinations.Welcome.route) { inclusive = true }
     }
 }
 
@@ -55,7 +48,7 @@ private fun WelcomeScreen() {
         Text(
             text = stringResource(R.string.train_hard_win_easily),
             color = MaterialTheme.colors.primary,
-            style = MaterialTheme.typography.h3
+            style = MaterialTheme.typography.h3,
         )
     }
 }
@@ -76,5 +69,3 @@ private fun PreviewScreen() {
         WelcomeScreen()
     }
 }
-
-

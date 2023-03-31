@@ -17,19 +17,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
+import com.zywczas.common.utils.Action
 import com.zywczas.myworkout.R
 import com.zywczas.myworkout.screens.trainingplan.weekslist.domain.Week
 import com.zywczas.myworkout.theme.AppTheme
-import com.zywczas.myworkout.uicomponents.TopAppBar
 import com.zywczas.myworkout.theme.largePadding
 import com.zywczas.myworkout.theme.mediumPadding
+import com.zywczas.myworkout.uicomponents.TopAppBar
 import com.zywczas.myworkout.uicomponents.WeekItem
 import kotlinx.coroutines.launch
 
 @Composable
 fun WeeksListScreen(
-    navController: NavController,
     viewModel: WeeksListViewModel = hiltViewModel()
 ) {
     WeeksListScreen(
@@ -44,8 +43,8 @@ fun WeeksListScreen(
 private fun WeeksListScreen(
     weeks: SnapshotStateList<Week>,
     isEmptyPlanMessageVisible: State<Boolean>,
-    actionGetWeeks: ()->Unit,
-    actionAddNewWeek: ()->Unit
+    actionGetWeeks: Action,
+    actionAddNewWeek: Action,
 ) {
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
@@ -62,7 +61,8 @@ private fun WeeksListScreen(
                     }
                 }) {
                 Icon(imageVector = Icons.Default.Add, null)
-            }}
+            }
+        }
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),

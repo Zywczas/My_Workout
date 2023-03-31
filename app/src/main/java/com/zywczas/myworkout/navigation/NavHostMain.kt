@@ -10,8 +10,16 @@ import com.zywczas.myworkout.screens.welcome.presentation.WelcomeScreen
 @Composable
 fun NavHostMain() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = MainDestinations.Welcome.route) {
-        composable(MainDestinations.Welcome.route) { WelcomeScreen(navController = navController) }
-        composable(MainDestinations.WeeksList.route) { WeeksListScreen(navController = navController) }
+    NavHost(navController = navController, startDestination = Destinations.WELCOME.name) {
+        composable(Destinations.WELCOME.name) {
+            WelcomeScreen(
+                navigateToNextScreen = {
+                    navController.navigate(Destinations.WEEKS_LIST.name) {
+                        popUpTo(Destinations.WELCOME.name) { inclusive = true }
+                    }
+                }
+            )
+        }
+        composable(Destinations.WEEKS_LIST.name) { WeeksListScreen() }
     }
 }
