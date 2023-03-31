@@ -87,11 +87,4 @@ dependencies {
 
     //todo sprawdzic czy potrzebne, w innych modulach tez
     implementation lifeCycleDependencies.liveData
-
-    testImplementation testDependencies.robolectric
-    testImplementation testDependencies.junit
-    testImplementation testDependencies.mockk
-    testImplementation testDependencies.androidxCore
-    testImplementation testDependencies.coroutines
-    testImplementation testDependencies.assertK
 }

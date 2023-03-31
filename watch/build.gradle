@@ -69,7 +69,7 @@ dependencies {
 
     implementation hiltDependencies.hilt
     kapt hiltDependencies.compiler
-    implementation hiltDependencies.navigationCompose //todo nie uzywane poki co
+//    implementation hiltDependencies.navigationCompose
 
     implementation lifeCycleDependencies.liveData
 

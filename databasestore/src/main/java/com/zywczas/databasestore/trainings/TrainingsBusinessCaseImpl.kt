@@ -1,7 +1,5 @@
 package com.zywczas.databasestore.trainings
 
-import android.annotation.SuppressLint
-import androidx.annotation.VisibleForTesting
 import com.zywczas.common.utils.DateTimeProvider
 import com.zywczas.databasestore.synchronisation.SynchronisationBusinessCase
 import com.zywczas.databasestore.trainings.dao.DayDao
@@ -14,9 +12,7 @@ import com.zywczas.databasestore.trainings.relations.DayRelations
 import com.zywczas.databasestore.trainings.relations.WeekRelations
 import javax.inject.Inject
 
-@SuppressLint("VisibleForTests")
-@VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
-class TrainingsBusinessCaseImpl @Inject constructor(
+internal class TrainingsBusinessCaseImpl @Inject constructor(
     private val weekDao: WeekDao,
     private val dayDao: DayDao,
     private val exerciseDao: ExerciseDao,
@@ -36,7 +32,6 @@ class TrainingsBusinessCaseImpl @Inject constructor(
         synchronisation.updateDatabaseTimeStamp()
     }
 
-    //todo poprawic tak zeby bralo z sql
     private suspend fun findNextWeekPosition(): Int = weekDao.getWeeks().maxByOrNull { it.sequence }?.let { it.sequence + 1 } ?: 1
 
     override suspend fun getWeek(id: Long): WeekLocal = weekDao.getWeek(id)
@@ -67,7 +62,6 @@ class TrainingsBusinessCaseImpl @Inject constructor(
         )
     }
 
-    //todo wrzucic to w SQL
     private suspend fun findNextWeekCopyVersion(nameOfWeekToBeCopied: String): Int =
         weekDao.getWeeks()
             .filter { it.name == nameOfWeekToBeCopied }
@@ -143,7 +137,6 @@ class TrainingsBusinessCaseImpl @Inject constructor(
         synchronisation.updateDatabaseTimeStamp()
     }
 
-    //todo wrzucic to w SQL
     private suspend fun findNextExercisePosition(dayId: Long): Int = exerciseDao.getExercises(dayId).maxByOrNull { it.sequence }?.let { it.sequence + 1 } ?: 1
 
     override suspend fun copyDayAndTrainingsInTheSameWeek(dayId: Long) {
@@ -161,7 +154,6 @@ class TrainingsBusinessCaseImpl @Inject constructor(
         synchronisation.updateDatabaseTimeStamp()
     }
 
-    //todo wrzucic to w SQL
     private suspend fun findNextDayPosition(weekId: Long): Int = dayDao.getDays(weekId).maxByOrNull { it.sequence }?.let { it.sequence + 1 } ?: 1
 
     override suspend fun getWeekByExerciseId(exerciseId: Long): WeekLocal {
