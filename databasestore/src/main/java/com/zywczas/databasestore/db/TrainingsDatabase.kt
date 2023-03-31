@@ -1,6 +1,5 @@
 package com.zywczas.databasestore.db
 
-import androidx.annotation.VisibleForTesting
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
@@ -26,12 +25,11 @@ import com.zywczas.databasestore.utils.Converters
     version = 1
 )
 @TypeConverters(Converters::class)
-@VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
-abstract class TrainingsDatabase : RoomDatabase() {
+internal abstract class TrainingsDatabase : RoomDatabase() {
 
     abstract fun dayDao(): DayDao
     abstract fun exerciseDao(): ExerciseDao
     abstract fun weekDao(): WeekDao
-    internal abstract fun timerDao(): TimerDao
-    internal abstract fun lastUpdateDao(): LastUpdateDao
+    abstract fun timerDao(): TimerDao
+    abstract fun lastUpdateDao(): LastUpdateDao
 }

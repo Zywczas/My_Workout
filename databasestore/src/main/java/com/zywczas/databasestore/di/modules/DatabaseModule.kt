@@ -1,6 +1,5 @@
 package com.zywczas.databasestore.di.modules
 
-import android.annotation.SuppressLint
 import android.content.Context
 import androidx.room.Room
 import com.zywczas.databasestore.db.TrainingsDatabase
@@ -18,7 +17,6 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-@SuppressLint("VisibleForTests")
 class DatabaseModule {
 
     @Provides
