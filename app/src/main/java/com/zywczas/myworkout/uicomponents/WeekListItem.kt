@@ -8,7 +8,7 @@ import com.zywczas.myworkout.screens.trainingplan.weekslist.domain.Week
 import com.zywczas.myworkout.theme.AppTheme
 
 @Composable
-fun WeekItem(week: Week) {
+fun WeekListItem(week: Week) {
     Text(text = "${week.name} - ${week.sequence}")
 }
 
@@ -23,8 +23,8 @@ fun WeekItem(week: Week) {
     name = "WeekItem NightMode"
 )
 @Composable
-private fun PreviewWeekItem() {
+private fun Preview() {
     AppTheme {
-        WeekItem(Week())
+        WeekListItem(Week(name = "Week 1"))
     }
 }
