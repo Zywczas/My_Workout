@@ -41,8 +41,8 @@ fun WeeksListScreen(
 
 @Composable
 private fun WeeksListScreen(
-    weeks: SnapshotStateList<Week>,
-    isEmptyPlanMessageVisible: State<Boolean>,
+    weeks: List<Week>,
+    isEmptyPlanMessageVisible: Boolean,
     actionGetWeeks: Action,
     actionAddNewWeek: Action,
 ) {
@@ -68,7 +68,7 @@ private fun WeeksListScreen(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center
         ) {
-            if (isEmptyPlanMessageVisible.value) {
+            if (isEmptyPlanMessageVisible) {
                 Text(
                     text = stringResource(R.string.empty_training_plan_weeks),
                     modifier = Modifier.padding(start = largePadding, end = largePadding, top = mediumPadding)
@@ -105,8 +105,8 @@ private fun WeeksListScreen(
 private fun PreviewScreen() {
     AppTheme {
         WeeksListScreen(
-            weeks = mutableStateListOf(Week(name = "week 1"), Week(name = "week 2"), Week(name = "week 3")),
-            isEmptyPlanMessageVisible = mutableStateOf(true),
+            weeks = listOf(Week(name = "week 1"), Week(name = "week 2"), Week(name = "week 3")),
+            isEmptyPlanMessageVisible = true,
             actionGetWeeks = {},
             actionAddNewWeek = {}
         )

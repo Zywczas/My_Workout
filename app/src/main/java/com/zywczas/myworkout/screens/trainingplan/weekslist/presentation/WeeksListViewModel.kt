@@ -1,7 +1,8 @@
 package com.zywczas.myworkout.screens.trainingplan.weekslist.presentation
 
-import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
@@ -22,31 +23,27 @@ class WeeksListViewModel @Inject constructor(
     private val stringProvider: StringProvider
 ) : ViewModel() {
 
-    var weeksList = mutableStateListOf<Week>()
+    var weeksList by mutableStateOf<List<Week>>(emptyList())
         private set
 
-    var isEmptyPlanMessageVisible = mutableStateOf(false)
+    // It's not derived state of weeksList to avoid text blinking on screen init
+    var isEmptyPlanMessageVisible by mutableStateOf(false)
         private set
 
     fun getWeeksList() {
         viewModelScope.launch(dispatcherIO) {
-            val weeks = repo.getWeeks().sortedByDescending { it.sequence }
-            keepOnlyLast5Weeks(weeks)
+            keepOnlyLast5Weeks(repo.getWeeks())
         }
     }
-    
+
     private suspend fun keepOnlyLast5Weeks(weeks: List<Week>) {
-        val weeksToBeDisplayed = weeks.take(5)
+        val weeksToBeDisplayed = weeks
+            .sortedByDescending { it.sequence }
+            .take(5)
             .withCopyVersion()
             .withDisplayedDates()
-        if (weeksToBeDisplayed.isNotEmpty()) {
-            isEmptyPlanMessageVisible.value = false
-            weeksList.clear()
-            weeksList.addAll(weeksToBeDisplayed)
-        } else {
-            weeksList.clear()
-            isEmptyPlanMessageVisible.value = true
-        }
+        weeksList = weeksToBeDisplayed
+        isEmptyPlanMessageVisible = weeksToBeDisplayed.isEmpty()
         val weeksToBeDeleted = weeks.subtract(weeksToBeDisplayed.toSet())
         weeksToBeDeleted.forEach { repo.deleteWeek(it.id) }
     }
@@ -83,13 +80,12 @@ class WeeksListViewModel @Inject constructor(
     private var i = 1
 
     fun addNewWeek() {
-        viewModelScope.launch(dispatcherIO){
+        viewModelScope.launch(dispatcherIO) {
 //            name?.let {
-                repo.saveNewWeek("tydzien $i")
+            repo.saveNewWeek("tydzien $i")
             i++
-                getWeeksList()
+            getWeeksList()
 //            }
         }
     }
-
 }
