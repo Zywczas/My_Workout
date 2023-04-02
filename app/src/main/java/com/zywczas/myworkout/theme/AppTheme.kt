@@ -15,7 +15,7 @@ import com.zywczas.myworkout.R
 @Composable
 fun AppTheme(content: @Composable () -> Unit) {
     MaterialTheme(
-        colors = if (isSystemInDarkTheme()) DarkColorsPalette else LightColorsPalette, //todo check if it's working,
+        colors = if (isSystemInDarkTheme()) DarkColorsPalette else LightColorsPalette,
         typography = typography,
         shapes = shapes,
         content = content
@@ -23,15 +23,15 @@ fun AppTheme(content: @Composable () -> Unit) {
 }
 
 private val DarkColorsPalette = darkColors(
-    primary = ColorPrimaryDarkMode,
-    primaryVariant = ColorLogoFirst,
-    secondary = ColorPrimaryDarkMode
+    primary = Colors.Primary.darkMode,
+    primaryVariant = Colors.logoFirst,
+    secondary = Colors.Primary.darkMode
 )
 
 private val LightColorsPalette = lightColors(
-    primary = ColorPrimaryLightMode,
-    primaryVariant = ColorPrimaryLightMode,
-    secondary = ColorPrimaryLightMode
+    primary = Colors.Primary.lightMode,
+    primaryVariant = Colors.Primary.lightMode,
+    secondary = Colors.Primary.lightMode
 )
 
 private val fontFamily = FontFamily(

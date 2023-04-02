@@ -27,9 +27,8 @@ android {
         }
     }
     buildFeatures {
-        viewBinding true //todo do usuniecia po compose
-        dataBinding true //todo do usuniecia po compose
-//        compose true
+        viewBinding true
+        dataBinding true
     }
     packagingOptions {
         exclude "META-INF/LICENSE*"

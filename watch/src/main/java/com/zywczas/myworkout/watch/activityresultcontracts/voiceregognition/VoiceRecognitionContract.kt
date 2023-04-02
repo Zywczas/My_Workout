@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.speech.RecognizerIntent
 import androidx.activity.result.contract.ActivityResultContract
+import com.zywczas.common.Constants
 
 class VoiceRecognitionContract : ActivityResultContract<Unit, String?>() {
 
@@ -16,11 +17,12 @@ class VoiceRecognitionContract : ActivityResultContract<Unit, String?>() {
         if (resultCode == Activity.RESULT_OK && intent != null) {
             intent.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.let { words ->
                 var sentence = ""
-                var spaceBetweenWords = ""
-                //todo change it to "for each indexed"
-                words.forEach {
-                    sentence = sentence.plus("$spaceBetweenWords$it")
-                    spaceBetweenWords = " "
+                words.forEachIndexed { index, word ->
+                    sentence = if (index == 0) {
+                        sentence.plus(word)
+                    } else {
+                        sentence.plus("${Constants.EMPTY_SPACE}$word")
+                    }
                 }
                 sentence
             }
