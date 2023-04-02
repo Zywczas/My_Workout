@@ -5,5 +5,5 @@
     <dimen name="recyclerViewPaddingOnSides">20dp</dimen>
     <dimen name="listItemMinHeight">40dp</dimen>
     <dimen name="listSettingsItemMinHeight">35dp</dimen>
-    <dimen name="one_space_width">2dp</dimen>
+    <dimen name="single_space">2dp</dimen>
 </resources>

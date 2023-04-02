@@ -9,6 +9,7 @@ import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.common.extetions.dayFormat
 import com.zywczas.common.utils.StringProvider
 import com.zywczas.myworkout.R
+import com.zywczas.myworkout.activity.MainActivityDataProvider
 import com.zywczas.myworkout.screens.trainingplan.weekslist.domain.Week
 import com.zywczas.myworkout.screens.trainingplan.weekslist.domain.WeeksListRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +21,8 @@ import javax.inject.Inject
 class WeeksListViewModel @Inject constructor(
     private val repo: WeeksListRepository,
     @DispatcherIO private val dispatcherIO: CoroutineDispatcher,
-    private val stringProvider: StringProvider
+    private val stringProvider: StringProvider,
+    private val mainActivityDataProvider: MainActivityDataProvider
 ) : ViewModel() {
 
     var weeksList by mutableStateOf<List<Week>>(emptyList())
@@ -30,7 +32,7 @@ class WeeksListViewModel @Inject constructor(
     var isEmptyPlanMessageVisible by mutableStateOf(false)
         private set
 
-    fun getWeeksList() {
+    fun displayWeeksList() {
         viewModelScope.launch(dispatcherIO) {
             keepOnlyLast5Weeks(repo.getWeeks())
         }
@@ -68,24 +70,14 @@ class WeeksListViewModel @Inject constructor(
         return this
     }
 
-//    fun addNewWeek(name: String?) { //todo dokonczyc
-//        viewModelScope.launch(dispatcherIO){
-//            name?.let {
-//                repo.saveNewWeek(it)
-//                getWeeksList()
-//            } ?: postMessage(R.string.week_name_not_provided)
-//        }
-//    }
-
-    private var i = 1
-
-    fun addNewWeek() {
+    fun addNewWeek(name: String?) { //todo check if must be null
         viewModelScope.launch(dispatcherIO) {
-//            name?.let {
-            repo.saveNewWeek("tydzien $i")
-            i++
-            getWeeksList()
-//            }
+            if (name.isNullOrBlank()) {
+                mainActivityDataProvider.postMessage(R.string.week_name_not_provided)
+            } else {
+                repo.saveNewWeek(name)
+                displayWeeksList()
+            }
         }
     }
 }

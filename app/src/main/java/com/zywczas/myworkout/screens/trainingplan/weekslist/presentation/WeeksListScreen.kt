@@ -11,9 +11,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.FabPosition
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,8 +20,7 @@ import com.zywczas.common.utils.Action
 import com.zywczas.myworkout.R
 import com.zywczas.myworkout.screens.trainingplan.weekslist.domain.Week
 import com.zywczas.myworkout.theme.AppTheme
-import com.zywczas.myworkout.theme.largePadding
-import com.zywczas.myworkout.theme.mediumPadding
+import com.zywczas.myworkout.theme.Spacing
 import com.zywczas.myworkout.uicomponents.FloatingPlusButton
 import com.zywczas.myworkout.uicomponents.Toolbar
 import com.zywczas.myworkout.uicomponents.WeekListItem
@@ -33,14 +30,18 @@ import kotlinx.coroutines.launch
 fun WeeksListScreen(
     viewModel: WeeksListViewModel = hiltViewModel()
 ) {
+    var showDialog by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) {
-        viewModel.getWeeksList()
+        viewModel.displayWeeksList()
     }
     WeeksListScreen(
         weeks = viewModel.weeksList,
         isEmptyPlanMessageVisible = viewModel.isEmptyPlanMessageVisible,
-        onPlusButtonCLick = viewModel::addNewWeek
+        onPlusButtonCLick = { showDialog = true }
     )
+    if (showDialog) {
+        AddNewWeekDialog()
+    }
 }
 
 @Composable
@@ -71,7 +72,7 @@ private fun WeeksListScreen(
             if (isEmptyPlanMessageVisible) {
                 Text(
                     text = stringResource(R.string.empty_training_plan_weeks),
-                    modifier = Modifier.padding(start = largePadding, end = largePadding, top = mediumPadding)
+                    modifier = Modifier.padding(start = Spacing.m, end = Spacing.m, top = Spacing.s)
                 )
             }
             LazyColumn(
@@ -84,6 +85,11 @@ private fun WeeksListScreen(
             }
         }
     }
+}
+
+@Composable
+private fun AddNewWeekDialog() {
+
 }
 
 @Preview(
