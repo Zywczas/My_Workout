@@ -20,7 +20,7 @@ import com.zywczas.myworkout.R
 import com.zywczas.myworkout.theme.AppTheme
 
 @Composable
-fun TopAppBar(@StringRes title: Int, modifier: Modifier = Modifier) {
+fun Toolbar(@StringRes title: Int, modifier: Modifier = Modifier) {
     val appBarHeight = 56.dp
     Surface(
         modifier = modifier.height(appBarHeight),
@@ -32,7 +32,6 @@ fun TopAppBar(@StringRes title: Int, modifier: Modifier = Modifier) {
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.fillMaxSize(),
         )
-
         TopAppBar(
             title = { Text(stringResource(title)) },
             backgroundColor = Color.Transparent,
@@ -44,8 +43,8 @@ fun TopAppBar(@StringRes title: Int, modifier: Modifier = Modifier) {
 
 @Preview(name = "TopAppBar")
 @Composable
-fun PreviewTopAppBar(){
+private fun Preview() {
     AppTheme {
-        TopAppBar(R.string.title_training_weeks)
+        Toolbar(R.string.title_training_weeks)
     }
 }

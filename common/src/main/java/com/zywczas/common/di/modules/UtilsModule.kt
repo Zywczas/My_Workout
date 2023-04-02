@@ -16,5 +16,4 @@ class UtilsModule {
 
     @Qualifier
     annotation class WelcomeScreenDelay
-
 }

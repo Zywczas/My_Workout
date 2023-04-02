@@ -29,5 +29,4 @@ class MainViewModel @Inject constructor(
     }
 
     private suspend fun presentMotto() = delay(welcomeScreenDelay)
-
 }
