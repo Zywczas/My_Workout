@@ -88,7 +88,6 @@ class WeeksListActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getWeeksList()
+        viewModel.displayWeeksList()
     }
-
 }

@@ -3,7 +3,6 @@ package com.zywczas.myworkout.watch.activities.trainingplan.weekslist.presentati
 import androidx.lifecycle.*
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.common.extetions.dayFormat
-import com.zywczas.common.extetions.logD
 import com.zywczas.common.utils.StringProvider
 import com.zywczas.myworkout.watch.R
 import com.zywczas.myworkout.watch.activities.BaseViewModel
@@ -30,18 +29,19 @@ class WeeksListViewModel @Inject constructor(
         }
     }
 
-    fun getWeeksList() {
+    fun displayWeeksList() {
         viewModelScope.launch(dispatcherIO) {
-            val weeks = repo.getWeeks().sortedByDescending { it.sequence }
-            keepOnlyLast5Weeks(weeks)
+            keepOnlyLast5Weeks(repo.getWeeks())
         }
     }
 
     private suspend fun keepOnlyLast5Weeks(weeks: List<WeeksListElements.Week>) {
-        val weeksToBeDisplayed = weeks.take(5)
+        val weeksToBeDisplayed = weeks
+            .sortedByDescending { it.sequence }
+            .take(5)
             .withCopyVersion()
             .withDisplayedDates()
-        if (weeksToBeDisplayed.isNotEmpty()){
+        if (weeksToBeDisplayed.isNotEmpty()) {
             val weeksListElements = mutableListOf<WeeksListElements>().apply {
                 add(WeeksListElements.Title())
                 addAll(weeksToBeDisplayed)
@@ -75,13 +75,14 @@ class WeeksListViewModel @Inject constructor(
         return this
     }
 
-    fun addNewWeek(name: String?){
-        viewModelScope.launch(dispatcherIO){
-            name?.let {
-                repo.saveNewWeek(it)
-                getWeeksList()
-            } ?: postMessage(R.string.week_name_not_provided)
+    fun addNewWeek(name: String?) {
+        viewModelScope.launch(dispatcherIO) {
+            if (name.isNullOrBlank()) {
+                postMessage(R.string.week_name_not_provided)
+            } else {
+                repo.saveNewWeek(name)
+                displayWeeksList()
+            }
         }
     }
-
 }

@@ -32,5 +32,4 @@ class VoiceRecognitionLauncher (
     fun launch() {
         launcher.launch()
     }
-
 }
