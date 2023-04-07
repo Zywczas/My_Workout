@@ -11,17 +11,21 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.FabPosition
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.zywczas.common.utils.Action
+import com.zywczas.common.utils.OnTextProvided
 import com.zywczas.myworkout.R
 import com.zywczas.myworkout.screens.trainingplan.weekslist.domain.Week
 import com.zywczas.myworkout.theme.AppTheme
 import com.zywczas.myworkout.theme.Spacing
 import com.zywczas.myworkout.uicomponents.FloatingPlusButton
+import com.zywczas.myworkout.uicomponents.TextInputDialog
 import com.zywczas.myworkout.uicomponents.Toolbar
 import com.zywczas.myworkout.uicomponents.WeekListItem
 import kotlinx.coroutines.launch
@@ -30,17 +34,21 @@ import kotlinx.coroutines.launch
 fun WeeksListScreen(
     viewModel: WeeksListViewModel = hiltViewModel()
 ) {
-    var showDialog by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) {
         viewModel.displayWeeksList()
     }
     WeeksListScreen(
         weeks = viewModel.weeksList,
         isEmptyPlanMessageVisible = viewModel.isEmptyPlanMessageVisible,
-        onPlusButtonCLick = { showDialog = true }
+        onPlusButtonCLick = viewModel::onPlusButtonClick
     )
-    if (showDialog) {
-        AddNewWeekDialog()
+    if (viewModel.showAddNewWeekDialog) {
+        AddNewWeekDialog(
+            onDismissRequest = viewModel::onAddNewWeekDialogDismissRequest,
+            onConfirmClick = viewModel::addNewWeek,
+            isError = viewModel.isNewWeekNameError,
+            onTextChanged = viewModel::onAddNewWeekDialogTextChanged,
+        )
     }
 }
 
@@ -88,8 +96,22 @@ private fun WeeksListScreen(
 }
 
 @Composable
-private fun AddNewWeekDialog() {
-
+private fun AddNewWeekDialog(
+    onDismissRequest: Action,
+    onConfirmClick: OnTextProvided,
+    isError: Boolean,
+    onTextChanged: Action
+) {
+    TextInputDialog(
+        title = stringResource(R.string.add_new_week),
+        onDismissRequest = onDismissRequest,
+        hint = stringResource(R.string.week_name),
+        isError = isError,
+        errorText = stringResource(R.string.week_name_not_provided),
+        onTextChanged = { onTextChanged() },
+        onDismissClick = onDismissRequest,
+        onConfirmClick = onConfirmClick
+    )
 }
 
 @Preview(

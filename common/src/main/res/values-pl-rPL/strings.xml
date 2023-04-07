@@ -47,5 +47,7 @@
     <string name="delete_day">Usuń ten dzień</string>
     <string name="delete_week">Usuń ten tydzień</string>
     <string name="min">min</string>
-
+    <string name="button_add">Dodaj</string>
+    <string name="button_cancel">Anuluj</string>
+    <string name="week_name">Nazwa tygodnia</string>
 </resources>

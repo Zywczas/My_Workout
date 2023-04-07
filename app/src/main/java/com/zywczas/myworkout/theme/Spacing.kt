@@ -5,6 +5,11 @@ import androidx.compose.ui.unit.dp
 object Spacing {
 
     /**
+     * 8 dp
+     */
+    val xxs = 8.dp
+
+    /**
      * 24.dp
      */
     val s = 24.dp

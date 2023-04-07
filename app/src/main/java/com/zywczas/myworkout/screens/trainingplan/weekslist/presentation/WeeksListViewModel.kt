@@ -9,7 +9,6 @@ import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
 import com.zywczas.common.extetions.dayFormat
 import com.zywczas.common.utils.StringProvider
 import com.zywczas.myworkout.R
-import com.zywczas.myworkout.activity.MainActivityDataProvider
 import com.zywczas.myworkout.screens.trainingplan.weekslist.domain.Week
 import com.zywczas.myworkout.screens.trainingplan.weekslist.domain.WeeksListRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,15 +21,17 @@ class WeeksListViewModel @Inject constructor(
     private val repo: WeeksListRepository,
     @DispatcherIO private val dispatcherIO: CoroutineDispatcher,
     private val stringProvider: StringProvider,
-    private val mainActivityDataProvider: MainActivityDataProvider
 ) : ViewModel() {
 
     var weeksList by mutableStateOf<List<Week>>(emptyList())
         private set
 
-    // It's not derived state of weeksList to avoid text blinking on screen init
+    // It's not a derived state of weeksList to avoid text blinking on screen init
     var isEmptyPlanMessageVisible by mutableStateOf(false)
         private set
+
+    var showAddNewWeekDialog by mutableStateOf(false)
+    var isNewWeekNameError by mutableStateOf(false)
 
     fun displayWeeksList() {
         viewModelScope.launch(dispatcherIO) {
@@ -70,14 +71,28 @@ class WeeksListViewModel @Inject constructor(
         return this
     }
 
-    fun addNewWeek(name: String?) { //todo check if must be null
+    fun addNewWeek(name: String) {
         viewModelScope.launch(dispatcherIO) {
-            if (name.isNullOrBlank()) {
-                mainActivityDataProvider.postMessage(R.string.week_name_not_provided)
+            if (name.isBlank()) {
+                isNewWeekNameError = true
             } else {
+                showAddNewWeekDialog = false
                 repo.saveNewWeek(name)
                 displayWeeksList()
             }
         }
+    }
+
+    fun onAddNewWeekDialogTextChanged() {
+        isNewWeekNameError = false
+    }
+
+    fun onAddNewWeekDialogDismissRequest() {
+        showAddNewWeekDialog = false
+        isNewWeekNameError = false
+    }
+
+    fun onPlusButtonClick() {
+        showAddNewWeekDialog = true
     }
 }

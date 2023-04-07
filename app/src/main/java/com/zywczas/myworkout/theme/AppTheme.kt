@@ -4,6 +4,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -23,15 +24,19 @@ fun AppTheme(content: @Composable () -> Unit) {
 }
 
 private val DarkColorsPalette = darkColors(
-    primary = Colors.Primary.darkMode,
+    primary = Colors.primaryDarkMode,
     primaryVariant = Colors.logoFirst,
-    secondary = Colors.Primary.darkMode
+    secondary = Colors.primaryDarkMode,
+    error = Colors.error,
+    surface = Color.White,
 )
 
 private val LightColorsPalette = lightColors(
-    primary = Colors.Primary.lightMode,
-    primaryVariant = Colors.Primary.lightMode,
-    secondary = Colors.Primary.lightMode
+    primary = Colors.primaryLightMode,
+    primaryVariant = Colors.primaryLightMode,
+    secondary = Colors.primaryLightMode,
+    error = Colors.error,
+    surface = Color.White,
 )
 
 private val fontFamily = FontFamily(
@@ -58,7 +63,14 @@ private val typography = Typography(
         letterSpacing = 0.51.sp,
         lineHeight = 18.sp,
         fontFamily = fontFamily
-    )
+    ),
+    caption = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
+        letterSpacing = 0.sp,
+        fontFamily = fontFamily,
+        lineHeight = 24.sp,
+    ),
 )
 
 private val shapes = Shapes(
