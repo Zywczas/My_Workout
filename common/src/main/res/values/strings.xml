@@ -46,4 +46,7 @@
     <string name="delete_day">Delete the day</string>
     <string name="delete_week">Delete the week</string>
     <string name="min">min</string>
+    <string name="button_add">Add</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="week_name">Week name</string>
 </resources>

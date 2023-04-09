@@ -8,31 +8,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.DialogProperties
+import com.zywczas.common.utils.Action
 import com.zywczas.myworkout.theme.Spacing
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun BaseDialog(
-    title: String,
-    message: String,
-    modifier: Modifier = Modifier.padding(horizontal = Spacing.s),
+    title: String?,
+    text: @Composable () -> Unit,
+    onDismissRequest: Action,
     buttons: @Composable () -> Unit
 ) {
     AlertDialog(
-        onDismissRequest = {},
-        modifier = modifier,
-        title = {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.h2
-            )
+        onDismissRequest = onDismissRequest,
+        modifier = Modifier.padding(horizontal = Spacing.s),
+        title = title?.let {
+            {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.h2
+                )
+            }
         },
-        text = {
-            Text(
-                text = message,
-                style = MaterialTheme.typography.subtitle1
-            )
-        },
+        text = text,
         buttons = buttons,
         properties = DialogProperties(
             usePlatformDefaultWidth = false
