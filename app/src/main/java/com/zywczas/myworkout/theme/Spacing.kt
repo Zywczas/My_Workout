@@ -10,6 +10,11 @@ object Spacing {
     val xxs = 8.dp
 
     /**
+     * 16 dp
+     */
+    val xs = 16.dp
+
+    /**
      * 24.dp
      */
     val s = 24.dp

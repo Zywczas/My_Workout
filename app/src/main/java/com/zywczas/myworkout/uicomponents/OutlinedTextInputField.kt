@@ -12,11 +12,9 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zywczas.common.utils.OnTextProvided
 import com.zywczas.myworkout.R
-import com.zywczas.myworkout.theme.AppTheme
 import com.zywczas.myworkout.theme.Colors
 import com.zywczas.myworkout.theme.Spacing
 
@@ -26,7 +24,8 @@ fun OutlinedTextInputField(
     hint: String,
     isError: Boolean,
     errorText: String,
-    onValueChange: OnTextProvided
+    onValueChange: OnTextProvided,
+    modifier: Modifier = Modifier
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     var text by remember { mutableStateOf("") }
@@ -57,7 +56,8 @@ fun OutlinedTextInputField(
             },
             keyboardActions = KeyboardActions {
                 keyboardController?.hide()
-            }
+            },
+            modifier = modifier
         )
         if (isError) {
             Spacer(Modifier.height(Spacing.xxs))
@@ -68,24 +68,5 @@ fun OutlinedTextInputField(
                 modifier = Modifier.padding(horizontal = Spacing.s)
             )
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun Preview() {
-    AppTheme {
-//        OutlinedInputField(
-//            hint = "Hint text",
-//            value = "233",
-//            isError = true,
-//            errorText = "Invalid input",
-//            isEnabled = true,
-//            keyboardOptions = KeyboardOptions(
-//                keyboardType = KeyboardType.Number,
-//                imeAction = ImeAction.Done
-//            ),
-//            modifier = Modifier
-//        ) {}
     }
 }

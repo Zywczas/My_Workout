@@ -14,7 +14,7 @@ import com.zywczas.myworkout.theme.Spacing
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun BaseDialog(
-    title: String,
+    title: String?,
     text: @Composable () -> Unit,
     onDismissRequest: Action,
     buttons: @Composable () -> Unit
@@ -22,11 +22,13 @@ fun BaseDialog(
     AlertDialog(
         onDismissRequest = onDismissRequest,
         modifier = Modifier.padding(horizontal = Spacing.s),
-        title = {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.h2
-            )
+        title = title?.let {
+            {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.h2
+                )
+            }
         },
         text = text,
         buttons = buttons,

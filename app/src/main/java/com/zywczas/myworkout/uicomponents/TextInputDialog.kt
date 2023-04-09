@@ -1,6 +1,8 @@
 package com.zywczas.myworkout.uicomponents
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -22,17 +24,25 @@ fun TextInputDialog(
 ) {
     var text by remember { mutableStateOf("") }
     BaseDialog(
-        title = title,
+        title = null,
         text = {
-            OutlinedTextInputField(
-                hint = hint,
-                isError = isError,
-                errorText = errorText,
-                onValueChange = {
-                    text = it
-                    onTextChanged(it)
-                }
-            )
+            Column {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.h2
+                )
+                Spacer(Modifier.height(Spacing.xs))
+                OutlinedTextInputField(
+                    hint = hint,
+                    isError = isError,
+                    errorText = errorText,
+                    onValueChange = {
+                        text = it
+                        onTextChanged(it)
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         },
         onDismissRequest = onDismissRequest,
         buttons = {
