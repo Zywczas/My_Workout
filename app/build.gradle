@@ -65,17 +65,11 @@ dependencies {
     implementation appDependencies.jodatime
 
     implementation viewDependencies.material
-    //todo sprawdzic ktore nie potrzebne
+
     implementation composeDependencies.activity
-    implementation composeDependencies.ui
     implementation composeDependencies.foundation
-    implementation composeDependencies.animation
     implementation composeDependencies.uiTooling
     implementation composeDependencies.material
-    implementation composeDependencies.accompanist
-    implementation composeDependencies.iconsCore
-    implementation composeDependencies.iconsExtended
-    implementation composeDependencies.livedata
     implementation composeDependencies.viewModel
     implementation composeDependencies.navigation
 
@@ -84,7 +78,4 @@ dependencies {
     implementation hiltDependencies.hilt
     kapt hiltDependencies.compiler
     implementation hiltDependencies.navigationCompose
-
-    //todo sprawdzic czy potrzebne, w innych modulach tez
-    implementation lifeCycleDependencies.liveData
 }
