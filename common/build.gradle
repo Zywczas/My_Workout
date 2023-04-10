@@ -62,5 +62,4 @@ dependencies {
     kapt hiltDependencies.compiler
 
     implementation lifeCycleDependencies.liveData
-
 }

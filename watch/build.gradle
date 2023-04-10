@@ -48,13 +48,10 @@ dependencies {
     implementation appDependencies.kotlin
     implementation appDependencies.legacySupport
     implementation appDependencies.jodatime
-//todo wyczyscic importy
+
     implementation viewDependencies.appCompat
     implementation viewDependencies.material
     implementation viewDependencies.activity
-//    implementation viewDependencies.composeMaterial
-//    implementation viewDependencies.composeUIToolingPreview
-//    implementation viewDependencies.composeActivity
     implementation viewDependencies.recyclerView
     implementation viewDependencies.percentlayout
     implementation viewDependencies.constraintlayout
@@ -62,13 +59,10 @@ dependencies {
     implementation viewDependencies.fastAdapterBinding
     implementation viewDependencies.fastAdapterDiffUtil
 
-    //    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
-
     implementation kotlinCoroutines
 
     implementation hiltDependencies.hilt
     kapt hiltDependencies.compiler
-//    implementation hiltDependencies.navigationCompose
 
     implementation lifeCycleDependencies.liveData
 

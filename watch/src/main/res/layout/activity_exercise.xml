@@ -164,7 +164,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nextExercise"
                 tools:visibility="visible" />
-<!--todo potworzyc style dla tych guzikow-->
+
             <TextView
                 android:id="@+id/changeWeight"
                 android:layout_width="wrap_content"
@@ -196,7 +196,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/changeWeight" />
-<!--todo poprawci progress bar-->
+
             <ProgressBar
                 android:id="@+id/progressBar"
                 style="?android:attr/progressBarStyle"
