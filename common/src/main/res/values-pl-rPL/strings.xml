@@ -17,8 +17,8 @@
     <string name="copy_week">Skopiuj ten tydzień</string>
     <string name="week_name_not_provided">Nie podano nazwy tygodnia</string>
     <string name="day_name_not_provided">Nie podano nazwy dnia</string>
-    <string name="started">Zaczęty: %1$s</string>
-    <string name="done">Skończony: %1$s</string>
+    <string name="started">Rozpoczęty: %1$s</string>
+    <string name="done">Zakończony: %1$s</string>
     <string name="week_copied">Skopiowano tydzień.</string>
     <string name="add_new_exercise">Dodaj nowe ćwiczenie</string>
     <string name="add_cardio">Dodaj kardio</string>

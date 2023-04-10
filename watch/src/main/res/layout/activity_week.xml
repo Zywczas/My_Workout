@@ -37,7 +37,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextContrastCheck"
         tools:visibility="visible" />
-<!--todo dac pozniej inny progress bar-->
+
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
@@ -49,5 +49,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

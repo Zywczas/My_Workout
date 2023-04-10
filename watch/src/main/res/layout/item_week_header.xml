@@ -7,7 +7,6 @@
     android:layout_height="wrap_content"
     android:padding="10dp">
     <!--    todo zamiast paddingu to dac poprawny line separator-->
-
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"

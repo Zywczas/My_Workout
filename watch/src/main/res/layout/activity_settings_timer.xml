@@ -38,7 +38,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/time" />
 
-        <!--todo dac tutaj ustawianie za pomoca scrolowania literek-->
         <EditText
             android:id="@+id/time"
             android:layout_width="wrap_content"
@@ -61,7 +60,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-        <!--todo albo poprawic style dla tekstow albo dac jetpack compose-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.wear.widget.BoxInsetLayout>
