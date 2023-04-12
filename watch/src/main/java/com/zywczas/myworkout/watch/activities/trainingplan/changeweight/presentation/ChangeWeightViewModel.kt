@@ -1,7 +1,7 @@
 package com.zywczas.myworkout.watch.activities.trainingplan.changeweight.presentation
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zywczas.common.di.modules.DispatchersModule.DispatcherIO
@@ -15,27 +15,27 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ChangeWeightViewModel @Inject constructor(
- @DispatcherIO private val dispatcherIO: CoroutineDispatcher,
- private val repo: ChangeWeightRepository
+    @DispatcherIO private val dispatcherIO: CoroutineDispatcher,
+    private val repo: ChangeWeightRepository
 ) : ViewModel() {
 
-    private val _exercise = MediatorLiveData<Exercise>()
+    private val _exercise = MutableLiveData<Exercise>()
     val exercise: LiveData<Exercise> = _exercise
 
     private val _finishActivity = SingleLiveData<Boolean>()
     val finishActivity: LiveData<Boolean> = _finishActivity
 
-    fun getCurrentExercise(id: Long){
-        viewModelScope.launch(dispatcherIO){
+    fun getCurrentExercise(id: Long) {
+        viewModelScope.launch(dispatcherIO) {
             _exercise.postValue(repo.getExercise(id))
         }
     }
 
-    fun saveWeight(weightString: String){
-        viewModelScope.launch(dispatcherIO){
+    fun saveWeight(weightString: String) {
+        viewModelScope.launch(dispatcherIO) {
             exercise.value?.let { exercise ->
                 val weight: Double =
-                    if (weightString.isBlank()){
+                    if (weightString.isBlank()) {
                         0.0
                     } else {
                         weightString.toDouble()
@@ -45,5 +45,4 @@ class ChangeWeightViewModel @Inject constructor(
             _finishActivity.postValue(true)
         }
     }
-
 }
